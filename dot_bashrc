@@ -1,0 +1,112 @@
+# vim: filetype=bash
+# shellcheck shell=bash
+#
+# My fallback bashrc for when my favourite shell of the day isn't available or not needed
+#
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+PROMPT_COMMAND='history -a;history -n'
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+((BASH_VERSINFO[0] > 3)) && shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  alias grep='grep --color=auto'
+  alias egrep='egrep --color=auto'
+fi
+
+# some aliases
+alias l='ls -l'
+alias ll='ls -la'
+alias gb='git branch'
+alias gbc='git checkout -b'
+alias gco='git checkout'
+alias gcom='git checkout master'
+alias gld='git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"'
+alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
+alias gst='git status'
+alias gup='git up'
+alias myprocs='ps aux | grep [l]ildude'
+alias path='echo -e ${PATH//:/\\n}'
+# Function to easily update SSH vars under tmux as these will go stale - https://stackoverflow.com/questions/21378569/how-to-auto-update-ssh-agent-environment-variables-when-attaching-to-existing-tm
+alias fixssh='eval $(tmux show-env -s SSH_AUTH_SOCK)'
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    # shellcheck disable=SC1091
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    # shellcheck disable=SC1091
+    . /etc/bash_completion
+  fi
+fi
+
+# Accept the default merge commit msg without opening the editor
+export GIT_MERGE_AUTOEDIT=no
+
+GPG_TTY=$(tty)
+export GPG_TTY
+
+[ "$(uname -s)" = "Darwin" ] && OS=macos
+[ "$(uname -s)" = "Linux" ] && OS=linux
+
+for p in $HOME/bin $HOME/.dotfiles/all/bin $HOME/.dotfiles/$OS/bin $HOME/.local/bin $HOME/github/enterprise2 $HOME/enterprise2; do
+  [ -d "$p" ] && PATH=$PATH:$p
+done
+
+export PATH
+
+# Load rbenv automatically
+which rbenv > /dev/null && eval "$(rbenv init -)"
+
+# Load nodenv automatically
+which nodenv > /dev/null && eval "$(nodenv init -)"
+
+# Make renaming tmux tabs under iTerm2 easy: tabname "foobar"
+function tabname {
+  [ -n "$TMUX" ] && tmux rename-window "$@"
+}
+
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+purple=$(tput setaf 5)
+reset=$(tput sgr0)
+
+if [ "$(id -u)" -eq 0 ]; then
+  user_clr=${red}
+else
+  user_clr=${blue}
+fi
+
+export PS1="${user_clr}\u${reset}@${yellow}\h ${green}\w${purple} ${user_clr}\$${reset} "
+

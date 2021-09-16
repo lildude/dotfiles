@@ -1,0 +1,12 @@
+# Improve diffs for the languages I use regularly.
+*.css   diff=css
+*.go    diff=golang
+*.html  diff=html
+*.js    diff=javascript
+*.md    diff=markdown
+*.php   diff=php
+*.py    diff=python
+*.rake  diff=ruby
+*.rb    diff=ruby
+*.rs    diff=rust
+*.ts    diff=javascript

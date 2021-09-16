@@ -1,0 +1,2 @@
+# Use version file from other tools like .ruby-version as used by rbenv
+legacy_version_file = yes
