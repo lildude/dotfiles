@@ -1,4 +1,13 @@
+{{/* Don't install Linux files on macOS */}}
+{{ if eq .chezmoi.os "darwin" -}}
+
+{{/* Don't install macOS files on Linux */}}
+{{ else if eq .chezmoi.os "linux" -}}
+
+{{ end -}}
+{{/* Don't ever install these files */}}
 LICENSE
 README.md
 install.sh
 Dockerfile
+{{/* vim: set filetype=gotemplate : */}}
