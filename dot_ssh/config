@@ -1,0 +1,171 @@
+# Ref https://developer.apple.com/library/content/technotes/tn2449/_index.html
+Host *
+  IgnoreUnknown UseKeychain
+  UseKeychain yes
+  Compression yes
+  ForwardX11 no
+  ControlPath ~/.ssh/master-%C
+  ControlMaster auto
+  #ControlPersist 4h
+  PreferredAuthentications publickey,keyboard-interactive,password,gssapi-with-mic,hostbased
+  KeepAlive yes
+  ServerAliveInterval 60
+
+# Freenas
+Host freenas.local freenas 192.168.1.191
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/freenas_dsa
+  User lildude
+
+# GitHub
+Host github.com *.github.com localhost
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github_2018_ed25519
+  AddKeysToAgent yes
+  User git
+  ForwardAgent yes
+
+# Local dev
+Host localhost
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github_2018_ed25519
+  AddKeysToAgent yes
+  User git
+  ForwardAgent yes
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+
+Host *.githubapp.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github_2018_ed25519
+  AddKeysToAgent yes
+  User lildude
+  ForwardAgent yes
+
+Host prodshell shell
+  Hostname shell.service.cp1-iad.github.net
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github_2018_ed25519
+  ProxyJump %r@bastion.githubapp.com
+  ForwardAgent yes
+  AddKeysToAgent yes
+  User lildude
+
+Host bastion
+  Hostname bastion.githubapp.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github_2018_ed25519
+  ForwardAgent yes
+  AddKeysToAgent yes
+  User lildude
+
+Host vault-bastion
+  Hostname vault-bastion.githubapp.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github_2018_ed25519
+  ForwardAgent yes
+  AddKeysToAgent yes
+  User lildude
+
+Host *.cp1-prd.iad.github.net *.private-us-east-1.github.net *.ghe.io
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github_2018_ed25519
+  ProxyJump %r@bastion.githubapp.com
+  DynamicForward 8888
+  ForwardAgent yes
+  AddKeysToAgent yes
+  User lildude
+
+Host *.bpdev-us-east-1.github.net
+  User build
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/github_2018_ed25519
+  DynamicForward 8888
+  ForwardAgent yes
+  AddKeysToAgent yes
+  #RemoteForward /run/user/1001/gnupg/S.gpg-agent ~/.gnupg/S.gpg-agent.extra
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+
+# Heroku
+Host heroku.com
+  User git
+  Hostname heroku.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/heroku_2016_rsa
+  AddKeysToAgent yes
+
+# Bitbucket
+Host bitbucket.org
+  User git
+  Hostname bitbucket.org
+
+# Digital Ocean - droplet1
+Host do1
+  User col
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/digitalocean_2016_rsa
+  AddKeysToAgent yes
+  Hostname 192.241.150.191
+
+# Random test AWS instances
+Host *.compute.amazonaws.com
+  Port 122
+  User admin
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/aws-lildude.pem
+  LogLevel quiet
+
+Host raspberrypi rpi hassio.local
+  Hostname 192.168.1.85
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/rpi_ed25519
+  User hassio
+  AddKeysToAgent yes
+
+Host hassioroot hassiodebug
+  Hostname 192.168.1.85
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/id_rsa
+  User root
+  Port 22222
+  AddKeysToAgent yes
+
+# Work Azure VMs
+Host *.ghaedev.com
+  User lildude
+  Port 122
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/azure_vm_2018_rsa
+  AddKeysToAgent yes
+
+Host msazure.visualstudio.com
+  User coseymou@microsoft.com
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/azure_vm_2018_rsa
+  AddKeysToAgent yes
+  ServerAliveInterval 30
+
+Host win10
+  Hostname 127.0.0.1
+  User colin
+  Port 2522
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/azure_vm_2018_rsa
+  AddKeysToAgent yes
+
+# Personal Azure VMs
+Host cluckwp
+  Hostname 168.61.34.129
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/azure_vm_2018_rsa
+  User lildude
+  AddKeysToAgent yes
+
+Host github-codespace ghcs codespace
+  User root
+  Hostname localhost
+  Port 2222
+  NoHostAuthenticationForLocalhost yes
