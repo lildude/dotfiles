@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
 {{ if eq .chezmoi.os "linux" -}}
-packages="bat fd-find fzf grc gnupg2 jq zsh neovim ripgrep"
 
 {{- if ne .install_type "min" }}
 if [ -n "$packages" ]; then
+  packages="bat fd-find fzf grc gnupg2 jq zsh neovim ripgrep"
   # Extra opts required because of rust build bug - https://askubuntu.com/questions/1290262/unable-to-install-bat-error-trying-to-overwrite-usr-crates2-json-which
   sudo apt-get update && sudo apt-get install -o Dpkg::Options::="--force-overwrite" -y $to_install
 fi
+
+filename="op_linux_amd64_v1.12.2.zip"
+curl -sLO "https://cache.agilebits.com/dist/1P/op/pkg/v1.12.2/$filename"
+cd "$HOME/.local/bin"
+unzip "$HOME/$filename" > /dev/null
+# Verify download
+gpg --keyserver hkps://keyserver.ubuntu.com --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22 &> /dev/null
+gpg --verify op.sig op &> /dev/null || fail "Problem verifying op binary"
+rm op.sig
+cd "$HOME"
+rm "$HOME/$filename"
+
 {{- else -}}
 
 {{- end }}
