@@ -1,0 +1,5 @@
+[user]
+  name = Colin Seymour
+  email = colin@github.com
+  # ID taken from `gpg --list-secret-keys --keyid-format LONG` - more accurate than using emails.
+  signingkey = 88109C73073E7080
