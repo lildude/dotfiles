@@ -3,7 +3,8 @@
 
 {{/* Don't install macOS files on Linux */}}
 {{ else if eq .chezmoi.os "linux" -}}
-
+.hammerspoon/init.lua
+.config/karabiner.edn
 {{ end -}}
 {{/* Don't ever install these files */}}
 LICENSE
