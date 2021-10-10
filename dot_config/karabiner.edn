@@ -1,0 +1,56 @@
+; Source and inspiration - https://medium.com/@nikitavoloboev/karabiner-god-mode-7407a5ddc8f6
+; https://github.com/kchen0x/k-goku has some good mappings to borrow
+; run `goku` to confirm all ok
+{:simlayers {:caps_lock-mode {:key :caps_lock}},
+ :main [
+   {:des "Hyper Mode",
+         :rules [:caps_lock-mode
+                 [:open_bracket :!TOopen_bracket]
+                 [:close_bracket :!TOclose_bracket]
+                 [:semicolon :!TOsemicolon]
+                 [:quote :!TOquote]
+                 [:comma :!TOcomma]
+                 [:period :!TOperiod]
+                 [:slash :!TOslash]
+                 [:a :!TOa]
+                 [:b :!TOb]
+                 [:c :!TOc]
+                 [:d :!TOd]
+                 [:e :!TOe]
+                 [:f :!TOf]
+                 [:g :!TOg]
+                 [:h :!TOh]
+                 [:i :up_arrow]
+                 [:j :left_arrow]
+                 [:k :down_arrow]
+                 [:l :right_arrow]
+                 [:m :!TOm]
+                 [:n :!TOn]
+                 [:o :!TOo]
+                 [:p :!TOp]
+                 [:q :!TOq]
+                 [:r :!TOr]
+                 [:s :!TOs]
+                 [:t :!TOt]
+                 [:u :!TOu]
+                 [:v :!TOv]
+                 [:w :!TOw]
+                 [:x :!TOx]
+                 [:y :!TOy]
+                 [:z :!TOz]
+                 [:1 :!TO1]
+                 [:2 :!TO2]
+                 [:3 :!TO3]
+                 [:4 :!TO4]
+                 [:5 :!TO5]
+                 [:6 :!TO6]
+                 [:7 :!TO7]
+                 [:8 :!TO8]
+                 [:9 :!TO9]
+                 [:0 :!TO0]
+                ]
+    }
+  ]
+}
+; the default value is 250
+:simlayer-threshold 500
