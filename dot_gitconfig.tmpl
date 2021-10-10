@@ -1,0 +1,162 @@
+# vim: set filetype=ini
+[core]
+  excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
+  # Don't prompt for commit messages for merge commits.
+  mergeoptions = --no-edit
+  {{- if (eq .chezmoi.os "darwin") }}
+  trustctime = false
+  {{- end }}
+  {{- if lookPath "delta" }}
+  pager = delta --diff-so-fancy
+  {{- end }}
+
+[user]
+  # Never use the system info if the user info isn't set; error instead.
+  useConfigOnly = true
+  name = Colin Seymour
+  email = colin@symr.io
+  signingkey = 88109C73073E7080
+
+# Override default when working in work repos
+[includeIf "gitdir:~/github/"]
+  path = ~/.dotfiles/all/git/gitconfig-github
+# Work dirs on Codespaces
+[includeIf "gitdir:/workspaces/"]
+  path = ~/.dotfiles/all/git/gitconfig-github
+
+[github]
+  user = lildude
+
+[color]
+  ui = always
+
+# Supported colors: normal, black, red, green, yellow, blue, magenta, cyan, or white
+# Supported effects: bold, dim, ul (underline), blink, and reverse (swap foreground and background)
+[color "branch"]
+  #current = green # Default: green
+  #local = yellow
+  remote = blue
+
+[color "diff"]
+  commit = green
+  meta = yellow
+  whitespace = red reverse # Make sure I really want to commit whitespace changes
+
+[color "status"]
+  untracked = magenta  # Default: red
+
+[help]
+  autocorrect = 1   # Autocorrect mistyped commands.
+
+[alias]
+  branch-name = "!git rev-parse --abbrev-ref HEAD"  # Get branch. Used by other aliases.
+  st = "status --short --branch --no-ahead-behind"
+  sw = switch
+  rem = remote -v
+  co = switch
+  pu = push -u
+  cp = cherry-pick
+  cherry = cherry-pick
+  #lg = log --graph --pretty=oneline --abbrev-commit --decorate
+  lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit
+  cob = switch -c
+  b = branch --sort=-committerdate --format='%(HEAD)%(if)%(HEAD)%(then)%(color:green)%(end) %(refname:short) %(color:reset) (%(color:blue)%(committerdate:relative)%(color:reset))'
+  # Get default branch - run `git remote set-head origin -a` if still returns master after a rename on github
+  db = !git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'
+  # Remove all local branches that were tracking remote branches that have been deleted.
+  # We use the for loop because we can't pipe to `xargs -r git branch -D` as xargs on macos doesn't accept `-r` to ignore empty cases
+  up = "!git switch $(git db) && git pull --rebase --prune && for b in $(git branch --list --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'); do git branch -D $b; done"
+  com = "!git switch $(git db)"
+  # Create a pull request on GitHub using the `hub` command.
+  pr = !hub pull-request -o
+  # Grab someone else's PR changes without using hub
+  # Source: https://davidwalsh.name/pull-down-pr
+  prco = !f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 && git switch pr/$1; }; f
+  pr-clean = "!git switch $(git db) ; git for-each-ref refs/heads/pr/* --format="%(refname)" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+  tagcommit = rev-list -n 1
+  br = !git switch $(git branch --no-color | cut -c 3- | awk '{print $1}' | fzf +m --preview 'git show --color=always {}')
+  swf = br
+  bdf = !git branch --delete --force $(git branch --no-color | grep --invert-match '*' | cut -c 3- | awk '{print $1}' | fzf --multi --preview 'git log --color=always {}')
+  # Usage: git change-commits GIT_AUTHOR_NAME "old name" "new name"
+  # Usage: git change-commits GIT_AUTHOR_EMAIL "old@email.com" "new@email.com" HEAD~10..HEAD
+  change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+
+[gist]
+  browse = true  # Open GitHub Gist in browser after submission.
+
+[fetch]
+  prune = 1  # Always prune when fetching (and pulling).
+
+[push]
+  default = current # Default: simple
+
+[filter "media"]
+  required = true
+  clean = git media clean %f
+  smudge = git media smudge %f
+
+[diff]
+  renames = copies  # Detect copies as well as renames
+  noprefix = true   # Don't show the a/ and b/ at the beginning of file paths in diffs
+
+[http]
+  sslVerify = true
+
+[filter "lfs"]
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+
+[archive]
+  restrictRemote = false
+
+[commit]
+  gpgSign = true
+
+[gpg]
+  program = {{- lookPath "gpg" }}
+
+[merge]
+  conflictstyle = diff3
+
+[protocol]
+  version = 2
+
+[feature]
+  manyFiles = true
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = false
+
+[advice]
+  detachedHead = false
+
+[maintenance]
+  repo = /Users/lildude/github/github
+
+[submodule]
+  fetchJobs = 8
+
+{{- if (eq .chezmoi.os "darwin") }}
+[credential]
+  helper = osxkeychain
+{{- end }}
+
+# Always use SSH for GitHub, except on Codespaces
+{{- if env "CODESPACES" | not | not }}
+[url "https://github.com/"]
+  insteadOf = git@github.com:
+{{- else }}
+[url "git@github.com:"]
+  insteadof = https://github.com/
+{{- end }}
+
+{{- if lookPath "delta" }}
+[interactive]
+  diffFilter = delta --color-only
+{{- end }}
