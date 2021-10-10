@@ -1,11 +1,15 @@
 {{- $codespaces := env "CODESPACES" | not | not -}}
+{{- $ci := env "CI" | not | not -}}
+{{- $github_workspace := env "GITHUB_WORKSPACE" | not | not -}}
+{{- $type := promptString "Install type: home|work|full|min" -}}
 sourceDir = "{{ .chezmoi.sourceDir }}"
 
 [data]
-  name = "Your name"
+  ci = {{ $ci }}
   codespaces = {{ $codespaces }}
-{{- if $codespaces }}{{/* Codespaces dotfiles setup is non-interactive, so set an email address */}}
-  email = "your@email.com"
-{{- else }}{{/* Interactive setup, so prompt for an email address */}}
-  email = "{{ promptString "email" }}"
+  github_workspace = {{ $github_workspace }}
+{{- if or $ci $codespaces $github_workspace }}
+  install_type = "min"
+{{- else }}{{/* Interactive setup so prompt for install type */}}
+  install_type = {{ $type | quote }}
 {{- end }}
