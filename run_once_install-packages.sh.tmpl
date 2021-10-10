@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+{{ if eq .chezmoi.os "linux" -}}
+packages="bat fd-find fzf gnupg2 jq zsh neovim ripgrep"
+
+to_install=""
+for x in $packages; do
+  if ! command -v $x >/dev/null 2>&1; then
+    to_install="$to_install $x"
+  fi
+done
+
+if [ -n "$to_install" ]; then
+  # Extra opts required because of rust build bug - https://askubuntu.com/questions/1290262/unable-to-install-bat-error-trying-to-overwrite-usr-crates2-json-which
+  sudo apt-get update && sudo apt-get install -o Dpkg::Options::="--force-overwrite" -y $to_install
+fi
+
+{{- else if eq .chezmoi.os "darwin" }}
+if ! command -v brew > /dev/null 2>&1 && [ -s "$HOME/.Brewfile" ]; then
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" > "$HOME/tmp/homebrew.log" 2>&1
+fi
+brew bundle install --global
+
+{{- end }}

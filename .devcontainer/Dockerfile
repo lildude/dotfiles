@@ -6,6 +6,9 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
+      bat \
+      fd-find \
+      fzf \
       build-essential \
       coreutils \
       gnupg2 \
@@ -13,6 +16,7 @@ RUN apt-get update && \
       unzip \
       zsh \
       neovim && \
+      ripgrep && \
     locale-gen "en_GB.UTF-8" "en_US.UTF-8" && \
     apt-get clean
 
