@@ -7,6 +7,10 @@
 .config/karabiner.edn
 .Brewfile
 {{ end -}}
+{{ if eq .install_type "min" -}}
+.netrc
+.secrets
+{{ end }}
 {{/* Don't ever install these files */}}
 LICENSE
 README.md
