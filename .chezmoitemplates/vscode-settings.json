@@ -184,5 +184,13 @@
       "GitHub.copilot",
       "eamodio.gitlens",
       "chrislajoie.vscode-modelines"
+    ],
+    "github.codespaces.createCodespaceInNewWindow": true,
+    "github.codespaces.defaultExtensions": [
+      "GitHub.codespaces",
+      "EditorConfig.EditorConfig",
+      "GitHub.copilot",
+      "eamodio.gitlens",
+      "chrislajoie.vscode-modelines"
     ]
 }
