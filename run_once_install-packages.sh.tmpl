@@ -27,6 +27,6 @@ rm "$HOME/$filename"
 if ! command -v brew > /dev/null 2>&1 && [ -s "$HOME/.Brewfile" ]; then
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" > "$HOME/tmp/homebrew.log" 2>&1
 fi
-brew bundle install --global
+brew bundle --no-lock --global
 
 {{- end }}
