@@ -1,11 +1,12 @@
 {{/* Don't install Linux files on macOS */}}
 {{ if eq .chezmoi.os "darwin" -}}
-
+.config/Code/
 {{/* Don't install macOS files on Linux */}}
 {{ else if eq .chezmoi.os "linux" -}}
 .hammerspoon/init.lua
 .config/karabiner.edn
 .Brewfile
+Library/
 {{ end -}}
 {{ if eq .install_type "min" -}}
 .netrc
