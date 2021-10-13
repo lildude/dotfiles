@@ -1,6 +1,7 @@
 {{- $codespaces := env "CODESPACES" | not | not -}}
 {{- $ci := env "CI" | not | not -}}
 {{- $github_workspace := env "GITHUB_WORKSPACE" | not | not -}}
+{{- $remote_containers := env "REMOTE_CONTAINERS" | not | not -}}
 {{- $type := promptString "Install type: home|work|full|min" -}}
 sourceDir = "{{ .chezmoi.sourceDir }}"
 
@@ -8,7 +9,8 @@ sourceDir = "{{ .chezmoi.sourceDir }}"
   ci = {{ $ci }}
   codespaces = {{ $codespaces }}
   github_workspace = {{ $github_workspace }}
-{{- if or $ci $codespaces $github_workspace }}
+  remote_containers = {{ $remote_containers }}
+{{- if or $ci $codespaces $github_workspace $remote_containers }}
   install_type = "min"
 {{- else }}{{/* Interactive setup so prompt for install type */}}
   install_type = {{ $type | quote }}
