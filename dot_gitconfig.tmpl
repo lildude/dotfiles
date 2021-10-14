@@ -147,13 +147,10 @@
   helper = osxkeychain
 {{- end }}
 
-# Always use SSH for GitHub, except on Codespaces
-{{- if env "CODESPACES" | not | not }}
+# Always use https on Codespaces
+{{- if .codespaces }}
 [url "https://github.com/"]
   insteadOf = git@github.com:
-{{- else }}
-[url "git@github.com:"]
-  insteadof = https://github.com/
 {{- end }}
 
 {{- if lookPath "delta" }}
