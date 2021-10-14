@@ -24,9 +24,10 @@ rm "$HOME/$filename"
 {{- end }}
 
 {{- else if eq .chezmoi.os "darwin" }}
-if ! command -v brew > /dev/null 2>&1 && [ -s "$HOME/.Brewfile" ]; then
-  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" > "$HOME/tmp/homebrew.log" 2>&1
-fi
-brew bundle --no-lock --global
-
+  {{- if ne .install_type "min" }}
+  if ! command -v brew > /dev/null 2>&1 && [ -s "$HOME/.Brewfile" ]; then
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" > "$HOME/tmp/homebrew.log" 2>&1
+  fi
+  brew bundle --no-lock --global
+  {{- end -}}
 {{- end }}
