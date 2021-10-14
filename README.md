@@ -18,7 +18,7 @@ Codespaces and VS Code Remote Containers (thanks to my settings) automatically c
 
 ## My Prompt
 
-![My Prompt](script/prompt.png)
+![My Prompt](prompt.png)
 
 ## Slack Theme
 
