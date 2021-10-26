@@ -1,33 +1,41 @@
 #!/usr/bin/env bash
 {{ if eq .chezmoi.os "linux" -}}
 
-{{- if ne .install_type "min" }}
-if [ -n "$packages" ]; then
-  packages="bat fd-find fzf grc gnupg2 jq zsh neovim ripgrep"
-  # Extra opts required because of rust build bug - https://askubuntu.com/questions/1290262/unable-to-install-bat-error-trying-to-overwrite-usr-crates2-json-which
-  sudo apt-get update && sudo apt-get install -o Dpkg::Options::="--force-overwrite" -y $to_install
-fi
+  {{- if ne .install_type "min" }}
+    if [ -n "$packages" ]; then
+      packages="bat fd-find fzf grc gnupg2 jq zsh neovim ripgrep libssl-dev zlib1g-dev"
+      # Extra opts required because of rust build bug - https://askubuntu.com/questions/1290262/unable-to-install-bat-error-trying-to-overwrite-usr-crates2-json-which
+      sudo apt-get update && sudo apt-get install -o Dpkg::Options::="--force-overwrite" -y $to_install
+      git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
+    fi
 
-filename="op_linux_amd64_v1.12.2.zip"
-curl -sLO "https://cache.agilebits.com/dist/1P/op/pkg/v1.12.2/$filename"
-cd "$HOME/.local/bin"
-unzip "$HOME/$filename" > /dev/null
-# Verify download
-gpg --keyserver hkps://keyserver.ubuntu.com --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22 &> /dev/null
-gpg --verify op.sig op &> /dev/null || fail "Problem verifying op binary"
-rm op.sig
-cd "$HOME"
-rm "$HOME/$filename"
-
-{{- else -}}
-
-{{- end }}
+    filename="op_linux_amd64_v1.12.2.zip"
+    curl -sLO "https://cache.agilebits.com/dist/1P/op/pkg/v1.12.2/$filename"
+    cd "$HOME/.local/bin"
+    unzip "$HOME/$filename" > /dev/null
+    # Verify download
+    gpg --keyserver hkps://keyserver.ubuntu.com --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22 &> /dev/null
+    gpg --verify op.sig op &> /dev/null || fail "Problem verifying op binary"
+    rm op.sig
+    cd "$HOME"
+    rm "$HOME/$filename"
+  {{- end }}
 
 {{- else if eq .chezmoi.os "darwin" }}
   {{- if ne .install_type "min" }}
-  if ! command -v brew > /dev/null 2>&1 && [ -s "$HOME/.Brewfile" ]; then
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" > "$HOME/tmp/homebrew.log" 2>&1
-  fi
-  brew bundle --no-lock --global
+    if ! command -v brew > /dev/null 2>&1 && [ -s "$HOME/.Brewfile" ]; then
+      bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" > "$HOME/tmp/homebrew.log" 2>&1
+    fi
+    brew bundle --no-lock --global
   {{- end -}}
 {{- end }}
+
+{{- if ne .install_type "min" }}
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+  asdf install nodejs latest &
+  asdf install ruby latest &
+  wait
+  asdf global nodejs latest
+  asdf global ruby latest
+{{- end -}}
