@@ -1,0 +1,11 @@
+
+# Function for quickly timing ZSH startup
+if (( $+commands[hyperfine] )); then
+  hyperfine --min-runs 10 --max-runs 10 --warmup 1 "zsh -i -c exit;"
+else
+  echo "hyperfine not installed, using time instead..."
+  for i in $(seq 1 10); do time zsh -i -c exit; done
+fi
+
+
+

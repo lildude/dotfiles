@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+# Dump all zsh config to a single file
+# This is useful to see the impact of enabling or disabling plugins
+echo "=> Keybindings"
+for m ($keymaps) bindkey -LM $m
+echo
+echo "=> Shell opts" # ZSH defaults can be found with `emulate -lLR zsh`
+setopt
+echo
+echo "=> ZLE user widgets"
+zle -lL
+echo
+echo "=> Zstyles"
+zstyle -L
+echo
+echo "=> Loaded modules"
+zmodload -L
+echo
+echo "=> All variables, aliases and functions"
+typeset -p +H -m '*'
