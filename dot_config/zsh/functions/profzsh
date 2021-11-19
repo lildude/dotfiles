@@ -1,3 +1,2 @@
 #!/usr/bin/env zsh
-shell=${1-$SHELL}
-ZPROF=true $shell -i -c exit
+ZPROF=true zsh -i -c exit
