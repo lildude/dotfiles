@@ -3,6 +3,7 @@
 set -euo pipefail
 
 if [ ! "$(command -v chezmoi)" ]; then
+  echo "=> Installing chezmoi..."
   bin_dir="$HOME/.local/bin"
   chezmoi="$bin_dir/chezmoi"
   if [ "$(command -v curl)" ]; then
