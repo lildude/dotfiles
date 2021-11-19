@@ -1,3 +1,4 @@
+# vim: set ft=zsh
 # Personal Zsh configuration file. It is strongly recommended to keep all
 # shell customization and configuration (including exported environment
 # variables such as PATH) in this file or in files source by it.
@@ -58,7 +59,7 @@ fpath=(
 
 #### ---:[ Export Variables ]:--- ###
 export GPG_TTY=$TTY
-export LANG='en_GB.UTF-8'         # Speak British to me.
+[ -z "$LANG" ] && export LANG='en_GB.UTF-8'  # Speak British to me, might need to run `sudo locale-gen en_GB.utf8` first
 [ -d ${HOME}/go ] && export GOPATH=${HOME}/go
 export HOMEBREW_INSTALL_CLEANUP=1 # Always clean up when installing Homebrew packages
 export HOMEBREW_BOOTSNAP=1        # Speed up homebrew
@@ -72,6 +73,16 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
   export LESS_ADVANCED_PREPROCESSOR=1
 fi
+export GREP_COLOR=${GREP_COLOR:-'37;45'}            # BSD.
+export GREP_COLORS=${GREP_COLORS:-"mt=$GREP_COLOR"} # GNU.
+# Gimme colourful man pages
+# export LESS_TERMCAP_mb=$'\E[01;31m'                 # Begins blinking. (red)
+# export LESS_TERMCAP_md=$'\E[01;31m'                 # Begins bold. (red)
+# export LESS_TERMCAP_me=$'\E[0m'                     # Ends mode.
+# export LESS_TERMCAP_se=$'\E[0m'                     # Ends standout-mode.
+# export LESS_TERMCAP_so=$'\E[00;47;30m'              # Begins standout-mode.
+# export LESS_TERMCAP_ue=$'\E[0m'                     # Ends underline.
+# export LESS_TERMCAP_us=$'\E[01;32m'                 # Begins underline.
 
 HISTFILE=~/.cache/zsh/.zsh_history
 HISTSIZE=11000               # Max. entries to keep in memory
@@ -131,6 +142,18 @@ setopt hist_no_store          # Don't store history or fc commands
 setopt hist_ignore_dups       # Don't add to history if it's the same as previous event.
 setopt hist_ignore_all_dups   # Remove older event if new event is duplicate.
 setopt hist_save_no_dups      # Older commands that duplicate newer ones are omitted.
+setopt combining_chars        # Combine zero-length punctuation characters (accents) with the base character.
+setopt interactive_comments   # Enable comments in interactive shell.
+setopt rc_quotes              # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
+unsetopt mail_warning         # Don't print a warning message if a mail file has been accessed.
+setopt long_list_jobs         # List jobs in the long format by default.
+setopt auto_resume            # Attempt to resume existing job before creating a new process.
+setopt notify                 # Report status of background jobs immediately.
+unsetopt bg_nice              # Don't run all background jobs at a lower priority.
+unsetopt hup                  # Don't kill jobs on shell exit.
+unsetopt check_jobs           # Don't report on jobs when shell exit.
+unsetopt clobber              # Do not overwrite existing files with > and >>. Use >! and >>! to bypass.
+setopt extended_glob          # Use extended globbing syntax.
 
 #### ---:[ Keybindings ]:--- ###
 z4h bindkey undo Ctrl+/   Shift+Tab # undo the last command line change
@@ -144,12 +167,20 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 autoload -Uz zmv
 autoload -Uz $fpath[1]/*(.:t)           # Load all functions in the first directory which is my own.
 
+autoload -Uz bracketed-paste-url-magic
+zle -N bracketed-paste bracketed-paste-url-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
+
 # Define functions and completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
 
 z4h source --compile "$HOME/.secrets"
+z4h source --compile /etc/grc.zsh || true # Colourize all the other things
+z4h source --compile /usr/local/etc/grc.zsh || true # Colourize all the other things
+
 
 # This must always be last.
 [ -z "$ZPROF" ] || zprof
