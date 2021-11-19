@@ -11,20 +11,22 @@ tap 'jesseduffield/lazydocker'  # Needed for lazydocker
 tap 'muesli/tap'
 tap 'yqrashawn/goku'            # Needed for goku
 tap 'goreleaser/tap/goreleaser'
-tap 'romkatv/gitstatus/gitstatus'
 tap 'grdl/tap/git-get'
 tap 'kopia/kopia'
+tap 'tavianator/tap/bfs'      # Needed for bfs
 
 # Work-specific tools
 {{- if eq .install_type "work" }}
 brew 'adr-tools'
-brew 'ansible'
-brew 'awscli'
-brew 'azure-cli'
-brew 's3cmd'
+# brew 'ansible'
+# brew 'awscli'
+# brew 'azure-cli'
+# brew 's3cmd'
 {{ end }}
 
 {{- if eq .install_type "home" }}
+brew 'lipvips'          # Used by jekyll plugin to resize images
+brew 'webp'             # For converting images to webp
 brew 'youtube-dl'
 {{ end }}
 
@@ -34,10 +36,10 @@ brew 'asdf'             # Replaces rbenv, pyenv, nodeenv etc
 brew 'base64'
 brew 'bash'             # Only needed for my Bash scripts now macOS isn't shipping updates etc
 brew 'bat'              # Like cat, but prettier
-brew 'checkbashisms'
+brew 'bfs'              # Breadth-first version of find - much quicker and used by my fzf config.
 brew 'chezmoi'          # dotfile manager
 brew 'coreutils'
-brew 'croc'             # A tool for sending large files directly to someone on the CLI
+# brew 'croc'             # A tool for sending large files directly to someone on the CLI
 brew 'dos2unix'
 brew 'duf'
 brew 'exa'
@@ -47,12 +49,11 @@ brew 'ffmpeg'
 brew 'findutils'
 brew 'fswatch'
 brew 'fzf'
-brew 'fzy'
+# brew 'fzy'
 brew 'gh'
 brew 'git'
 brew 'git-delta'
 brew 'git-lfs'
-brew 'gitstatus'        # Without the tap: brew install romkatv/gitstatus/gitstatus
 brew 'git-get'          # Without the tap: brew install grdl/tap/git-get
 brew 'gnu-sed'
 brew 'gnupg'
@@ -62,7 +63,6 @@ brew 'goreleaser'
 brew 'grc'              # General colorizer
 brew 'heroku'
 brew 'htop'
-brew 'httpie'
 brew 'hub'
 brew 'hyperfine'        # Great cli benchmarking tool
 brew 'icdiff'
@@ -76,7 +76,6 @@ brew 'lesspipe'
 brew 'lockrun'
 brew 'mas'              # CLI tool for installing Mac App Store apps at the end of this file.
 brew 'moreutils'
-brew 'neovim'
 brew 'openssl'
 brew 'pinentry-mac'
 brew 'p7zip'
@@ -86,7 +85,6 @@ brew 'rclone'
 brew 'restic'
 brew 'ripgrep'          # rg, an even faster version of ag
 brew 'rsync'
-# brew 'rubyfmt'        # Often outdated. Use precompile bin from https://github.com/penelopezone/rubyfmt/releases instead
 brew 'shellcheck'
 brew 'tldr'
 brew 'tmux'
@@ -94,6 +92,7 @@ brew 'watch'
 brew 'xz'
 brew 'zsh'
 brew 'zsh-completions'
+brew 'zsh-autosuggestions'
 
 # Work-specific apps
 {{- if eq .install_type "work" }}
@@ -109,7 +108,7 @@ cask 'chatmate-for-whatsapp'
 cask 'concept2-utility'
 cask 'exodus'
 cask 'garmin-express'
-cask 'microblog'
+# cask 'microblog'
 cask 'netnewswire'
 # cask 'obsidian'
 cask 'portfolioperformance'
@@ -155,7 +154,7 @@ cask 'mailtrackerblocker'
 # cask 'microsoft-edge'
 # cask 'microsoft-teams'
 # cask 'multipass'              # Run Ubuntu Server easily locally
-cask 'muzzle'
+# cask 'muzzle'
 cask 'netspot'
 # cask 'ngrok'
 # cask 'numi'
@@ -165,8 +164,8 @@ cask 'qlmarkdown'             # QuickLook support for markdown
 cask 'qlimagesize'            # QuickLook support for webp and showing image dimensions
 cask 'raycast'                # Alfred alternative
 cask 'rocket'
-cask 'skitch'
-cask 'sketch'
+# cask 'skitch'
+# cask 'sketch'
 cask 'slack'
 cask 'spotify'
 cask 'textexpander'
@@ -186,9 +185,9 @@ mas 'Microsoft OneNote', id: 784_801_555
 {{ end }}
 mas 'AdGuard for Safari', id: 1_440_147_259
 mas 'Bear', id: 1_091_189_122
-mas 'Craft', id: 1_487_937_127
+# mas 'Craft', id: 1_487_937_127
 mas 'Magnet', id: 441_258_766
-mas 'Microsoft Remote Desktop 10', id: 1_295_203_466
+# mas 'Microsoft Remote Desktop 10', id: 1_295_203_466
 mas 'Monit', id: 1_014_850_245
 mas 'Monosnap', id: 540_348_655
 mas 'Pixelmator', id: 407_963_104
