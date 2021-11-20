@@ -1,0 +1,27 @@
+# Extract various archives.  This one method should obsolete gz and bz etc
+if [ ! $1 ]
+then 
+        echo "No filename specified. Please specify a filename."
+else
+        for x in $*; do
+		echo -n "Extracting $x ..."
+    		if [ -f $x ] ; then
+        		case $x in
+            			*.tar.bz2)        tar xnjf $x        ;;
+            			*.tar.gz)         tar xzf $x        ;;
+            			*.bz2)            bunzip2 $x        ;;
+            			*.rar)            unrar x $x        ;;
+            			*.gz)             gunzip $x         ;;
+            			*.tar)            tar xf $x         ;;
+            			*.tbz2)           tar xjf $x        ;;
+            			*.tgz)            tar xzf $x        ;;
+            			*.zip)            unzip $x          ;;
+            			*.Z)              uncompress $x     ;;
+            			*)                echo "'$x' cannot be extracted via extract()" ;;
+        		esac
+    		else
+        		echo "'$x' is not a valid file"
+    		fi
+		echo "Done"
+	done
+fi

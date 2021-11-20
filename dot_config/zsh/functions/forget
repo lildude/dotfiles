@@ -1,0 +1,9 @@
+# Forgetting everything about a known host
+# Host as given
+NAMES=`grep ${1} ${HOME}/.ssh/known_hosts | awk '{print $1}'`
+for NAME in ${NAMES}; do
+  if [ `echo ${NAME} | grep -c ","` -eq 1 ]; then
+    NAME=`echo ${NAME} | cut -d, -f1`
+  fi
+  ssh-keygen -R ${NAME}
+done

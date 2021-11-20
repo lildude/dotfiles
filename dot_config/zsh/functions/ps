@@ -1,0 +1,7 @@
+# ps that excludes the grep when grepping
+if [ ! $1 ]
+then
+	/bin/ps
+else
+   	/bin/ps $* | grep -v grep
+fi

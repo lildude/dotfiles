@@ -1,0 +1,6 @@
+if [ ! $1 ]
+then
+  	echo -n "Filename: "
+  	read RESP; else RESP=$1
+fi
+cp ${RESP}{,.`date +%Y%m%d-%Hh%m`}

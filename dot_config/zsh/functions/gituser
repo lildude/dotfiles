@@ -1,0 +1,12 @@
+# Make setting git user.name and user.email a single cmd
+#
+# By default we switch to lildood unless a username is supplied as my global
+# config is for colin.
+#
+if [ ! ${1} ]; then
+  git config user.email lildood@gmail.com
+elif [ ${1} == "colin" ]; then
+  git config user.email colin@github.com
+else
+  echo "Unknown user".
+fi

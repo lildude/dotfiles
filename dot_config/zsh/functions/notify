@@ -1,0 +1,5 @@
+if hash terminal-notifier 2> /dev/null; then
+  terminal-notifier -message "$1"
+else
+  osascript -e "display notification \"$1\""
+fi
