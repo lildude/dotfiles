@@ -94,7 +94,6 @@ alias path='echo -e ${PATH//:/\\n}'
 alias rm='nocorrect rm'
 alias l='ls -lg'
 alias ll='ls -lga'
-alias ls-l='ls -l'      # Typo
 alias ..='cd ..'
 alias path='echo -e ${PATH//:/\\n}'
 alias fpath='echo -e ${FPATH//:/\\n}'
