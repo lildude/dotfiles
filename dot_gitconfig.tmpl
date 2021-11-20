@@ -147,8 +147,8 @@
   helper = osxkeychain
 {{- end }}
 
-# Always use https on Codespaces
 {{- if .codespaces }}
+# Always use https on Codespaces
 [url "https://github.com/"]
   insteadOf = git@github.com:
 {{- end }}
