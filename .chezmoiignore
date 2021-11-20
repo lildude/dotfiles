@@ -3,10 +3,13 @@
 .config/Code/
 {{/* Don't install macOS files on Linux */}}
 {{ else if eq .chezmoi.os "linux" -}}
-.hammerspoon/init.lua
 .config/karabiner.edn
 .Brewfile
 Library/
+.asdfrc
+.tool-versions
+.local/bin/touchid-enable-pam-sudo
+.local/bin/rebrew
 {{ end -}}
 {{ if eq .install_type "min" -}}
 .netrc
