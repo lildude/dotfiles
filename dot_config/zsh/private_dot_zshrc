@@ -60,7 +60,6 @@ fpath=(
 #### ---:[ Export Variables ]:--- ###
 export GPG_TTY=$TTY
 [ -z "$LANG" ] && export LANG='en_GB.UTF-8'  # Speak British to me, might need to run `sudo locale-gen en_GB.utf8` first
-[ -d ${HOME}/go ] && export GOPATH=${HOME}/go
 export HOMEBREW_INSTALL_CLEANUP=1 # Always clean up when installing Homebrew packages
 export HOMEBREW_BOOTSNAP=1        # Speed up homebrew
 export HOMEBREW_NO_ANALYTICS=1    # Don't send analytics
@@ -84,14 +83,25 @@ export LESS_TERMCAP_so=$'\E[00;47;30m'              # Begins standout-mode.
 export LESS_TERMCAP_ue=$'\E[0m'                     # Ends underline.
 export LESS_TERMCAP_us=$'\E[01;32m'                 # Begins underline.
 # Store stuff in ~/.config and ~/.cache when we can.
-# https://github.com/grawity/dotfiles/blob/master/.dotfiles.notes
+# https://wiki.archlinux.org/title/XDG_Base_Directory
 # https://www.reddit.com/r/zsh/comments/fvtr19/no_more_dotfile_clutter_in_my_home/
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="${HOME}/.config"
 [ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="${HOME}/.cache"
+[ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="${HOME}/.local/share"
 
 export LESSHISTFILE=$XDG_CONFIG_HOME/lesshistory
 export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
-export IRBRC=$XDG_CONFIG_HOME/irbrc
+export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
+export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
+export IRBRC=$XDG_CONFIG_HOME/irb/irbrc
+export ASDF_DATA_DIR=$XDG_DATA_HOME/asdf
+export ASDF_CONFIG_FILE=$XDG_CONFIG_HOME/asdf/asdfrc
+export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$XDG_CONFIG_HOME/asdf/tool-versions
+export PRYRC=$XDG_CONFIG_HOME/pry/pryrc   # Unnessesary but being extra safe
+export GOPATH=$XDG_DATA_HOME/go
+export SQLITE_HISTORY=$XDG_CACHE_HOME/sqlite_history
+
+path+=($GOPATH/bin)
 
 HISTFILE=$XDG_CONFIG_HOME/zsh/.zsh_history
 HISTSIZE=11000               # Max. entries to keep in memory
