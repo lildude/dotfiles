@@ -3,7 +3,7 @@
 
   {{- if ne .install_type "min" }}
     if [ -n "$packages" ]; then
-      packages="bat fd-find fzf grc gnupg2 jq zsh ripgrep libssl-dev zlib1g-dev"
+      packages="bat bfs exa fd-find grc gnupg2 jq zsh ripgrep libssl-dev zlib1g-dev"
       # Extra opts required because of rust build bug - https://askubuntu.com/questions/1290262/unable-to-install-bat-error-trying-to-overwrite-usr-crates2-json-which
       sudo apt-get update && sudo apt-get install -o Dpkg::Options::="--force-overwrite" -y $to_install
       git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
