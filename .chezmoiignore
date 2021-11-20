@@ -14,7 +14,8 @@ Library/
 {{ if eq .install_type "min" -}}
 .netrc
 .secrets
-{{ end }}
+.ssh/config
+{{ end -}}
 {{/* Don't ever install these files */}}
 LICENSE
 README.md
