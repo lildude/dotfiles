@@ -173,14 +173,15 @@ autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
 # Define functions and completions.
+# Or place the functions in $ZDOTDIR/functions and the completions in $ZDOTDIR/completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
 
-z4h source --compile "$HOME/.secrets"
-z4h source --compile /etc/grc.zsh || true # Colourize all the other things
-z4h source --compile /usr/local/etc/grc.zsh || true # Colourize all the other things
-
+z4h source "$HOME/.secrets"
+z4h source /etc/grc.zsh # Colourize all the other things
+z4h source /usr/local/etc/grc.zsh # Colourize all the other things
+z4h source -- ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh} # Load asdf if it's installed.
 
 # This must always be last.
 [ -z "$ZPROF" ] || zprof
