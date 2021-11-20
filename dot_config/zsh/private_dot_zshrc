@@ -83,8 +83,17 @@ export LESS_TERMCAP_se=$'\E[0m'                     # Ends standout-mode.
 export LESS_TERMCAP_so=$'\E[00;47;30m'              # Begins standout-mode.
 export LESS_TERMCAP_ue=$'\E[0m'                     # Ends underline.
 export LESS_TERMCAP_us=$'\E[01;32m'                 # Begins underline.
+# Store stuff in ~/.config and ~/.cache when we can.
+# https://github.com/grawity/dotfiles/blob/master/.dotfiles.notes
+# https://www.reddit.com/r/zsh/comments/fvtr19/no_more_dotfile_clutter_in_my_home/
+[ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="${HOME}/.config"
+[ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="${HOME}/.cache"
 
-HISTFILE=~/.cache/zsh/.zsh_history
+export LESSHISTFILE=$XDG_CONFIG_HOME/lesshistory
+export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
+export IRBRC=$XDG_CONFIG_HOME/irbrc
+
+HISTFILE=$XDG_CONFIG_HOME/zsh/.zsh_history
 HISTSIZE=11000               # Max. entries to keep in memory
 SAVEHIST=10000               # Max. entries to save to file
 HISTORY_IGNORE='([bf]g *|[bf]g|disown|cd ..|cd -)' # Don't add these to the history file.
@@ -104,6 +113,8 @@ alias nocmt="grep -v '^$\|^\s*\#'"
 alias vi=vim
 alias curl="noglob curl"              # Don't glob
 alias find='noglob find'              # Allows typing e.g. "find . -name *.zsh" without quotes.
+alias cp='cp -i'                      # Ask for confirmation when overwriting existing files.
+alias mv='mv -i'
 
 # Lazy Git aliases
 alias gcom="git com"
