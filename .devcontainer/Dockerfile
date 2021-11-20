@@ -10,11 +10,13 @@ RUN apt-get update && \
       bfs \
       exa \
       fd-find \
+      grc \
       build-essential \
       coreutils \
       gnupg2 \
       jq \
       unzip \
+      vim \
       zsh \
       zsh-autosuggestions \
       ripgrep && \
