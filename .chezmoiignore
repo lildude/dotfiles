@@ -9,6 +9,7 @@ Library/
 .tool-versions
 .local/bin/touchid-enable-pam-sudo
 .local/bin/rebrew
+.local/bin/set-macos-defaults.sh
 {{ end -}}
 {{ if eq .install_type "min" -}}
 .netrc
