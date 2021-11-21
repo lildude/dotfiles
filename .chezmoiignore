@@ -1,6 +1,7 @@
 {{/* Don't install Linux files on macOS */}}
 {{ if eq .chezmoi.os "darwin" -}}
 .config/Code/
+.mozilla/
 {{/* Don't install macOS files on Linux */}}
 {{ else if eq .chezmoi.os "linux" -}}
 .config/karabiner.edn
@@ -16,6 +17,7 @@ Library/
 .secrets
 .ssh/config
 .config/homebrew
+.mozilla
 {{ end -}}
 {{/* Don't ever install these files */}}
 LICENSE
