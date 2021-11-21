@@ -4,7 +4,6 @@
 {{/* Don't install macOS files on Linux */}}
 {{ else if eq .chezmoi.os "linux" -}}
 .config/karabiner.edn
-.Brewfile
 Library/
 .asdfrc
 .tool-versions
@@ -15,6 +14,7 @@ Library/
 .netrc
 .secrets
 .ssh/config
+.config/homebrew
 {{ end -}}
 {{/* Don't ever install these files */}}
 LICENSE
