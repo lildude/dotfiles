@@ -27,6 +27,7 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 # enabled hosts.
 #zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
 zstyle :z4h: start-tmux 'no' # Don't download and start tmux-related stuff as I don't use tmux
+zstyle :z4h:fzf-history fzf-flags --no-preview --height 30% # Disable history preview and limit height
 
 # Clone additional Git repositories from GitHub.
 #
@@ -66,6 +67,7 @@ export HOMEBREW_NO_ANALYTICS=1    # Don't send analytics
 export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
+export MANWIDTH=80
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
 if (( $#commands[(i)lesspipe(|.sh)] )); then
@@ -89,25 +91,30 @@ export LESS_TERMCAP_us=$'\E[01;32m'                 # Begins underline.
 [ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="${HOME}/.cache"
 [ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="${HOME}/.local/share"
 
-export LESSHISTFILE=$XDG_CONFIG_HOME/lesshistory
-export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
+
+export ASDF_CONFIG_FILE=$XDG_CONFIG_HOME/asdf/asdfrc
+export ASDF_DATA_DIR=$XDG_DATA_HOME/asdf
+export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$XDG_CONFIG_HOME/asdf/tool-versions
 export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
+export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
 export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
+export GOBIN=~/.local/gobin                     # Go binaries ('go install').
+export GOCACHE=/tmp/go/build                    # Go build cache in tmp/memory
+export GOPATH=$XDG_CACHE_HOME/go                # GOPATH mostly stores cache stuff these days thanks to modules
+export GOTMPDIR=/tmp/go/tmp                     # tmp files during compile
 export HOMEBREW_BUNDLE_FILE=$XDG_CONFIG_HOME/homebrew/Brewfile
 export IRBRC=$XDG_CONFIG_HOME/irb/irbrc
-export ASDF_DATA_DIR=$XDG_DATA_HOME/asdf
-export ASDF_CONFIG_FILE=$XDG_CONFIG_HOME/asdf/asdfrc
-export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$XDG_CONFIG_HOME/asdf/tool-versions
-export PRYRC=$XDG_CONFIG_HOME/pry/pryrc   # Unnessesary but being extra safe
-export GOPATH=$XDG_DATA_HOME/go
+export LESSHISTFILE=$XDG_CONFIG_HOME/lesshistory
+export PRYRC=$XDG_CONFIG_HOME/pry/pryrc         # Unnessesary but being extra safe
 export SQLITE_HISTORY=$XDG_CACHE_HOME/sqlite_history
 
-path+=($GOPATH/bin)
+[[ ! -d "$GOTMPDIR" ]] && mkdir -p "$GOTMPDIR"  # Make sure it exists as Go won't create it.
+path+=($GOBIN)
 
 HISTFILE=$XDG_CONFIG_HOME/zsh/.zsh_history
-HISTSIZE=11000               # Max. entries to keep in memory
-SAVEHIST=10000               # Max. entries to save to file
-HISTORY_IGNORE='([bf]g *|[bf]g|disown|cd ..|cd -)' # Don't add these to the history file.
+HISTSIZE=11000                                      # Max. entries to keep in memory
+SAVEHIST=10000                                      # Max. entries to save to file
+HISTORY_IGNORE='([bf]g *|[bf]g|disown|cd ..|cd -)'  # Don't add these to the history file.
 
 #### ---:[ Aliases ]:--- ###
 alias path='echo -e ${PATH//:/\\n}'
@@ -128,17 +135,18 @@ alias cp='cp -i'                      # Ask for confirmation when overwriting ex
 alias mv='mv -i'
 
 # Lazy Git aliases
-alias gcom="git com"
-alias gup="git up"  # Uses the `up` alias in my .gitconfigcd
-alias gst="git status"
 alias g='git'
 alias gb='git branch'
 alias gbc='git switch -c'
 alias gc='git commit --verbose'
 alias gco='git switch'
-alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
+alias gcom="git com"
 alias gld='git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"'
+alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
 alias gp='git push -u'
+alias gst='git status'
+alias gsw='git switch'
+alias gup='git up'  # Uses the `up` alias in my .gitconfigcd
 
 _exists() { (( $+commands[$1] )) }
 
@@ -175,8 +183,8 @@ unsetopt check_jobs           # Don't report on jobs when shell exit.
 unsetopt clobber              # Do not overwrite existing files with > and >>. Use >! and >>! to bypass.
 
 #### ---:[ Keybindings ]:--- ###
-z4h bindkey undo Ctrl+/   Shift+Tab # undo the last command line change
-z4h bindkey redo Option+/           # redo the last undone command line change
+z4h bindkey undo Ctrl+/   Shift+Tab     # undo the last command line change
+z4h bindkey redo Option+/               # redo the last undone command line change
 z4h bindkey z4h-cd-back    Shift+Left   # cd into the previous directory
 z4h bindkey z4h-cd-forward Shift+Right  # cd into the next directory
 z4h bindkey z4h-cd-up      Shift+Up     # cd into the parent directory
