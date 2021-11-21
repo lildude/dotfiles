@@ -1,0 +1,14 @@
+/*
+ * Custom CSS as pulled in by the Custom CSS and JS extension - https://github.com/be5invis/vscode-custom-css
+*/
+
+/* Dim terminal when unfocused */
+.terminal {
+  border-left: 1px solid #00ffaa;
+  padding-left: 1em;
+  opacity: 1;
+}
+.terminal:not(.focus) {
+  border-color: transparent;
+  opacity: 0.5;
+}
