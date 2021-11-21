@@ -1,0 +1,11 @@
+{
+	// -*- jsonc -*-
+	"Frozen String Literal": {
+		"prefix": "fsl",
+		"body": [
+			"# frozen_string_literal: true",
+			"",
+			"$0"
+		]
+	}
+}
