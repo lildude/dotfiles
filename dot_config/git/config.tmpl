@@ -1,7 +1,7 @@
 # vim: set filetype=ini
 [core]
-  excludesfile = ~/.gitignore
-  attributesfile = ~/.gitattributes
+  excludesfile = ~/.config/git/ignore
+  attributesfile = ~/.config/git/attributes
   # Don't prompt for commit messages for merge commits.
   mergeoptions = --no-edit
   {{- if (eq .chezmoi.os "darwin") }}
@@ -20,10 +20,10 @@
 
 # Override default when working in work repos
 [includeIf "gitdir:~/github/"]
-  path = ~/.gitconfig.work
+  path = ~/.config/git/gitconfig.work
 # Work dirs on Codespaces
 [includeIf "gitdir:/workspaces/"]
-  path = ~/.gitconfig.work
+  path = ~/.config/git/gitconfig.work
 
 [github]
   user = lildude
@@ -137,7 +137,7 @@
   detachedHead = false
 
 [maintenance]
-  repo = /Users/lildude/github/github
+  repo = ~/github/github
 
 [submodule]
   fetchJobs = 8
