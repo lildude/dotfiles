@@ -25,4 +25,5 @@ README.md
 install.sh
 Dockerfile
 prompt.png
+script/
 {{/* vim: set filetype=gotemplate : */}}
