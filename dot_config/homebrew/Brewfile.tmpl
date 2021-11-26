@@ -10,10 +10,9 @@ tap 'homebrew/command-not-found'
 tap 'jesseduffield/lazydocker'  # Needed for lazydocker
 tap 'muesli/tap'
 tap 'yqrashawn/goku'            # Needed for goku
-tap 'goreleaser/tap/goreleaser'
-tap 'grdl/tap/git-get'
+tap 'goreleaser/tap'
 tap 'kopia/kopia'
-tap 'tavianator/tap/bfs'      # Needed for bfs
+tap 'tavianator/tap'            # Needed for bfs
 
 # Work-specific tools
 {{- if eq .install_type "work" }}
@@ -25,7 +24,7 @@ brew 'adr-tools'
 {{ end }}
 
 {{- if eq .install_type "home" }}
-brew 'lipvips'          # Used by jekyll plugin to resize images
+brew 'vips'             # Used by jekyll plugin to resize images
 brew 'webp'             # For converting images to webp
 brew 'youtube-dl'
 {{ end }}
@@ -37,7 +36,6 @@ brew 'base64'
 brew 'bash'             # Only needed for my Bash scripts now macOS isn't shipping updates etc
 brew 'bat'              # Like cat, but prettier
 brew 'bfs'              # Breadth-first version of find - much quicker and used by my fzf config.
-brew 'chezmoi'          # dotfile manager
 brew 'coreutils'
 # brew 'croc'             # A tool for sending large files directly to someone on the CLI
 brew 'dos2unix'
@@ -48,13 +46,12 @@ brew 'fd'               # Like find, but faster
 brew 'ffmpeg'
 brew 'findutils'
 brew 'fswatch'
-brew 'fzf'
+# brew 'fzf'            # Installed by my shell now
 # brew 'fzy'
 brew 'gh'
 brew 'git'
 brew 'git-delta'
 brew 'git-lfs'
-brew 'git-get'          # Without the tap: brew install grdl/tap/git-get
 brew 'gnu-sed'
 brew 'gnupg'
 brew 'go'
@@ -91,8 +88,8 @@ brew 'tmux'
 brew 'watch'
 brew 'xz'
 brew 'zsh'
-brew 'zsh-completions'
-brew 'zsh-autosuggestions'
+# brew 'zsh-completions'        # My shell installs this
+# brew 'zsh-autosuggestions'    # My shell installs this
 
 # Work-specific apps
 {{- if eq .install_type "work" }}
