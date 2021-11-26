@@ -1,0 +1,20 @@
+{{- if ne .install_type "min" }}
+#!/usr/bin/env bash
+set -euo pipefail
+DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+
+echo "=> Importing gpg key"
+gpg --list-keys
+gpg --passphrase '{{- (onepassword "wl54agzpf5f2vbysssb55v2dae").details.password }}' --pinentry-mode loopback --batch --import ~/.gnupg/colin@symr.io.asc
+
+{{- if eq .chezmoi.os "darwin" }}
+ssh-add --apple-use-keychain $(find "$HOME/.ssh/" -name "*.pub" | sed 's/.pub//g')
+{{- end }}
+
+{{ if eq .chezmoi.os "linux" -}}
+eval "$(ssh-agent -s)"
+echo "=> TODO: Manually add keys using `ssh-add $(find "$HOME/.ssh/" -name "*.pub" | sed 's/.pub//g')`
+#DISPLAY=1 SSH_ASKPASS="$DIR/script/ssh-askpass" ssh-add ${opts:-} $(find "$HOME/.ssh/" -name "*.pub" | sed 's/.pub//g') < /dev/null
+{{- end }}
+
+{{- end }}
