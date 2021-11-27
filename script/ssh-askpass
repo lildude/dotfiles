@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# Return the password for an SSH key from 1Password for the file passed as the first argument
+#
+# This is used by run_once_after_load_keys.sh.tmpl to load the SSH keys.
+#
+set -euo pipefail
+
+[ -z "${1:-}" ] && ( echo "SSH private key filename required!"; exit 1 )
+
+# shellcheck disable=SC2001
+path=$(echo "$1" | sed 's|.*\(/.*\): |\1|')
+filename=$(basename "$path")
+item_id=$(op list items --vault Dotfiles | jq -r ".[] | select(.templateUuid==\"005\") | select(.overview.title | endswith(\"$filename\")) | .uuid")
+
+# Returns the password in plaintext
+if [ -n "$item_id" ]; then
+  op get item "$item_id" | jq -r '.details.password'
+fi

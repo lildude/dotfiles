@@ -15,9 +15,10 @@ Library/
 {{ if eq .install_type "min" -}}
 .netrc
 .secrets
-.ssh/config
+.ssh/
 .config/homebrew
 .mozilla
+.gnupg/
 {{ end -}}
 {{/* Don't ever install these files */}}
 LICENSE
