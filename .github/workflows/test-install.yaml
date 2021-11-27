@@ -12,7 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Run install script
-      env:
-        NAME: ${{ github.actor }}
-        EMAIL: ${{ github.action }}@${{ github.repository_owner }}.com
-      run: ./install.sh
+      run: ./script/install
