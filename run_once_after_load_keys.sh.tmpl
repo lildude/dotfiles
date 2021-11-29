@@ -1,6 +1,6 @@
 {{- if ne .install_type "min" -}}
 #!/usr/bin/env bash
-
+exit
 set -euo pipefail
 DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 
