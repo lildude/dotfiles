@@ -58,7 +58,7 @@ fpath=(
 #### ---:[ Export Variables ]:--- ###
 export GPG_TTY=$TTY
 export LANG='en_GB.UTF-8'         # Speak British to me, might need to run `sudo locale-gen en_GB.utf8` first
-export LC_COLLATE='C.UTF-8'       # Use C-UTF-8 collation for sorting
+export LC_COLLATE='C'             # Use C collation for sorting
 export HOMEBREW_INSTALL_CLEANUP=1 # Always clean up when installing Homebrew packages
 export HOMEBREW_BOOTSNAP=1        # Speed up homebrew
 export HOMEBREW_NO_ANALYTICS=1    # Don't send analytics
