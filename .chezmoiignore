@@ -19,6 +19,8 @@ Library/
 .config/homebrew
 .mozilla
 .gnupg/
+dev
+tmp
 {{ end -}}
 {{/* Don't ever install these files */}}
 LICENSE
