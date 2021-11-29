@@ -63,7 +63,7 @@ export HOMEBREW_INSTALL_CLEANUP=1 # Always clean up when installing Homebrew pac
 export HOMEBREW_BOOTSNAP=1        # Speed up homebrew
 export HOMEBREW_NO_ANALYTICS=1    # Don't send analytics
 export EDITOR='vim'
-export VISUAL='vim'
+export VISUAL='code --wait'
 export PAGER='less'
 export MANWIDTH=80
 # Set the Less input preprocessor.
