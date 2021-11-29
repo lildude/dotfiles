@@ -9,6 +9,7 @@ This current implementation is managed using [chezmoi](https://chezmoi.io/) and 
 ### Direct from this repo
 
 ```console
+$ eval $(op signin my.1password.com <email>) 
 $ sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply lildude
 ```
 
