@@ -176,7 +176,7 @@
       "markdown": false
     },
     "dotfiles.repository": "lildude/dotfiles",
-    "dotfiles.installCommand": "script/install",
+    "dotfiles.installCommand": "~/dotfiles/script/install",
     "editor.bracketPairColorization.enabled": true,
     "terminal.integrated.gpuAcceleration": "on",
     "remote.containers.defaultExtensions": [
