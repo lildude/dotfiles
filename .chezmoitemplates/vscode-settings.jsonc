@@ -176,7 +176,7 @@
       "markdown": false
     },
     "dotfiles.repository": "lildude/dotfiles",
-    "dotfiles.installCommand": "~/dotfiles/install.sh",
+    "dotfiles.installCommand": "~/dotfiles/script/install",
     "editor.bracketPairColorization.enabled": true,
     "terminal.integrated.gpuAcceleration": "on",
     "remote.containers.defaultExtensions": [
@@ -192,5 +192,6 @@
       "GitHub.copilot",
       "eamodio.gitlens",
       "chrislajoie.vscode-modelines"
-    ]
+    ],
+    "window.nativeTabs": true
 }
