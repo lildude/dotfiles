@@ -10,7 +10,7 @@ This current implementation is managed using [chezmoi](https://chezmoi.io/) and 
 
 ```console
 $ eval $(op signin my.1password.com <email>) 
-$ sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply lildude
+$ sh -c "$(curl -fsLS git.io/chezmoi)" -- -b ~/.local/bin init --apply lildude
 ```
 
 ### On Codespaces or VS Code Remote Containers
