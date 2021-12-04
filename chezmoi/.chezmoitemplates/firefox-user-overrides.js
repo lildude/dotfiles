@@ -13,51 +13,48 @@ user_pref("intl.accept_languages", "en-gb,en"); // 0210 - cos english
 // JUST IN CASE: `extensions.formautofill.*` in 0517 all disabled in favour of 1Password
 
 user_pref("network.dns.disableIPv6", false); // 0701 - I need IPv6
-user_pref("network.proxy.socks_remote_dns", true); // 0704 - I might need to disable this when proxying through SSH.
+user_pref("network.proxy.socks_remote_dns", true); // 0702 - I might need to disable this when proxying through SSH.
 user_pref("keyword.enabled", true); // 0801 - I like using the URL bar for easy searching
-user_pref("browser.formfill.enable", true); // 0860 - I'm lazy
-user_pref("security.ask_for_password", 0); // 0903 - I don't use Firefox's password manager, but in case it starts prompting, only the first time.
-user_pref("security.password_lifetime", 30); // 0904 - As for 0903
+user_pref("browser.formfill.enable", true); // 0810 - I'm lazy
+user_pref("security.ask_for_password", 0); // 0901 - I don't use Firefox's password manager, but in case it starts prompting, only the first time.
+user_pref("security.password_lifetime", 30); // 0902 - As for 0901
 
 user_pref("browser.cache.disk.enable", true); // 1001 - I use temp containers and a lot of tabs
-user_pref("browser.sessionstore.privacy_level", 0); // 1021 - I'm not sure about this just yet so sticking with default
+user_pref("browser.sessionstore.privacy_level", 0); // 1003 - I'm not sure about this just yet so sticking with default
 
 user_pref("security.mixed_content.block_display_content", false); // 1241 - Breaks a lot of sites
-user_pref("browser.display.use_document_fonts", 1); // 1401 - I want pretty fonts for now
-user_pref("media.gmp-widevinecdm.enabled", true); // 1825 - I likes Netflix
-user_pref("media.gmp-widevinecdm.visible", true); // 1825 - I likes Netflix
-user_pref("media.eme.enabled", true); // 1830 - I likes Netflix
 
-user_pref("webgl.enable-webgl2", true); // 2010 - Strava and Mapbox playground needs WebGL
-user_pref("webgl.min_capability_mode", false); // 2012 - Strava and Mapbox playground needs WebGL
-user_pref("webgl.disable-fail-if-major-performance-caveat", false); // 2012 - Strava and Mapbox playground needs WebGL
+user_pref("media.gmp-widevinecdm.enabled", true); // 2021 - I likes Netflix
+user_pref("media.gmp-widevinecdm.visible", true); // Gone? 1825 - I likes Netflix
+user_pref("media.eme.enabled", true); // 2022 - I likes Netflix
+
+user_pref("webgl.enable-webgl2", true); // Gone? 2010 - Strava and Mapbox playground needs WebGL
+user_pref("webgl.min_capability_mode", false); // Gone? 2012 - Strava and Mapbox playground needs WebGL
+user_pref("webgl.disable-fail-if-major-performance-caveat", false); // Gone? 2012 - Strava and Mapbox playground needs WebGL
+
 user_pref("dom.serviceWorkers.enabled", true); // 2302 - It breaks websites
-user_pref("dom.allow_cut_copy", true); // 2404 - I need this for GitHub's copy permalink func
-user_pref("beacon.enabled", true); // 2602 - github.rewatch.com used for work vids needs this
-user_pref("browser.download.folderList", 1); // 2650 - Always download to downloads
-user_pref("browser.download.useDownloadDir", true); // 2651 - I'm explicit in my setup so am happy to always go to downloads
-user_pref("privacy.sanitize.sanitizeOnShutdown", false); // 2802 - Don't clear things everytime I shutdown
-user_pref("privacy.clearOnShutdown.offlineApps", false); // cos 2802 is false
+user_pref("dom.allow_cut_copy", true); // Gone? 2404 - I need this for GitHub's copy permalink func
+user_pref("beacon.enabled", true); // 2602 - rewatch.com used for work vids needs this
 
-user_pref("privacy.firstparty.isolate", false); // 4001 - Breaks stuff
+user_pref("browser.download.useDownloadDir", true); // 2651 - I'm explicit in my setup so am happy to always go to downloads
+user_pref("privacy.sanitize.sanitizeOnShutdown", false); // 2810 - Don't clear things everytime I shutdown
+user_pref("privacy.clearOnShutdown.offlineApps", false); // 2811 - cos 2810 is false
+
+user_pref("privacy.firstparty.isolate", false); // 4001 - Breaks a lot of stuff that uses cross-origin logins
+// TODO: Changing these might fix some of the breakage of enabling above
+// user_pref("privacy.firstparty.isolate.restrict_opener_access", false); // [DEFAULT: true]
+// user_pref("privacy.firstparty.isolate.block_post_message", false);
+
 user_pref("privacy.resistFingerprinting", false); // 4501 - this breaks Okta login
 user_pref("privacy.resistFingerprinting.letterboxing", false); // 4504
-// 4600: These are enabled here because I've disabled 4501. Some of these might interfer with sites
+// 4600: These are enabled here because I've disabled 4501. Some of these might interfere with sites
 user_pref("webgl.disabled", false); // 4520 - Strava and Mapbox playground needs WebGL
-user_pref("dom.enable_resource_timing", false); // 4602
-user_pref("dom.enable_performance", false); // 4603
-user_pref("browser.zoom.siteSpecific", false); // 4605
-user_pref("media.webspeech.synth.enabled", false); // 4608
-user_pref("media.video_stats.enabled", false); // 4610
-user_pref("media.ondevicechange.enabled", false); // 4612
-user_pref("webgl.enable-debug-renderer-info", false); // 4613
-user_pref("ui.use_standins_for_native_colors", true); // 4615
 
-// 9000s
+user_pref("browser.download.folderList", 1); // 5016 - Always download to downloads
+
+// Personal settings unrelated to arkenfox/user.js
 user_pref("extensions.pocket.enabled", true); // - I like Pocket
-
-/*** ANO non-ghacks settings ***/
-user_pref("security.enterprise_roots.enabled", true); // Trust keychain company certs - might work one day - https://www.jamf.com/jamf-nation/discussions/25166/how-to-firefox-trusting-company-certificates
+user_pref("security.enterprise_roots.enabled", true); // Trust keychain company certs - need for work
 user_pref("security.osclientcerts.autoload", true);
 user_pref("accessibility.typeaheadfind.flashBar", 0); // I don't want the toolbar to flash when a find matches
 

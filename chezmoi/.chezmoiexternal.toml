@@ -1,0 +1,4 @@
+[".local/share/chezmoi/chezmoi/.chezmoitemplates/user-js-updater.sh"]
+  type = "file"
+  url = "https://github.com/arkenfox/user.js/raw/master/updater.sh"
+  refreshPeriod = "168h"
