@@ -24,8 +24,8 @@ zstyle ':z4h:direnv:success' notify 'yes'           # Show "loading" and "unload
 #zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
 zstyle ':z4h:ssh:*'                   enable 'no'   # The default value if none of the overrides above match the hostname.
 #zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'  # Send these files over to the remote host when connecting over SSH to the enabled hosts.
-zstyle :z4h: start-tmux 'no'                        # Don't download and start tmux-related stuff as I don't use tmux
-zstyle :z4h:fzf-history fzf-flags --no-preview --height 30% # Disable history preview and limit height
+zstyle :z4h: start-tmux 'integrated'                        # Don't download and start tmux-related stuff as I don't use tmux
+zstyle :z4h:fzf-history fzf-flags --no-preview # Disable history preview and limit height
 
 # Clone additional Git repositories from GitHub.
 #
@@ -64,7 +64,7 @@ export HOMEBREW_INSTALL_CLEANUP=1 # Always clean up when installing Homebrew pac
 export HOMEBREW_BOOTSNAP=1        # Speed up homebrew
 export HOMEBREW_NO_ANALYTICS=1    # Don't send analytics
 export EDITOR='vim'
-export VISUAL='code --wait'
+export VISUAL='vim'
 export PAGER='less'
 export MANWIDTH=80
 # Set the Less input preprocessor.
