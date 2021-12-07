@@ -52,6 +52,8 @@ user_pref("webgl.disabled", false); // 4520 - Strava and Mapbox playground needs
 
 user_pref("browser.download.folderList", 1); // 5016 - Always download to downloads
 
+user_pref("dom.event.clipboardevents.enabled", true); // 7013 - Needed for copy & paste on GDocs etc
+
 // Personal settings unrelated to arkenfox/user.js
 user_pref("extensions.pocket.enabled", true); // - I like Pocket
 user_pref("security.enterprise_roots.enabled", true); // Trust keychain company certs - need for work
