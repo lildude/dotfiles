@@ -9,7 +9,7 @@
 
 #### ---:[ Z4H config ]:--- ###
 
-zstyle ':z4h:' chsh no                              # Disable chsh check
+zstyle ':z4h:' chsh 'no'                            # Disable chsh check
 zstyle ':z4h:' auto-update      'no'                # Periodic auto-update on Zsh startup: 'ask' or 'no'. You can manually run `z4h update` to update everything.
 zstyle ':z4h:' auto-update-days '28'                # Ask whether to auto-update this often; has no effect if auto-update is 'no'.
 zstyle ':z4h:' prompt-at-bottom 'no'                # Move prompt to the bottom when zsh starts and on Ctrl+L.
