@@ -160,6 +160,12 @@ _exists exa && alias ls=exa
 _exists rg && rg() { $commands[rg] -p "$@" | less; }
 _exists prettyping && alias ping="prettyping --nolegend"
 _exists htop && alias top=htop
+_exists chezmoi && {
+  alias che=chezmoi
+  alias chez=chezmoi
+  alias ch=chezmoi
+  alias cha="chezmoi apply"
+}
 
 unfunction _exists
 
