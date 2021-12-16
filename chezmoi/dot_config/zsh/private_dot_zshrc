@@ -198,7 +198,8 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 
 #### ---:[ Autoload functions ]:--- ###
 autoload -Uz zmv
-autoload -Uz $fpath[1,2]/*(.:t)           # Load all my functions & completions
+autoload -Uz $fpath[1]/*(.:t)           # Load all my functions
+autoload -Uz $fpath[2]/*(.:t)           # Load all my completions
 
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
