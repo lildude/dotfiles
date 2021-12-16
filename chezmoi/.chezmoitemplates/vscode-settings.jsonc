@@ -14,7 +14,6 @@
     "editor.fontLigatures": true,
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": false,
-    "terminal.external.osxExec": "iTerm2.app",
     "workbench.sideBar.location": "left",
     "workbench.statusBar.visible": true,
     "workbench.list.horizontalScrolling": true,
@@ -78,7 +77,6 @@
     "[markdown]": {
       "files.trimTrailingWhitespace": false
     },
-    "git.autofetch": true,
     "go.useLanguageServer": true,
     "coverage-gutters.highlightdark": "rgba(45, 121, 10, 0.2)",
     "coverage-gutters.noHighlightDark": "rgba(121, 31, 10, 0.2)",
