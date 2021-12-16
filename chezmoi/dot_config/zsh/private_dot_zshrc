@@ -20,6 +20,11 @@ zstyle ':z4h:ssh:*'             enable            'no'            # The default 
 zstyle ':z4h:'                  start-tmux        'integrated'    # Don't download and start tmux-related stuff as I don't use tmux
 zstyle ':z4h:fzf-history'       fzf-flags         --no-preview    # Disable history preview and limit height
 
+# Disable on codespaces as they are never used
+if [ $CODESPACES ]; then
+  zstyle ':z4h:homebrew-command-not-found'      channel           'none'
+  zstyle ':z4h:systemd'                         channel           'none'
+fi
 
 # Clone additional Git repositories from GitHub.
 #
@@ -193,7 +198,7 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 
 #### ---:[ Autoload functions ]:--- ###
 autoload -Uz zmv
-autoload -Uz $fpath[1]/*(.:t)           # Load all functions in the first directory which is my own.
+autoload -Uz $fpath[1,2]/*(.:t)           # Load all my functions & completions
 
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
