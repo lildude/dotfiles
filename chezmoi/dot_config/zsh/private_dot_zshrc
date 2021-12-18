@@ -9,24 +9,22 @@
 
 #### ---:[ Z4H config ]:--- ###
 
-zstyle ':z4h:' auto-update      'no'                # Periodic auto-update on Zsh startup: 'ask' or 'no'. You can manually run `z4h update` to update everything.
-zstyle ':z4h:' auto-update-days '28'                # Ask whether to auto-update this often; has no effect if auto-update is 'no'.
-zstyle ':z4h:' prompt-at-bottom 'no'                # Move prompt to the bottom when zsh starts and on Ctrl+L.
-zstyle ':z4h:bindkey' keyboard  'mac'               # Keyboard type: 'mac' or 'pc'.
-zstyle ':z4h:autosuggestions' forward-char 'accept' # Right-arrow key accepts one character ('partial-accept') from command autosuggestions or the whole thing ('accept')?
-zstyle ':z4h:fzf-complete' recurse-dirs 'no'        # Recursively traverse directories when TAB-completing files.
-zstyle ':z4h:direnv'         enable 'no'            # Enable direnv to automatically source .envrc files.
-zstyle ':z4h:direnv:success' notify 'yes'           # Show "loading" and "unloading" notifications from direnv.
-# Enable ('yes') or disable ('no') automatic teleportation of z4h over
-# SSH when connecting to these hosts.
-#zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
-#zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
-zstyle ':z4h:ssh:*'                   enable 'no'   # The default value if none of the overrides above match the hostname.
-#zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'  # Send these files over to the remote host when connecting over SSH to the enabled hosts.
-zstyle :z4h: start-tmux 'integrated'                        # Don't download and start tmux-related stuff as I don't use tmux
-zstyle :z4h:fzf-history fzf-flags --no-preview --height 30% # Disable history preview and limit height
-zstyle ':z4h:fzf-dir-history' fzf-bindings tab:repeat
-zstyle ':z4h:fzf-complete'    fzf-bindings tab:repeat
+zstyle ':z4h:'                  chsh              'no'            # Disable chsh check
+zstyle ':z4h:'                  auto-update       'no'            # Periodic auto-update on Zsh startup: 'ask' or 'no'. You can manually run `z4h update` to update everything.
+zstyle ':z4h:'                  prompt-at-bottom  'yes'           # Move prompt to the bottom when zsh starts and on Ctrl+L.
+zstyle ':z4h:bindkey'           keyboard          'mac'           # Keyboard type: 'mac' or 'pc'.
+zstyle ':z4h:autosuggestions'   forward-char      'accept'        # Right-arrow key accepts one character ('partial-accept') from command autosuggestions or the whole thing ('accept')?
+zstyle ':z4h:fzf-complete'      recurse-dirs      'no'            # Recursively traverse directories when TAB-completing files.
+zstyle ':z4h:direnv'            enable            'no'            # Enable direnv to automatically source .envrc files.
+zstyle ':z4h:ssh:*'             enable            'no'            # The default value if none of the overrides above match the hostname.
+zstyle ':z4h:'                  start-tmux        'integrated'    # Don't download and start tmux-related stuff as I don't use tmux
+zstyle ':z4h:fzf-history'       fzf-flags         --no-preview    # Disable history preview and limit height
+
+# Disable on codespaces as they are never used
+if [ $CODESPACES ]; then
+  zstyle ':z4h:homebrew-command-not-found'      channel           'none'
+  zstyle ':z4h:systemd'                         channel           'none'
+fi
 
 # Clone additional Git repositories from GitHub.
 #
@@ -65,7 +63,7 @@ export HOMEBREW_INSTALL_CLEANUP=1 # Always clean up when installing Homebrew pac
 export HOMEBREW_BOOTSNAP=1        # Speed up homebrew
 export HOMEBREW_NO_ANALYTICS=1    # Don't send analytics
 export EDITOR='vim'
-export VISUAL='code --wait'
+export VISUAL='vim'
 export PAGER='less'
 export MANWIDTH=80
 # Set the Less input preprocessor.
@@ -161,6 +159,12 @@ _exists exa && alias ls=exa
 _exists rg && rg() { $commands[rg] -p "$@" | less; }
 _exists prettyping && alias ping="prettyping --nolegend"
 _exists htop && alias top=htop
+_exists chezmoi && {
+  alias che=chezmoi
+  alias chez=chezmoi
+  alias ch=chezmoi
+  alias cha="chezmoi apply"
+}
 
 unfunction _exists
 
@@ -194,7 +198,8 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 
 #### ---:[ Autoload functions ]:--- ###
 autoload -Uz zmv
-autoload -Uz $fpath[1]/*(.:t)           # Load all functions in the first directory which is my own.
+autoload -Uz $fpath[1]/*(.:t)           # Load all my functions
+autoload -Uz $fpath[2]/*(.:t)           # Load all my completions
 
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
