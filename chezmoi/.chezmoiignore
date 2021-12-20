@@ -4,7 +4,8 @@
 .mozilla/
 {{/* Don't install macOS files on Linux */}}
 {{ else if eq .chezmoi.os "linux" -}}
-.config/karabiner.edn
+.config/karabiner/
+.config/hammerspoon/
 Library/
 .asdfrc
 .tool-versions
@@ -29,4 +30,5 @@ install.sh
 Dockerfile
 prompt.png
 script/
+**/.DS_Store
 {{/* vim: set filetype=gotemplate : */}}
