@@ -66,6 +66,7 @@ export EDITOR='vim'
 export VISUAL='vim'
 export PAGER='less'
 export MANWIDTH=80
+export LESS='-FgiMRwXz4'
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
 if (( $#commands[(i)lesspipe(|.sh)] )); then
