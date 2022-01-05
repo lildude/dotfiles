@@ -199,7 +199,6 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 #### ---:[ Autoload functions ]:--- ###
 autoload -Uz zmv
 autoload -Uz $fpath[1]/*(.:t)           # Load all my functions
-autoload -Uz $fpath[2]/*(.:t)           # Load all my completions
 
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
@@ -210,7 +209,6 @@ zle -N self-insert url-quote-magic
 # Or place the functions in $ZDOTDIR/functions and the completions in $ZDOTDIR/completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
-
 
 z4h source "$HOME/.secrets"
 z4h source /etc/grc.zsh # Colourize all the other things
