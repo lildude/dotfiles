@@ -133,6 +133,7 @@ alias curl="noglob curl"              # Don't glob
 alias find='noglob find'              # Allows typing e.g. "find . -name *.zsh" without quotes.
 alias cp='cp -i'                      # Ask for confirmation when overwriting existing files.
 alias mv='mv -i'
+alias codespaces-post-start='sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start'
 
 # Lazy Git aliases
 alias g='git'
