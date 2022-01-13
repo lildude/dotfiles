@@ -11,13 +11,13 @@
 
 zstyle ':z4h:'                  chsh              'no'            # Disable chsh check
 zstyle ':z4h:'                  auto-update       'no'            # Periodic auto-update on Zsh startup: 'ask' or 'no'. You can manually run `z4h update` to update everything.
-zstyle ':z4h:'                  prompt-at-bottom  'yes'           # Move prompt to the bottom when zsh starts and on Ctrl+L.
+zstyle ':z4h:'                  prompt-at-bottom  'no'           # Move prompt to the bottom when zsh starts and on Ctrl+L - needs tmux
 zstyle ':z4h:bindkey'           keyboard          'mac'           # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:autosuggestions'   forward-char      'accept'        # Right-arrow key accepts one character ('partial-accept') from command autosuggestions or the whole thing ('accept')?
 zstyle ':z4h:fzf-complete'      recurse-dirs      'no'            # Recursively traverse directories when TAB-completing files.
 zstyle ':z4h:direnv'            enable            'no'            # Enable direnv to automatically source .envrc files.
 zstyle ':z4h:ssh:*'             enable            'no'            # The default value if none of the overrides above match the hostname.
-zstyle ':z4h:'                  start-tmux        'integrated'    # Don't download and start tmux-related stuff as I don't use tmux
+zstyle ':z4h:'                  start-tmux        'no'            # Don't download and start tmux-related stuff as I really don't seem to gain much benefit from this.
 zstyle ':z4h:fzf-history'       fzf-flags         --no-preview    # Disable history preview and limit height
 
 # Disable on codespaces as they are never used
