@@ -1,7 +1,7 @@
 {
   "global": {
       "check_for_updates_on_startup": true,
-      "show_in_menu_bar": true,
+      "show_in_menu_bar": false,
       "show_profile_name_in_menu_bar": false
   },
   "profiles": [
@@ -16,7 +16,7 @@
               },
               "rules": [
                   {
-                      "description": "Hyper/Alfred",
+                      "description": "Caps Lock as Hyper",
                       "manipulators": [
                           {
                               "from": {
@@ -33,11 +33,6 @@
                                       ]
                                   }
                               ],
-                              "to_if_alone": [
-                                  {
-                                      "key_code": "f13" // map to alfred
-                                  }
-                              ],
                               "to_if_held_down": [
                                   {
                                       "key_code": "caps_lock"
@@ -49,104 +44,6 @@
                   }
               ]
           },
-          "devices": [
-              {
-                  "disable_built_in_keyboard_if_exists": false,
-                  "fn_function_keys": [],
-                  "identifiers": {
-                      "is_keyboard": true,
-                      "is_pointing_device": false,
-                      "product_id": 21,
-                      "vendor_id": 5426
-                  },
-                  "ignore": false,
-                  "manipulate_caps_lock_led": false,
-                  "simple_modifications": [
-                      {
-                          "from": {
-                              "key_code": "keypad_1"
-                          },
-                          "to": [
-                              {
-                                  "key_code": "f19"
-                              }
-                          ]
-                      },
-                      {
-                          "from": {
-                              "key_code": "keypad_2"
-                          },
-                          "to": [
-                              {
-                                  "key_code": "f18"
-                              }
-                          ]
-                      },
-                      {
-                          "from": {
-                              "key_code": "keypad_3"
-                          },
-                          "to": [
-                              {
-                                  "key_code": "f17"
-                              }
-                          ]
-                      }
-                  ]
-              },
-              {
-                  "disable_built_in_keyboard_if_exists": false,
-                  "fn_function_keys": [],
-                  "identifiers": {
-                      "is_keyboard": true,
-                      "is_pointing_device": false,
-                      "product_id": 544,
-                      "vendor_id": 1452
-                  },
-                  "ignore": true,
-                  "manipulate_caps_lock_led": true,
-                  "simple_modifications": []
-              },
-              {
-                  "disable_built_in_keyboard_if_exists": false,
-                  "fn_function_keys": [],
-                  "identifiers": {
-                      "is_keyboard": true,
-                      "is_pointing_device": false,
-                      "product_id": 566,
-                      "vendor_id": 1452
-                  },
-                  "ignore": true,
-                  "manipulate_caps_lock_led": true,
-                  "simple_modifications": []
-              },
-              {
-                  "disable_built_in_keyboard_if_exists": false,
-                  "fn_function_keys": [],
-                  "identifiers": {
-                      "is_keyboard": false,
-                      "is_pointing_device": true,
-                      "product_id": 21,
-                      "vendor_id": 5426
-                  },
-                  "ignore": false,
-                  "manipulate_caps_lock_led": false,
-                  "simple_modifications": []
-              },
-              {
-                  "disable_built_in_keyboard_if_exists": false,
-                  "fn_function_keys": [],
-                  "identifiers": {
-                      "is_keyboard": false,
-                      "is_pointing_device": true,
-                      "product_id": 49283,
-                      "vendor_id": 1133
-                  },
-                  "ignore": true,
-                  "manipulate_caps_lock_led": false,
-                  "simple_modifications": []
-              }
-          ],
           "fn_function_keys": [
               {
                   "from": {
@@ -269,7 +166,7 @@
                   ]
               }
           ],
-          "name": "Default profile",
+          "name": "Default",
           "parameters": {
               "delay_milliseconds_before_open_device": 1000
           },
