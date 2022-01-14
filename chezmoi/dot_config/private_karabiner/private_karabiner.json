@@ -1,2130 +1,287 @@
 {
-    "global" : {
-      "check_for_updates_on_startup" : true,
-      "show_in_menu_bar" : false,
-      "show_profile_name_in_menu_bar" : false
-    },
-    "profiles" : [ {
-      "complex_modifications" : {
-        "parameters" : {
-          "basic.simultaneous_threshold_milliseconds" : 50,
-          "basic.to_delayed_action_delay_milliseconds" : 500,
-          "basic.to_if_alone_timeout_milliseconds" : 1000,
-          "basic.to_if_held_down_threshold_milliseconds" : 500
-        },
-        "rules" : [ {
-          "description" : "Hyper Mode",
-          "manipulators" : [ {
-            "from" : {
-              "key_code" : "open_bracket"
-            },
-            "to" : [ {
-              "key_code" : "open_bracket",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "open_bracket",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "open_bracket"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
+  "global": {
+      "check_for_updates_on_startup": true,
+      "show_in_menu_bar": true,
+      "show_profile_name_in_menu_bar": false
+  },
+  "profiles": [
+      {
+          "complex_modifications": {
+              "parameters": {
+                  "basic.simultaneous_threshold_milliseconds": 50,
+                  "basic.to_delayed_action_delay_milliseconds": 500,
+                  "basic.to_if_alone_timeout_milliseconds": 200,
+                  "basic.to_if_held_down_threshold_milliseconds": 500,
+                  "mouse_motion_to_scroll.speed": 100
+              },
+              "rules": [
+                  {
+                      "description": "Hyper/Alfred",
+                      "manipulators": [
+                          {
+                              "from": {
+                                  "key_code": "caps_lock"
+                              },
+                              "to": [
+                                  {
+                                      "key_code": "right_shift",
+                                      "lazy": true,
+                                      "modifiers": [
+                                          "right_command",
+                                          "right_control",
+                                          "right_option"
+                                      ]
+                                  }
+                              ],
+                              "to_if_alone": [
+                                  {
+                                      "key_code": "f13" // map to alfred
+                                  }
+                              ],
+                              "to_if_held_down": [
+                                  {
+                                      "key_code": "caps_lock"
+                                  }
+                              ],
+                              "type": "basic"
+                          }
+                      ]
                   }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "close_bracket"
-            },
-            "to" : [ {
-              "key_code" : "close_bracket",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "close_bracket",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "close_bracket"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "semicolon"
-            },
-            "to" : [ {
-              "key_code" : "semicolon",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "semicolon",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "semicolon"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "quote"
-            },
-            "to" : [ {
-              "key_code" : "quote",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "quote",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "quote"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "comma"
-            },
-            "to" : [ {
-              "key_code" : "comma",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "comma",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "comma"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "period"
-            },
-            "to" : [ {
-              "key_code" : "period",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "period",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "period"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "slash"
-            },
-            "to" : [ {
-              "key_code" : "slash",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "slash",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "slash"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "a"
-            },
-            "to" : [ {
-              "key_code" : "a",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "a",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "a"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "b"
-            },
-            "to" : [ {
-              "key_code" : "b",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "b",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "b"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "c"
-            },
-            "to" : [ {
-              "key_code" : "c",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "c",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "c"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "d"
-            },
-            "to" : [ {
-              "key_code" : "d",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "d",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "d"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "e"
-            },
-            "to" : [ {
-              "key_code" : "e",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "e",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "e"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "f"
-            },
-            "to" : [ {
-              "key_code" : "f",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "f",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "f"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "g"
-            },
-            "to" : [ {
-              "key_code" : "g",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "g",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "g"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "h"
-            },
-            "to" : [ {
-              "key_code" : "h",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "h",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "h"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "i"
-            },
-            "to" : [ {
-              "key_code" : "up_arrow"
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "up_arrow"
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "i"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "j"
-            },
-            "to" : [ {
-              "key_code" : "left_arrow"
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "left_arrow"
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "j"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "k"
-            },
-            "to" : [ {
-              "key_code" : "down_arrow"
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "down_arrow"
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "k"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "l"
-            },
-            "to" : [ {
-              "key_code" : "right_arrow"
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "right_arrow"
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "l"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "m"
-            },
-            "to" : [ {
-              "key_code" : "m",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "m",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "m"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "n"
-            },
-            "to" : [ {
-              "key_code" : "n",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "n",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "n"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "o"
-            },
-            "to" : [ {
-              "key_code" : "o",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "o",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "o"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "p"
-            },
-            "to" : [ {
-              "key_code" : "p",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "p",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "p"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "q"
-            },
-            "to" : [ {
-              "key_code" : "q",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "q",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "q"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "r"
-            },
-            "to" : [ {
-              "key_code" : "r",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "r",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "r"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "s"
-            },
-            "to" : [ {
-              "key_code" : "s",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "s",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "s"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "t"
-            },
-            "to" : [ {
-              "key_code" : "t",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "t",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "t"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "u"
-            },
-            "to" : [ {
-              "key_code" : "u",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "u",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "u"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "v"
-            },
-            "to" : [ {
-              "key_code" : "v",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "v",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "v"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "w"
-            },
-            "to" : [ {
-              "key_code" : "w",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "w",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "w"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "x"
-            },
-            "to" : [ {
-              "key_code" : "x",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "x",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "x"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "y"
-            },
-            "to" : [ {
-              "key_code" : "y",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "y",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "y"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "z"
-            },
-            "to" : [ {
-              "key_code" : "z",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "z",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "z"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "1"
-            },
-            "to" : [ {
-              "key_code" : "1",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "1",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "1"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "2"
-            },
-            "to" : [ {
-              "key_code" : "2",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "2",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "2"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "3"
-            },
-            "to" : [ {
-              "key_code" : "3",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "3",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "3"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "4"
-            },
-            "to" : [ {
-              "key_code" : "4",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "4",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "4"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "5"
-            },
-            "to" : [ {
-              "key_code" : "5",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "5",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "5"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "6"
-            },
-            "to" : [ {
-              "key_code" : "6",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "6",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "6"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "7"
-            },
-            "to" : [ {
-              "key_code" : "7",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "7",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "7"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "8"
-            },
-            "to" : [ {
-              "key_code" : "8",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "8",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "8"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "9"
-            },
-            "to" : [ {
-              "key_code" : "9",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "9",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "9"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          }, {
-            "from" : {
-              "key_code" : "0"
-            },
-            "to" : [ {
-              "key_code" : "0",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "conditions" : [ {
-              "name" : "caps_lock-mode",
-              "value" : 1,
-              "type" : "variable_if"
-            } ],
-            "type" : "basic"
-          }, {
-            "type" : "basic",
-            "parameters" : {
-              "basic.simultaneous_threshold_milliseconds" : 250
-            },
-            "to" : [ {
-              "set_variable" : {
-                "name" : "caps_lock-mode",
-                "value" : 1
-              }
-            }, {
-              "key_code" : "0",
-              "modifiers" : [ "left_control", "left_option" ]
-            } ],
-            "from" : {
-              "simultaneous" : [ {
-                "key_code" : "caps_lock"
-              }, {
-                "key_code" : "0"
-              } ],
-              "simultaneous_options" : {
-                "detect_key_down_uninterruptedly" : true,
-                "key_down_order" : "strict",
-                "key_up_order" : "strict_inverse",
-                "key_up_when" : "any",
-                "to_after_key_up" : [ {
-                  "set_variable" : {
-                    "name" : "caps_lock-mode",
-                    "value" : 0
-                  }
-                } ]
-              }
-            }
-          } ]
-        } ]
-      },
-      "devices" : [ ],
-      "fn_function_keys" : [ {
-        "from" : {
-          "key_code" : "f1"
-        },
-        "to" : {
-          "consumer_key_code" : "display_brightness_decrement"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f2"
-        },
-        "to" : {
-          "consumer_key_code" : "display_brightness_increment"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f3"
-        },
-        "to" : {
-          "key_code" : "mission_control"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f4"
-        },
-        "to" : {
-          "key_code" : "launchpad"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f5"
-        },
-        "to" : {
-          "key_code" : "illumination_decrement"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f6"
-        },
-        "to" : {
-          "key_code" : "illumination_increment"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f7"
-        },
-        "to" : {
-          "consumer_key_code" : "rewind"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f8"
-        },
-        "to" : {
-          "consumer_key_code" : "play_or_pause"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f9"
-        },
-        "to" : {
-          "consumer_key_code" : "fastforward"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f10"
-        },
-        "to" : {
-          "consumer_key_code" : "mute"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f11"
-        },
-        "to" : {
-          "consumer_key_code" : "volume_decrement"
-        }
-      }, {
-        "from" : {
-          "key_code" : "f12"
-        },
-        "to" : {
-          "consumer_key_code" : "volume_increment"
-        }
-      } ],
-      "name" : "Default",
-      "parameters" : {
-        "delay_milliseconds_before_open_device" : 1000
-      },
-      "selected" : true,
-      "simple_modifications" : [ ],
-      "virtual_hid_keyboard" : {
-        "country_code" : 0,
-        "mouse_key_xy_scale" : 100
+              ]
+          },
+          "devices": [
+              {
+                  "disable_built_in_keyboard_if_exists": false,
+                  "fn_function_keys": [],
+                  "identifiers": {
+                      "is_keyboard": true,
+                      "is_pointing_device": false,
+                      "product_id": 21,
+                      "vendor_id": 5426
+                  },
+                  "ignore": false,
+                  "manipulate_caps_lock_led": false,
+                  "simple_modifications": [
+                      {
+                          "from": {
+                              "key_code": "keypad_1"
+                          },
+                          "to": [
+                              {
+                                  "key_code": "f19"
+                              }
+                          ]
+                      },
+                      {
+                          "from": {
+                              "key_code": "keypad_2"
+                          },
+                          "to": [
+                              {
+                                  "key_code": "f18"
+                              }
+                          ]
+                      },
+                      {
+                          "from": {
+                              "key_code": "keypad_3"
+                          },
+                          "to": [
+                              {
+                                  "key_code": "f17"
+                              }
+                          ]
+                      }
+                  ]
+              },
+              {
+                  "disable_built_in_keyboard_if_exists": false,
+                  "fn_function_keys": [],
+                  "identifiers": {
+                      "is_keyboard": true,
+                      "is_pointing_device": false,
+                      "product_id": 544,
+                      "vendor_id": 1452
+                  },
+                  "ignore": true,
+                  "manipulate_caps_lock_led": true,
+                  "simple_modifications": []
+              },
+              {
+                  "disable_built_in_keyboard_if_exists": false,
+                  "fn_function_keys": [],
+                  "identifiers": {
+                      "is_keyboard": true,
+                      "is_pointing_device": false,
+                      "product_id": 566,
+                      "vendor_id": 1452
+                  },
+                  "ignore": true,
+                  "manipulate_caps_lock_led": true,
+                  "simple_modifications": []
+              },
+              {
+                  "disable_built_in_keyboard_if_exists": false,
+                  "fn_function_keys": [],
+                  "identifiers": {
+                      "is_keyboard": false,
+                      "is_pointing_device": true,
+                      "product_id": 21,
+                      "vendor_id": 5426
+                  },
+                  "ignore": false,
+                  "manipulate_caps_lock_led": false,
+                  "simple_modifications": []
+              },
+              {
+                  "disable_built_in_keyboard_if_exists": false,
+                  "fn_function_keys": [],
+                  "identifiers": {
+                      "is_keyboard": false,
+                      "is_pointing_device": true,
+                      "product_id": 49283,
+                      "vendor_id": 1133
+                  },
+                  "ignore": true,
+                  "manipulate_caps_lock_led": false,
+                  "simple_modifications": []
+              }
+          ],
+          "fn_function_keys": [
+              {
+                  "from": {
+                      "key_code": "f1"
+                  },
+                  "to": [
+                      {
+                          "consumer_key_code": "display_brightness_decrement"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f2"
+                  },
+                  "to": [
+                      {
+                          "consumer_key_code": "display_brightness_increment"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f3"
+                  },
+                  "to": [
+                      {
+                          "key_code": "mission_control"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f4"
+                  },
+                  "to": [
+                      {
+                          "key_code": "launchpad"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f5"
+                  },
+                  "to": [
+                      {
+                          "key_code": "illumination_decrement"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f6"
+                  },
+                  "to": [
+                      {
+                          "key_code": "illumination_increment"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f7"
+                  },
+                  "to": [
+                      {
+                          "consumer_key_code": "rewind"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f8"
+                  },
+                  "to": [
+                      {
+                          "consumer_key_code": "play_or_pause"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f9"
+                  },
+                  "to": [
+                      {
+                          "consumer_key_code": "fastforward"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f10"
+                  },
+                  "to": [
+                      {
+                          "consumer_key_code": "mute"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f11"
+                  },
+                  "to": [
+                      {
+                          "consumer_key_code": "volume_decrement"
+                      }
+                  ]
+              },
+              {
+                  "from": {
+                      "key_code": "f12"
+                  },
+                  "to": [
+                      {
+                          "consumer_key_code": "volume_increment"
+                      }
+                  ]
+              }
+          ],
+          "name": "Default profile",
+          "parameters": {
+              "delay_milliseconds_before_open_device": 1000
+          },
+          "selected": true,
+          "simple_modifications": [],
+          "virtual_hid_keyboard": {
+              "caps_lock_delay_milliseconds": 0,
+              "country_code": 0,
+              "indicate_sticky_modifier_keys_state": true,
+              "keyboard_type": "ansi",
+              "mouse_key_xy_scale": 100
+          }
       }
-    } ]
-  }
+  ]
+}
