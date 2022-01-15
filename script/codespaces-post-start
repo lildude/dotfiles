@@ -2,10 +2,15 @@
 # Run by github/github codespaces after starting - this is unique to the repo thanks to the .devcontainer config
 
 # Always want to use ZSH as my default shell (e.g. for SSH)
-if ! grep -q "root.*/bin/zsh" /etc/passwd; then
-  chsh -s /bin/zsh root
+sudo="sudo"
+if [ "$(whoami)" = "root" ]; then
+  sudo=""
+fi
+
+if ! grep -q "$(whoami).*/bin/zsh" /etc/passwd; then
+  $sudo chsh -s /bin/zsh root
 fi
 
 # Install some developer tools and setup Linux how I like it
-apt-get install -y \
-  bat bfs exa grc ripgrep zsh-autosuggestions
+$sudo apt-get install -y \
+  bat bfs exa grc ripgrep tmux

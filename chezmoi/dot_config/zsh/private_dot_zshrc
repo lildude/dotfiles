@@ -11,13 +11,13 @@
 
 zstyle ':z4h:'                  chsh              'no'            # Disable chsh check
 zstyle ':z4h:'                  auto-update       'no'            # Periodic auto-update on Zsh startup: 'ask' or 'no'. You can manually run `z4h update` to update everything.
-zstyle ':z4h:'                  prompt-at-bottom  'yes'           # Move prompt to the bottom when zsh starts and on Ctrl+L.
+zstyle ':z4h:'                  prompt-at-bottom  'no'           # Move prompt to the bottom when zsh starts and on Ctrl+L - needs tmux
 zstyle ':z4h:bindkey'           keyboard          'mac'           # Keyboard type: 'mac' or 'pc'.
 zstyle ':z4h:autosuggestions'   forward-char      'accept'        # Right-arrow key accepts one character ('partial-accept') from command autosuggestions or the whole thing ('accept')?
 zstyle ':z4h:fzf-complete'      recurse-dirs      'no'            # Recursively traverse directories when TAB-completing files.
 zstyle ':z4h:direnv'            enable            'no'            # Enable direnv to automatically source .envrc files.
 zstyle ':z4h:ssh:*'             enable            'no'            # The default value if none of the overrides above match the hostname.
-zstyle ':z4h:'                  start-tmux        'integrated'    # Don't download and start tmux-related stuff as I don't use tmux
+zstyle ':z4h:'                  start-tmux        'no'            # Don't download and start tmux-related stuff as I really don't seem to gain much benefit from this.
 zstyle ':z4h:fzf-history'       fzf-flags         --no-preview    # Disable history preview and limit height
 
 # Disable on codespaces as they are never used
@@ -134,6 +134,7 @@ alias curl="noglob curl"              # Don't glob
 alias find='noglob find'              # Allows typing e.g. "find . -name *.zsh" without quotes.
 alias cp='cp -i'                      # Ask for confirmation when overwriting existing files.
 alias mv='mv -i'
+alias codespaces-post-start='sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start'
 
 # Lazy Git aliases
 alias g='git'
@@ -200,7 +201,6 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 #### ---:[ Autoload functions ]:--- ###
 autoload -Uz zmv
 autoload -Uz $fpath[1]/*(.:t)           # Load all my functions
-autoload -Uz $fpath[2]/*(.:t)           # Load all my completions
 
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
@@ -211,7 +211,6 @@ zle -N self-insert url-quote-magic
 # Or place the functions in $ZDOTDIR/functions and the completions in $ZDOTDIR/completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
-
 
 z4h source "$HOME/.secrets"
 z4h source /etc/grc.zsh # Colourize all the other things

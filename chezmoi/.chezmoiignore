@@ -31,4 +31,5 @@ Dockerfile
 prompt.png
 script/
 **/.DS_Store
+ano/
 {{/* vim: set filetype=gotemplate : */}}
