@@ -15,7 +15,9 @@ spoon.ReloadConfiguration:start()
 --   fullscreen = {hyper, "f"}
 -- })
 
--- hs.loadSpoon("ArrangeDesktop")
+-- arrangeDesktop = hs.loadSpoon('ArrangeDesktop')
+-- arrangeDesktop.logger.setLogLevel('info')
+-- menubar = hs.menubar.new()
 
 -- bind reload at start in case of error later in config
 hs.hotkey.bind(hyper, "R", hs.reload)
