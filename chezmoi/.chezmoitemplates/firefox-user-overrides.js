@@ -72,5 +72,9 @@ user_pref("security.default_personal_cert", "Select Automatically");
 user_pref("browser.proton.enabled", true); // Proton Enabled #127
 user_pref("browser.proton.places-tooltip.enabled", true); // Proton Tooltip
 user_pref("browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar", false); // about:home Search Bar - 89 Above
+// user_pref("layout.css.prefers-color-scheme.content-override", 3); // Browser Theme Based Scheme - Will be activate 95 Above
+// Draw in Titlebar
+// user_pref("browser.tabs.drawInTitlebar", true);
+// user_pref("browser.tabs.inTitlebar",        1); // Nightly, 96 Above
 
 /*** Don't forget to remove and reset deprecated refs in the 9999 section of the default file ***/
