@@ -8,7 +8,10 @@ This current implementation is managed using [chezmoi](https://chezmoi.io/) and 
 
 ### Direct from this repo
 
+Download and install 1Password CLI from <https://1password.com/downloads/command-line/> and then run:
+  
 ```console
+$ xcode-select --install
 $ eval $(op signin my.1password.com <email>) 
 $ sh -c "$(curl -fsLS git.io/chezmoi)" -- -b ~/.local/bin init --apply lildude
 ```
