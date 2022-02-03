@@ -37,6 +37,7 @@ user_pref("dom.allow_cut_copy", true); // Gone? 2404 - I need this for GitHub's 
 user_pref("beacon.enabled", true); // 2602 - rewatch.com used for work vids needs this
 
 user_pref("browser.download.useDownloadDir", true); // 2651 - I'm explicit in my setup so am happy to always go to downloads
+//user_pref("network.cookie.lifetimePolicy", 0); // 2801 - Don't clear on shutdown
 user_pref("privacy.sanitize.sanitizeOnShutdown", false); // 2810 - Don't clear things everytime I shutdown
 user_pref("privacy.clearOnShutdown.offlineApps", false); // 2811 - cos 2810 is false
 
@@ -76,5 +77,7 @@ user_pref("browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar"
 // Draw in Titlebar
 // user_pref("browser.tabs.drawInTitlebar", true);
 // user_pref("browser.tabs.inTitlebar",        1); // Nightly, 96 Above
+
+user_pref("network.cookie.sameSite.laxByDefault.disabledHosts", "admin.github.com"); // Lax SameSite Cookies exceptions - 96 Above
 
 /*** Don't forget to remove and reset deprecated refs in the 9999 section of the default file ***/
