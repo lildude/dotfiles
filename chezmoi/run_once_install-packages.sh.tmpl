@@ -23,7 +23,7 @@
 
 {{- else if eq .chezmoi.os "darwin" }}
   {{- if ne .install_type "min" }}
-    if ! command -v brew > /dev/null 2>&1 && [ -s "$HOME/.config/homebrew/Brewfile" ]; then
+    if ! command -v brew > /dev/null 2>&1 && [ -f "$HOME/.config/homebrew/Brewfile" ]; then
       bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" > "$HOME/tmp/homebrew.log" 2>&1
     fi
     brew bundle --file $HOME/.config/homebrew/Brewfile --no-lock
