@@ -119,8 +119,11 @@
   program = {{- lookPath "gpg" }}
 
 [merge]
+  {{- $v := output "git" "--version" | trim | split " " }}{{ if semverCompare ">2.35.0" $v._2 }}
+  conflictstyle = zdiff3  # Requires git 2.35 or later which isn't available on Codespaces by default
+  {{- else }}
   conflictstyle = diff3
-  #conflictstyle = zdiff3  - Requires git 2.35 or later which isn't available on Codespaces by default
+  {{- end }}
 
 [protocol]
   version = 2
