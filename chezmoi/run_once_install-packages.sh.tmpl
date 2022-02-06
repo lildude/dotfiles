@@ -26,8 +26,6 @@
     if ! command -v git > /dev/null 2>&1; then
       xcode-select --install
     fi
-    curl -sLO https://cache.agilebits.com/dist/1P/op/pkg/v1.12.4/op_apple_universal_v1.12.4.pkg
-    sudo installer -pkg op_apple_universal_v1.12.4.pkg -target /
     if ! command -v brew > /dev/null 2>&1 && [ -f "$HOME/.config/homebrew/Brewfile" ]; then
       bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
       eval '$(/opt/homebrew/bin/brew shellenv)'
