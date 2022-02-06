@@ -5,11 +5,8 @@
 # @mikemcquaid of Homebrew says this is a good idea after performing an OS upgrade
 #
 set -euo pipefail
-DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
-# shellcheck source=script/lib.sh
-source "$DIR/script/lib.sh"
 
-info "☕️ Re-brewing…"
+echo "☕️ Re-brewing…"
 
 cd /tmp
 brew bundle dump
