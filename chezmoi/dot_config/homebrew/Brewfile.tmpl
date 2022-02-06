@@ -22,6 +22,7 @@ brew 'adr-tools'
 {{ end }}
 
 {{- if eq .install_type "home" }}
+brew 'ffmpeg'
 brew 'vips'             # Used by jekyll plugin to resize images
 brew 'webp'             # For converting images to webp
 brew 'youtube-dl'
@@ -41,11 +42,9 @@ brew 'duf'
 brew 'exa'
 brew 'exercism'
 brew 'fd'               # Like find, but faster
-brew 'ffmpeg'
 brew 'findutils'
 brew 'fswatch'
 # brew 'fzf'            # Installed by my shell now
-# brew 'fzy'
 brew 'gh'
 brew 'git'
 brew 'git-delta'
@@ -60,7 +59,6 @@ brew 'heroku'
 brew 'htop'
 brew 'hub'
 brew 'hyperfine'        # Great cli benchmarking tool
-brew 'icdiff'
 brew 'icu4c'
 brew 'jq'
 brew 'kopia'            # UI downloadable from GitHub releases - https://github.com/kopia/kopia/releases/latest
@@ -69,7 +67,7 @@ brew 'lesspipe'
 brew 'lockrun'
 brew 'mas'              # CLI tool for installing Mac App Store apps at the end of this file.
 brew 'moreutils'
-brew 'openssl'
+#brew 'openssl'
 brew 'pinentry-mac'
 brew 'p7zip'
 brew 'prettyping'
@@ -95,29 +93,24 @@ cask 'viscosity'
 
 # Home-specific apps
 {{- if eq .install_type "home" }}
-# cask 'banktivity'
 cask 'calibre'
 cask 'chatmate-for-whatsapp'
 cask 'concept2-utility'
 cask 'exodus'
 cask 'garmin-express'
-# cask 'microblog'
 cask 'netnewswire'
-# cask 'obsidian'
 cask 'portfolioperformance'
-cask 'signal'
-# cask 'teamviewer'
 cask 'telegram'
 cask 'transmission'
+cask 'transmit'
 cask 'trainerroad'
-# cask 'vlc'
 cask 'zwift'
 {{- end }}
 
 # Install everywhere
 cask '1password'
 cask '1password-cli'
-cask 'alfred'
+# cask 'alfred'
 # cask 'amazon-drive'
 # cask 'amazon-music'
 cask 'appcleaner'
@@ -129,17 +122,17 @@ cask 'cleanshot'
 cask 'dash'
 cask 'divvy'
 cask 'docker'
-cask 'dropbox'
-cask 'encryptme'
+#cask 'dropbox'
+#cask 'encryptme'
 cask 'fantastical'
 cask 'firefox'
-cask 'flux'
+# cask 'flux'
 cask 'font-jetbrains-mono'
 cask 'font-jetbrains-mono-nerd-font'
 # cask 'google-chrome'        # Think about the amount of data Google already has. Also https://chromeisbad.com/
 cask 'hammerspoon'
 cask 'hey'
-cask 'insomnia' # Alternative to Postman
+#cask 'insomnia' # Alternative to Postman
 cask 'iterm2'
 cask 'little-snitch'
 cask 'karabiner-elements'
@@ -149,8 +142,9 @@ cask 'mailtrackerblocker'
 # cask 'multipass'              # Run Ubuntu Server easily locally
 # cask 'muzzle'
 cask 'netspot'
-# cask 'ngrok'
+cask 'ngrok'
 # cask 'numi'
+cask 'obsidian'
 # cask 'pallotron-yubiswitch'
 # cask 'postman'
 cask 'qlmarkdown'             # QuickLook support for markdown
@@ -159,11 +153,11 @@ cask 'raycast'                # Alfred alternative
 cask 'rocket'
 # cask 'skitch'
 # cask 'sketch'
+cask 'signal'
 cask 'slack'
 cask 'spotify'
 cask 'textexpander'
 cask 'the-unarchiver'
-cask 'transmit'
 # cask 'vagrant'
 # cask 'virtualbox'
 # cask 'virtualbox-extension-pack'
@@ -176,15 +170,14 @@ cask 'visual-studio-code'
 {{- if eq .install_type "home" }}
 mas 'Microsoft OneNote', id: 784_801_555
 {{ end }}
-mas 'AdGuard for Safari', id: 1_440_147_259
+#mas 'AdGuard for Safari', id: 1_440_147_259
 mas 'Bear', id: 1_091_189_122
 # mas 'Craft', id: 1_487_937_127
-mas 'Magnet', id: 441_258_766
+# mas 'Magnet', id: 441_258_766
 # mas 'Microsoft Remote Desktop 10', id: 1_295_203_466
-mas 'Monit', id: 1_014_850_245
-mas 'Monosnap', id: 540_348_655
-mas 'Pixelmator', id: 407_963_104
+# mas 'Monit', id: 1_014_850_245
+# mas 'Pixelmator', id: 407_963_104
 mas 'pomodorome', id: 1_484_801_884
-mas 'WireGuard', id: 1_451_685_025
+# mas 'WireGuard', id: 1_451_685_025
 
 # vim: set filetype=ruby
