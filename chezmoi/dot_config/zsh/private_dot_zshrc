@@ -153,10 +153,10 @@ alias gup='git up'  # Uses the `up` alias in my .gitconfigcd
 
 _exists() { (( $+commands[$1] )) }
 
-_exists hub && {
-  alias git=hub
-  alias ci="hub ci-status"
-}
+# _exists hub && {
+#   alias git=hub
+#   alias ci="hub ci-status"
+# }
 _exists bat && alias cat=bat && export BAT_THEME="Monokai Extended"
 _exists exa && alias ls=exa
 _exists rg && rg() { $commands[rg] -p "$@" | less; }
