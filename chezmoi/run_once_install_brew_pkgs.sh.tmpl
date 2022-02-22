@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# hash: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
+{{- if eq .chezmoi.os "darwin" }}
+brew bundle --file $HOME/.config/homebrew/Brewfile --no-lock
+{{- end }}
