@@ -191,5 +191,6 @@
       "eamodio.gitlens",
       "chrislajoie.vscode-modelines"
     ],
-    "window.nativeTabs": true
+    "window.nativeTabs": true,
+    "task.autoDetect": "off"
 }
