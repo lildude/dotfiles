@@ -110,7 +110,6 @@
     "[gemfile]": {
       "editor.defaultFormatter": "misogi.ruby-rubocop"
     },
-    "ruby.rubocop.executePath": "/Users/lildude/.asdf/shims/",
     "files.exclude": {
       "**/.git": true,
       "**/.svn": true,
@@ -192,5 +191,8 @@
       "chrislajoie.vscode-modelines"
     ],
     "window.nativeTabs": true,
-    "task.autoDetect": "off"
+    "task.autoDetect": "off",
+    "gopls": {
+      "experimentalWorkspaceModule": true,
+    }
 }
