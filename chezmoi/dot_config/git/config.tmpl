@@ -116,7 +116,11 @@
   gpgSign = true
 
 [gpg]
+  {{- if .codespaces }}
+  program = /.codespaces/bin/gh-gpgsign
+  {{- else }}
   program = {{- lookPath "gpg" }}
+  {{- end }}
 
 [merge]
   {{- $v := output "git" "--version" | trim | split " " }}{{ if semverCompare ">2.35.0" $v._2 }}
