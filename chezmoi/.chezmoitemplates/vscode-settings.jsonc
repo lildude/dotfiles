@@ -18,7 +18,6 @@
     "workbench.statusBar.visible": true,
     "workbench.list.horizontalScrolling": true,
     "workbench.activityBar.visible": true,
-    "workbench.iconTheme": "file-icons",
     "workbench.colorCustomizations": {
         "editorIndentGuide.activeBackground": "#999",
         //"sideBar.background": "#333",
@@ -118,7 +117,7 @@
       "**/.DS_Store": true,
       "**/*.olean": true
     },
-    "go.formatTool": "gofumports",
+    "go.formatTool": "goimports",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "python.showStartPage": false,
     "python.formatting.provider": "black",
@@ -194,5 +193,8 @@
     "task.autoDetect": "off",
     "gopls": {
       "experimentalWorkspaceModule": true,
-    }
+    },
+    "workbench.iconTheme": "file-icons",
+    "go.lintTool": "golangci-lint",
+    "go.survey.prompt": false
 }
