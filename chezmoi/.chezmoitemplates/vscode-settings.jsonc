@@ -104,7 +104,6 @@
     },
     "ruby.format": "rubyfmt",
     "ruby.useLanguageServer": true,
-    "editor.formatOnSaveMode": "modifications",
     "ruby.intellisense": "rubyLocate",
     "[gemfile]": {
       "editor.defaultFormatter": "misogi.ruby-rubocop"
@@ -194,7 +193,7 @@
     "gopls": {
       "experimentalWorkspaceModule": true,
     },
-    "workbench.iconTheme": "file-icons",
     "go.lintTool": "golangci-lint",
-    "go.survey.prompt": false
+    "go.survey.prompt": false,
+    "workbench.iconTheme": "file-icons"
 }
