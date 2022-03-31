@@ -1,1 +1,3 @@
-chezmoi/.chezmoitemplates/user-js-updater.sh
+#chezmoi/.chezmoitemplates/user-js-updater.sh
+chezmoi/.chezmoitemplates/userjs_backups
+chezmoi/.chezmoitemplates/user.js
