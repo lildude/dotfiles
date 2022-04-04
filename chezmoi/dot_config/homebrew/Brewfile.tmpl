@@ -11,6 +11,7 @@ tap 'yqrashawn/goku'            # Needed for goku
 tap 'goreleaser/tap'
 tap 'kopia/kopia'
 tap 'tavianator/tap'            # Needed for bfs
+tap 'espanso/espanso'           # Needed for espanso
 
 # Work-specific tools
 {{- if eq .install_type "work" }}
@@ -41,6 +42,7 @@ brew 'dos2unix'
 brew 'duf'
 brew 'exa'
 brew 'exercism'
+brew 'espanso'
 brew 'fd'               # Like find, but faster
 brew 'findutils'
 brew 'fswatch'
