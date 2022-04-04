@@ -107,7 +107,7 @@ export GOTMPDIR=/tmp/go/tmp                     # tmp files during compile
 export HOMEBREW_BUNDLE_FILE=$XDG_CONFIG_HOME/homebrew/Brewfile
 export IRBRC=$XDG_CONFIG_HOME/irb/irbrc
 export LESSHISTFILE=$XDG_CONFIG_HOME/lesshistory
-export PRYRC=$XDG_CONFIG_HOME/pry/pryrc         # Unnessesary but being extra safe
+export PRYRC=$XDG_CONFIG_HOME/pry/pryrc         # Unnecessary but being extra safe
 export SQLITE_HISTORY=$XDG_CACHE_HOME/sqlite_history
 
 [[ ! -d "$GOTMPDIR" ]] && mkdir -p "$GOTMPDIR"  # Make sure it exists as Go won't create it.
