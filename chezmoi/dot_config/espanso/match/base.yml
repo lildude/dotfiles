@@ -12,8 +12,6 @@ matches:
   - trigger: ":espanso"
     replace: "Hi there!"
 
-  - trigger: "ggurl"
-    replace: "https://github.com/github/"
   # NOTE: espanso uses YAML to define matches, so pay attention to the indentation!
 
   # But matches can also be dynamic:
