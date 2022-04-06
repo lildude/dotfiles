@@ -2,4 +2,6 @@
   name = Colin Seymour
   email = colin@github.com
   # ID taken from `gpg --list-secret-keys --keyid-format LONG` - more accurate than using emails.
+  # This is also not a secret and easily obtained from the corresponding public key:
+  # curl -so - https://github.com/lildude.gpg | gpg --show-keys --keyid-format=long | grep pub
   signingkey = 88109C73073E7080
