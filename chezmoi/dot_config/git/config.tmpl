@@ -150,6 +150,9 @@
 [submodule]
   fetchJobs = 8
 
+[remote]
+  pushDefault = origin
+
 {{- if (eq .chezmoi.os "darwin") }}
 [credential]
   helper = osxkeychain
