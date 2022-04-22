@@ -1,23 +1,43 @@
 hyper = {"cmd", "alt", "ctrl", "shift"}
 
-hs.loadSpoon("ReloadConfiguration")
-spoon.ReloadConfiguration:start()
+-- loads spoons using SpoonInstall
+-- see https://www.hammerspoon.org/Spoons/SpoonInstall.html
+local SpoonInstall = hs.loadSpoon("SpoonInstall")
 
--- hs.loadSpoon("Cherry")
--- spoon.Cherry:start()
+SpoonInstall:andUse("ReloadConfiguration", {
+  disable = false,
+  start = true
+})
 
--- hs.loadSpoon("MiroWindowsManager")
--- spoon.MiroWindowsManager:bindHotkeys({
---   up = {hyper, "up"},
---   right = {hyper, "right"},
---   down = {hyper, "down"},
---   left = {hyper, "left"},
---   fullscreen = {hyper, "f"}
+local arrangements = {
+  ['zwift-tr'] = {
+    ['37D8832A-2D66-02CA-B9F7-8F30A301B230'] = {
+      ['Montior Name'] = 'Built-in Retina Display',
+        ['apps'] = {
+          ['ZwiftApp'] = {w = 1512, h = 794.0, x = 0.0, y = 38.0},
+          ['TrainerRoad'] = {w = 1512, h = 944.0, x = 0.0, y = 38.0}
+        }
+      }
+    }
+  }
+
+-- local function setupArrangeDesktopMenu(ArrangeDesktop)
+--   local layoutMenuItems = ArrangeDesktop:addMenuItems()
+--   local layoutMenubar = hs.menubar.new()
+--   layoutMenubar:setMenu(function() return layoutMenuItems end)
+--   -- layoutMenubar:setTitle('layouts')
+--   -- layoutMenubar:setIcon(hs.configdir .. 'assets/layers-triple.png')
+--   layoutMenubar:setIcon(hs.image.imageFromName("NSHandCursor"))
+--   -- layoutMenubar:returnToMenuBar()
+-- end
+
+-- SpoonInstall:andUse("ArrangeDesktop", {
+--   config = {
+--       arrangements = arrangements,
+--       logger = hs.logger.new('ArrangeDesktop', 'info')
+--   },
+--   fn = setupArrangeDesktopMenu
 -- })
-
--- arrangeDesktop = hs.loadSpoon('ArrangeDesktop')
--- arrangeDesktop.logger.setLogLevel('info')
--- menubar = hs.menubar.new()
 
 -- bind reload at start in case of error later in config
 hs.hotkey.bind(hyper, "R", hs.reload)
