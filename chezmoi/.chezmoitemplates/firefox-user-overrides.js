@@ -80,4 +80,5 @@ user_pref("browser.newtabpage.activity-stream.improvesearch.handoffToAwesomebar"
 
 user_pref("network.cookie.sameSite.laxByDefault.disabledHosts", "admin.github.com"); // Lax SameSite Cookies exceptions - 96 Above
 
+user_pref("security.default_personal_cert", "Select Automatically"); // Work added this one
 /*** Don't forget to remove and reset deprecated refs in the 9999 section of the default file ***/

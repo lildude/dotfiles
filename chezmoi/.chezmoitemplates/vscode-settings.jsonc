@@ -104,7 +104,6 @@
     },
     "ruby.format": "rubyfmt",
     "ruby.useLanguageServer": true,
-    "editor.formatOnSaveMode": "modifications",
     "ruby.intellisense": "rubyLocate",
     "[gemfile]": {
       "editor.defaultFormatter": "misogi.ruby-rubocop"
@@ -117,7 +116,6 @@
       "**/.DS_Store": true,
       "**/*.olean": true
     },
-    "go.formatTool": "goimports",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "python.showStartPage": false,
     "python.formatting.provider": "black",
@@ -193,8 +191,13 @@
     "task.autoDetect": "off",
     "gopls": {
       "experimentalWorkspaceModule": true,
+      "formatting.gofumpt": true
     },
-    "workbench.iconTheme": "file-icons",
     "go.lintTool": "golangci-lint",
-    "go.survey.prompt": false
+    "go.survey.prompt": false,
+    "[go]": {
+      "editor.formatOnSave": true
+    },
+    "go.formatTool": "gofumports",
+    "workbench.iconTheme": "file-icons"
 }

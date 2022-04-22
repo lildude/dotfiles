@@ -11,6 +11,7 @@ tap 'yqrashawn/goku'            # Needed for goku
 tap 'goreleaser/tap'
 tap 'kopia/kopia'
 tap 'tavianator/tap'            # Needed for bfs
+tap 'espanso/espanso'           # Needed for espanso
 
 # Work-specific tools
 {{- if eq .install_type "work" }}
@@ -88,7 +89,7 @@ brew 'zsh'
 # Work-specific apps
 {{- if eq .install_type "work" }}
 # cask 'apache-directory-studio'
-cask 'viscosity'
+# cask 'viscosity'
 {{- end }}
 
 # Home-specific apps
@@ -108,7 +109,7 @@ cask 'zwift'
 {{- end }}
 
 # Install everywhere
-cask '1password'
+# cask '1password'
 cask '1password-cli'
 # cask 'alfred'
 # cask 'amazon-drive'
@@ -124,6 +125,7 @@ cask 'divvy'
 cask 'docker'
 #cask 'dropbox'
 #cask 'encryptme'
+cask 'espanso'
 cask 'fantastical'
 cask 'firefox'
 # cask 'flux'
@@ -154,9 +156,8 @@ cask 'rocket'
 # cask 'skitch'
 # cask 'sketch'
 cask 'signal'
-cask 'slack'
+# cask 'slack'
 cask 'spotify'
-cask 'textexpander'
 cask 'the-unarchiver'
 # cask 'vagrant'
 # cask 'virtualbox'
