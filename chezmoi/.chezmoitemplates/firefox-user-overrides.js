@@ -15,7 +15,7 @@ user_pref("intl.accept_languages", "en-gb,en"); // 0210 - cos english
 user_pref("network.dns.disableIPv6", false); // 0701 - I need IPv6
 user_pref("network.proxy.socks_remote_dns", true); // 0702 - I might need to disable this when proxying through SSH.
 user_pref("keyword.enabled", true); // 0801 - I like using the URL bar for easy searching
-user_pref("browser.formfill.enable", true); // 0810 - I'm lazy
+//user_pref("browser.formfill.enable", true); // 0810 - I'm lazy - disabled cos it was getting annoying with 1Password
 user_pref("security.ask_for_password", 0); // 0901 - I don't use Firefox's password manager, but in case it starts prompting, only the first time.
 user_pref("security.password_lifetime", 30); // 0902 - As for 0901
 
