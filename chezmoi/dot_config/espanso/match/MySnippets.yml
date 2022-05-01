@@ -2,31 +2,40 @@ matches:
 #  ../../backups/My Snippets.textexpander
   - trigger: "uber"
     replace: "über"
+    word: true
   - trigger: "colsig"
     replace: "— Colin"
+    word: true
   - trigger: "^TM"
     replace: "™"
+    word: true
   - trigger: "!?"
     replace: "‽"
-  - trigger: ";ph"
-    replace: "+44 7866584999"
-  - trigger: ";em"
-    replace: "colin@github.com"
+    word: true
   - trigger: "ttime"
     replace: "%1I:%M %p"
+    word: true
   - trigger: "ddate"
     replace: "%e %B %Y"
+    word: true
   - trigger: "tbltos"
     replace: "(╯°□°)╯︵ ┻━┻"
+    word: true
   - trigger: "butttouch"
     replace: "( ＾◡＾)っ(‿|‿)"
+    word: true
   - trigger: "txbears"
     replace: "ʕ•̫͡•ʕ̫͡ʕ•͓͡•ʔ-̫͡-ʕ•̫͡•ʔ̫͡ʔ-̫͡-ʔ"
+    word: true
   - trigger: ";..."
     replace: "…"
+    word: true
   - trigger: "N^o"
     replace: "Nº"
+    word: true
   - trigger: ";shrug"
     replace: "¯\_(ツ)_/¯"
+    word: true
   - trigger: "ggurl"
     replace: "https://github.com/github/"
+    word: true
