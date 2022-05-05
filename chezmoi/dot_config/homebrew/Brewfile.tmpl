@@ -15,10 +15,12 @@ tap 'espanso/espanso'           # Needed for espanso
 
 # Work-specific tools
 {{- if eq .install_type "work" }}
+tap 'github/bootstrap'
 brew 'adr-tools'
 # brew 'ansible'
 # brew 'awscli'
 # brew 'azure-cli'
+brew 'macos-vscode-codespaces'
 # brew 's3cmd'
 {{ end }}
 
