@@ -199,5 +199,6 @@
       "editor.formatOnSave": true
     },
     "go.formatTool": "gofumports",
+    "solargraph.diagnostics": true,
     "workbench.iconTheme": "file-icons"
 }
