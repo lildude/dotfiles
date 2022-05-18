@@ -1,3 +1,5 @@
 #chezmoi/.chezmoitemplates/user-js-updater.sh
 chezmoi/.chezmoitemplates/userjs_backups
 chezmoi/.chezmoitemplates/user.js
+# Just in case I do something silly - this file has secrets in it.
+chezmoi/dot_config/raycast/config.json
