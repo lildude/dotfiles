@@ -8,7 +8,7 @@ if [ "${USER}" = "root" ]; then
 fi
 
 if ! grep -q "${USER}.*/bin/zsh" /etc/passwd; then
-  $sudo chsh -s /bin/zsh ${USER}
+  $sudo chsh -s /bin/zsh "${USER}"
 fi
 
 # Install some developer tools and setup Linux how I like it
