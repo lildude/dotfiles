@@ -141,7 +141,7 @@
       "GO111MODULE": "on"
     },
     "workbench.editorAssociations": {
-      "*.ipynb": "jupyter.notebook.ipynb"
+      "*.ipynb": "jupyter-notebook"
     },
     "coverage-gutters.coverageFileNames": [
       "lcov.info",
@@ -153,16 +153,10 @@
     "git.pruneOnFetch": true,
     "scm.repositories.visible": 0,
     "git.detectSubmodules": false,
-    "terminal.integrated.profiles.windows": {
-      "pwsh": {
-        "path": "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
-      }
-    },
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "editor.inlineSuggest.enabled": true,
     "terminal.integrated.tabs.focusMode": "singleClick",
-    "github.copilot.autocomplete.enable": true,
     "github.copilot.enable": {
       "*": true,
       "yaml": false,
@@ -172,7 +166,6 @@
     "dotfiles.repository": "lildude/dotfiles",
     "dotfiles.installCommand": "~/dotfiles/script/install",
     "editor.bracketPairColorization.enabled": true,
-    "terminal.integrated.gpuAcceleration": "on",
     "remote.containers.defaultExtensions": [
       "EditorConfig.EditorConfig",
       "GitHub.copilot",
@@ -200,5 +193,8 @@
     },
     "go.formatTool": "gofumports",
     "solargraph.diagnostics": true,
-    "workbench.iconTheme": "file-icons"
+    "workbench.iconTheme": "file-icons",
+    "terminal.integrated.scrollback": 2000,
+    "terminal.external.osxExec": "iTerm.app",
+    "terminal.integrated.gpuAcceleration": "off" // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
 }
