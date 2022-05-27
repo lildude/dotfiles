@@ -9,6 +9,7 @@ slant.co
 stackshare.io
 tutorialspoint.com
 w3schools.com
+golangexample.com
 
 ! Copycats
 ! Related project: https://github.com/quenhus/uBlock-Origin-dev-filter
