@@ -1,0 +1,25 @@
+! Title: @lildude's custom filters
+! Homepage: https://github.com/lildude/dotfiles/ano/adblocker/
+
+||c2.runalyze.com/assets/images/panel-supporter-en.png$image
+||c2.runalyze.com/assets/images/become-supporter-en.png$image
+
+www.theguardian.com##.site-message--engagement-banner-2017-06-08.site-message--banner.yellow.site-message--membership-prominent.js-site-message.site-message
+www.theguardian.com##.site-message--banner.yellow.site-message--membership-prominent.js-site-message.site-message
+www.fetcheveryone.com##.affiliates
+www.fetcheveryone.com###abmsg
+www.fetcheveryone.com##div#turnoff
+www.ruby-forum.com##.modal-middle-container
+www.ruby-forum.com##.modal-outer-container
+www.ruby-forum.com##.in.modal-backdrop
+medium.com##.js-overlayDialog.overlay-dialog--animate.overlay-dialog--extended.overlay-dialog
+medium.com##.overlay--light.overlay
+medium.com##.overlay--dark.overlay
+
+! Cookie banners
+###cookie-banner
+###eu-cookie-law
+###tracking-consent-dialog
+
+! Medium sites sticky footer
+##.js-stickyFooter
