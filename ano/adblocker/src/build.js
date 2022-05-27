@@ -15,7 +15,12 @@
  `;
 
  const source = readFileSync(join(__dirname, "search-results.txt"), "utf-8");
- const fileLines = source.split("\n");
+ const searchLines = source.split("\n");
+// My own list of domains to remove from search results.
+ const additional = readFileSync(join(__dirname, "additional.txt"), "utf-8");
+ const addLines = additional.split("\n");
+
+ const fileLines = new Set([...searchLines, ...addLines]);
 
  // Domains
  output += "\n! Domains\n\n";

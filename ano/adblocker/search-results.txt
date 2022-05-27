@@ -19,7 +19,6 @@
 *://stackshare.io/*
 *://tutorialspoint.com/*
 *://w3schools.com/*
-*://golangexample.com/*
 
 ! Copycats
 ! Related project: https://github.com/quenhus/uBlock-Origin-dev-filter
@@ -392,7 +391,7 @@
 *://zsharp.org/*
 *://zxc.wiki/*
 *://zzun.app/*
-
+*://golangexample.com/*
 
 ! DuckDuckGo
 
@@ -407,7 +406,6 @@ duckduckgo.com##[data-domain*="slant.co"]
 duckduckgo.com##[data-domain*="stackshare.io"]
 duckduckgo.com##[data-domain*="tutorialspoint.com"]
 duckduckgo.com##[data-domain*="w3schools.com"]
-duckduckgo.com##[data-domain*="golangexample.com"]
 
 ! Copycats
 ! Related project: https://github.com/quenhus/uBlock-Origin-dev-filter
@@ -780,7 +778,7 @@ duckduckgo.com##[data-domain*="yuanmacha.com"]
 duckduckgo.com##[data-domain*="zsharp.org"]
 duckduckgo.com##[data-domain*="zxc.wiki"]
 duckduckgo.com##[data-domain*="zzun.app"]
-
+duckduckgo.com##[data-domain*="golangexample.com"]
 
 ! Google
 
@@ -795,7 +793,6 @@ google.*##.g:has(a[href*="slant.co"])
 google.*##.g:has(a[href*="stackshare.io"])
 google.*##.g:has(a[href*="tutorialspoint.com"])
 google.*##.g:has(a[href*="w3schools.com"])
-google.*##.g:has(a[href*="golangexample.com"])
 
 ! Copycats
 ! Related project: https://github.com/quenhus/uBlock-Origin-dev-filter
@@ -1168,4 +1165,4 @@ google.*##.g:has(a[href*="yuanmacha.com"])
 google.*##.g:has(a[href*="zsharp.org"])
 google.*##.g:has(a[href*="zxc.wiki"])
 google.*##.g:has(a[href*="zzun.app"])
-
+google.*##.g:has(a[href*="golangexample.com"])
