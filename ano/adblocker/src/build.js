@@ -38,7 +38,7 @@
    if (line.trim() === "" || line.startsWith("!")) {
      output += `${line}\n`;
    } else {
-     output += `duckduckgo.com##[data-domain*="${line}"]\n`;
+     output += `duckduckgo.com###links>div:has(a[href*="${line}"])\n`;
    }
  });
 
