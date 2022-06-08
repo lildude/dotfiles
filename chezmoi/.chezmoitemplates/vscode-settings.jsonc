@@ -153,14 +153,7 @@
     "git.pruneOnFetch": true,
     "scm.repositories.visible": 0,
     "git.detectSubmodules": false,
-    "terminal.integrated.defaultProfile.osx": {
-      "zsh": { // Workaround for https://github.com/microsoft/vscode/issues/138999
-        "path": "zsh",
-        "args": [
-          "-l"
-        ]
-      }
-    },
+    "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "editor.inlineSuggest.enabled": true,
     "terminal.integrated.tabs.focusMode": "singleClick",
