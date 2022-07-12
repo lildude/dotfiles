@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 {{ if eq .chezmoi.os "linux" -}}
-
-  {{- if ne .install_type "min" }}
+  {{- if eq .install_type "min" }}
+    {{- if .codespaces }}
+      sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start
+    {{- end -}}
+  {{- else }}
     if [ -n "$packages" ]; then
       packages="bat bfs exa fd-find grc gnupg2 jq zsh ripgrep libssl-dev zlib1g-dev"
       # Extra opts required because of rust build bug - https://askubuntu.com/questions/1290262/unable-to-install-bat-error-trying-to-overwrite-usr-crates2-json-which
