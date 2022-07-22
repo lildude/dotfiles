@@ -153,6 +153,7 @@
     "git.pruneOnFetch": true,
     "scm.repositories.visible": 0,
     "git.detectSubmodules": false,
+    "git.mergeEditor": true, // Still experimental - https://code.visualstudio.com/updates/v1_69#_3-way-merge-editor
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "editor.inlineSuggest.enabled": true,
@@ -193,8 +194,8 @@
     },
     "go.formatTool": "gofumports",
     "solargraph.diagnostics": true,
-    "workbench.iconTheme": "file-icons",
     "terminal.integrated.scrollback": 2000,
     "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.gpuAcceleration": "off" // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
+    "terminal.integrated.gpuAcceleration": "off",
+    "workbench.iconTheme": "file-icons" // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
 }
