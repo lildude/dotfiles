@@ -41,6 +41,88 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Exchange right_command and fn.",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            {
+                                                "product_id": 591,
+                                                "vendor_id": 1452,
+                                                "description": "Keychron K2v2"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "fn"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "fn",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_command"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Post right_option if right_control is pressed alone.",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            {
+                                                "product_id": 591,
+                                                "vendor_id": 1452,
+                                                "description": "Keychron K2v2"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_control",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_option"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
@@ -52,11 +134,23 @@
                         "is_keyboard": true,
                         "is_pointing_device": false,
                         "product_id": 834,
-                        "vendor_id": 1452
+                        "vendor_id": 1452,
+                        "description": "Appple Internal Keyboard / Trackpad"
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": []
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "non_us_backslash"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "escape"
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -70,6 +164,56 @@
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
                     "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 615,
+                        "vendor_id": 76,
+                        "description": "Apple Magic Keyboard"
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "non_us_backslash"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "escape"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 592,
+                        "vendor_id": 1452,
+                        "description": "Keychron K2v2"
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "grave_accent_and_tilde"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "escape"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             "fn_function_keys": [
@@ -199,18 +343,7 @@
                 "delay_milliseconds_before_open_device": 1000
             },
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": {
-                        "key_code": "non_us_backslash"
-                    },
-                    "to": [
-                        {
-                            "key_code": "escape"
-                        }
-                    ]
-                }
-            ],
+            "simple_modifications": [],
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
                 "country_code": 0,
