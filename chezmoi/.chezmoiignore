@@ -26,6 +26,7 @@ Library/
 .mozilla
 .gnupg/
 .config/restic/
+.local/bin/executable_mount-backups
 dev
 tmp
 {{ end -}}
