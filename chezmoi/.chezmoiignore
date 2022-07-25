@@ -25,6 +25,7 @@ Library/
 .local/share/gem/credentials
 .mozilla
 .gnupg/
+.config/restic/
 dev
 tmp
 {{ end -}}
