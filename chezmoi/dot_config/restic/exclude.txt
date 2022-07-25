@@ -1,0 +1,8 @@
+# Restic Exclude list
+.DS_Store
+.localized
+Downloads/trash/
+node_modules
+Desktop/lildude-MBP18
+Development/github
+dev/github

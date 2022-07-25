@@ -35,5 +35,11 @@
     fi
     # Adjust hammerspoon config location
     /usr/bin/defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
+
+    # Load/reload backup launchd job
+    if launchctl list local.restic_backup > /dev/null 2>&1; then
+      launchctl unload "$HOME/Library/LaunchAgents/local.restic_backup.plist"
+    fi
+    launchctl load "$HOME/Library/LaunchAgents/local.restic_backup.plist"
   {{- end -}}
 {{- end }}

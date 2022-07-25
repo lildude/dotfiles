@@ -1,0 +1,11 @@
+# Restic Include list
+bin/
+Desktop/
+Development/
+Documents/
+Downloads/
+Movies/
+Music/
+Pictures/
+.local/
+.config/

@@ -1,0 +1,38 @@
+#!/bin/bash
+#/
+#/ Script to mount and umount my external backup drive before and after each backup.
+#/ The action is based on the filename with the primary filename being the mount-backup
+#/ and umount-backup being a symlink or hard to the same file.
+#/
+#/ Assumptions:
+#/ - The UUID is always the same; it should be
+#/ - Only I have access to this script so only I can see the password
+#/ - The disk will always be disk3 when it comes to mounting
+
+if [[ "$(basename "$0")" =~ ^umount ]]; then
+  disk_list=$(diskutil list external physical)
+  disk_count=$(echo "$disk_list" | grep -o /dev/disk | wc -l)
+  if [ "$disk_count" -eq 1 ] && echo "$disk_list" | grep -q 'Backups on MyP'; then
+    disk_id=$(echo "$disk_list" | head -1 | grep -E -o "disk[0-9]")
+    diskutil unmountDisk force "$disk_id"
+  fi
+else
+  if mount | grep -q "/Volumes/Backups on MyP"; then
+    # we're already mounted so exit
+    exit 0
+  else
+    vol_id="E983CA1F-61B0-4A9A-BE63-F55803F61BAC"
+    diskutil coreStorage unlockVolume $vol_id -passphrase "{{- (onepasswordDetailsFields "ozqgr7knlm2rjlxx744fe3tgxy").password.value }}" || true
+    disk_id=$(diskutil list $vol_id | head -1 | grep -E -o "disk[0-9]")
+    # try to mount a few times as it can sometimes fail
+    for _ in $(seq 1 10); do
+      diskutil mount "$disk_id" && break
+      sleep 1
+    done
+    # Check mounted and if not, exit 1
+    if ! mount | grep -q "/Volumes/Backups on MyP"; then
+      echo "Failed to mount external disk." >&2
+      exit 1
+    fi
+  fi
+fi
