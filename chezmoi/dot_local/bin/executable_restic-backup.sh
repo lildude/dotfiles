@@ -34,10 +34,8 @@ if [ "$1" ]; then
   dest=${1^^} # uppercase dest
   repo=${dest}_RESTIC_REPOSITORY
   pass=${dest}_RESTIC_PASSWORD
-  log=${dest}_RESTIC_LOG_FILE
   export RESTIC_REPOSITORY=${!repo}
   export RESTIC_PASSWORD=${!pass}
-  export RESTIC_LOG_FILE=${!log}
   restic snapshots --compact
   exit
 fi
@@ -60,10 +58,9 @@ for dest in $DESTS; do
 ( # Run backups in parallel
   repo=${dest}_RESTIC_REPOSITORY
   pass=${dest}_RESTIC_PASSWORD
-  log=${dest}_RESTIC_LOG_FILE
   export RESTIC_REPOSITORY=${!repo}
   export RESTIC_PASSWORD=${!pass}
-  export RESTIC_LOG_FILE=${!log}
+  logfile="/tmp/restic-${dest}.$BASHPID.log"
 
   { # Group all the subsequent commands so they all output into the same log file
   echo "${blue}*** RESTIC BACKUP SCRIPT STARTED${reset}"
@@ -131,7 +128,7 @@ for dest in $DESTS; do
 
   printf "\n===================================================================\n\n\n"
 
-  } | ts >> "$RESTIC_LOG_FILE"
+  } | ts >> "$logfile"
 
 ) &
 
@@ -142,7 +139,7 @@ for pid in $(jobs -p); do
   wait "$pid"
   # Delete the log files on success - we're only really interested in the log if things go wrong
   if [ -n "$DELETE_LOG_ON_SUCCESS" ]; then
-    rm -f "/tmp/restic-*.log"
+    rm -f /tmp/restic-*."$pid".log
   fi
 done
 
