@@ -46,6 +46,18 @@
                         "description": "K2: Right shift + up to shift only (cos fat-fingers)",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "description": "Keychron K2v2",
+                                                "product_id": 592,
+                                                "vendor_id": 1452
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "up_arrow",
                                     "modifiers": {
@@ -59,19 +71,7 @@
                                         "key_code": "right_shift"
                                     }
                                 ],
-                                "type": "basic",
-                                "conditions": [
-                                    {
-                                        "type": "device_if",
-                                        "identifiers": [
-                                            {
-                                            "product_id": 592,
-                                            "vendor_id": 1452,
-                                            "description":"Keychron K2v2"
-                                            }
-                                        ]
-                                    }
-                                ]
+                                "type": "basic"
                             }
                         ]
                     },
@@ -79,6 +79,18 @@
                         "description": "K2: Post right_option if right_control is pressed alone.",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "description": "Keychron K2v2",
+                                                "product_id": 592,
+                                                "vendor_id": 1452
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "right_control",
                                     "modifiers": {
@@ -92,19 +104,7 @@
                                         "key_code": "right_option"
                                     }
                                 ],
-                                "type": "basic",
-                                "conditions": [
-                                    {
-                                        "type": "device_if",
-                                        "identifiers": [
-                                            {
-                                            "product_id": 592,
-                                            "vendor_id": 1452,
-                                            "description":"Keychron K2v2"
-                                            }
-                                        ]
-                                    }
-                                ]
+                                "type": "basic"
                             }
                         ]
                     },
@@ -112,6 +112,18 @@
                         "description": "K2: Left control + backspace = forward delete.",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "description": "Keychron K2v2",
+                                                "product_id": 592,
+                                                "vendor_id": 1452
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "delete_or_backspace",
                                     "modifiers": {
@@ -125,19 +137,7 @@
                                         "key_code": "delete_forward"
                                     }
                                 ],
-                                "type": "basic",
-                                "conditions": [
-                                    {
-                                        "type": "device_if",
-                                        "identifiers": [
-                                            {
-                                            "product_id": 592,
-                                            "vendor_id": 1452,
-                                            "description":"Keychron K2v2"
-                                            }
-                                        ]
-                                    }
-                                ]
+                                "type": "basic"
                             }
                         ]
                     },
@@ -145,6 +145,18 @@
                         "description": "K2: Exchange right_command and fn.",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "description": "Keychron K2v2",
+                                                "product_id": 592,
+                                                "vendor_id": 1452
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "right_command",
                                     "modifiers": {
@@ -158,21 +170,21 @@
                                         "key_code": "fn"
                                     }
                                 ],
-                                "type": "basic",
-                                "conditions": [
-                                    {
-                                        "type": "device_if",
-                                        "identifiers": [
-                                            {
-                                            "product_id": 592,
-                                            "vendor_id": 1452,
-                                            "description":"Keychron K2v2"
-                                            }
-                                        ]
-                                    }
-                                ]
+                                "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "description": "Keychron K2v2",
+                                                "product_id": 592,
+                                                "vendor_id": 1452
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "fn",
                                     "modifiers": {
@@ -186,19 +198,7 @@
                                         "key_code": "right_command"
                                     }
                                 ],
-                                "type": "basic",
-                                "conditions": [
-                                    {
-                                        "type": "device_if",
-                                        "identifiers": [
-                                            {
-                                            "product_id": 592,
-                                            "vendor_id": 1452,
-                                            "description":"Keychron K2v2"
-                                            }
-                                        ]
-                                    }
-                                ]
+                                "type": "basic"
                             }
                         ]
                     },
