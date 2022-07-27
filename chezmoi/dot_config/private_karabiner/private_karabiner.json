@@ -43,6 +43,39 @@
                         ]
                     },
                     {
+                        "description": "K2: Right shift + up to shift only (cos fat-fingers)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "up_arrow",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_shift"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_shift"
+                                    }
+                                ],
+                                "type": "basic",
+                                "conditions": [
+                                    {
+                                        "type": "device_if",
+                                        "identifiers": [
+                                            {
+                                            "product_id": 592,
+                                            "vendor_id": 1452,
+                                            "description":"Keychron K2v2"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
                         "description": "K2: Post right_option if right_control is pressed alone.",
                         "manipulators": [
                             {
