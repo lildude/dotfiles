@@ -118,11 +118,17 @@ Host *.compute.amazonaws.com
   IdentityFile ~/.ssh/aws-lildude.pem
   LogLevel quiet
 
-Host raspberrypi rpi hassio.local
+Host ha.local hassio.local
   Hostname 192.168.1.85
   IdentitiesOnly yes
   IdentityFile ~/.ssh/rpi_ed25519
   User hassio
+  AddKeysToAgent yes
+
+Host raspap.local 
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/rpi_ed25519
+  User pi
   AddKeysToAgent yes
 
 Host hassioroot hassiodebug
