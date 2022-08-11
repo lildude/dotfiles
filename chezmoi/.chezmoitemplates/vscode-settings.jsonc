@@ -196,6 +196,7 @@
     "solargraph.diagnostics": true,
     "terminal.integrated.scrollback": 2000,
     "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.gpuAcceleration": "off",
-    "workbench.iconTheme": "file-icons" // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
+    "terminal.integrated.gpuAcceleration": "off", // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
+    "workbench.iconTheme": "file-icons",
+    "terminal.integrated.enableMultiLinePasteWarning": false
 }
