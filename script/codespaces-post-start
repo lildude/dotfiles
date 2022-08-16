@@ -14,20 +14,7 @@ fi
 
 # Install some developer tools and setup Linux how I like it
 if [ "$(command -v rg)" = "" ]; then
-  $sudo apt-get install -y -o Dpkg::Options::="--force-overwrite" bat bfs grc ripgrep
-fi
-
-# If the workspace contains Ruby files, install my default gems
-
-WORKSPACE="/workspaces/$(echo "$GITHUB_REPOSITORY" | cut -d/ -f2)"
-if [ -f "$WORKSPACE/Gemfile" ]; then
-  $sudo gem install bundler
-  $sudo bundle install
-  # shellcheck disable=SC2046
-  bundle exec gem install $(cat "$HOME/.config/asdf/default-gems")
-elif [ "$(find "$WORKSPACE" -maxdepth 2 -name '*.rb' | wc -l)" -gt 0 ]; then
-  # shellcheck disable=SC2046
-  gem install $(cat "$HOME/.config/asdf/default-gems")
+  $sudo apt-get install -y ripgrep &
 fi
 
 echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >> "$HOME/.netrc"

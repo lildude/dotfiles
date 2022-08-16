@@ -1,0 +1,6 @@
+echo "Installing default gems..."
+if [ -f "$(pwd)/Gemfile" ]; then
+  bundle exec gem install $(cat "$HOME/.config/asdf/default-gems")
+else
+  gem install $(cat "$HOME/.config/asdf/default-gems")
+fi
