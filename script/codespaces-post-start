@@ -1,5 +1,8 @@
 #!/bin/sh
 # Run in codespaces after starting
+purple=$(tput setaf 5)
+reset=$(tput sgr0)
+echo "${purple}===== Running codespaces post-start script =====${reset}"
 
 # Always want to use ZSH as my default shell (e.g. for SSH)
 sudo="sudo"
@@ -14,6 +17,12 @@ fi
 # Install some developer tools and setup Linux how I like it
 if [ "$(command -v rg)" = "" ]; then
   $sudo apt-get install -y bat bfs grc ripgrep
+fi
+
+# If the workspace contains Ruby files, install my default gems
+if [ -f "$CODESPACE_VSCODE_FOLDER/Gemfile" ]; then
+  # shellcheck disable=SC2046
+  bundle exec gem install $(cat "$HOME/.config/asdf/default-gems")
 fi
 
 echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >> "$HOME/.netrc"
