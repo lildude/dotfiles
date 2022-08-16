@@ -18,7 +18,14 @@ if [ "$(command -v rg)" = "" ]; then
 fi
 
 # If the workspace contains Ruby files, install my default gems
-if [ "$(find . -maxdepth 2 -name '*.rb' | wc -l)" -gt 0 ]; then
+
+WORKSPACE="/workspaces/$(echo "$GITHUB_REPOSITORY" | cut -d/ -f2)"
+if [ -f "$WORKSPACE/Gemfile" ]; then
+  $sudo gem install bundler
+  $sudo bundle install
+  # shellcheck disable=SC2046
+  bundle exec gem install $(cat "$HOME/.config/asdf/default-gems")
+elif [ "$(find "$WORKSPACE" -maxdepth 2 -name '*.rb' | wc -l)" -gt 0 ]; then
   # shellcheck disable=SC2046
   gem install $(cat "$HOME/.config/asdf/default-gems")
 fi
