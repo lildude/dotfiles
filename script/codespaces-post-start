@@ -16,7 +16,7 @@ fi
 
 # Install some developer tools and setup Linux how I like it
 if [ "$(command -v rg)" = "" ]; then
-  $sudo apt-get install -y bat bfs grc ripgrep
+  $sudo apt-get install -y -o Dpkg::Options::="--force-overwrite" bat bfs grc ripgrep
 fi
 
 # If the workspace contains Ruby files, install my default gems
