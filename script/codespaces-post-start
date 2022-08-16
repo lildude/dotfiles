@@ -14,7 +14,7 @@ fi
 
 # Install some developer tools and setup Linux how I like it
 if [ "$(command -v rg)" = "" ]; then
-  $sudo apt-get install -y ripgrep &
+  $sudo apt-get install -y ripgrep
 fi
 
 echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >> "$HOME/.netrc"
