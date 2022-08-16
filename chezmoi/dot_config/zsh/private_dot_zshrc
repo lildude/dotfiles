@@ -98,7 +98,8 @@ export LESS_TERMCAP_us=$'\E[01;32m'                 # Begins underline.
 
 export ASDF_CONFIG_FILE=$XDG_CONFIG_HOME/asdf/asdfrc
 export ASDF_DATA_DIR=$XDG_DATA_HOME/asdf
-export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$XDG_CONFIG_HOME/asdf/tool-versions
+# export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$XDG_CONFIG_HOME/asdf/tool-versions
+export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=.config/asdf/tool-versions # ASDF has started prefixing with $HOME for some reason.
 export ASDF_GEM_DEFAULT_PACKAGES_FILE=$XDG_CONFIG_HOME/asdf/default-gems
 export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
 export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
