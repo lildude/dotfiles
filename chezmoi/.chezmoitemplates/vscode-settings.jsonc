@@ -153,7 +153,6 @@
     "git.pruneOnFetch": true,
     "scm.repositories.visible": 0,
     "git.detectSubmodules": false,
-    "git.mergeEditor": true, // Still experimental - https://code.visualstudio.com/updates/v1_69#_3-way-merge-editor
     "terminal.integrated.defaultProfile.osx": "zsh",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "editor.inlineSuggest.enabled": true,
@@ -197,6 +196,6 @@
     "terminal.integrated.scrollback": 2000,
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.gpuAcceleration": "off", // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
-    "workbench.iconTheme": "file-icons",
-    "terminal.integrated.enableMultiLinePasteWarning": false
+    "terminal.integrated.shellIntegration.enabled": false, // Disable shell integration as it plays havoc with my custom shell config.
+    "workbench.iconTheme": "file-icons"
 }
