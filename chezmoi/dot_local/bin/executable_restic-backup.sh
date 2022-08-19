@@ -60,7 +60,7 @@ for dest in $DESTS; do
   pass=${dest}_RESTIC_PASSWORD
   export RESTIC_REPOSITORY=${!repo}
   export RESTIC_PASSWORD=${!pass}
-  logfile="/tmp/restic-${dest}.$BASHPID.log"
+  logfile="$HOME/.config/restic/${dest}.$BASHPID.log"
 
   { # Group all the subsequent commands so they all output into the same log file
   echo "${blue}*** RESTIC BACKUP SCRIPT STARTED${reset}"
@@ -139,7 +139,7 @@ for pid in $(jobs -p); do
   wait "$pid"
   # Delete the log files on success - we're only really interested in the log if things go wrong
   if [ -n "$DELETE_LOG_ON_SUCCESS" ]; then
-    rm -f /tmp/restic-*."$pid".log
+    rm -f $HOME/.config/restic/*.$pid.log
   fi
 done
 
