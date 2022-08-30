@@ -140,7 +140,9 @@
 
 [pull]
   rebase = false
-  twohead = ort  # Force the use of the latest and greatest merging strategy - https://github.blog/2021-08-16-highlights-from-git-2-33/#merge-ort-a-new-merge-strategy
+  {{- $v := output "git" "--version" | trim | split " " }}{{ if semverCompare ">2.33.0" $v._2 }}
+  twohead = ort  # Requires git 2.33 or later which isn't available on Codespaces by default
+  {{- end }}
 
 [advice]
   detachedHead = false
