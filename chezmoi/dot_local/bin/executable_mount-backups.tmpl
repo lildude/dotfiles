@@ -22,7 +22,7 @@ else
     exit 0
   else
     vol_id="E983CA1F-61B0-4A9A-BE63-F55803F61BAC"
-    diskutil coreStorage unlockVolume $vol_id -passphrase "{{- (onepasswordDetailsFields "ozqgr7knlm2rjlxx744fe3tgxy").password.value }}" || true
+    diskutil coreStorage unlockVolume $vol_id -passphrase "{{- (onepasswordDetailsFields "2vy5srf36agwcehsryqwaiigqm").password.value }}" || true
     disk_id=$(diskutil list $vol_id | head -1 | grep -E -o "disk[0-9]")
     # try to mount a few times as it can sometimes fail
     for _ in $(seq 1 10); do
