@@ -13,7 +13,7 @@
   <string>/Users/lildude</string>
   <key>ProgramArguments</key>
   <array>
-   <string>/Users/lildude/.local/bin/restic-backup.sh</string>
+   <string>/Users/lildude/.local/bin/restic-backup</string>
   </array>
   <!-- Run every hour between 09:00 and 19:00, Mon - Fri -->
   <key>StartCalendarInterval</key>

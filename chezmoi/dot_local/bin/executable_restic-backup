@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #/ Backup using Restic
+#/ Don't forget to give me full disk access in preferences > security & privacy > privacy > full disk access
 #/
 set -e
 
@@ -117,6 +118,16 @@ for dest in $DESTS; do
     --keep-yearly 2 \
     --cleanup-cache \
     --prune
+
+  # Verify the backup by restoring this file and comparing it to the original
+  echo "${yellow}=> Verifying backup...${reset}"
+  restic restore latest --target /tmp/ --include "/.local/bin/restic-backup" || ( notify "🚨 BACKUP FAILED: Failed to restore file. 🚨" && exit 1 )
+  if ! cmp "$HOME/.local/bin/restic-backup" /tmp/.local/bin/restic-backup; then
+    notify "🚨 BACKUP FAILED: Restored file doesn't match original 🚨"
+    status "$dest: ERROR: Backup verification failed"
+    exit 1
+  fi
+  rm -rf /tmp/.local/
 
   # Only perform restic check at the end of the day when I'm not likely to be working
   if [ "$(date +%H)" -eq 19 ]; then
