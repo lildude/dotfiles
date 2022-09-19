@@ -10,7 +10,8 @@ fi
 
 #shellcheck source=/Users/lildude/.config/restic/restic.env disable=SC1091
 source "$HOME/.config/restic/restic.env"
-PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin
+PATH=$PATH:/opt/homebrew/bin/restic:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin
+LOGDIR="${XDG_STATE_HOME:-$HOME/.local/state}/restic"
 
 notify() {
   if tty -s; then
@@ -20,6 +21,13 @@ notify() {
       osascript -e "display notification \"$1\" with title \"Restic Backup\""
     fi
   fi
+}
+
+# Function called status to record the status of this script to a file
+# so that other scripts can check the status of this script
+status() {
+  echo "$1"
+  echo "$(date) $1" >> "$LOGDIR/backup.status" || true
 }
 
 #red=$(tput setaf 1)
@@ -40,6 +48,8 @@ if [ "$1" ]; then
   exit
 fi
 
+mkdir -p "$LOGDIR"
+
 # Prevent running whilst already running, and also prevent sleeping by running via caffeinate
 [ -n "$LOCKED" ] || {
   export LOCKED=1
@@ -48,7 +58,7 @@ fi
 
 # Don't run if we're on battery power
 pmset -g batt | grep -q "Now drawing from 'Battery Power'" && {
-  notify "Skipping backups whilst on battery"
+  status "Skipping backups whilst on battery"
   exit 0
 }
 
@@ -60,7 +70,7 @@ for dest in $DESTS; do
   pass=${dest}_RESTIC_PASSWORD
   export RESTIC_REPOSITORY=${!repo}
   export RESTIC_PASSWORD=${!pass}
-  logfile="$HOME/.config/restic/${dest}.$BASHPID.log"
+  logfile="$LOGDIR/${dest}.$BASHPID.log"
 
   { # Group all the subsequent commands so they all output into the same log file
   echo "${blue}*** RESTIC BACKUP SCRIPT STARTED${reset}"
@@ -68,11 +78,19 @@ for dest in $DESTS; do
   # change to home dir as all backups are currently relative to $HOME
   cd "$HOME" || exit
 
+  # Only backup to cloud once a day at 19:00
+  if [ "$dest" != "LOCAL" ]; then
+    if [ "$(date +%H)" != "19" ]; then
+      status "$dest: Skipping external backup as it's not 19:00"
+      exit 0
+    fi
+  fi
+
   if [ "$dest" == "LOCAL" ]; then
     # Mount backup volume
     echo "${yellow}=> Mounting backup volume...${reset}"
     if ! "$HOME/.local/bin/mount-backups" 2>&1; then
-      echo "ERROR: failed to mount backup volume"
+      status "$dest: ERROR: failed to mount backup volume"
       notify "🚨 BACKUP FAILED 🚨"
       exit 1
     fi
@@ -127,7 +145,7 @@ for dest in $DESTS; do
   fi
 
   printf "\n===================================================================\n\n\n"
-
+  status "Backup finished"
   } | ts >> "$logfile"
 
 ) &
@@ -139,7 +157,7 @@ for pid in $(jobs -p); do
   wait "$pid"
   # Delete the log files on success - we're only really interested in the log if things go wrong
   if [ -n "$DELETE_LOG_ON_SUCCESS" ]; then
-    rm -f $HOME/.config/restic/*.$pid.log
+    rm -f $LOGDIR/*.$pid.log
   fi
 done
 
