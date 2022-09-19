@@ -5,16 +5,14 @@
  	<key>EnvironmentVariables</key>
 	<dict>
 		<key>PATH</key>
-		<string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin</string>
+		<string>/opt/homebrew/bin/restic:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
 	</dict>
   <key>Label</key>
   <string>local.restic_backup</string>
   <key>WorkingDirectory</key>
   <string>/Users/lildude</string>
-  <key>ProgramArguments</key>
-  <array>
-   <string>/Users/lildude/.local/bin/restic-backup</string>
-  </array>
+  <key>Program</key>
+  <string>/Users/lildude/.local/bin/restic-backup</string>
   <!-- Run every hour between 09:00 and 19:00, Mon - Fri -->
   <key>StartCalendarInterval</key>
   <array>
@@ -76,6 +74,11 @@
   </array>
   <key>Nice</key>
   <integer>10</integer>
+  <key>StandardOutPath</key>
+  <string>/tmp/local.restic_backup.out.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>/tmp/local.restic_backup.error.log</string>
  </dict>
 </plist>
 

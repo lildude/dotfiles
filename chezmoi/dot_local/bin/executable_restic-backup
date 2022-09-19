@@ -11,8 +11,9 @@ fi
 
 #shellcheck source=/Users/lildude/.config/restic/restic.env disable=SC1091
 source "$HOME/.config/restic/restic.env"
-PATH=$PATH:/opt/homebrew/bin/restic:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin
+PATH=$PATH:/opt/homebrew/bin/:/usr/local/bin:/usr/bin:/usr/sbin
 LOGDIR="${XDG_STATE_HOME:-$HOME/.local/state}/restic"
+export LC_TIME="en_GB.UTF-8"
 
 notify() {
   if tty -s; then
@@ -31,12 +32,14 @@ status() {
   echo "$(date) $1" >> "$LOGDIR/backup.status" || true
 }
 
-#red=$(tput setaf 1)
-#green=$(tput setaf 2)
-yellow=$(tput setaf 3)
-blue=$(tput setaf 4)
-#purple=$(tput setaf 5)
-reset=$(tput sgr0)
+if tty -s; then
+  #red=$(tput setaf 1)
+  #green=$(tput setaf 2)
+  yellow=$(tput setaf 3)
+  blue=$(tput setaf 4)
+  #purple=$(tput setaf 5)
+  reset=$(tput sgr0)
+fi
 
 # List snapshots of env passed as first arg
 if [ "$1" ]; then
