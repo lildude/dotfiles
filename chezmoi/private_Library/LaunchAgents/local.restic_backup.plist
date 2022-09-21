@@ -5,14 +5,14 @@
  	<key>EnvironmentVariables</key>
 	<dict>
 		<key>PATH</key>
-		<string>/opt/homebrew/bin/restic:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+		<string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
 	</dict>
   <key>Label</key>
   <string>local.restic_backup</string>
   <key>WorkingDirectory</key>
   <string>/Users/lildude</string>
   <key>Program</key>
-  <string>/Users/lildude/.local/bin/restic-backup</string>
+  <string>/Users/lildude/.local/gobin/restic-wrapper</string>
   <!-- Run every hour between 09:00 and 19:00, Mon - Fri -->
   <key>StartCalendarInterval</key>
   <array>

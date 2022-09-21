@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #/ Backup using Restic
-#/ Don't forget to give me full disk access in preferences > security & privacy > privacy > full disk access
+#/
+#/ This is called by the wrapper script in ${HOME}/.local/gobin/restic-wrapper when executed by launchd
+#/ with the binary given full disk access.
 #/
 set -e
 
@@ -159,7 +161,7 @@ for dest in $DESTS; do
   fi
 
   printf "\n===================================================================\n\n\n"
-  status "Backup finished"
+  status "$dest: Backup finished"
   } | ts >> "$logfile"
 
 ) &
