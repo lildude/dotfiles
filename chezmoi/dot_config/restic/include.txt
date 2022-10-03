@@ -6,6 +6,7 @@ Documents/
 Downloads/
 Movies/
 Music/
+Sites/
 Pictures/
 .local/
 .config/
