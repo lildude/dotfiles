@@ -1,6 +1,7 @@
 # Restic Exclude list
 .DS_Store
 .localized
+.local/share/pnpm/store
 Downloads/trash/
 node_modules
 Desktop/lildude-MBP18
