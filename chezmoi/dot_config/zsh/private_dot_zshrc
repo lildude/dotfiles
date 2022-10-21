@@ -70,6 +70,7 @@ export PAGER='less'
 export MANWIDTH=80
 export LESS='-FgiMRwXz-2'
 export ICLOUD_DRIVE="$HOME/Library/Mobile Documents/com~apple~CloudDocs" # Conveniently locate cloud drive :-P
+export OBSIDIAN="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents"
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
 if (( $#commands[(i)lesspipe(|.sh)] )); then
