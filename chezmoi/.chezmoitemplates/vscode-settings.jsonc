@@ -198,5 +198,6 @@
     "terminal.integrated.gpuAcceleration": "off", // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
     "terminal.integrated.shellIntegration.enabled": false, // Disable shell integration as it plays havoc with my custom shell config.
     "workbench.iconTheme": "file-icons",
-    "git.autofetch": true
+    "git.autofetch": true,
+    "editor.unicodeHighlight.includeStrings": false
 }
