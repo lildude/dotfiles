@@ -166,7 +166,7 @@
     "dotfiles.repository": "lildude/dotfiles",
     "dotfiles.installCommand": "~/dotfiles/script/install",
     "editor.bracketPairColorization.enabled": true,
-    "remote.containers.defaultExtensions": [
+    "dev.containers.defaultExtensions": [
       "EditorConfig.EditorConfig",
       "GitHub.copilot",
       "eamodio.gitlens",
@@ -183,7 +183,6 @@
     "window.nativeTabs": true,
     "task.autoDetect": "off",
     "gopls": {
-      "experimentalWorkspaceModule": true,
       "formatting.gofumpt": true
     },
     "go.lintTool": "golangci-lint",
@@ -191,13 +190,14 @@
     "[go]": {
       "editor.formatOnSave": true
     },
-    "go.formatTool": "gofumports",
+    "go.formatTool": "gofumpt",
     "solargraph.diagnostics": true,
     "terminal.integrated.scrollback": 2000,
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.gpuAcceleration": "off", // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
-    "terminal.integrated.shellIntegration.enabled": false, // Disable shell integration as it plays havoc with my custom shell config.
-    "workbench.iconTheme": "file-icons",
+    "terminal.integrated.shellIntegration.enabled": false,
     "git.autofetch": true,
-    "editor.unicodeHighlight.includeStrings": false
+    "editor.unicodeHighlight.includeStrings": false,
+    "workbench.iconTheme": "file-icons",
+    "svelte.plugin.svelte.note-new-transformation": true
 }
