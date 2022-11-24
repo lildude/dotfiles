@@ -12,6 +12,7 @@ tap 'goreleaser/tap'
 tap 'kopia/kopia'
 tap 'tavianator/tap'            # Needed for bfs
 tap 'espanso/espanso'           # Needed for espanso
+tap 'azure/functions'           # Needed for azure-functions-core-tools
 
 # Work-specific tools
 {{- if eq .install_type "work" }}
@@ -33,6 +34,7 @@ brew 'youtube-dl'
 brew 'act'              # Run GitHub Actions locally
 brew 'asdf'             # Replaces rbenv, pyenv, nodeenv etc
 brew 'azure-cli'
+brew 'azure-functions-core-tools@4'
 brew 'base64'
 brew 'bash'             # Only needed for my Bash scripts now macOS isn't shipping updates etc
 brew 'bat'              # Like cat, but prettier
@@ -134,6 +136,7 @@ cask 'docker'
 #cask 'dropbox'
 #cask 'encryptme'
 cask 'espanso'
+cask 'elgato-control-center'
 cask 'fantastical'
 cask 'firefox'
 # cask 'flux'
