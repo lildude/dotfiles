@@ -199,5 +199,8 @@
     "git.autofetch": true,
     "editor.unicodeHighlight.includeStrings": false,
     "workbench.iconTheme": "file-icons",
-    "svelte.plugin.svelte.note-new-transformation": true
+    "svelte.plugin.svelte.note-new-transformation": true,
+    "ledger.binary": "/opt/homebrew/bin/ledger",
+    "git.branchPrefix": "lildude/",
+    "git.autoRepositoryDetection": "openEditors"
 }
