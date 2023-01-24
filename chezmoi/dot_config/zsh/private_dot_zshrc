@@ -180,6 +180,10 @@ _exists chezmoi && {
   alias cha="chezmoi apply"
 }
 
+# From `source $HOME/.config/op/plugins.sh`
+export OP_PLUGIN_ALIASES_SOURCED=1
+alias gh="op plugin run -- gh"
+
 unfunction _exists
 
 
