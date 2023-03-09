@@ -21,6 +21,7 @@ zstyle ':z4h:direnv'            enable            'no'            # Disable dire
 zstyle ':z4h:ssh:*'             enable            'no'            # The default value if none of the overrides above match the hostname.
 zstyle ':z4h:'                  start-tmux        'no'            # Don't download and start tmux-related stuff as I really don't seem to gain much benefit from this.
 zstyle ':z4h:fzf-history'       fzf-flags         --no-preview    # Disable history preview and limit height
+#zstyle ':z4h:*'                 fzf-command       fzf             # Use fzf in PATH
 
 # Disable on codespaces as they are never used
 if [ $CODESPACES ]; then
@@ -95,7 +96,14 @@ export LESS_TERMCAP_us=$'\E[01;32m'                 # Begins underline.
 [ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="${HOME}/.config"
 [ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="${HOME}/.cache"
 [ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="${HOME}/.local/share"
+[ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="${HOME}/.tmp"
 [ -z "$XDG_STATE_HOME" ] && export XDG_STATE_HOME="${HOME}/.local/state"
+
+## create directories if they don't already exist
+for _dir in $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME $XDG_RUNTIME_DIR $XDG_STATE_HOME; do
+  [[ -d "$_dir" ]] || mkdir -p "$_dir"
+done
+unset _dir
 
 export ASDF_CONFIG_FILE=$XDG_CONFIG_HOME/asdf/asdfrc
 export ASDF_DATA_DIR=$XDG_DATA_HOME/asdf
@@ -178,6 +186,7 @@ _exists chezmoi && {
   alias chez=chezmoi
   alias ch=chezmoi
   alias cha="chezmoi apply"
+  alias chd="chezmoi cd"
 }
 
 # From `source $HOME/.config/op/plugins.sh`
@@ -231,7 +240,7 @@ compdef _directories md
 
 z4h source "$HOME/.secrets"
 z4h source /etc/grc.zsh # Colourize all the other things
-z4h source /usr/local/etc/grc.zsh # Colourize all the other things
+z4h source -- ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/etc/grc.zsh} # Colourize all the other things
 z4h source -- ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh} # Load asdf if it's installed.
 
 # This must always be last.
