@@ -712,12 +712,8 @@ defaults write com.apple.terminal StringEncodings -array 4
 #defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true
 
-# Install the Solarized Dark theme for iTerm
-# CNS: This is my custom theme - I've change the highlight color to blue so I can see what I've highlighted
-# open "${HOME}/.dotfiles/iterm2/Custom-Solarized-Dark.itermcolors"
-
-# Load/save settings from/to Dropbox
-defaults write com.googlecode.iterm2 PrefsCustomFolder -string "/Users/lildude/Dropbox/App Prefs"
+# Load/save settings from/to dotfiles
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "/Users/lildude/.config/iterm2"
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
 ###############################################################################

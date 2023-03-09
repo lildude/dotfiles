@@ -7,6 +7,7 @@
 .config/karabiner/
 .config/hammerspoon/
 .config/restic/
+.config/iterm2/
 Library/
 .asdfrc
 .tool-versions
