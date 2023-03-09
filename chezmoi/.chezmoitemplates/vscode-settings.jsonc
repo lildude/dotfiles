@@ -202,5 +202,6 @@
     "svelte.plugin.svelte.note-new-transformation": true,
     "ledger.binary": "/opt/homebrew/bin/ledger",
     "git.branchPrefix": "lildude/",
-    "git.autoRepositoryDetection": "openEditors"
+    "git.autoRepositoryDetection": "openEditors",
+    "svg.preview.mode": "svg"
 }
