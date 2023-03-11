@@ -1,5 +1,4 @@
 tap 'github/gh'                 # Needed for gh
-tap 'heroku/brew'               # Needed for heroku
 tap 'homebrew/bundle'
 tap 'homebrew/cask-drivers'     # Needed for garmin-express
 tap 'homebrew/cask-fonts'       # Needed for fonts
@@ -7,9 +6,7 @@ tap 'homebrew/cask-versions'    # Needed for beta versions
 tap 'homebrew/cask'
 tap 'homebrew/command-not-found'
 tap 'muesli/tap'
-tap 'yqrashawn/goku'            # Needed for goku
 tap 'goreleaser/tap'
-tap 'kopia/kopia'
 tap 'tavianator/tap'            # Needed for bfs
 tap 'espanso/espanso'           # Needed for espanso
 tap 'azure/functions'           # Needed for azure-functions-core-tools
@@ -40,7 +37,6 @@ brew 'bash'             # Only needed for my Bash scripts now macOS isn't shippi
 brew 'bat'              # Like cat, but prettier
 brew 'bfs'              # Breadth-first version of find - much quicker and used by my fzf config.
 brew 'coreutils'
-# brew 'croc'             # A tool for sending large files directly to someone on the CLI
 brew 'dos2unix'
 brew 'duf'
 brew 'exa'
@@ -48,7 +44,7 @@ brew 'exercism'
 brew 'fd'               # Like find, but faster
 brew 'findutils'
 brew 'fswatch'
-# brew 'fzf'            # Installed by my shell now
+brew 'fzf'
 brew 'gh'
 brew 'git'
 brew 'git-delta'
@@ -57,17 +53,14 @@ brew 'gnu-sed'
 brew 'gnupg'
 brew 'go'
 brew 'gofumpt'
-brew 'goku'
 brew 'golangci-lint'
 brew 'goreleaser'
 brew 'gron'             # Grep JSON
 brew 'grc'              # General colorizer
 brew 'htop'
-brew 'hub'
 brew 'hyperfine'        # Great cli benchmarking tool
 brew 'icu4c'
 brew 'jq'
-brew 'kopia'            # UI downloadable from GitHub releases - https://github.com/kopia/kopia/releases/latest
 brew 'lcov'
 brew 'lesspipe'
 brew 'lockrun'
@@ -96,15 +89,15 @@ brew 'zsh'
 
 # Work-specific apps
 {{- if eq .install_type "work" }}
-# cask 'apache-directory-studio'
+# cask 'microsoft-edge'
 cask 'microsoft-teams'
-# cask 'viscosity'
+cask 'slack'
+cask 'viscosity'
 {{- end }}
 
 # Home-specific apps
 {{- if eq .install_type "home" }}
 cask 'calibre'
-cask 'chatmate-for-whatsapp'
 cask 'concept2-utility'
 cask 'exodus'
 cask 'garmin-express'
@@ -113,81 +106,52 @@ cask 'portfolioperformance'
 cask 'telegram'
 cask 'transmission'
 cask 'transmit'
-#cask 'trainerroad'
+cask 'trainerroad'
 cask 'zwift'
 {{- end }}
 
 # Install everywhere
-# cask '1password'
+cask '1password'
 cask '1password-cli'
-# cask 'alfred'
-# cask 'amazon-drive'
-# cask 'amazon-music'
 cask 'appcleaner'
-# cask 'arq'
-# cask 'balenaetcher'
 cask 'bartender'
 cask 'cleanmymac'
 cask 'cleanshot'
 cask 'dash'
-cask 'divvy'
 cask 'docker'
-#cask 'dropbox'
-#cask 'encryptme'
 cask 'espanso'
-cask 'elgato-control-center'
 cask 'fantastical'
 cask 'firefox'
-# cask 'flux'
 cask 'font-jetbrains-mono'
 cask 'font-jetbrains-mono-nerd-font'
 # cask 'google-chrome'        # Think about the amount of data Google already has. Also https://chromeisbad.com/
-cask 'hammerspoon'
 cask 'hey'
 #cask 'insomnia' # Alternative to Postman
 cask 'iterm2'
-cask 'little-snitch'
+# cask 'little-snitch'
 cask 'karabiner-elements'
 cask 'mailtrackerblocker'
-# cask 'microsoft-edge'
-# cask 'microsoft-teams'
-# cask 'multipass'              # Run Ubuntu Server easily locally
-# cask 'muzzle'
 cask 'netspot'
 cask 'ngrok'
-# cask 'numi'
+cask 'numi'
 cask 'obsidian'
-# cask 'pallotron-yubiswitch'
-# cask 'postman'
 cask 'qlmarkdown'             # QuickLook support for markdown
 cask 'qlimagesize'            # QuickLook support for webp and showing image dimensions
 cask 'raycast'                # Alfred alternative
-cask 'rocket'
 # cask 'skitch'
 # cask 'sketch'
 cask 'signal'
-# cask 'slack'
 cask 'spotify'
 cask 'the-unarchiver'
-# cask 'vagrant'
-# cask 'virtualbox'
-# cask 'virtualbox-extension-pack'
 cask 'visual-studio-code'
-# cask 'vmware-fusion'
-# cask 'wireshark' # This is having problems installing at the mo - Oct 2019.
 # cask 'yubico-yubikey-manager'
 
 # AppStore Apps
 {{- if eq .install_type "home" }}
 mas 'Microsoft OneNote', id: 784_801_555
 {{ end }}
-# mas 'AdGuard for Safari', id: 1_440_147_259
-# mas 'Bear', id: 1_091_189_122
-# mas 'Craft', id: 1_487_937_127
+
 mas 'Hand Mirror', id: 1_502_839_586
-# mas 'Magnet', id: 441_258_766
-# mas 'Microsoft Remote Desktop 10', id: 1_295_203_466
-# mas 'Monit', id: 1_014_850_245
 # mas 'Pixelmator', id: 407_963_104
 mas 'pomodorome', id: 1_484_801_884
 mas 'StopTheMadness', id: 1_376_402_589
