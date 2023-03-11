@@ -5,7 +5,6 @@
 {{/* Don't install macOS files on Linux */}}
 {{ else if eq .chezmoi.os "linux" -}}
 .config/karabiner/
-.config/hammerspoon/
 .config/restic/
 .config/iterm2/
 Library/
