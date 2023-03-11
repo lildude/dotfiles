@@ -203,5 +203,8 @@
     "ledger.binary": "/opt/homebrew/bin/ledger",
     "git.branchPrefix": "lildude/",
     "git.autoRepositoryDetection": "openEditors",
-    "svg.preview.mode": "svg"
+    "svg.preview.mode": "svg",
+    "[python]": {
+      "editor.formatOnType": true
+    }
 }
