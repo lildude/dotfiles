@@ -1,6 +1,6 @@
+{{- if eq .chezmoi.os "darwin" -}}
 #!/usr/bin/env bash
 # hash: {{ include "dot_config/asdf/tool-versions" | sha256sum }}
-{{- if eq .chezmoi.os "darwin" }}
   {{- if ne .install_type "min" }}
     asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
     asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
