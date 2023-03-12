@@ -4,7 +4,7 @@
 PLUGINS="nodejs ruby"
 
 if [ $(asdf plugin list | wc -l) -gt 0 ]; then
-  asdf plugin update --all
+  asdf plugin update --all 2>&1 > /dev/null
 else
   for plugin in $PLUGINS; do
     asdf plugin list | grep -q $plugin || asdf plugin add $plugin https://github.com/asdf-vm/asdf-${plugin}.git
@@ -12,9 +12,9 @@ else
 fi
 
 for plugin in $PLUGINS; do
-  asdf install $plugin latest &
+  asdf install $plugin latest 2>&1 > /dev/null &
   wait
-  asdf global $plugin latest
+  asdf global $plugin latest  2>&1 > /dev/null
 done
 
   {{- end -}}
