@@ -26,8 +26,5 @@ vendor/*/vendor/ruby/
 # Ignore sync config file
 .sync-config.cson
 
-# Ignore VSCode config dir
-.vscode
-
 # Tmp disable globally
 coverage/
