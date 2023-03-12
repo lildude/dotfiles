@@ -16,11 +16,11 @@ $ sh -c "$(curl -fsLS git.io/chezmoi)" -- -b ~/.local/bin init --apply lildude
 
 ### On Codespaces or VS Code Remote Containers
 
-Codespaces and VS Code Remote Containers (thanks to my settings) automatically clone the dotfiles repo and runs `script/install` automatically when the container is started.
+Codespaces and VS Code Remote Containers (thanks to my settings) automatically clone the dotfiles repo and runs `script/boostrap` automatically when the container is started.
 
 ## My Prompt
 
-![My Prompt](prompt.png)
+![My Prompt](prompt.gif)
 
 ## Slack Theme
 
