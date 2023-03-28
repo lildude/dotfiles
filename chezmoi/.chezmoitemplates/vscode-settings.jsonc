@@ -191,7 +191,6 @@
       "editor.formatOnSave": true
     },
     "go.formatTool": "gofumpt",
-    "solargraph.diagnostics": true,
     "terminal.integrated.scrollback": 2000,
     "terminal.external.osxExec": "iTerm.app",
     "terminal.integrated.gpuAcceleration": "off", // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
@@ -199,7 +198,6 @@
     "git.autofetch": true,
     "editor.unicodeHighlight.includeStrings": false,
     "workbench.iconTheme": "file-icons",
-    "svelte.plugin.svelte.note-new-transformation": true,
     "ledger.binary": "/opt/homebrew/bin/ledger",
     "git.branchPrefix": "lildude/",
     "git.autoRepositoryDetection": "openEditors",
