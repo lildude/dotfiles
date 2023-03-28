@@ -3,7 +3,7 @@
 #!/usr/bin/env bash
 PLUGINS="nodejs ruby"
 
-if [ $(asdf plugin list | wc -l) -gt 0 ]; then
+if [[ $(asdf plugin list | wc -l) -gt 0 ]]; then
   asdf plugin update --all 2>&1 > /dev/null
 else
   for plugin in $PLUGINS; do
