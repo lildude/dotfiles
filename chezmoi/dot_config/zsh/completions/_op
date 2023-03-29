@@ -1,5 +1,6 @@
 #compdef _op op
 
+# zsh completion for op                                   -*- shell-script -*-
 
 function _op {
   local -a commands
