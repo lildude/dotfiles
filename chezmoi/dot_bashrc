@@ -14,6 +14,21 @@ if [ -n "$CODESPACES" ]; then
   exec zsh
 fi
 
+# Store stuff in ~/.config and ~/.cache when we can.
+# https://wiki.archlinux.org/title/XDG_Base_Directory
+# https://www.reddit.com/r/zsh/comments/fvtr19/no_more_dotfile_clutter_in_my_home/
+[ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="${HOME}/.config"
+[ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="${HOME}/.cache"
+[ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="${HOME}/.local/share"
+[ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="${HOME}/.tmp"
+[ -z "$XDG_STATE_HOME" ] && export XDG_STATE_HOME="${HOME}/.local/state"
+
+## create directories if they don't already exist
+for _dir in $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME $XDG_RUNTIME_DIR $XDG_STATE_HOME; do
+  [[ -d "$_dir" ]] || mkdir -p "$_dir"
+done
+unset _dir
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -25,6 +40,7 @@ PROMPT_COMMAND='history -a;history -n'
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
+export HISTFILE="${XDG_STATE_HOME}"/bash/history
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
