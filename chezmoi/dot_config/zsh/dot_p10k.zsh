@@ -39,7 +39,8 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    os_icon                 # os identifier
+    # os_icon                 # os identifier
+    os_container_icon       # os or container identifier
     dir                     # current directory
     vcs                     # git status
     newline                 # \n
@@ -183,7 +184,7 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=250
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
 
@@ -345,7 +346,7 @@
   # typeset -g POWERLEVEL9K_DIR_PREFIX='%fin '
 
   #####################################[ vcs: git status ]######################################
-  # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
+  # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon ().
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='\uF126 '
   # CNS: Tag icon -  from Nerd Font patched font
   typeset -g POWERLEVEL9K_VCS_TAG_ICON='\uF02B '
@@ -354,7 +355,7 @@
 
   # Untracked files icon. It's really a question mark, your font isn't broken.
   # Change the value of this parameter to show a different icon.
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?' # CNS: Was ?
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
 
   # Formatter for Git status.
   #
@@ -1577,6 +1578,18 @@
   # User-defined prompt segments can be customized the same way as built-in segments.
   # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=208
   # typeset -g POWERLEVEL9K_EXAMPLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  # Use codespace or container icon if the current shell is running in a codespace or container instead of OS icon
+  function prompt_os_container_icon() {
+    if [[ -n $REMOTE_CONTAINERS$CODESPACES$VSCODE_REMOTE_CONTAINERS_SESSION ]]; then
+      p10k segment -i ''  # Replace me once https://github.com/ryanoasis/nerd-fonts/pull/1156 has been merged
+    else
+      prompt_os_icon
+    fi
+  }
+
+  function instant_prompt_os_container_icon() {prompt_os_container_icon}
+  typeset -g POWERLEVEL9K_OS_CONTAINER_ICON_FOREGROUND=${POWERLEVEL9K_OS_ICON_FOREGROUND}
 
   # Transient prompt works similarly to the builtin transient_rprompt option. It trims down prompt
   # when accepting a command line. Supported values:
