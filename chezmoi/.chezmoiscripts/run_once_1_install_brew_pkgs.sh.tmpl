@@ -3,6 +3,6 @@
 # hash: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
   {{- if ne .install_type "min" }}
 eval "$(/opt/homebrew/bin/brew shellenv)"
-brew bundle --file $HOME/.config/homebrew/Brewfile --no-lock
+brew bundle --file $HOME/.config/homebrew/Brewfile --no-lock || true
   {{- end }}
 {{- end }}
