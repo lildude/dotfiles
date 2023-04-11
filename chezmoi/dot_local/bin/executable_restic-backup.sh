@@ -135,7 +135,7 @@ for dest in $DESTS; do
   rm -rf /tmp/.local/
 
   # Only perform restic check at the end of the day when I'm not likely to be working
-  if [ "$(date +%H)" -eq 19 ]; then
+  if [ "$(date +%H)" -eq 18 ]; then
     printf "\n\n*** Running restic check....\n"
 
     # --with-cache - limits Class B Transactions on BackBlaze B2 see: https://forum.restic.net/t/limiting-b2-transactions/209/4
