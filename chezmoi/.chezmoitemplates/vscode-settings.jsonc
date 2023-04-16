@@ -164,7 +164,7 @@
       "markdown": false
     },
     "dotfiles.repository": "lildude/dotfiles",
-    "dotfiles.installCommand": "~/dotfiles/script/install",
+    "dotfiles.installCommand": "~/dotfiles/script/bootstrap",
     "editor.bracketPairColorization.enabled": true,
     "dev.containers.defaultExtensions": [
       "EditorConfig.EditorConfig",
