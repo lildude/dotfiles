@@ -1,22 +1,7 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/usr/bin/env bash
-# Enable sudo authentication using TouchID on macOS
-#
-set -euo pipefail
-if ls /usr/lib/pam | grep -q "pam_tid.so"; then
-  PAM_FILE="/etc/pam.d/sudo"
-  FIRST_LINE="# sudo: auth account password session"
-  if grep -q pam_tid.so "$PAM_FILE"; then
-    # echo "TouchID is already enabled for sudo"
-    true
-  elif ! head -n1 "$PAM_FILE" | grep -q "$FIRST_LINE"; then
-    echo "=> $PAM_FILE is not in the expected format!"
-  else
-    TOUCHID_LINE="auth       sufficient     pam_tid.so"
-    sudo sed -i .bak -e \
-      "s/$FIRST_LINE/$FIRST_LINE\n$TOUCHID_LINE/" \
-      "$PAM_FILE"
-    sudo rm "$PAM_FILE.bak"
-  fi
-fi
+# hash: {{ include "/etc/pam.d/sudo" | sha256sum }}
+
+${HOME}/.local/bin/touchid-enable-pam-sudo
+
 {{- end }}
