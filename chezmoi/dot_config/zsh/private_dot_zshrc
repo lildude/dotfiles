@@ -117,8 +117,8 @@ export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
 export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
 export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
 export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
-export GEM_HOME=$XDG_DATA_HOME/gem
-export GEM_SPEC_CACHE=$XDG_CACHE_HOME/gem
+# export GEM_HOME=$XDG_DATA_HOME/gem            # This confuses ASDF
+# export GEM_SPEC_CACHE=$XDG_CACHE_HOME/gem
 export GOBIN=~/.local/gobin                     # Go binaries ('go install').
 export GOCACHE=/tmp/go/build                    # Go build cache in tmp/memory
 export GOPATH=$XDG_CACHE_HOME/go                # GOPATH mostly stores cache stuff these days thanks to modules
@@ -136,8 +136,8 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 export PRYRC=$XDG_CONFIG_HOME/pry/pryrc         # Unnecessary but being extra safe
 export SOLARGRAPH_CACHE=$XDG_CACHE_HOME/solargraph
 export SQLITE_HISTORY=$XDG_CACHE_HOME/sqlite_history
-export TERMINFO=$XDG_DATA_HOME/terminfo
-export TERMINFO_DIRS=$XDG_DATA_HOME/terminfo:/usr/share/terminfo
+# export TERMINFO=$XDG_DATA_HOME/terminfo
+# export TERMINFO_DIRS=$XDG_DATA_HOME/terminfo:/usr/share/terminfo
 
 [[ ! -d "$GOTMPDIR" ]] && mkdir -p "$GOTMPDIR"  # Make sure it exists as Go won't create it.
 path+=($GOBIN)
