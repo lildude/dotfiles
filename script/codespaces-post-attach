@@ -1,0 +1,5 @@
+#!/bin/sh
+# Run in codespaces after attaching
+echo "==> Running codespaces post-attach script"
+# Codespaces doesn't always (ever?) re-exec the shell after chezmoi has run in the post-start command
+exec zsh
