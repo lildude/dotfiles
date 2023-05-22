@@ -168,7 +168,7 @@
     "editor.bracketPairColorization.enabled": true,
     "dev.containers.defaultExtensions": [
       "EditorConfig.EditorConfig",
-      "GitHub.copilot",
+      "GitHub.copilot-nightly",
       "eamodio.gitlens",
       "chrislajoie.vscode-modelines"
     ],
@@ -176,7 +176,7 @@
     "github.codespaces.defaultExtensions": [
       "GitHub.codespaces",
       "EditorConfig.EditorConfig",
-      "GitHub.copilot",
+      "GitHub.copilot-nightly",
       "eamodio.gitlens",
       "chrislajoie.vscode-modelines"
     ],
@@ -204,5 +204,8 @@
     "svg.preview.mode": "svg",
     "[python]": {
       "editor.formatOnType": true
-    }
+    },
+    "gitlens.showWelcomeOnInstall": false,
+    "gitlens.showWhatsNewAfterUpgrades": false,
+    "shellcheck.disableVersionCheck": true,
 }
