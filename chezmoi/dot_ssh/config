@@ -76,7 +76,7 @@ Host *.cp1-prd.iad.github.net *.private-us-east-1.github.net *.ghe.io
   AddKeysToAgent yes
   User lildude
 
-Host *.bpdev-us-east-1.github.net *.ghe-test.org *.qaboot.net *.gh-quality.net
+Host *.bpdev-us-east-1.github.net *.ghe-test.org *.qaboot.net *.gh-quality.net *.ghe-test.com
   User build
   IdentitiesOnly yes
   IdentityFile ~/.ssh/github_2018_ed25519
@@ -125,7 +125,7 @@ Host ha.local hassio.local
   User hassio
   AddKeysToAgent yes
 
-Host raspap.local 
+Host raspap.local
   IdentitiesOnly yes
   IdentityFile ~/.ssh/rpi_ed25519
   User pi
