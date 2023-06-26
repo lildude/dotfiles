@@ -458,12 +458,12 @@
     #(( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
     (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢"
     # *42 if have stashes.
-    #(( VCS_STATUS_STASHES        )) && res+=" ${clean}*${VCS_STATUS_STASHES}"
+    #(( VCS_STATUS_STASHES        )) && res+=" ${clean}⚑${VCS_STATUS_STASHES}"
     # 'merge' if the repo is in an unusual state.
     [[ -n $VCS_STATUS_ACTION     ]] && res+="${conflicted}${VCS_STATUS_ACTION:u}" # CNS: Uppercased
     # ~42 if have merge conflicts.
     #(( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
-    (( VCS_STATUS_NUM_CONFLICTED )) && res+="${conflicted}~"
+    (( VCS_STATUS_NUM_CONFLICTED )) && res+="${conflicted}✖"
     # +42 if have staged changes.
     #(( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}+${VCS_STATUS_NUM_STAGED}"
     (( VCS_STATUS_NUM_STAGED     )) && res+="${staged}+"
