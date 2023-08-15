@@ -208,4 +208,5 @@
     "gitlens.showWelcomeOnInstall": false,
     "gitlens.showWhatsNewAfterUpgrades": false,
     "shellcheck.disableVersionCheck": true,
+    "lldb.suppressUpdateNotifications": true,
 }
