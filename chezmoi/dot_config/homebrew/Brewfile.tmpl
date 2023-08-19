@@ -11,8 +11,8 @@ tap 'tavianator/tap'            # Needed for bfs
 tap 'espanso/espanso'           # Needed for espanso
 tap 'azure/functions'           # Needed for azure-functions-core-tools
 
-# Work-specific tools
 {{- if eq .install_type "work" }}
+# Work-specific tools
 # brew 'adr-tools'
 # brew 'ansible'
 # brew 'awscli'
@@ -21,10 +21,11 @@ tap 'azure/functions'           # Needed for azure-functions-core-tools
 {{ end }}
 
 {{- if eq .install_type "home" }}
-brew 'ffmpeg'
-brew 'vips'             # Used by jekyll plugin to resize images
-brew 'webp'             # For converting images to webp
-brew 'youtube-dl'
+# Home-specific tools
+# brew 'ffmpeg'
+# brew 'vips'             # Used by jekyll plugin to resize images
+# brew 'webp'             # For converting images to webp
+# brew 'youtube-dl'
 {{ end }}
 
 # Install everywhere
@@ -40,7 +41,7 @@ brew 'coreutils'
 brew 'dos2unix'
 brew 'duf'
 brew 'exa'
-brew 'exercism'
+# brew 'exercism'
 brew 'fd'               # Like find, but faster
 brew 'findutils'
 brew 'fswatch'
@@ -87,16 +88,16 @@ brew 'zsh'
 # brew 'zsh-completions'        # My shell installs this
 # brew 'zsh-autosuggestions'    # My shell installs this
 
-# Work-specific apps
 {{- if eq .install_type "work" }}
+# Work-specific apps
 # cask 'microsoft-edge'
 cask 'microsoft-teams'
 cask 'slack'
 cask 'viscosity'
 {{- end }}
 
-# Home-specific apps
 {{- if eq .install_type "home" }}
+# Home-specific apps
 cask 'calibre'
 cask 'concept2-utility'
 cask 'exodus'
@@ -104,11 +105,10 @@ cask 'garmin-express'
 cask 'garmin-virb-edit'
 cask 'handbrake'
 cask 'netnewswire'
-cask 'portfolioperformance'
-cask 'telegram'
+# cask 'telegram'
 cask 'transmission'
 cask 'transmit'
-# cask 'trainerroad'
+cask 'trainerroad'
 cask 'zwift'
 {{- end }}
 
@@ -144,7 +144,8 @@ cask 'raycast'                # Alfred alternative
 cask 'signal'
 cask 'spotify'
 cask 'the-unarchiver'
-cask 'visual-studio-code'
+# cask 'visual-studio-code'
+cask 'visual-studio-code-insiders'
 # cask 'yubico-yubikey-manager'
 
 # AppStore Apps
