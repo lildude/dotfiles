@@ -1,0 +1,29 @@
+# Taken from https://github.com/zerowidth/gh-md
+matches:
+  - trigger: "//md"
+    replace: "{{output}}"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: output
+        type: shell
+        params:
+          cmd: "/opt/homebrew/bin/gh md link {{clipboard}}"
+  - trigger: "//ml"
+    replace: "{{output}}"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: output
+        type: shell
+        params:
+          cmd: "/opt/homebrew/bin/gh md link --simple {{clipboard}}"
+  - trigger: "//ir"
+    replace: "{{output}}"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: output
+        type: shell
+        params:
+          cmd: "/opt/homebrew/bin/gh md ref {{clipboard}}"
