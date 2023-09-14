@@ -187,7 +187,7 @@ _exists() { (( $+commands[$1] )) }
 #   alias ci="hub ci-status"
 # }
 _exists bat && alias cat=bat && export BAT_THEME="Monokai Extended"
-_exists exa && alias ls=exa
+_exists eza && alias ls=eza
 _exists rg && rg() { $commands[rg] -p "$@" | less; }
 _exists prettyping && alias ping="prettyping --nolegend"
 _exists htop && alias top=htop
