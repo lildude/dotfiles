@@ -199,6 +199,7 @@ _exists chezmoi && {
   alias chd="chezmoi cd"
 }
 _exists code-insiders && alias code=code-insiders
+_exists trash && alias rm="trash -F"
 
 if [ -z "$CODESPACES" ]; then
   # From `source $HOME/.config/op/plugins.sh`
