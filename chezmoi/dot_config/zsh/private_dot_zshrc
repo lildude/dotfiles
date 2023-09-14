@@ -199,6 +199,10 @@ _exists chezmoi && {
   alias chd="chezmoi cd"
 }
 _exists code-insiders && alias code=code-insiders
+# _exists gh && {
+#   gh-cs="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m largePremiumLinux --default-permissions | tail -1) --insiders"
+#   gh-cs-big="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m xLargePremiumLinux --default-permissions | tail -1) --insiders"
+# }
 _exists trash && alias rm="trash -F"
 
 if [ -z "$CODESPACES" ]; then
