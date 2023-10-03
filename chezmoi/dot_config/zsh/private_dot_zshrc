@@ -149,7 +149,7 @@ HISTORY_IGNORE='([bf]g *|[bf]g|disown|cd ..|cd -)'  # Don't add these to the his
 
 #### ---:[ Aliases ]:--- ###
 alias path='echo -e ${PATH//:/\\n}'
-alias rm='nocorrect rm'
+# alias rm='nocorrect rm'
 alias l='ls -lg'
 alias ll='ls -lga'
 alias ls-l='ls -l'
@@ -179,6 +179,11 @@ alias gp='git push -u'
 alias gst='git status'
 alias gsw='git switch'
 alias gup='git up'  # Uses the `up` alias in my .gitconfigcd
+
+if [ -n "$CODESPACES" ]; then
+  alias so="${CODESPACE_VSCODE_FOLDER}/bin/serviceowners"
+  alias sols="${CODESPACE_VSCODE_FOLDER}/bin/serviceowners-ls-files"
+fi
 
 _exists() { (( $+commands[$1] )) }
 
