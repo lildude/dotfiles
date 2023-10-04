@@ -1,5 +1,5 @@
 version: "2"
-authtoken: {{ onepasswordRead "op://Personal/Ngrok/credential" }}
+authtoken: {{- if .codespaces -}}{{- env "NGROK_AUTHTOKEN" }}{{- else -}}{{ onepasswordRead "op://Personal/Ngrok/credential" }}{{- end -}}
 region: us
 tunnels:
   your_tunnel_name:
