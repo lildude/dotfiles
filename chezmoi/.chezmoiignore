@@ -26,6 +26,7 @@ Library/
 .mozilla
 .gnupg/
 .config/restic/
+.config/ngrok/
 .local/bin/mount-backups
 .local/bin/umount-backups
 dev
