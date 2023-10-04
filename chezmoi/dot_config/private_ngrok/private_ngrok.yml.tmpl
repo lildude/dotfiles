@@ -1,10 +1,10 @@
 version: "2"
-authtoken: {{- if .codespaces -}}{{- env "NGROK_AUTHTOKEN" }}{{- else -}}{{ onepasswordRead "op://Personal/Ngrok/credential" }}{{- end -}}
+authtoken: {{ if .codespaces }}{{ env "NGROK_AUTHTOKEN" }}{{ else }}{{ onepasswordRead "op://Personal/Ngrok/credential" }}{{ end }}
 region: us
 tunnels:
   your_tunnel_name:
     proto: http
-    hostname: {{ onepasswordRead "op://Personal/Ngrok/hostname" }}
+    hostname: lildude.ngrok.io
     addr: 127.0.0.1:80
 
     # -------------------------
