@@ -118,7 +118,7 @@ Host *.compute.amazonaws.com
   IdentityFile ~/.ssh/aws-lildude.pem
   LogLevel quiet
 
-Host ha.local hassio.local
+Host ha.local hassio.local ha.home
   Hostname 192.168.1.85
   IdentitiesOnly yes
   IdentityFile ~/.ssh/rpi_ed25519
@@ -134,7 +134,7 @@ Host raspap.local
 Host hassioroot hassiodebug
   Hostname 192.168.1.85
   IdentitiesOnly yes
-  IdentityFile ~/.ssh/id_rsa
+  IdentityFile ~/.ssh/rpi_ed25519
   User root
   Port 22222
   AddKeysToAgent yes
