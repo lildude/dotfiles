@@ -4,40 +4,41 @@
 .mozilla/
 {{/* Don't install macOS files on Linux */}}
 {{ else if eq .chezmoi.os "linux" -}}
+.config/asdf/
+.config/espanso/
+.config/iterm2/
 .config/karabiner/
 .config/restic/
-.config/iterm2/
-Library/
-.asdfrc
-.tool-versions
-.local/bin/touchid-enable-pam-sudo
-.local/bin/rebrew
-.local/bin/set-macos-defaults.sh
 .local/bin/mount-backups
-.local/bin/umount-backups
+.local/bin/rebrew
 .local/bin/restic-backup.sh
+.local/bin/set-macos-defaults.sh
+.local/bin/touchid-enable-pam-sudo
+.local/bin/umount-backups
+.tool-versions
+Library/
 {{ end -}}
 {{ if eq .install_type "min" -}}
+.config/homebrew
+.config/restic/
+.gnupg/
+.local/bin/mount-backups
+.local/bin/umount-backups
+.local/share/gem/credentials
+.mozilla
 .netrc
 .secrets
 .ssh/
-.config/homebrew
-.local/share/gem/credentials
-.mozilla
-.gnupg/
-.config/restic/
-.local/bin/mount-backups
-.local/bin/umount-backups
 dev
 tmp
 {{ end -}}
 {{/* Don't ever install these files */}}
-LICENSE
-README.md
-install.sh
-Dockerfile
-prompt.png
-script/
 **/.DS_Store
 ano/
+Dockerfile
+install.sh
+LICENSE
+prompt.png
+README.md
+script/
 {{/* vim: set filetype=gotemplate : */}}
