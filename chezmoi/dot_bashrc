@@ -2,8 +2,14 @@
 # shellcheck shell=bash
 #
 # My fallback bashrc for when my favourite shell of the day isn't available or not needed
-#
-# If not running interactively, don't do anything
+
+for p in $HOME/bin $HOME/.local/bin /opt/homebrew/bin /opt/homebrew/sbin; do
+  [ -d "$p" ] && PATH=$PATH:$p
+done
+
+export PATH
+
+# If not running interactively, don't do anything else
 case $- in
     *i*) ;;
       *) return;;
@@ -98,12 +104,6 @@ export GPG_TTY
 
 [ "$(uname -s)" = "Darwin" ] && OS=macos
 [ "$(uname -s)" = "Linux" ] && OS=linux
-
-for p in $HOME/bin $HOME/.dotfiles/all/bin $HOME/.dotfiles/$OS/bin $HOME/.local/bin $HOME/github/enterprise2 $HOME/enterprise2; do
-  [ -d "$p" ] && PATH=$PATH:$p
-done
-
-export PATH
 
 # Load rbenv automatically
 which rbenv > /dev/null && eval "$(rbenv init -)"
