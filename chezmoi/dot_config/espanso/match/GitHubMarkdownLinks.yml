@@ -8,7 +8,8 @@ matches:
       - name: output
         type: shell
         params:
-          cmd: "/opt/homebrew/bin/gh md link {{clipboard}}"
+          shell: bash
+          cmd: "gh md link {{clipboard}}"
   - trigger: "//ml"
     replace: "{{output}}"
     vars:
@@ -17,8 +18,9 @@ matches:
       - name: output
         type: shell
         params:
-          cmd: "/opt/homebrew/bin/gh md link --simple {{clipboard}}"
-  - trigger: "//ir"
+          shell: bash
+          cmd: "gh md link --simple {{clipboard}}"
+  - trigger: "//mr"
     replace: "{{output}}"
     vars:
       - name: clipboard
@@ -26,4 +28,5 @@ matches:
       - name: output
         type: shell
         params:
-          cmd: "/opt/homebrew/bin/gh md ref {{clipboard}}"
+          shell: bash
+          cmd: "gh md ref {{clipboard}}"
