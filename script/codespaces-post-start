@@ -14,7 +14,7 @@ fi
 
 # Install some developer tools and setup Linux how I like it
 if [ "$(command -v rg)" = "" ]; then
-  $sudo apt-get -q update && $sudo apt-get -q install -y ripgrep
+  $sudo apt-get -q update && $sudo apt-get -q install -y ripgrep most
 fi
 
 if [ -f "${HOME}/.netrc" ] && grep -q "goproxy.githubapp.com" "${HOME}/.netrc"; then
