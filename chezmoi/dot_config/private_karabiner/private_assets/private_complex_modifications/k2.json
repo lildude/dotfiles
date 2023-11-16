@@ -1,234 +1,361 @@
 {
-  "title": "Keychron K2",
-  "rules": [
-    {
-      "description": "K2: Right shift + up to shift only (cos fat-fingers)",
-      "manipulators": [
-          {
-              "conditions": [
-                  {
-                      "identifiers": [
-                          {
-                              "description": "Keychron K2v2",
-                              "product_id": 592,
-                              "vendor_id": 1452
-                          }
-                      ],
-                      "type": "device_if"
-                  }
-              ],
-              "from": {
-                  "key_code": "up_arrow",
-                  "modifiers": {
-                      "mandatory": [
-                          "right_shift"
-                      ]
-                  }
-              },
-              "to": [
-                  {
-                      "key_code": "right_shift"
-                  }
-              ],
-              "type": "basic"
-          }
-      ]
-  },
-  {
-      "description": "K2: Post right_option if right_control is pressed alone.",
-      "manipulators": [
-          {
-              "conditions": [
-                  {
-                      "identifiers": [
-                          {
-                              "description": "Keychron K2v2",
-                              "product_id": 592,
-                              "vendor_id": 1452
-                          }
-                      ],
-                      "type": "device_if"
-                  }
-              ],
-              "from": {
-                  "key_code": "right_control",
-                  "modifiers": {
-                      "optional": [
-                          "any"
-                      ]
-                  }
-              },
-              "to": [
-                  {
-                      "key_code": "right_option"
-                  }
-              ],
-              "type": "basic"
-          }
-      ]
-  },
-  {
-      "description": "K2: Left control + backspace = forward delete.",
-      "manipulators": [
-          {
-              "conditions": [
-                  {
-                      "identifiers": [
-                          {
-                              "description": "Keychron K2v2",
-                              "product_id": 592,
-                              "vendor_id": 1452
-                          }
-                      ],
-                      "type": "device_if"
-                  }
-              ],
-              "from": {
-                  "key_code": "delete_or_backspace",
-                  "modifiers": {
-                      "mandatory": [
-                          "left_control"
-                      ]
-                  }
-              },
-              "to": [
-                  {
-                      "key_code": "delete_forward"
-                  }
-              ],
-              "type": "basic"
-          }
-      ]
-  },
-  {
-      "description": "K2: Exchange right_command and fn.",
-      "manipulators": [
-          {
-              "conditions": [
-                  {
-                      "identifiers": [
-                          {
-                              "description": "Keychron K2v2",
-                              "product_id": 592,
-                              "vendor_id": 1452
-                          }
-                      ],
-                      "type": "device_if"
-                  }
-              ],
-              "from": {
-                  "key_code": "right_command",
-                  "modifiers": {
-                      "optional": [
-                          "any"
-                      ]
-                  }
-              },
-              "to": [
-                  {
-                      "key_code": "fn"
-                  }
-              ],
-              "type": "basic"
-          },
-          {
-              "conditions": [
-                  {
-                      "identifiers": [
-                          {
-                              "description": "Keychron K2v2",
-                              "product_id": 592,
-                              "vendor_id": 1452
-                          }
-                      ],
-                      "type": "device_if"
-                  }
-              ],
-              "from": {
-                  "key_code": "fn",
-                  "modifiers": {
-                      "optional": [
-                          "any"
-                      ]
-                  }
-              },
-              "to": [
-                  {
-                      "key_code": "right_command"
-                  }
-              ],
-              "type": "basic"
-          }
-      ]
-  },
-  {
-      "description": "K2: Disable page_up, page_down, home, and end.",
-      "manipulators": [
-          {
-              "from": {
-                  "key_code": "page_up",
-                  "modifiers": {
-                      "optional": [
-                          "any"
-                      ]
-                  }
-              },
-              "to": [
-                  {
-                      "key_code": "vk_none"
-                  }
-              ],
-              "type": "basic"
-          },
-          {
-              "from": {
-                  "key_code": "page_down",
-                  "modifiers": {
-                      "optional": [
-                          "any"
-                      ]
-                  }
-              },
-              "to": [
-                  {
-                      "key_code": "vk_none"
-                  }
-              ],
-              "type": "basic"
-          },
-          {
-              "from": {
-                  "key_code": "home",
-                  "modifiers": {
-                      "optional": [
-                          "any"
-                      ]
-                  }
-              },
-              "to": [
-                  {
-                      "key_code": "vk_none"
-                  }
-              ],
-              "type": "basic"
-          },
-          {
-              "from": {
-                  "key_code": "end",
-                  "modifiers": {
-                      "optional": [
-                          "any"
-                      ]
-                  }
-              },
-              "to": [
-                  {
-                      "key_code": "vk_none"
-                  }
-              ],
-              "type": "basic"
-          }
-      ]
-    }
-  ]
+    "title": "Keychron K2",
+    "rules": [
+        {
+            "description": "K2: Post right_option if right_control is pressed alone.",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_control",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_option"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "K2: Exchange right_command and fn.",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_command",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "fn"
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "fn",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_command"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "K2: Disable page_up, page_down, home, and end.",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "page_up",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "vk_none"
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "page_down",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "vk_none"
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "home",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "vk_none"
+                        }
+                    ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "end",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "vk_none"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "description": "K2: Right shift + up to shift only (cos fat-fingers)",
+            "manipulators": [
+                {
+                    "conditions": [
+                        {
+                            "identifiers": [
+                                {
+                                    "description": "Keychron K2v2",
+                                    "product_id": 592,
+                                    "vendor_id": 1452
+                                }
+                            ],
+                            "type": "device_if"
+                        }
+                    ],
+                    "from": {
+                        "key_code": "up_arrow",
+                        "modifiers": {
+                            "mandatory": [
+                                "right_shift"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_shift"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "K2: Post right_option if right_control is pressed alone.",
+            "manipulators": [
+                {
+                    "conditions": [
+                        {
+                            "identifiers": [
+                                {
+                                    "description": "Keychron K2v2",
+                                    "product_id": 592,
+                                    "vendor_id": 1452
+                                }
+                            ],
+                            "type": "device_if"
+                        }
+                    ],
+                    "from": {
+                        "key_code": "right_control",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_option"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "K2: Left control + backspace = forward delete.",
+            "manipulators": [
+                {
+                    "conditions": [
+                        {
+                            "identifiers": [
+                                {
+                                    "description": "Keychron K2v2",
+                                    "product_id": 592,
+                                    "vendor_id": 1452
+                                }
+                            ],
+                            "type": "device_if"
+                        }
+                    ],
+                    "from": {
+                        "key_code": "delete_or_backspace",
+                        "modifiers": {
+                            "mandatory": [
+                                "left_control"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "delete_forward"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "K2: Exchange right_command and fn.",
+            "manipulators": [
+                {
+                    "conditions": [
+                        {
+                            "identifiers": [
+                                {
+                                    "description": "Keychron K2v2",
+                                    "product_id": 592,
+                                    "vendor_id": 1452
+                                }
+                            ],
+                            "type": "device_if"
+                        }
+                    ],
+                    "from": {
+                        "key_code": "right_command",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "fn"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "conditions": [
+                        {
+                            "identifiers": [
+                                {
+                                    "description": "Keychron K2v2",
+                                    "product_id": 592,
+                                    "vendor_id": 1452
+                                }
+                            ],
+                            "type": "device_if"
+                        }
+                    ],
+                    "from": {
+                        "key_code": "fn",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_command"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "K2: Disable page_up, page_down, home, and end.",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "page_up",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "vk_none"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "page_down",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "vk_none"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "home",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "vk_none"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "end",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "vk_none"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        }
+    ]
 }
