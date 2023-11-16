@@ -34,11 +34,6 @@
                                         ]
                                     }
                                 ],
-                                "to_if_held_down": [
-                                    {
-                                        "key_code": "caps_lock"
-                                    }
-                                ],
                                 "type": "basic"
                             }
                         ]
