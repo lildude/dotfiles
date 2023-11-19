@@ -143,6 +143,7 @@ HISTFILE=$XDG_CONFIG_HOME/zsh/.zsh_history
 HISTSIZE=11000                                      # Max. entries to keep in memory
 SAVEHIST=10000                                      # Max. entries to save to file
 HISTORY_IGNORE='([bf]g *|[bf]g|disown|cd ..|cd -)'  # Don't add these to the history file.
+export ERL_AFLAGS="-kernel shell_history enabled"
 
 #### ---:[ Aliases ]:--- ###
 alias path='echo -e ${PATH//:/\\n}'
