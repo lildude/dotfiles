@@ -169,14 +169,14 @@ alias g='git'
 alias gb='git branch'
 alias gbc='git switch -c'
 alias gc='git commit --verbose'
-alias gco='git switch'
+alias gco='git checkout'
 alias gcom="git com"
 alias gld='git log --topo-order --stat --patch --full-diff --pretty=format:"${_git_log_medium_format}"'
 alias gls='git log --topo-order --stat --pretty=format:"${_git_log_medium_format}"'
 alias gp='git push -u'
 alias gst='git status'
 alias gsw='git switch'
-alias gup='git up'  # Uses the `up` alias in my .gitconfigcd
+alias gup='git up'  # Uses the `up` alias in my .gitconfig
 
 if [ -n "$CODESPACES" ]; then
   alias so="${CODESPACE_VSCODE_FOLDER}/bin/serviceowners"
