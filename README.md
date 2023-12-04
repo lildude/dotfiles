@@ -7,7 +7,7 @@ This current implementation is managed using [chezmoi](https://chezmoi.io/) and 
 ## Installation
 
 ### Direct from this repo
-  
+
 ```console
 $ op account add --address my.1password.com --email $EMAIL
 $ eval $(op signin)
