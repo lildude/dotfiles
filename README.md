@@ -27,3 +27,7 @@ Codespaces and VS Code Remote Containers (thanks to my settings) automatically c
 Cos I need somewhere to store it
 
 `#282A36`,`#44475A`,`#44475A`,`#8BE9FD`,`#6272A4`,`#FFFFFF`,`#50FA7B`,`#FF5555`,`#44475A`,`#FFFFFF`
+
+## Firefox
+
+I make Firefox look much prettier using <https://github.com/black7375/Firefox-UI-Fix>
