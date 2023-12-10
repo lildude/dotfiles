@@ -118,14 +118,22 @@ Host *.compute.amazonaws.com
   IdentityFile ~/.ssh/aws-lildude.pem
   LogLevel quiet
 
-Host ha.local hassio.local ha.home
+Host ha.local hassio.local ha.home ha.lan
   Hostname 192.168.1.85
   IdentitiesOnly yes
   IdentityFile ~/.ssh/rpi_ed25519
   User hassio
   AddKeysToAgent yes
 
-Host raspap.local
+Host raspap
+  Hostname 10.3.141.1
+  IdentitiesOnly yes
+  IdentityFile ~/.ssh/rpi_ed25519
+  User pi
+  AddKeysToAgent yes
+
+Host raspap.lan
+  Hotname 192.168.1.188
   IdentitiesOnly yes
   IdentityFile ~/.ssh/rpi_ed25519
   User pi
