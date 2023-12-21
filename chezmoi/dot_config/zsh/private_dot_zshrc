@@ -149,9 +149,9 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 #### ---:[ Aliases ]:--- ###
 alias path='echo -e ${PATH//:/\\n}'
 # alias rm='nocorrect rm'
-alias l='ls -lg'
-alias ll='ls -lga'
-alias ls-l='ls -l'
+alias l='ls -lh'
+alias ll='ls -lha'
+alias ls-l='ls -lh'
 alias ..='cd ..'
 alias path='echo -e ${PATH//:/\\n}'
 alias fpath='echo -e ${FPATH//:/\\n}'
@@ -191,7 +191,7 @@ _exists() { (( $+commands[$1] )) }
 #   alias ci="hub ci-status"
 # }
 _exists bat && alias cat=bat && export BAT_THEME="Monokai Extended"
-_exists eza && alias ls=eza
+_exists eza && alias ls="eza --icons --no-user"
 _exists rg && rg() { $commands[rg] -p "$@" | less; }
 _exists prettyping && alias ping="prettyping --nolegend"
 _exists htop && alias top=htop
