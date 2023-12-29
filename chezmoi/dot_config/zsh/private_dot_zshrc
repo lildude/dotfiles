@@ -166,7 +166,7 @@ alias mv='mv -i'
 alias codespaces-post-start='sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start'
 
 # Lazy Git aliases
-alias g='git'
+# alias g='git'
 alias gb='git branch'
 alias gbc='git switch -c'
 alias gc='git commit --verbose'
