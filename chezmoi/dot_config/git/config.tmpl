@@ -53,12 +53,13 @@
 [alias]
   branch-name = "!git rev-parse --abbrev-ref HEAD"  # Get branch. Used by other aliases.
   st = "status --short --branch --no-ahead-behind"
-  sw = switch
-  rem = remote -v
+  sw = switchd
+  rem = remote --verbose
   co = checkout
-  pu = push -u
+  pu = push --set-upstream
   cp = cherry-pick
   cherry = cherry-pick
+  staash = stash --all
   #lg = log --graph --pretty=oneline --abbrev-commit --decorate
   lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)<%an>%Creset' --abbrev-commit
   cob = checkout -b
@@ -70,8 +71,6 @@
   # We use the for loop because we can't pipe to `xargs -r git branch -D` as xargs on macos doesn't accept `-r` to ignore empty cases
   up = "!git switch $(git db) && git pull --rebase --prune && for b in $(git branch --list --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'); do git branch -D $b; done"
   com = "!git switch $(git db)"
-  # Create a pull request on GitHub using the `hub` command.
-  pr = !hub pull-request -o
   # Grab someone else's PR changes without using hub
   # Source: https://davidwalsh.name/pull-down-pr
   prco = !f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 && git switch pr/$1; }; f
