@@ -17,9 +17,8 @@
     "workbench.sideBar.location": "left",
     "workbench.statusBar.visible": true,
     "workbench.list.horizontalScrolling": true,
-    "workbench.activityBar.visible": true,
     "workbench.colorCustomizations": {
-        "editorIndentGuide.activeBackground": "#999",
+        "editorIndentGuide.activeBackground1": "#999",
         //"sideBar.background": "#333",
         //"sideBar.foreground": "#aaa",
         //"list.activeSelectionForeground": "#fff",
@@ -62,7 +61,7 @@
     "go.coverageDecorator": {
         "uncoveredHighlightColor": "rgba(209, 59, 46, 0.2)",
         },
-    "explorer.openEditors.visible": 0,
+    "explorer.openEditors.visible": 1,
     "git.showPushSuccessNotification": true,
     "git.confirmSync": false,
     "diffEditor.renderSideBySide": false,
@@ -198,7 +197,6 @@
     "git.autofetch": true,
     "editor.unicodeHighlight.includeStrings": false,
     "workbench.iconTheme": "file-icons",
-    "ledger.binary": "/opt/homebrew/bin/ledger",
     "git.branchPrefix": "lildude/",
     "git.autoRepositoryDetection": "openEditors",
     "svg.preview.mode": "svg",
