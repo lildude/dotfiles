@@ -5,8 +5,7 @@
     "editor.fontSize": 14,
     "editor.tabSize": 2,
     "editor.rulers": [
-      { "column": 120, "color": "#4444445e" },
-      //{ "column": 90, "color": "#880000" }
+      { "column": 120, "color": "#4444445e" }
     ],
     "editor.minimap.enabled": false,
     "editor.cursorWidth": 3,
@@ -82,7 +81,6 @@
     "code-runner.enableAppInsights": false,
     "ruby.codeCompletion": "rcodetools",
     "editor.renderControlCharacters": true,
-    "workbench.colorTheme": "One Dark Pro",
     "diffEditor.ignoreTrimWhitespace": false,
     "code-runner.executorMapByFileExtension": {
 
@@ -98,8 +96,18 @@
     "jake.autoDetect": "off",
     "npm.autoDetect": "off",
     "[ruby]": {
-      "editor.formatOnSave": false,
-      "editor.defaultFormatter": "misogi.ruby-rubocop"
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "Shopify.ruby-lsp",
+      "editor.formatOnType": true,
+      "editor.tabSize": 2,
+      "editor.insertSpaces": true,
+      "files.trimTrailingWhitespace": true,
+      "files.insertFinalNewline": true,
+      "files.trimFinalNewlines": true,
+      "editor.rulers": [
+        120
+      ],
+      "editor.semanticHighlighting.enabled": true
     },
     "ruby.format": "rubyfmt",
     "ruby.useLanguageServer": true,
@@ -192,11 +200,9 @@
     "go.formatTool": "gofumpt",
     "terminal.integrated.scrollback": 2000,
     "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.gpuAcceleration": "off", // Disable GPU acceleration as it truncates icons - https://github.com/xtermjs/xterm.js/issues/3342
     "terminal.integrated.shellIntegration.enabled": false,
     "git.autofetch": true,
     "editor.unicodeHighlight.includeStrings": false,
-    "workbench.iconTheme": "file-icons",
     "git.branchPrefix": "lildude/",
     "git.autoRepositoryDetection": "openEditors",
     "svg.preview.mode": "svg",
@@ -207,4 +213,6 @@
     "gitlens.showWhatsNewAfterUpgrades": false,
     "shellcheck.disableVersionCheck": true,
     "lldb.suppressUpdateNotifications": true,
+    "workbench.iconTheme": "file-icons",
+    "workbench.colorTheme": "One Dark Pro",
 }
