@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Force the Ruby LSP server to use the Ruby version in the workspace
+if [ -x /workspaces/github/bin/safe-ruby ]; then
+  exec /workspaces/github/bin/safe-ruby "$@"
+else
+  exec ruby "$@"
+fi
