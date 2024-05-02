@@ -113,7 +113,7 @@
     "ruby.useLanguageServer": true,
     "ruby.intellisense": "rubyLocate",
     "[gemfile]": {
-      "editor.defaultFormatter": "misogi.ruby-rubocop"
+      "editor.defaultFormatter": "Shopify.ruby-lsp"
     },
     "files.exclude": {
       "**/.git": true,
@@ -171,7 +171,7 @@
       "markdown": false
     },
     "dotfiles.repository": "lildude/dotfiles",
-    "dotfiles.installCommand": "~/dotfiles/script/bootstrap",
+    "dotfiles.installCommand": "script/bootstrap",
     "editor.bracketPairColorization.enabled": true,
     "dev.containers.defaultExtensions": [
       "EditorConfig.EditorConfig",
@@ -215,4 +215,8 @@
     "lldb.suppressUpdateNotifications": true,
     "workbench.iconTheme": "file-icons",
     "workbench.colorTheme": "One Dark Pro",
+    "rubyLsp.customRubyCommand": "~/.local/bin/ruby",
+    "rubyLsp.rubyVersionManager": {
+      "identifier": "custom"
+    },
 }
