@@ -31,6 +31,7 @@
 
 [color]
   ui = always
+  interactive = always
 
 # Supported colors: normal, black, red, green, yellow, blue, magenta, cyan, or white
 # Supported effects: bold, dim, ul (underline), blink, and reverse (swap foreground and background)
@@ -44,8 +45,13 @@
   meta = yellow
   whitespace = red reverse # Make sure I really want to commit whitespace changes
 
+[color "interactive"]
+  error = red
+  warning = yellow
+
 [color "status"]
   untracked = magenta  # Default: red
+  branch = blue
 
 [help]
   autocorrect = 1   # Autocorrect mistyped commands.
