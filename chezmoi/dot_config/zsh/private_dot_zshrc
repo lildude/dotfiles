@@ -128,6 +128,7 @@ fi
 export HOMEBREW_BUNDLE_FILE=$XDG_CONFIG_HOME/homebrew/Brewfile
 export IRBRC=$XDG_CONFIG_HOME/irb/irbrc
 export LESSHISTFILE=$XDG_CONFIG_HOME/lesshistory
+export MISE_RUBY_DEFAULT_PACKAGES_FILE=$XDG_CONFIG_HOME/mise/default-gems
 export MIX_XDG=1
 export MOST_INITFILE=$XDG_CONFIG_HOME/most/mostrc
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc

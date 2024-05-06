@@ -3,5 +3,6 @@
 if [ -x /workspaces/github/bin/safe-ruby ]; then
   exec /workspaces/github/bin/safe-ruby "$@"
 else
-  exec ruby "$@"
+  export PATH=${PATH//":$HOME/.local/bin:"/":"}
+  command ruby "$@"
 fi
