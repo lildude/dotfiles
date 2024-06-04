@@ -132,6 +132,7 @@ export MISE_RUBY_DEFAULT_PACKAGES_FILE=$XDG_CONFIG_HOME/mise/default-gems
 export MIX_XDG=1
 export MOST_INITFILE=$XDG_CONFIG_HOME/most/mostrc
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+path+=($XDG_CONFIG_HOME/npm/bin)
 export PRYRC=$XDG_CONFIG_HOME/pry/pryrc         # Unnecessary but being extra safe
 export SOLARGRAPH_CACHE=$XDG_CACHE_HOME/solargraph
 export SQLITE_HISTORY=$XDG_CACHE_HOME/sqlite_history
