@@ -219,4 +219,14 @@
     "rubyLsp.rubyVersionManager": {
       "identifier": "custom"
     },
+    "gitlens.plusFeatures.enabled": false,
+    "gitlens.virtualRepositories.enabled": false,
+    "gitlens.advanced.messages": {
+      "suppressIntegrationRequestTimedOutWarning": true
+    },
+    "terminal.explorerKind": "external",
+    "scm.diffDecorationsGutterPattern": {
+      "added": true
+    },
+    "github.copilot.editor.enableAutoCompletions": true,
 }
