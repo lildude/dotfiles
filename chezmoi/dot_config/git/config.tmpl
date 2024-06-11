@@ -50,7 +50,10 @@
   warning = yellow
 
 [color "status"]
-  untracked = magenta  # Default: red
+  header = "#999999"
+  added = "#99cc99"
+  changed = "#f2777a"
+  untracked = "#ffcc66"
   branch = blue
 
 [help]
@@ -178,4 +181,4 @@
 {{- if lookPath "delta" }}
 [interactive]
   diffFilter = delta --color-only
-{{- end }}
+{{ end }}
