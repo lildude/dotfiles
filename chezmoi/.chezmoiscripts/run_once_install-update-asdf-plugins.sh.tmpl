@@ -1,0 +1,13 @@
+{{- if eq .chezmoi.os "darwin" -}}
+  {{- if ne .install_type "min" -}}
+#!/usr/bin/env bash
+
+{{- if lookPath "mise" }}
+
+mise use --global ruby@3.3
+mise use --global node@lts
+#mise use --global go@latest
+
+{{- end -}}
+  {{- end -}}
+{{- end }}
