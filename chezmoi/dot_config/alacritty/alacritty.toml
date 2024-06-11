@@ -1,7 +1,10 @@
-import = [ "~/.config/alacritty/theme.toml", "~/.config/alacritty/font.toml" ]
+import = [ "~/.config/alacritty/theme.toml" ]
 
 [font]
 size = 12
+normal = { family = "JetBrainsMono NF", style = "Regular" }
+bold = { family = "JetBrainsMono NF", style = "Bold" }
+italic = { family = "JetBrainsMono NF", style = "Italic" }
 
 [env]
 TERM = "xterm-256color"
