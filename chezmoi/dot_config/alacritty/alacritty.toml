@@ -7,13 +7,16 @@ size = 12
 TERM = "xterm-256color"
 
 [shell]
-program = "zellij"
+program = "/opt/homebrew/bin/zellij"
 
 [window]
-padding.x = 16
-padding.y = 14
-decorations = "none"
+#padding.x = 5
+#padding.y = 5
+dynamic_padding = true
+#decorations = "none"
 opacity = 0.97
+dimensions = { columns = 180, lines = 60 }
+option_as_alt = "OnlyLeft"
 
 [keyboard]
 bindings = [
