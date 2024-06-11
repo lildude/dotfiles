@@ -33,8 +33,6 @@
       bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
       eval '$(/opt/homebrew/bin/brew shellenv)'
     fi
-    # Adjust hammerspoon config location
-    /usr/bin/defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 
     # Build the restic-wrapper binary
     go build -o "$HOME/.local/gobin/restic-wrapper" "{{- .chezmoi.sourceDir }}/../ano/restic-wrapper/restic-wrapper.go"
