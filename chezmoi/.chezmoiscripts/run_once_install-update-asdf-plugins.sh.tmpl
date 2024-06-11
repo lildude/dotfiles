@@ -2,32 +2,11 @@
   {{- if ne .install_type "min" -}}
 #!/usr/bin/env bash
 
-{{- if lookPath "asdf" }}
-
-PLUGINS="nodejs ruby"
-
-if [[ $(asdf plugin list | wc -l) -gt 0 ]]; then
-  asdf plugin update --all 2>&1 > /dev/null
-else
-  for plugin in $PLUGINS; do
-    asdf plugin list | grep -q $plugin || asdf plugin add $plugin https://github.com/asdf-vm/asdf-${plugin}.git
-  done
-fi
-
-for plugin in $PLUGINS; do
-  asdf install $plugin latest 2>&1 > /dev/null &
-  wait
-  asdf global $plugin latest  2>&1 > /dev/null
-done
-
-{{- end -}}
-
 {{- if lookPath "mise" }}
 
 mise use --global ruby@3.3
 mise use --global node@lts
 #mise use --global go@latest
 
-{{- end -}}
   {{- end -}}
 {{- end }}
