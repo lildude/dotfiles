@@ -229,4 +229,5 @@
       "added": true
     },
     "github.copilot.editor.enableAutoCompletions": true,
+    "remote.autoForwardPortsSource": "hybrid",
 }
