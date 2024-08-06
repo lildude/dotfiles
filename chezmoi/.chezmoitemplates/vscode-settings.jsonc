@@ -230,4 +230,8 @@
     },
     "github.copilot.editor.enableAutoCompletions": true,
     "remote.autoForwardPortsSource": "hybrid",
+    "gitlens.launchpad.indicator.enabled": false,
+    "scm.showOutgoingChanges": "never",
+    "scm.showIncomingChanges": "never",
+    "scm.showHistoryGraph": false,
 }
