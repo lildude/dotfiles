@@ -110,16 +110,9 @@ export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
 export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
 export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
 export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
-# if [ -f "/Users/$USER/Library/Containers/com.docker.docker/Data/docker.raw.sock" ]; then
-#   export DOCKER_HOST=unix:///Users/$USER/Library/Containers/com.docker.docker/Data/docker.raw.sock
-# fi
-# export GEM_HOME=$XDG_DATA_HOME/gem
-# export GEM_SPEC_CACHE=$XDG_CACHE_HOME/gem
 export GIT_MERGE_AUTOEDIT=no
-export GOBIN=~/.local/gobin                     # Go binaries ('go install').
-export GOCACHE=/tmp/go/build                    # Go build cache in tmp/memory
-export GOPATH=$XDG_CACHE_HOME/go                # GOPATH mostly stores cache stuff these days thanks to modules
-export GOTMPDIR=/tmp/go/tmp                     # tmp files during compile
+export GOPATH=$XDG_DATA_HOME/go
+path+=($GOPATH/bin)
 if [ -n "$CODESPACES" ]; then
   export GOPROXY=https://goproxy.githubapp.com/mod,https://proxy.golang.org/,direct
   export GOPRIVATE=
@@ -137,17 +130,11 @@ path+=($XDG_CONFIG_HOME/npm/bin)
 export PRYRC=$XDG_CONFIG_HOME/pry/pryrc         # Unnecessary but being extra safe
 export SOLARGRAPH_CACHE=$XDG_CACHE_HOME/solargraph
 export SQLITE_HISTORY=$XDG_CACHE_HOME/sqlite_history
-# export TERMINFO=$XDG_DATA_HOME/terminfo
-# export TERMINFO_DIRS=$XDG_DATA_HOME/terminfo:/usr/share/terminfo
-export ZELLIJ_CONFIG_DIR=$XDG_CONFIG_HOME/zellij
 
 _exists pnpm && {
   export PNPM_HOME="$XDG_DATA_HOME/pnpm"
   path+=($PNPM_HOME)
 }
-
-[[ ! -d "$GOTMPDIR" ]] && mkdir -p "$GOTMPDIR"  # Make sure it exists as Go won't create it.
-path+=($GOBIN)
 
 HISTFILE=$XDG_CONFIG_HOME/zsh/.zsh_history
 HISTSIZE=11000                                      # Max. entries to keep in memory
@@ -172,7 +159,6 @@ alias curl="noglob curl"              # Don't glob
 alias find='noglob find'              # Allows typing e.g. "find . -name *.zsh" without quotes.
 alias cp='cp -i'                      # Ask for confirmation when overwriting existing files.
 alias mv='mv -i'
-alias codespaces-post-start='sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start'
 
 # Lazy Git aliases
 # alias g='git'
@@ -192,6 +178,9 @@ if [ -n "$CODESPACES" ]; then
   alias so="${CODESPACE_VSCODE_FOLDER}/bin/serviceowners"
   alias sols="${CODESPACE_VSCODE_FOLDER}/bin/serviceowners-ls-files"
   alias ff="${CODESPACE_VSCODE_FOLDER}/bin/toggle-feature-flag"
+  alias codespaces-post-start='sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start'
+  alias refreshpass='sed -i "s/password .*/password $GITHUB_TOKEN/g" ~/.netrc'
+  alias driftwood-server="if [ ! -d /workspaces/driftwood ]; then ${CODESPACE_VSCODE_FOLDER}/script/setup-codespaces-driftwood-dev; fi && /workspaces/driftwood/script/server"
 fi
 
 # _exists hub && {
