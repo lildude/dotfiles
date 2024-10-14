@@ -30,3 +30,16 @@ matches:
   - trigger: "Github"
     replace: "GitHub"
     word: true
+  - trigger: ";deet"
+    replace: |
+      <details>
+        <summary>
+          $|$
+        </summary>
+
+        {{clipb}}
+
+      </details>
+    vars:
+      - name: "clipb"
+        type: "clipboard"
