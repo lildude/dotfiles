@@ -17,9 +17,7 @@ if [ "$(command -v rg)" = "" ]; then
   $sudo apt-get -q update && $sudo apt-get -q install -y ripgrep most gh
 fi
 
-if [ -f "${HOME}/.netrc" ] && grep -q "goproxy.githubapp.com" "${HOME}/.netrc"; then
-  exit 0
-else
+if [ ! -f "${HOME}/.netrc" ] || grep -vq "goproxy.githubapp.com" "${HOME}/.netrc"; then
   echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >> "$HOME/.netrc"
 fi
 

@@ -30,6 +30,7 @@ Library/
 .secrets
 .ssh/**
 !.ssh/
+!.ssh/allowed_signers
 !.ssh/git_signing_ed25519.pub
 dev
 tmp
