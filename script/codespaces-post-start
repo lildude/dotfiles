@@ -25,6 +25,6 @@ fi
 
 if [ ! -f "${HOME}/.ssh/git_signing_ed25519" ]; then
   # Takes this from my Codespaces secrets config on GitHub
-  echo "$GIT_SIGNING_KEY" | "${HOME}/.ssh/git_signing_ed25519"
+  echo "$GIT_SIGNING_KEY" > "${HOME}/.ssh/git_signing_ed25519"
   chmod 600 "${HOME}/.ssh/git_signing_ed25519"
 fi
