@@ -118,6 +118,10 @@ if [ -n "$CODESPACES" ]; then
   export GOPRIVATE=
   export GONOPROXY=
   export GONOSUMDB='github.com/github/*'
+  # Unset these as GitHub doesn't verify commits by the default GitHub <noreply@github.com> set by default in Codespaces
+  # This doesn't help things if you use the UI to commit
+  unset GIT_COMMITTER_EMAIL
+  unset GIT_COMMITTER_NAME
 fi
 export HOMEBREW_BUNDLE_FILE=$XDG_CONFIG_HOME/homebrew/Brewfile
 export IRBRC=$XDG_CONFIG_HOME/irb/irbrc
