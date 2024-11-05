@@ -26,3 +26,7 @@ if [ ! -f "${HOME}/.ssh/git_signing_ed25519" ]; then
   echo "$GIT_SIGNING_KEY" > "${HOME}/.ssh/git_signing_ed25519"
   chmod 600 "${HOME}/.ssh/git_signing_ed25519"
 fi
+
+# Unset these as GitHub doesn't verify commits by the default GitHub <noreply@github.com> set by default in Codespaces
+unset GIT_COMMITTER_EMAIL
+unset GIT_COMMITTER_NAME
