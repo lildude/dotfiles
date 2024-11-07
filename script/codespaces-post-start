@@ -21,12 +21,21 @@ if [ ! -f "${HOME}/.netrc" ] || grep -vq "goproxy.githubapp.com" "${HOME}/.netrc
   echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >> "$HOME/.netrc"
 fi
 
-if [ ! -f "${HOME}/.ssh/git_signing_ed25519" ]; then
-  # Takes this from my Codespaces secrets config on GitHub
-  echo "$GIT_SIGNING_KEY" > "${HOME}/.ssh/git_signing_ed25519"
-  chmod 600 "${HOME}/.ssh/git_signing_ed25519"
-fi
+# Commented out as Codespaces has this annoying habit of setting GIT_COMMITTER_EMAIL and GIT_COMMITTER_NAME
+# to GitHub <noreply@github.com> respectively. GitHub doesn't sign commits by this user and thus doesn't verify them
+# either. The verification also completely ignores the author attribute in the commit.
+#
+# Unsetting these env vars "works around" the issue but then the Codespace becomes quite unstable for some reason
+# so we're going to have to stick with GPG on Codespaces for now.
+#
+# Revisit this occasionally.
+#
+# if [ ! -f "${HOME}/.ssh/git_signing_ed25519" ]; then
+#   # Takes this from my Codespaces secrets config on GitHub
+#   echo "$GIT_SIGNING_KEY" > "${HOME}/.ssh/git_signing_ed25519"
+#   chmod 600 "${HOME}/.ssh/git_signing_ed25519"
+# fi
 
 # Unset these as GitHub doesn't verify commits by the default GitHub <noreply@github.com> set by default in Codespaces
-unset GIT_COMMITTER_EMAIL
-unset GIT_COMMITTER_NAME
+# unset GIT_COMMITTER_EMAIL
+# unset GIT_COMMITTER_NAME
