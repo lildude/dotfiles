@@ -27,6 +27,8 @@ matches:
     word: true
   - trigger: "ggurl"
     replace: "https://github.com/github/"
+  - trigger: "glurl"
+    replace: "https://github.com/lildude/"
   - trigger: "Github"
     replace: "GitHub"
     word: true
