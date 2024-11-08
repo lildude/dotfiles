@@ -16,11 +16,8 @@
   useConfigOnly = true
   name = Colin Seymour
   email = colin@symr.io
-  {{- if .codespaces }}
-  signingkey = 88109C73073E7080 # GitHub doesn't play nice with verifying SSH signed commits from Codespaces due to it setting GIT_COMMITTER_EMAIL and GIT_COMMITTER_NAME
-  {{- else }}
+  #signingkey = 88109C73073E7080
   signingkey = ~/.ssh/git_signing_ed25519.pub
-  {{- end }}
 
 # Override default when working in work repos
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com/github/*"] # Requires git 2.36.0 later
@@ -131,20 +128,22 @@
   gpgSign = true
 
 [gpg]
-  {{- if .codespaces }}
-  program = /.codespaces/bin/gh-gpgsign
-  {{- else }}
-  format = ssh # Use SSH everywhere other than Codespaces for now.
+  format = ssh
+  # {{- if .codespaces }}
+  # program = /.codespaces/bin/gh-gpgsign
+  # {{- else }}
   # program = {{- lookPath "gpg" }}
-  {{- end }}
+  # {{- end }}
 
-{{- if .codespaces }}
 [gpg "ssh"]
   allowedSignersFile = ~/.ssh/allowed_signers
-{{- end }}
 
 [merge]
-  conflictstyle = zdiff3
+  {{- $v := output "git" "--version" | trim | split " " }}{{ if semverCompare ">2.35.0" $v._2 }}
+  conflictstyle = zdiff3  # Requires git 2.35 or later which isn't available on Codespaces by default
+  {{- else }}
+  conflictstyle = diff3
+  {{- end }}
 
 [protocol]
   version = 2
@@ -157,7 +156,9 @@
 
 [pull]
   rebase = false
-  twohead = ort
+  {{- $v := output "git" "--version" | trim | split " " }}{{ if semverCompare ">2.33.0" $v._2 }}
+  twohead = ort  # Requires git 2.33 or later which isn't available on Codespaces by default
+  {{- end }}
 
 [advice]
   detachedHead = false
