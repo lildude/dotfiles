@@ -139,11 +139,7 @@
   allowedSignersFile = ~/.ssh/allowed_signers
 
 [merge]
-  {{- $v := output "git" "--version" | trim | split " " }}{{ if semverCompare ">2.35.0" $v._2 }}
-  conflictstyle = zdiff3  # Requires git 2.35 or later which isn't available on Codespaces by default
-  {{- else }}
-  conflictstyle = diff3
-  {{- end }}
+  conflictstyle = zdiff3
 
 [protocol]
   version = 2
@@ -156,9 +152,7 @@
 
 [pull]
   rebase = false
-  {{- $v := output "git" "--version" | trim | split " " }}{{ if semverCompare ">2.33.0" $v._2 }}
-  twohead = ort  # Requires git 2.33 or later which isn't available on Codespaces by default
-  {{- end }}
+  twohead = ort
 
 [advice]
   detachedHead = false
