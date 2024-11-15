@@ -4,6 +4,8 @@ if [ -x /workspaces/github/bin/safe-ruby ]; then
   exec /workspaces/github/bin/safe-ruby "$@"
 else
   export PATH=${PATH//":$HOME/.local/bin:"/":"}
-  command -v rbenv && eval "$(rbenv init -)"
-  command ruby "$@"
+  if command -v rbenv > /dev/null; then
+    eval "$(rbenv init -)"
+    command ruby "$@"
+  fi
 fi
