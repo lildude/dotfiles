@@ -95,6 +95,7 @@ brew 'zsh'
 
 {{- if eq .install_type "work" }}
 # Work-specific apps
+cask 'loom'
 # cask 'microsoft-edge'
 cask 'microsoft-teams'
 cask 'slack'
@@ -138,10 +139,7 @@ cask 'font-fira-mono'
 cask 'font-fira-mono-nerd-font'
 cask 'font-meslo-lg'
 cask 'font-meslo-lg-nerd-font'
-# cask 'google-chrome'        # Think about the amount of data Google already has. Also https://chromeisbad.com/
-# cask 'hey'
 cask 'iterm2'
-# cask 'little-snitch'
 cask 'karabiner-elements'
 cask 'livebook'
 cask 'mailtrackerblocker'
@@ -151,14 +149,11 @@ cask 'obsidian'
 cask 'qlmarkdown'             # QuickLook support for markdown
 cask 'qlimagesize'            # QuickLook support for webp and showing image dimensions
 cask 'raycast'                # Alfred alternative
-# cask 'skitch'
-# cask 'sketch'
 cask 'signal'
 cask 'spotify'
 cask 'the-unarchiver'
 # cask 'visual-studio-code'
 cask 'visual-studio-code-insiders'
-# cask 'yubico-yubikey-manager'
 
 # AppStore Apps
 {{- if eq .install_type "home" }}
