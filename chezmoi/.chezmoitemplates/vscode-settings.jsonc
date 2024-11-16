@@ -177,7 +177,8 @@
       "EditorConfig.EditorConfig",
       "GitHub.copilot-nightly",
       "eamodio.gitlens",
-      "chrislajoie.vscode-modelines"
+      "chrislajoie.vscode-modelines",
+      "GitHub.copilot-chat-nightly"
     ],
     "github.codespaces.createCodespaceInNewWindow": true,
     "github.codespaces.defaultExtensions": [
