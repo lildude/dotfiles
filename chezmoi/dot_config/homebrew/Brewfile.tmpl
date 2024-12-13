@@ -8,15 +8,10 @@ tap 'muesli/tap'
 tap 'goreleaser/tap'
 tap 'tavianator/tap'            # Needed for bfs
 tap 'espanso/espanso'           # Needed for espanso
-tap 'azure/functions'           # Needed for azure-functions-core-tools
 
 {{- if eq .install_type "work" }}
 # Work-specific tools
-# brew 'adr-tools'
-# brew 'ansible'
-# brew 'awscli'
 # brew 'azure-cli'
-# brew 's3cmd'
 {{ end }}
 
 {{- if eq .install_type "home" }}
@@ -28,13 +23,9 @@ tap 'azure/functions'           # Needed for azure-functions-core-tools
 {{ end }}
 
 # Install everywhere
-# brew 'act'              # Run GitHub Actions locally
-brew 'azure-cli'
-brew 'azure-functions-core-tools@4'
 brew 'base64'
 brew 'bash'             # Only needed for my Bash scripts now macOS isn't shipping updates etc
 brew 'bat'              # Like cat, but prettier
-# brew 'bfs'              # Breadth-first version of find - much quicker and used by my fzf config.
 # brew 'colima'           # Docker alternative
 brew 'coreutils'
 brew 'docker'
@@ -57,7 +48,6 @@ brew 'go'
 brew 'gofumpt'
 brew 'golangci-lint'
 brew 'goreleaser'
-brew 'gron'             # Grep JSON
 brew 'grc'              # General colorizer
 brew 'htop'
 brew 'hyperfine'        # Great cli benchmarking tool
@@ -83,7 +73,6 @@ brew 'revive'           # fast & extensible static code analysis framework for G
 brew 'ripgrep'          # rg, an even faster version of ag
 brew 'rsync'
 brew 'shellcheck'
-# brew 'starship'
 brew 'tldr'
 brew 'tmux'
 brew 'trash'
@@ -97,7 +86,7 @@ brew 'zsh'
 {{- if eq .install_type "work" }}
 # Work-specific apps
 cask 'loom'
-# cask 'microsoft-edge'
+cask 'microsoft-edge'
 cask 'microsoft-teams'
 cask 'slack'
 cask 'viscosity'
@@ -112,7 +101,6 @@ cask 'garmin-express'
 cask 'garmin-virb-edit'
 cask 'handbrake'
 cask 'netnewswire'
-# cask 'telegram'
 # cask 'transmission'
 cask 'transmit'
 cask 'trainerroad'
@@ -150,10 +138,8 @@ cask 'obsidian'
 cask 'qlmarkdown'             # QuickLook support for markdown
 cask 'qlimagesize'            # QuickLook support for webp and showing image dimensions
 cask 'raycast'                # Alfred alternative
-cask 'signal'
 cask 'spotify'
 cask 'the-unarchiver'
-# cask 'visual-studio-code'
 cask 'visual-studio-code-insiders'
 
 # AppStore Apps
