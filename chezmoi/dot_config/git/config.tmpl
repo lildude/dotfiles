@@ -16,11 +16,7 @@
   useConfigOnly = true
   name = Colin Seymour
   email = colin@symr.io
-  # signingkey = 88109C73073E7080
-  # Don't use SSH signing on Codespaces as it doesn't play nicely.
-  {{- if not .codespaces }}
-  signingkey = ~/.ssh/git_signing_ed25519.pub
-  {{- end }}
+  signingkey = 88109C73073E7080
 
 # Override default when working in work repos
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com/github/*"] # Requires git 2.36.0 later
@@ -134,14 +130,8 @@
   {{- if .codespaces }}
   program = /.codespaces/bin/gh-gpgsign
   {{- else }}
-  format = ssh
-  # program = {{- lookPath "gpg" }}
+  program = {{- lookPath "gpg" }}
   {{- end }}
-
-{{- if not .codespaces }}
-[gpg "ssh"]
-  allowedSignersFile = ~/.ssh/allowed_signers
-{{- end }}
 
 [merge]
   conflictstyle = zdiff3

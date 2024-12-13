@@ -232,5 +232,8 @@
     "github.copilot.editor.enableAutoCompletions": true,
     "remote.autoForwardPortsSource": "hybrid",
     "gitlens.launchpad.indicator.enabled": false,
-    "window.newWindowProfile": "Default"
+    "window.newWindowProfile": "Default",
+    "scm.showOutgoingChanges": "never",
+    "scm.showIncomingChanges": "never",
+    "scm.showHistoryGraph": false
 }
