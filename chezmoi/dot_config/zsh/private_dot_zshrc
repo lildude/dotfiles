@@ -119,10 +119,9 @@ if [ -n "$CODESPACES" ]; then
   export GONOPROXY=
   export GONOSUMDB='github.com/github/*'
 fi
-export GNUPGHOME=$XDG_CONFIG_HOME/gnupg
 export HOMEBREW_BUNDLE_FILE=$XDG_CONFIG_HOME/homebrew/Brewfile
 export IRBRC=$XDG_CONFIG_HOME/irb/irbrc
-export LESSHISTFILE=$XDG_CONFIG_HOME/less/history
+export LESSHISTFILE=$XDG_CONFIG_HOME/lesshistory
 export MISE_RUBY_DEFAULT_PACKAGES_FILE=$XDG_CONFIG_HOME/mise/default-gems
 export MIX_XDG=1
 export MOST_INITFILE=$XDG_CONFIG_HOME/most/mostrc
