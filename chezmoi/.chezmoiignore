@@ -21,7 +21,7 @@ Library/
 {{ if eq .install_type "min" -}}
 .config/homebrew
 .config/restic/
-.gnupg/
+.config/gnupg/
 .local/bin/mount-backups
 .local/bin/umount-backups
 .local/share/gem/credentials
