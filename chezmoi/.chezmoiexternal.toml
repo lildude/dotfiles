@@ -2,7 +2,7 @@
   type = "file"
   url = "https://github.com/arkenfox/user.js/raw/master/updater.sh"
   refreshPeriod = "168h"
-[".config/gnupg/github_web.gpg"]
+[".gnupg/github_web.gpg"]
   type = "file"
   url = "https://github.com/web-flow.gpg"
   refreshPeriod = "168h"
