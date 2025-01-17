@@ -78,7 +78,7 @@
   db = !git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@'
   # Remove all local branches that were tracking remote branches that have been deleted.
   # We use the for loop because we can't pipe to `xargs -r git branch -D` as xargs on macos doesn't accept `-r` to ignore empty cases
-  up = "!git switch $(git db) && git pull --rebase --prune && for b in $(git branch --list --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'); do git branch -D $b; done"
+  up = "!git switch $(git db) && git pull --rebase --prune && for b in $(git branch --list --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'); do test -n $b && git branch -D $b; done"
   com = "!git switch $(git db)"
   # Grab someone else's PR changes without using hub
   # Source: https://davidwalsh.name/pull-down-pr
