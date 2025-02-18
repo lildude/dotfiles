@@ -3,3 +3,6 @@ node = "lts"
 ruby = "3.3"
 elixir = "latest"
 erlang = "latest"
+
+[settings]
+quiet = true
