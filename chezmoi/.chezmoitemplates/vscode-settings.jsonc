@@ -235,5 +235,6 @@
     "window.newWindowProfile": "Default",
     "scm.showOutgoingChanges": "never",
     "scm.showIncomingChanges": "never",
-    "scm.showHistoryGraph": false
+    "scm.showHistoryGraph": false,
+    "workbench.externalBrowser": "Brave Browser"
 }
