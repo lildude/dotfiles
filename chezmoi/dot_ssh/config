@@ -1,5 +1,4 @@
-Include /Users/lildude/.config/colima/ssh_config
-
+# vim: set filetype=ssh_config
 Host *
   IgnoreUnknown UseKeychain
   UseKeychain yes
