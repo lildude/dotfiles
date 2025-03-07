@@ -18,6 +18,7 @@
     "workbench.list.horizontalScrolling": true,
     "workbench.colorCustomizations": {
         "editorIndentGuide.activeBackground1": "#999",
+        "git.blame.editorDecorationForeground": "#99999959",
         //"sideBar.background": "#333",
         //"sideBar.foreground": "#aaa",
         //"list.activeSelectionForeground": "#fff",
@@ -236,5 +237,6 @@
     "scm.showOutgoingChanges": "never",
     "scm.showIncomingChanges": "never",
     "scm.showHistoryGraph": false,
-    "workbench.externalBrowser": "Brave Browser"
+    "workbench.externalBrowser": "Brave Browser",
+    "git.blame.editorDecoration.enabled": true
 }
