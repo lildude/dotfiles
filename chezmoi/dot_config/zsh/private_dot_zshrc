@@ -50,6 +50,8 @@ typeset -gU fpath path
 path=(
   ~/bin
   ~/.local/share/gem/bin
+  /opt/homebrew/opt/postgresql@17/bin
+  /opt/homebrew/opt/trash/bin
   $path
 )
 

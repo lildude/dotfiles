@@ -1,0 +1,9 @@
+window-padding-x = 5
+#theme = 0x96f
+#theme = "Monokai Pro Octagon"
+theme = tokyo
+font-size = 13
+cursor-style = block
+shell-integration-features = no-cursor
+cursor-style-blink = false
+copy-on-select = clipboard
