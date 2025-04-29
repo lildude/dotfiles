@@ -11,7 +11,7 @@ mise() {
   shift
 
   case "$command" in
-  deactivate|s|shell)
+  deactivate|shell|sh)
     # if argv doesn't contains -h,--help
     if [[ ! " $@ " =~ " --help " ]] && [[ ! " $@ " =~ " -h " ]]; then
       eval "$(command /opt/homebrew/bin/mise "$command" "$@")"
@@ -34,12 +34,13 @@ if [[ -z "${chpwd_functions[(r)_mise_hook]+1}" ]]; then
   chpwd_functions=( _mise_hook ${chpwd_functions[@]} )
 fi
 
+_mise_hook
 if [ -z "${_mise_cmd_not_found:-}" ]; then
     _mise_cmd_not_found=1
     [ -n "$(declare -f command_not_found_handler)" ] && eval "${$(declare -f command_not_found_handler)/command_not_found_handler/_command_not_found_handler}"
 
     function command_not_found_handler() {
-        if /opt/homebrew/bin/mise hook-not-found -s zsh -- "$1"; then
+        if [[ "$1" != "mise" && "$1" != "mise-"* ]] && /opt/homebrew/bin/mise hook-not-found -s zsh -- "$1"; then
           _mise_hook
           "$@"
         elif [ -n "$(declare -f _command_not_found_handler)" ]; then
