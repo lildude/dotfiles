@@ -208,6 +208,7 @@ _exists code-insiders && alias code=code-insiders
 #   gh-cs-big="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m xLargePremiumLinux --default-permissions | tail -1) --insiders"
 # }
 _exists trash && alias rm="trash -F"
+_exists overmind && alias orw="overmind restart web"
 
 if [ -z "$CODESPACES" ]; then
   # From `source $HOME/.config/op/plugins.sh`

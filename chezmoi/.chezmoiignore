@@ -4,9 +4,10 @@
 .mozilla/
 {{/* Don't install macOS files on Linux */}}
 {{ else if eq .chezmoi.os "linux" -}}
-.config/asdf/
+.config/mise/
 .config/espanso/
 .config/iterm2/
+.config/ghostty/
 .config/karabiner/
 .config/restic/
 .local/bin/mount-backups
