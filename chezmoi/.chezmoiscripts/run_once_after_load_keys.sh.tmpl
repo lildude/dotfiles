@@ -13,7 +13,7 @@ echo "=> Importing SSH keys"
 ssh-add --apple-use-keychain $(find "$HOME/.ssh/" -name "*.pub" | sed 's/.pub//g')
 {{- end }}
 
-{{ if eq .chezmoi.os "linux" -}}
+{{ if .linux -}}
 eval "$(ssh-agent -s)"
 echo "=> TODO: Manually add keys using `ssh-add $(find "$HOME/.ssh/" -name "*.pub" | sed 's/.pub//g')`
 #DISPLAY=1 SSH_ASKPASS="$DIR/script/ssh-askpass" ssh-add ${opts:-} $(find "$HOME/.ssh/" -name "*.pub" | sed 's/.pub//g') < /dev/null

@@ -1,9 +1,10 @@
 {{/* Don't install Linux files on macOS */}}
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if .mac -}}
 .config/Code/
 .mozilla/
+Library/Application Support/Firefox/
 {{/* Don't install macOS files on Linux */}}
-{{ else if eq .chezmoi.os "linux" -}}
+{{ else if .linux -}}
 .config/mise/
 .config/espanso/
 .config/iterm2/

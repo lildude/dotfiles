@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os "darwin" -}}
+{{- if .mac -}}
 #!/usr/bin/env bash
 # hash: {{ include "/etc/pam.d/sudo" | sha256sum }}
 

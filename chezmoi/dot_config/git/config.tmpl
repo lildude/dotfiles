@@ -162,7 +162,7 @@
 [remote]
   pushDefault = origin
 
-{{- if (eq .chezmoi.os "darwin") }}
+{{- if .mac }}
 [credential]
   helper = osxkeychain
 {{- end }}

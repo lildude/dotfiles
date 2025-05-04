@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-{{ if eq .chezmoi.os "linux" -}}
+{{ if .linux -}}
   {{- if eq .install_type "min" }}
     {{- if .codespaces }}
       sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start
@@ -9,7 +9,6 @@
       packages="bat bfs exa fd-find grc gnupg2 jq zsh ripgrep libssl-dev zlib1g-dev"
       # Extra opts required because of rust build bug - https://askubuntu.com/questions/1290262/unable-to-install-bat-error-trying-to-overwrite-usr-crates2-json-which
       sudo apt-get update && sudo apt-get install -o Dpkg::Options::="--force-overwrite" -y $to_install
-      git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
     fi
 
     filename="op_linux_amd64_v1.12.2.zip"
@@ -24,7 +23,7 @@
     rm "$HOME/$filename"
   {{- end }}
 
-{{- else if eq .chezmoi.os "darwin" }}
+{{- else if .mac }}
   {{- if ne .install_type "min" }}
     if ! command -v git > /dev/null 2>&1; then
       xcode-select --install

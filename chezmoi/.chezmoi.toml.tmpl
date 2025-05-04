@@ -6,6 +6,8 @@ sourceDir = "{{ .chezmoi.sourceDir }}"
 
 [data]
   ci = {{ $ci }}
+  mac = {{ eq .chezmoi.os "darwin" }}
+  linux = {{ eq .chezmoi.os "linux" }}
   codespaces = {{ $codespaces }}
   github_workspace = {{ $github_workspace }}
   remote_containers = {{ $remote_containers }}
