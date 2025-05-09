@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+_exists() { (( $+commands[$1] )) }
+
 {{ if .linux -}}
   arch=$(uname -m)
   {{- if eq .install_type "min" }}
@@ -24,9 +26,9 @@
     rm "$HOME/$filename"
   {{- end }}
   # Install packages
-  sudo apt-get -q update && sudo apt-get -q install -y $packages
+  sudo apt-get -q update > /dev/null && sudo apt-get -q install -y $packages > /dev/null
 
-  if ! command -v jj > /dev/null 2>&1; then
+  if ! _exists jj > /dev/null 2>&1; then
     # These are the results of the remapping above
     if [[ "$arch" == "amd64" ]]; then
       pattern="jj-*-x86_64-unknown-linux-musl.tar.gz"
@@ -42,10 +44,10 @@
 
 {{- else if .mac }}
   {{- if ne .install_type "min" }}
-    if ! command -v git > /dev/null 2>&1; then
+    if ! _exists git > /dev/null 2>&1; then
       xcode-select --install
     fi
-    if ! command -v brew > /dev/null 2>&1 && [ -f "$HOME/.config/homebrew/Brewfile" ]; then
+    if ! _exists brew > /dev/null 2>&1 && [ -f "$HOME/.config/homebrew/Brewfile" ]; then
       bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
       eval '$(/opt/homebrew/bin/brew shellenv)'
     fi
