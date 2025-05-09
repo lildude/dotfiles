@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 {{ if .linux -}}
+  arch=$(uname -m)
   {{- if eq .install_type "min" }}
-    {{- if .codespaces }}
-      sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start
-    {{- end -}}
+    packages="bat exa gh most jq ripgrep"
   {{- else }}
-    if [ -n "$packages" ]; then
-      packages="bat bfs exa fd-find grc gnupg2 jq zsh ripgrep libssl-dev zlib1g-dev"
-      # Extra opts required because of rust build bug - https://askubuntu.com/questions/1290262/unable-to-install-bat-error-trying-to-overwrite-usr-crates2-json-which
-      sudo apt-get update && sudo apt-get install -o Dpkg::Options::="--force-overwrite" -y $to_install
+    packages+=" gnupg2 grc"
+
+    if [[ "$arch" == "x86_64" ]]; then
+      arch="amd64"
+    elif [[ "$arch" == "aarch64" ]]; then
+      arch="arm64"
     fi
 
-    filename="op_linux_amd64_v1.12.2.zip"
-    curl -sLO "https://cache.agilebits.com/dist/1P/op/pkg/v1.12.2/$filename"
+    filename="op_linux_${arch}_v2.30.3.zip"
+    curl -sLO "https://cache.agilebits.com/dist/1P/op/pkg/v2.30.3/$filename"
     cd "$HOME/.local/bin"
     unzip "$HOME/$filename" > /dev/null
     # Verify download
@@ -22,6 +23,22 @@
     cd "$HOME"
     rm "$HOME/$filename"
   {{- end }}
+  # Install packages
+  sudo apt-get -q update && sudo apt-get -q install -y $packages
+
+  if ! command -v jj > /dev/null 2>&1; then
+    # These are the results of the remapping above
+    if [[ "$arch" == "amd64" ]]; then
+      pattern="jj-*-x86_64-unknown-linux-musl.tar.gz"
+    elif [[ "$arch" == "arm64" ]]; then
+      pattern="jj-*-aarch64-unknown-linux-musl.tar.gz"
+    fi
+
+    gh release download --repo jj-vcs/jj --pattern $pattern --dir "$HOME/.local/bin" --clobber
+    tar -xzf $HOME/.local/bin/*.tar.gz -C $HOME/.local/bin/ ./jj
+    rm $HOME/.local/bin/*.tar.gz
+  fi
+
 
 {{- else if .mac }}
   {{- if ne .install_type "min" }}
