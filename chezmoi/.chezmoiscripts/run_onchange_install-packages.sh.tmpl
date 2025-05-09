@@ -41,7 +41,6 @@ _exists() { (( $+commands[$1] )) }
     rm $HOME/.local/bin/*.tar.gz
   fi
 
-
 {{- else if .mac }}
   {{- if ne .install_type "min" }}
     if ! _exists git > /dev/null 2>&1; then
