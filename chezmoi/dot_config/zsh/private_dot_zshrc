@@ -214,8 +214,10 @@ if [ -z "$CODESPACES" ]; then
   # From `source $HOME/.config/op/plugins.sh`
   export OP_PLUGIN_ALIASES_SOURCED=1
   export OP_ACCOUNT="my.1password.com"
-  alias gh="op plugin run -- gh"
-  alias brew="op plugin run -- brew"
+  if _exists op; then
+    alias gh="op plugin run -- gh"
+    alias brew="op plugin run -- brew"
+  fi
 fi
 
 
