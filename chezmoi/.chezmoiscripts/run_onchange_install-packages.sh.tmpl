@@ -29,7 +29,7 @@ _exists() {
     rm "$HOME/$filename"
   {{- end }}
   # Install packages
-  sudo apt-get -q update > /dev/null && sudo apt-get -q install -y $packages 2>&1 /dev/null
+  sudo apt-get -q update > /dev/null && sudo apt-get -q install -y $packages > /dev/null 2>&1
 
   if ! _exists jj; then
     if [[ "$arch" == "amd64" ]]; then
