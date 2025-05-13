@@ -178,9 +178,12 @@ alias gsw='git switch'
 alias gup='git up'
 
 if [ -n "$CODESPACES" ]; then
+  alias co="${CODESPACE_VSCODE_FOLDER}/bin/codeowners"
   alias so="${CODESPACE_VSCODE_FOLDER}/bin/serviceowners"
   alias sols="${CODESPACE_VSCODE_FOLDER}/bin/serviceowners-ls-files"
   alias ff="${CODESPACE_VSCODE_FOLDER}/bin/toggle-feature-flag"
+  alias ffe="${CODESPACE_VSCODE_FOLDER}/bin/toggle-feature-flag"
+  alias ffd="${CODESPACE_VSCODE_FOLDER}/bin/toggle-feature-flag"
   alias codespaces-post-start='sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start'
   alias refreshpass='sed -i "s/password .*/password $GITHUB_TOKEN/g" ~/.netrc'
   alias driftwood-server="if [ ! -d /workspaces/driftwood ]; then ${CODESPACE_VSCODE_FOLDER}/script/setup-codespaces-driftwood-dev; fi && /workspaces/driftwood/script/server"
