@@ -6,8 +6,9 @@ _exists() {
 
 {{ if .linux -}}
   arch=$(uname -m)
+  packages="bat gh most jq ripgrep"
   {{- if eq .install_type "min" }}
-    packages="bat gh most jq ripgrep"
+
   {{- else }}
     packages+=" exa gnupg2 grc"
 
@@ -29,21 +30,21 @@ _exists() {
     rm "$HOME/$filename"
   {{- end }}
   # Install packages
-  sudo apt-get -q update > /dev/null && sudo apt-get -q install -y $packages > /dev/null 2>&1
+  sudo apt-get -q update > /dev/null && sudo apt-get -q install -y $packages > /dev/null > /dev/null
 
-  if ! _exists jj; then
-    if [[ "$arch" == "amd64" ]]; then
-      pattern="jj-*-amd64-unknown-linux-musl.tar.gz"
-    elif [[ "$arch" == "aarch64" ]]; then
-      pattern="jj-*-aarch64-unknown-linux-musl.tar.gz"
-    else
-      pattern="jj-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
+  # if ! _exists jj; then
+  #   if [[ "$arch" == "amd64" ]]; then
+  #     pattern="jj-*-amd64-unknown-linux-musl.tar.gz"
+  #   elif [[ "$arch" == "aarch64" ]]; then
+  #     pattern="jj-*-aarch64-unknown-linux-musl.tar.gz"
+  #   else
+  #     pattern="jj-*-x86_64-unknown-linux-musl.tar.gz"
+  #   fi
 
-    gh release download --repo jj-vcs/jj --pattern "$pattern" --dir "$HOME/.local/bin" --clobber \
-    && tar -xzf $HOME/.local/bin/*.tar.gz -C $HOME/.local/bin/ ./jj \
-    && rm $HOME/.local/bin/*.tar.gz
-  fi
+  #   gh release download --repo jj-vcs/jj --pattern "$pattern" --dir "$HOME/.local/bin" --clobber \
+  #   && tar -xzf $HOME/.local/bin/*.tar.gz -C $HOME/.local/bin/ ./jj \
+  #   && rm $HOME/.local/bin/*.tar.gz
+  # fi
 
 {{- else if .mac }}
   {{- if ne .install_type "min" }}

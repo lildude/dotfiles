@@ -7,6 +7,9 @@
 		// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
 		"args": { "VARIANT": "hirsute" }
 	},
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {}
+	},
 
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {
