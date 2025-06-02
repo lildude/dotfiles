@@ -3,9 +3,7 @@
 {
 	"name": "Ubuntu",
 	"build": {
-		"dockerfile": "Dockerfile",
-		// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
-		"args": { "VARIANT": "hirsute" }
+		"dockerfile": "Dockerfile"
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/github-cli:1": {}
