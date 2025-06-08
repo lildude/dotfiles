@@ -10,7 +10,25 @@ backend = "ssh"
 key = "~/.ssh/git_signing_ed25519.pub"
 
 [git]
+push-new-bookmarks = true
 push-bookmark-prefix = "lildude/push-"
 
 [ui]
-default-command = "log"
+default-command = "log-recent"
+
+[aliases]
+i = ["git", "init", "--colocate"]
+lg = ["log", "-r", "recent()"]
+log-recent = ["log", "-r", "recent()"]
+pull = ["git", "fetch"]
+push = ["git", "push", "--allow-new"]
+tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+# set all remote bookmarks (commits pushed to remote branches) to be immutable
+'immutable_heads()' = "builtin_immutable_heads() | remote_bookmarks()"
+'recent()' = 'committer_date(after:"3 months ago")'
+
+[template-aliases]
+'format_short_change_id(id)' = 'id.shortest()'
