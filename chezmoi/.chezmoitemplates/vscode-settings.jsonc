@@ -228,5 +228,6 @@
   "scm.showHistoryGraph": false,
   "workbench.externalBrowser": "Brave Browser",
   "git.blame.editorDecoration.enabled": true,
-  "docker.extension.enableComposeLanguageServer": false
+  "docker.extension.enableComposeLanguageServer": false,
+  "github.copilot.nextEditSuggestions.enabled": true
 }
