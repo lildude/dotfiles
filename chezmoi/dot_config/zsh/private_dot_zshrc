@@ -114,8 +114,10 @@ export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
 export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
 # export DOCKER_CONFIG=$XDG_CONFIG_HOME/docker
 export GIT_MERGE_AUTOEDIT=no
-export GOPATH=$XDG_DATA_HOME/go
-path+=($GOPATH/bin)
+if [ -z "$CODESPACES" ]; then
+  export GOPATH=$XDG_DATA_HOME/go
+  path+=($GOPATH/bin)
+fi
 if [ -n "$CODESPACES" ]; then
   export GOPROXY=https://goproxy.githubapp.com/mod,https://proxy.golang.org/,direct
   export GOPRIVATE=
