@@ -1,268 +1,233 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "editor.renderWhitespace": "boundary",
-    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace",
-    "editor.fontSize": 14,
+  "editor.renderWhitespace": "boundary",
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace",
+  "editor.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.rulers": [{ "column": 120, "color": "#4444445e" }],
+  "editor.minimap.enabled": false,
+  "editor.cursorWidth": 3,
+  "editor.scrollBeyondLastLine": false,
+  "editor.fontLigatures": true,
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": false,
+  "workbench.sideBar.location": "left",
+  "workbench.statusBar.visible": true,
+  "workbench.list.horizontalScrolling": true,
+  "workbench.colorCustomizations": {
+    "editorIndentGuide.activeBackground1": "#999",
+    "git.blame.editorDecorationForeground": "#99999959",
+    //"sideBar.background": "#333",
+    //"sideBar.foreground": "#aaa",
+    //"list.activeSelectionForeground": "#fff",
+    //"list.inactiveSelectionForeground": "#fff",
+    //"list.inactiveFocusForeground": "#fff",
+    //"list.activeSelectionBackground": "#444",
+    //"statusBar.background" : "#1A1A1A",
+    //"statusBar.foreground": "#999",
+    //"statusBar.noFolderBackground" : "#0A0A0D",
+    //"statusBar.debuggingBackground": "#511f1f",
+    //"editorWarning.foreground": "#ffaa2c",
+    //"gitDecoration.untrackedResourceForeground": "#2BDA77",
+    //"activityBar.activeBorder": "#aa0000",
+    //"activityBar.activeBackground": "#aa0000"
+    //"terminal.background":"#131212",
+    //"terminal.foreground":"#dddad6",
+    //"terminal.ansiBlack":"#1D2021",
+    //"terminal.ansiBrightBlack":"#665C54",
+    //"terminal.ansiBrightBlue":"#61afef",
+    //"terminal.ansiBrightCyan":"#8BA59B",
+    //"terminal.ansiBrightGreen":"#237e02",
+    //"terminal.ansiBrightMagenta":"#8F4673",
+    //"terminal.ansiBrightRed":"#FB543F",
+    //"terminal.ansiBrightWhite":"#FDF4C1",
+    //"terminal.ansiBrightYellow":"#d19a66",
+    //"terminal.ansiCyan":"#8BA59B",
+    //"terminal.ansiGreen":"#95C085",
+    //"terminal.ansiMagenta":"#8F4673",
+    //"terminal.ansiRed":"#FB543F",
+    //"terminal.ansiWhite":"#A89984",
+    "terminal.ansiYellow": "#e5a52f",
+    "terminal.ansiBlue": "#359bef"
+  },
+  "git.countBadge": "tracked",
+  "window.newWindowDimensions": "inherit",
+  "window.clickThroughInactive": false,
+  "terminal.integrated.copyOnSelection": true,
+  "git.enableCommitSigning": true,
+  "workbench.startupEditor": "newUntitledFile",
+  "go.coverageDecorator": {
+    "uncoveredHighlightColor": "rgba(209, 59, 46, 0.2)"
+  },
+  "explorer.openEditors.visible": 1,
+  "git.showPushSuccessNotification": true,
+  "git.confirmSync": false,
+  "diffEditor.renderSideBySide": false,
+  "explorer.confirmDragAndDrop": false,
+  "shellcheck.customArgs": ["-x"],
+  "shellcheck.useWorkspaceRootAsCwd": true,
+  "go.testFlags": ["-v"],
+  "markdown.previewFrontMatter": "show",
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "go.useLanguageServer": true,
+  "coverage-gutters.highlightdark": "rgba(45, 121, 10, 0.2)",
+  "coverage-gutters.noHighlightDark": "rgba(121, 31, 10, 0.2)",
+  "coverage-gutters.partialHighlightDark": "rgba(121, 86, 10, 0.2)",
+  "code-runner.enableAppInsights": false,
+  "ruby.codeCompletion": "rcodetools",
+  "editor.renderControlCharacters": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "code-runner.executorMapByFileExtension": {},
+  "window.titleBarStyle": "native",
+  "ruby.locate": {},
+  "typescript.tsc.autoDetect": "off",
+  "grunt.autoDetect": "off",
+  "gulp.autoDetect": "off",
+  "jake.autoDetect": "off",
+  "npm.autoDetect": "off",
+  "[ruby]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "Shopify.ruby-lsp",
+    "editor.formatOnType": true,
     "editor.tabSize": 2,
-    "editor.rulers": [
-      { "column": 120, "color": "#4444445e" }
-    ],
-    "editor.minimap.enabled": false,
-    "editor.cursorWidth": 3,
-    "editor.scrollBeyondLastLine": false,
-    "editor.fontLigatures": true,
+    "editor.insertSpaces": true,
     "files.trimTrailingWhitespace": true,
-    "files.trimFinalNewlines": false,
-    "workbench.sideBar.location": "left",
-    "workbench.statusBar.visible": true,
-    "workbench.list.horizontalScrolling": true,
-    "workbench.colorCustomizations": {
-        "editorIndentGuide.activeBackground1": "#999",
-        "git.blame.editorDecorationForeground": "#99999959",
-        //"sideBar.background": "#333",
-        //"sideBar.foreground": "#aaa",
-        //"list.activeSelectionForeground": "#fff",
-        //"list.inactiveSelectionForeground": "#fff",
-        //"list.inactiveFocusForeground": "#fff",
-        //"list.activeSelectionBackground": "#444",
-        //"statusBar.background" : "#1A1A1A",
-        //"statusBar.foreground": "#999",
-        //"statusBar.noFolderBackground" : "#0A0A0D",
-        //"statusBar.debuggingBackground": "#511f1f",
-        //"editorWarning.foreground": "#ffaa2c",
-        //"gitDecoration.untrackedResourceForeground": "#2BDA77",
-        //"activityBar.activeBorder": "#aa0000",
-        //"activityBar.activeBackground": "#aa0000"
-        //"terminal.background":"#131212",
-        //"terminal.foreground":"#dddad6",
-        //"terminal.ansiBlack":"#1D2021",
-        //"terminal.ansiBrightBlack":"#665C54",
-        //"terminal.ansiBrightBlue":"#61afef",
-        //"terminal.ansiBrightCyan":"#8BA59B",
-        //"terminal.ansiBrightGreen":"#237e02",
-        //"terminal.ansiBrightMagenta":"#8F4673",
-        //"terminal.ansiBrightRed":"#FB543F",
-        //"terminal.ansiBrightWhite":"#FDF4C1",
-        //"terminal.ansiBrightYellow":"#d19a66",
-        //"terminal.ansiCyan":"#8BA59B",
-        //"terminal.ansiGreen":"#95C085",
-        //"terminal.ansiMagenta":"#8F4673",
-        //"terminal.ansiRed":"#FB543F",
-        //"terminal.ansiWhite":"#A89984",
-        "terminal.ansiYellow":"#e5a52f",
-        "terminal.ansiBlue":"#359bef",
-    },
-    "git.countBadge": "tracked",
-    "window.newWindowDimensions": "inherit",
-    "window.clickThroughInactive": false,
-    "terminal.integrated.copyOnSelection": true,
-    "git.enableCommitSigning": true,
-    "workbench.startupEditor": "newUntitledFile",
-    "go.coverageDecorator": {
-        "uncoveredHighlightColor": "rgba(209, 59, 46, 0.2)",
-        },
-    "explorer.openEditors.visible": 1,
-    "git.showPushSuccessNotification": true,
-    "git.confirmSync": false,
-    "diffEditor.renderSideBySide": false,
-    "explorer.confirmDragAndDrop": false,
-    "shellcheck.customArgs": ["-x"],
-    "shellcheck.useWorkspaceRootAsCwd": true,
-    "go.testFlags": [
-        "-v"
-    ],
-    "markdown.previewFrontMatter": "show",
-    "[markdown]": {
-      "files.trimTrailingWhitespace": false
-    },
-    "go.useLanguageServer": true,
-    "coverage-gutters.highlightdark": "rgba(45, 121, 10, 0.2)",
-    "coverage-gutters.noHighlightDark": "rgba(121, 31, 10, 0.2)",
-    "coverage-gutters.partialHighlightDark": "rgba(121, 86, 10, 0.2)",
-    "code-runner.enableAppInsights": false,
-    "ruby.codeCompletion": "rcodetools",
-    "editor.renderControlCharacters": true,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "code-runner.executorMapByFileExtension": {
-
-
-    },
-    "window.titleBarStyle": "native",
-    "ruby.locate": {
-
-    },
-    "typescript.tsc.autoDetect": "off",
-    "grunt.autoDetect": "off",
-    "gulp.autoDetect": "off",
-    "jake.autoDetect": "off",
-    "npm.autoDetect": "off",
-    "[ruby]": {
-      "editor.formatOnSave": true,
-      "editor.defaultFormatter": "Shopify.ruby-lsp",
-      "editor.formatOnType": true,
-      "editor.tabSize": 2,
-      "editor.insertSpaces": true,
-      "files.trimTrailingWhitespace": true,
-      "files.insertFinalNewline": true,
-      "files.trimFinalNewlines": true,
-      "editor.rulers": [
-        120
-      ],
-      "editor.semanticHighlighting.enabled": true
-    },
-    "ruby.format": "rubyfmt",
-    "ruby.useLanguageServer": true,
-    "ruby.intellisense": "rubyLocate",
-    "[gemfile]": {
-      "editor.defaultFormatter": "Shopify.ruby-lsp"
-    },
-    "files.exclude": {
-      "**/.git": true,
-      "**/.svn": true,
-      "**/.hg": true,
-      "**/CVS": true,
-      "**/.DS_Store": true,
-      "**/*.olean": true
-    },
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "python.showStartPage": false,
-    "python.formatting.provider": "black",
-    "python.testing.pytestEnabled": true,
-    "python.testing.pytestPath": "/Users/lildude/.asdf/shims/pytest",
-    "python.formatting.blackPath": "/Users/lildude/.asdf/shims/black",
-    "git.ignoreSubmodules": true,
-    "remote.SSH.connectTimeout": 1200,
-    "sshfs.configpaths": [
-      {
-        "algorithms": {
-          "hmac": ["hmac-sha2-512-etm"]
-        }
-      }
-    ],
-    "extensions.ignoreRecommendations": true, // Stop recommending extensions.
-    "keyboard.touchbar.enabled": false,
-    "workbench.enableExperiments": false,
-    "update.showReleaseNotes": false,
-    "go.toolsManagement.autoUpdate": true,
-    "go.toolsEnvVars": {
-      "GOPRIVATE": "*github.com/github/*",
-      "GO111MODULE": "on"
-    },
-    "workbench.editorAssociations": {
-      "*.ipynb": "jupyter-notebook"
-    },
-    "coverage-gutters.coverageFileNames": [
-      "lcov.info",
-      "cov.xml",
-      "coverage.xml",
-      "jacoco.xml"
-    ],
-    "redhat.telemetry.enabled": false,
-    "git.pruneOnFetch": true,
-    "scm.repositories.visible": 0,
-    "git.detectSubmodules": false,
-    "terminal.integrated.defaultProfile.osx": "zsh",
-    "terminal.integrated.defaultProfile.linux": "zsh",
-    "editor.inlineSuggest.enabled": true,
-    "terminal.integrated.tabs.focusMode": "singleClick",
-    "github.copilot.enable": {
-      "*": true,
-      "yaml": false,
-      "plaintext": true,
-      "markdown": false
-    },
-    "dotfiles.repository": "lildude/dotfiles",
-    "dotfiles.installCommand": "script/bootstrap",
-    "editor.bracketPairColorization.enabled": true,
-    "dev.containers.defaultExtensions": [
-      "EditorConfig.EditorConfig",
-      "GitHub.copilot-nightly",
-      "eamodio.gitlens",
-      "chrislajoie.vscode-modelines",
-      "GitHub.copilot-chat-nightly"
-    ],
-    "github.codespaces.createCodespaceInNewWindow": true,
-    "github.codespaces.defaultExtensions": [
-      "GitHub.codespaces",
-      "EditorConfig.EditorConfig",
-      "GitHub.copilot-nightly",
-      "eamodio.gitlens",
-      "chrislajoie.vscode-modelines"
-    ],
-    "window.nativeTabs": true,
-    "task.autoDetect": "off",
-    "gopls": {
-      "formatting.gofumpt": true
-    },
-    "go.lintTool": "golangci-lint",
-    "go.survey.prompt": false,
-    "[go]": {
-      "editor.formatOnSave": true
-    },
-    "go.formatTool": "gofumpt",
-    "terminal.integrated.scrollback": 2000,
-    "terminal.external.osxExec": "iTerm.app",
-    "terminal.integrated.shellIntegration.enabled": false,
-    "git.autofetch": true,
-    "editor.unicodeHighlight.includeStrings": false,
-    "git.branchPrefix": "lildude/",
-    "git.autoRepositoryDetection": "openEditors",
-    "svg.preview.mode": "svg",
-    "[python]": {
-      "editor.formatOnType": true
-    },
-    "gitlens.showWelcomeOnInstall": false,
-    "gitlens.showWhatsNewAfterUpgrades": false,
-    "shellcheck.disableVersionCheck": true,
-    "lldb.suppressUpdateNotifications": true,
-    "workbench.iconTheme": "file-icons",
-    "workbench.colorTheme": "One Dark Pro",
-    "rubyLsp.customRubyCommand": "~/.local/bin/ruby",
-    "rubyLsp.rubyVersionManager": {
-      "identifier": "custom"
-    },
-    "gitlens.plusFeatures.enabled": false,
-    "gitlens.virtualRepositories.enabled": false,
-    "gitlens.advanced.messages": {
-      "suppressIntegrationRequestTimedOutWarning": true
-    },
-    "terminal.explorerKind": "external",
-    "scm.diffDecorationsGutterPattern": {
-      "added": true
-    },
-    "github.copilot.editor.enableAutoCompletions": true,
-    "remote.autoForwardPortsSource": "hybrid",
-    "gitlens.launchpad.indicator.enabled": false,
-    "window.newWindowProfile": "Default",
-    "scm.showOutgoingChanges": "never",
-    "scm.showIncomingChanges": "never",
-    "scm.showHistoryGraph": false,
-    "workbench.externalBrowser": "Brave Browser",
-    "git.blame.editorDecoration.enabled": true,
-    "mcp": {
-
-      "inputs": [
-      {
-        "type": "promptString",
-        "id": "github_token",
-        "description": "GitHub Personal Access Token",
-        "password": true
-      }],
-      "servers": {
-        "github": {
-        "command": "docker",
-        "args": [
-          "run",
-          "-i",
-          "--rm",
-          "-e",
-          "GITHUB_PERSONAL_ACCESS_TOKEN",
-          "ghcr.io/github/github-mcp-server"
-        ],
-        "env": {
-          "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}"
-        }
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "editor.rulers": [120],
+    "editor.semanticHighlighting.enabled": true
+  },
+  "ruby.format": "rubyfmt",
+  "ruby.useLanguageServer": true,
+  "ruby.intellisense": "rubyLocate",
+  "[gemfile]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp"
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/*.olean": true
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "python.showStartPage": false,
+  "python.formatting.provider": "black",
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestPath": "/Users/lildude/.asdf/shims/pytest",
+  "python.formatting.blackPath": "/Users/lildude/.asdf/shims/black",
+  "git.ignoreSubmodules": true,
+  "remote.SSH.connectTimeout": 1200,
+  "sshfs.configpaths": [
+    {
+      "algorithms": {
+        "hmac": ["hmac-sha2-512-etm"]
       }
     }
-  }
+  ],
+  "extensions.ignoreRecommendations": true, // Stop recommending extensions.
+  "keyboard.touchbar.enabled": false,
+  "workbench.enableExperiments": false,
+  "update.showReleaseNotes": false,
+  "go.toolsManagement.autoUpdate": true,
+  "go.toolsEnvVars": {
+    "GOPRIVATE": "*github.com/github/*",
+    "GO111MODULE": "on"
+  },
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "coverage-gutters.coverageFileNames": [
+    "lcov.info",
+    "cov.xml",
+    "coverage.xml",
+    "jacoco.xml"
+  ],
+  "redhat.telemetry.enabled": false,
+  "git.pruneOnFetch": true,
+  "scm.repositories.visible": 0,
+  "git.detectSubmodules": false,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "editor.inlineSuggest.enabled": true,
+  "terminal.integrated.tabs.focusMode": "singleClick",
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": true,
+    "markdown": false
+  },
+  "dotfiles.repository": "lildude/dotfiles",
+  "dotfiles.installCommand": "script/bootstrap",
+  "editor.bracketPairColorization.enabled": true,
+  "dev.containers.defaultExtensions": [
+    "EditorConfig.EditorConfig",
+    "GitHub.copilot-nightly",
+    "eamodio.gitlens",
+    "chrislajoie.vscode-modelines",
+    "GitHub.copilot-chat-nightly"
+  ],
+  "github.codespaces.createCodespaceInNewWindow": true,
+  "github.codespaces.defaultExtensions": [
+    "GitHub.codespaces",
+    "EditorConfig.EditorConfig",
+    "GitHub.copilot-nightly",
+    "eamodio.gitlens",
+    "chrislajoie.vscode-modelines"
+  ],
+  "window.nativeTabs": true,
+  "task.autoDetect": "off",
+  "gopls": {
+    "formatting.gofumpt": true
+  },
+  "go.lintTool": "golangci-lint",
+  "go.survey.prompt": false,
+  "[go]": {
+    "editor.formatOnSave": true
+  },
+  "go.formatTool": "gofumpt",
+  "terminal.integrated.scrollback": 2000,
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.shellIntegration.enabled": false,
+  "git.autofetch": true,
+  "editor.unicodeHighlight.includeStrings": false,
+  "git.branchPrefix": "lildude/",
+  "git.autoRepositoryDetection": "openEditors",
+  "svg.preview.mode": "svg",
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "shellcheck.disableVersionCheck": true,
+  "lldb.suppressUpdateNotifications": true,
+  "workbench.iconTheme": "file-icons",
+  "workbench.colorTheme": "One Dark Pro",
+  "rubyLsp.customRubyCommand": "~/.local/bin/ruby",
+  "rubyLsp.rubyVersionManager": {
+    "identifier": "custom"
+  },
+  "gitlens.plusFeatures.enabled": false,
+  "gitlens.virtualRepositories.enabled": false,
+  "gitlens.advanced.messages": {
+    "suppressIntegrationRequestTimedOutWarning": true
+  },
+  "terminal.explorerKind": "external",
+  "scm.diffDecorationsGutterPattern": {
+    "added": true
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "remote.autoForwardPortsSource": "hybrid",
+  "gitlens.launchpad.indicator.enabled": false,
+  "window.newWindowProfile": "Default",
+  "scm.showOutgoingChanges": "never",
+  "scm.showIncomingChanges": "never",
+  "scm.showHistoryGraph": false,
+  "workbench.externalBrowser": "Brave Browser",
+  "git.blame.editorDecoration.enabled": true,
+  "docker.extension.enableComposeLanguageServer": false,
+  "github.copilot.nextEditSuggestions.enabled": true
 }
