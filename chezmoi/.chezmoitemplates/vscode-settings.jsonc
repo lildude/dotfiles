@@ -191,7 +191,6 @@
   "go.formatTool": "gofumpt",
   "terminal.integrated.scrollback": 2000,
   "terminal.external.osxExec": "iTerm.app",
-  "terminal.integrated.shellIntegration.enabled": false,
   "git.autofetch": true,
   "editor.unicodeHighlight.includeStrings": false,
   "git.branchPrefix": "lildude/",
@@ -229,5 +228,6 @@
   "workbench.externalBrowser": "Brave Browser",
   "git.blame.editorDecoration.enabled": true,
   "docker.extension.enableComposeLanguageServer": false,
-  "github.copilot.nextEditSuggestions.enabled": true
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "terminal.integrated.shellIntegration.enabled": false
 }
