@@ -126,7 +126,7 @@ if [ -n "$CODESPACES" ]; then
 fi
 export HOMEBREW_BUNDLE_FILE=$XDG_CONFIG_HOME/homebrew/Brewfile
 export IRBRC=$XDG_CONFIG_HOME/irb/irbrc
-export LESSHISTFILE=$XDG_CONFIG_HOME/lesshistory
+export LESSHISTFILE=$XDG_STATE_HOME/less/history
 export MISE_RUBY_DEFAULT_PACKAGES_FILE=$XDG_CONFIG_HOME/mise/default-gems
 export MIX_XDG=1
 export MOST_INITFILE=$XDG_CONFIG_HOME/most/mostrc
@@ -134,14 +134,14 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 path+=($XDG_CONFIG_HOME/npm/bin)
 export PRYRC=$XDG_CONFIG_HOME/pry/pryrc         # Unnecessary but being extra safe
 export SOLARGRAPH_CACHE=$XDG_CACHE_HOME/solargraph
-export SQLITE_HISTORY=$XDG_CACHE_HOME/sqlite_history
+export SQLITE_HISTORY=$XDG_STATE_HOME/sqlite/history
 
 _exists pnpm && {
   export PNPM_HOME="$XDG_DATA_HOME/pnpm"
   path+=($PNPM_HOME)
 }
 
-HISTFILE=$XDG_CONFIG_HOME/zsh/.zsh_history
+HISTFILE=$XDG_STATE_HOME/zsh/history
 HISTSIZE=11000                                      # Max. entries to keep in memory
 SAVEHIST=10000                                      # Max. entries to save to file
 HISTORY_IGNORE='([bf]g *|[bf]g|disown|cd ..|cd -)'  # Don't add these to the history file.
