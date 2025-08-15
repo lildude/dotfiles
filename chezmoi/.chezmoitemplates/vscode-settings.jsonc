@@ -229,5 +229,7 @@
   "git.blame.editorDecoration.enabled": true,
   "docker.extension.enableComposeLanguageServer": false,
   "github.copilot.nextEditSuggestions.enabled": true,
-  "terminal.integrated.shellIntegration.enabled": false
+  "terminal.integrated.shellIntegration.enabled": false,
+  "chat.tools.autoApprove": true,
+  "chat.agent.maxRequests": 100
 }
