@@ -231,5 +231,7 @@
   "github.copilot.nextEditSuggestions.enabled": true,
   "terminal.integrated.shellIntegration.enabled": false,
   "chat.tools.autoApprove": true,
-  "chat.agent.maxRequests": 100
+  "chat.agent.maxRequests": 100,
+  "github.copilot.chat.alternateGptPrompt.enabled": true,
+  "chat.todoListTool.enabled": true
 }
