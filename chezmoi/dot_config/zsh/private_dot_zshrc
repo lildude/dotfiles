@@ -184,8 +184,8 @@ if [ -n "$CODESPACES" ]; then
   alias so="${CODESPACE_VSCODE_FOLDER}/bin/serviceowners"
   alias sols="${CODESPACE_VSCODE_FOLDER}/bin/serviceowners-ls-files"
   alias ff="${CODESPACE_VSCODE_FOLDER}/bin/toggle-feature-flag"
-  alias ffe="${CODESPACE_VSCODE_FOLDER}/bin/toggle-feature-flag"
-  alias ffd="${CODESPACE_VSCODE_FOLDER}/bin/toggle-feature-flag"
+  alias ffe="${CODESPACE_VSCODE_FOLDER}/bin/toggle-feature-flag enable"
+  alias ffd="${CODESPACE_VSCODE_FOLDER}/bin/toggle-feature-flag disable"
   alias codespaces-post-start='sh -c /workspaces/.codespaces/.persistedshare/dotfiles/script/codespaces-post-start'
   alias refreshpass='sed -i "s/password .*/password $GITHUB_TOKEN/g" ~/.netrc'
   alias driftwood-server="if [ ! -d /workspaces/driftwood ]; then ${CODESPACE_VSCODE_FOLDER}/script/setup-codespaces-driftwood-dev; fi && /workspaces/driftwood/script/server"
@@ -196,7 +196,7 @@ fi
 #   alias ci="hub ci-status"
 # }
 _exists bat && alias cat=bat && export BAT_THEME="Monokai Extended"
-_exists eza && alias ls="eza --no-user"
+_exists eza && alias ls="eza --no-user --group-directories-first --icons=auto"
 _exists rg && rg() { $commands[rg] -p "$@" | less; }
 _exists prettyping && alias ping="prettyping --nolegend"
 _exists chezmoi && {
