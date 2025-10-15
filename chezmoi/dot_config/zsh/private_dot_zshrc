@@ -141,10 +141,10 @@ _exists pnpm && {
   path+=($PNPM_HOME)
 }
 
-HISTFILE=$XDG_STATE_HOME/zsh/history
-HISTSIZE=11000                                      # Max. entries to keep in memory
-SAVEHIST=10000                                      # Max. entries to save to file
-HISTORY_IGNORE='([bf]g *|[bf]g|disown|cd ..|cd -)'  # Don't add these to the history file.
+export HISTFILE=$XDG_STATE_HOME/zsh/history
+export HISTSIZE=11000                                      # Max. entries to keep in memory
+export SAVEHIST=10000                                      # Max. entries to save to file
+export HISTORY_IGNORE='([bf]g *|[bf]g|disown|cd ..|cd -)'  # Don't add these to the history file.
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 #### ---:[ Aliases ]:--- ###
