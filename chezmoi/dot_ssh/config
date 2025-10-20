@@ -11,12 +11,6 @@ Host *
   KeepAlive yes
   ServerAliveInterval 60
 
-# Freenas
-Host freenas.local freenas 192.168.1.191
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/freenas_dsa
-  User lildude
-
 # GitHub
 Host github.com *.github.com localhost
   IdentitiesOnly yes
@@ -67,7 +61,7 @@ Host vault-bastion
   AddKeysToAgent yes
   User lildude
 
-Host *.cp1-prd.iad.github.net *.private-us-east-1.github.net *.ghe.io
+Host *.cp1-prd.iad.github.net *.private-us-east-1.github.net *.ghe.io *.azure-eastus.github.net
   IdentitiesOnly yes
   IdentityFile ~/.ssh/github_2018_ed25519
   ProxyJump %r@bastion.githubapp.com
@@ -86,27 +80,6 @@ Host *.bpdev-us-east-1.github.net *.ghe-test.org *.qaboot.net *.gh-quality.net *
   #RemoteForward /run/user/1001/gnupg/S.gpg-agent ~/.gnupg/S.gpg-agent.extra
   UserKnownHostsFile /dev/null
   StrictHostKeyChecking no
-
-# Heroku
-Host heroku.com
-  User git
-  Hostname heroku.com
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/heroku_2016_rsa
-  AddKeysToAgent yes
-
-# Bitbucket
-Host bitbucket.org
-  User git
-  Hostname bitbucket.org
-
-# Digital Ocean - droplet1
-Host do1
-  User col
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/digitalocean_2016_rsa
-  AddKeysToAgent yes
-  Hostname 192.241.150.191
 
 # Random test AWS instances
 Host *.compute.amazonaws.com
@@ -161,14 +134,6 @@ Host msazure.visualstudio.com
   IdentityFile ~/.ssh/azure_vm_2018_rsa
   AddKeysToAgent yes
   ServerAliveInterval 30
-
-Host win10
-  Hostname 127.0.0.1
-  User colin
-  Port 2522
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/azure_vm_2018_rsa
-  AddKeysToAgent yes
 
 # Personal Azure VMs
 Host cluckwp
