@@ -23,10 +23,10 @@ zstyle ':z4h:'                  start-tmux        'no'            # Don't downlo
 zstyle ':z4h:fzf-history'       fzf-flags         --no-preview    # Disable history preview and limit height
 # zstyle ':z4h:*'                 fzf-command       fzf             # Use fzf in PATH
 # zstyle ':z4h:'                  term-shell-integration  'yes'     # Mark up shell's output with semantic information.
+zstyle ':z4h:homebrew-command-not-found'   channel  'none'        # Disable homebrew command-not-found integration as it deprecated.
 
 # Disable on codespaces as they are never used
 if [ $CODESPACES ]; then
-  zstyle ':z4h:homebrew-command-not-found'      channel           'none'
   zstyle ':z4h:systemd'                         channel           'none'
 fi
 
