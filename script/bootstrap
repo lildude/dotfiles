@@ -7,9 +7,7 @@ if ! chezmoi="$(command -v chezmoi)"; then
 	chezmoi="${bin_dir}/chezmoi"
 	echo "Installing chezmoi to '${chezmoi}'" >&2
 	if command -v curl >/dev/null; then
-		# chezmoi_install_script="$(curl -fsSL get.chezmoi.io)"
-		# Workaround until get.chezmoi.io is updated to use the script from https://github.com/twpayne/chezmoi/issues/4303
-		chezmoi_install_script="$(curl -fsSL https://raw.githubusercontent.com/twpayne/chezmoi/4406bd873ca0c04f0e8a7e306dd52a71d9ae2f19/assets/scripts/install.sh)"
+		chezmoi_install_script="$(curl -fsSL get.chezmoi.io)"
 	elif command -v wget >/dev/null; then
 		chezmoi_install_script="$(wget -qO- get.chezmoi.io)"
 	else
