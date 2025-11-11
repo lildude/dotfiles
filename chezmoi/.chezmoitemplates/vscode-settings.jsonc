@@ -247,5 +247,7 @@
   },
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
-  }
+  },
+  "scm.alwaysShowRepositories": true,
+  "scm.repositories.selectionMode": "multiple"
 }
