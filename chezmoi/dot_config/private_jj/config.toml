@@ -11,7 +11,7 @@ key = "~/.ssh/git_signing_ed25519.pub"
 
 [git]
 push-new-bookmarks = true
-push-bookmark-prefix = "lildude/push-"
+git_push_bookmark = "lildude/push-"
 
 [ui]
 default-command = "log-recent"
