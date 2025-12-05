@@ -2,6 +2,12 @@
 #!/usr/bin/env bash
 # hash: {{ include "dot_config/homebrew/Brewfile.tmpl" | sha256sum }}
   {{- if ne .install_type "min" }}
+_exists() {
+  command -v "$1" > /dev/null 2>&1
+}
+if ! _exists brew && [ -f "$HOME/.config/homebrew/Brewfile" ]; then
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
 eval "$(/opt/homebrew/bin/brew shellenv)"
 brew bundle --file $HOME/.config/homebrew/Brewfile || true
   {{- end }}

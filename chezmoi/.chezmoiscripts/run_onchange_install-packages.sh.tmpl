@@ -29,10 +29,6 @@ $HOME/.local/bin/mise install
     if ! _exists git; then
       xcode-select --install
     fi
-    if ! _exists brew && [ -f "$HOME/.config/homebrew/Brewfile" ]; then
-      bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-      eval '$(/opt/homebrew/bin/brew shellenv)'
-    fi
 
     # Build the restic-wrapper binary
     go build -o "$HOME/.local/gobin/restic-wrapper" "{{- .chezmoi.sourceDir }}/../ano/restic-wrapper/restic-wrapper.go"
