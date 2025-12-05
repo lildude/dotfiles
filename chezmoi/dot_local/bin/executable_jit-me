@@ -67,7 +67,7 @@ for _ in {1..10}; do
   )"
 
   if [[ -n "${fido_url}" ]]; then
-    echo -e "${green}✓${reset} Got Hubot's answer: ${fido_url}"
+    echo -e "${green}✔︎${reset} Got Hubot's answer: ${fido_url}"
     # iTerm is already configured to open these links in Safari
     if [[ "${TERM_PROGRAM}" != "iTerm.app" ]]; then
       open "${fido_url}"
@@ -92,7 +92,7 @@ for _ in {1..10}; do
             | cut -d"\`" -f2
         )"
         if [[ -n "${shell_cmd}" ]]; then
-          echo -e "${green}✓${reset} Got Hubot's shell command: ${shell_cmd}\n\nExecuting..."
+          echo -e "${green}✔︎${reset} Got Hubot's shell command: ${shell_cmd}\n\nExecuting..."
           eval "${shell_cmd}"
           exit 0
         fi
