@@ -18,3 +18,8 @@ http_unix_socket:
 browser:
 
 # gh pr list -R "github/github" -A "@me" -s merged --json headRefName --jq ".[].headRefName"
+extensions:
+    slack:
+        team: github
+        channel: meao-ops
+        bot: U02V5TYNARX
