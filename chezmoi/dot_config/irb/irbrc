@@ -1,6 +1,6 @@
 require "irb/completion"
 require "rubygems"
-require "irbtools"
+# require "irbtools"
 
 IRB.conf[:PROMPT_MODE] = :DEFAULT
 IRB.conf[:USE_READLINE] = true
