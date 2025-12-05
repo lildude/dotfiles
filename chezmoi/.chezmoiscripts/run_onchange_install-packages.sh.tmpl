@@ -20,8 +20,10 @@ $HOME/.local/bin/mise install
   {{- else }}
     packages+=" most gnupg2 grc"
   {{- end }}
-  sudo apt-get -q update > /dev/null && sudo apt-get -q install -y $packages > /dev/null
 
+  if [[ -n "$packages" ]]; then
+    sudo apt-get -q update > /dev/null && sudo apt-get -q install -y $packages > /dev/null
+  fi
 {{- else if .mac }}
   {{- if ne .install_type "min" }}
     if ! _exists git; then
