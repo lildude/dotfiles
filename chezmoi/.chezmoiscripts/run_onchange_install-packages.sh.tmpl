@@ -6,11 +6,10 @@ _exists() {
 # Install mise if not already installed
 if ! _exists mise; then
   curl -fsSL https://mise.run | sh
-  export PATH="$HOME/.local/mise/bin:$PATH"
 fi
 
 # Install/update packages with mise
-mise install
+$HOME/.local/bin/mise install
 
 # Install packages we can't manage with mise
 {{ if .linux -}}
