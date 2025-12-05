@@ -2,7 +2,6 @@ tap 'github/gh'                 # Needed for gh
 tap 'homebrew/bundle'
 tap 'muesli/tap'
 tap 'goreleaser/tap'
-tap 'tavianator/tap'            # Needed for bfs
 tap 'espanso/espanso'           # Needed for espanso
 
 {{- if eq .install_type "work" }}
@@ -21,46 +20,46 @@ tap 'espanso/espanso'           # Needed for espanso
 # Install everywhere
 brew 'base64'
 brew 'bash'             # Only needed for my Bash scripts now macOS isn't shipping updates etc
-brew 'bat'              # Like cat, but prettier
+# brew 'bat'              # Like cat, but prettier - Using mise to manage this
 brew 'btop'
 brew 'coreutils'
 brew 'docker-desktop'
 brew 'docker-compose'
 brew 'dos2unix'
 brew 'duf'
-brew 'eza'
+# brew 'eza'             # Better ls - Using mise to manage this
 brew 'exercism'
 brew 'fd'               # Like find, but faster
 brew 'findutils'
 brew 'fswatch'
 brew 'fzf'
-brew 'gh'
+# brew 'gh'              # Using mise to manage this
 brew 'git'
 brew 'git-delta'
 brew 'git-lfs'
 brew 'gnu-sed'
 brew 'gnupg'
-brew 'go'
-brew 'gofumpt'
-brew 'golangci-lint'
+# brew 'go'              # Using mise to manage this
+# brew 'gofumpt'         # Using mise to manage this
+# brew 'golangci-lint'   # Using mise to manage this
 brew 'goreleaser'
 brew 'grc'              # General colorizer
 brew 'htop'
 brew 'hyperfine'        # Great cli benchmarking tool
 brew 'icu4c'
-brew 'jj'
-brew 'jjui'
-brew 'jq'
+# brew 'jj'             # Using mise to manage this
+# brew 'jjui'           # Using mise to manage this
+# brew 'jq'              # Using mise to manage this
 brew 'just'
 brew 'lcov'
 brew 'lesspipe'
 brew 'libyaml'
 brew 'lockrun'
 brew 'mas'              # CLI tool for installing Mac App Store apps at the end of this file.
-brew 'mise'
+# brew 'mise'           # Using the shell installer as it's easier to manage across platforms
 brew 'moreutils'
 brew 'most'             # Better more/less - I only use this for paging and colouring man pages.
-brew 'pnpm'
+# brew 'pnpm'
 #brew 'openssl'
 brew 'pinentry-mac'
 brew 'p7zip'
@@ -69,7 +68,7 @@ brew 'pstree'
 brew 'rclone'
 brew 'restic'
 brew 'revive'           # fast & extensible static code analysis framework for Go
-brew 'ripgrep'          # rg, an even faster version of ag
+# brew 'ripgrep'          # rg, an even faster version of ag - Using mise to manage this
 brew 'rsync'
 brew 'shellcheck'
 brew 'tldr'
@@ -128,10 +127,10 @@ cask 'font-fira-mono'
 cask 'font-fira-mono-nerd-font'
 cask 'font-meslo-lg'
 cask 'font-meslo-lg-nerd-font'
-cask 'ghostty'
+# cask 'ghostty'
 cask 'iterm2'
 cask 'karabiner-elements'
-cask 'livebook'
+# cask 'livebook'
 cask 'mailtrackerblocker'
 cask 'netspot'
 cask 'ngrok'

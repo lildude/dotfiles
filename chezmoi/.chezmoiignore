@@ -22,6 +22,7 @@ Library/
 {{ end -}}
 {{ if eq .install_type "min" -}}
 .config/homebrew
+.config/mise/conf.d/full.toml
 .config/restic/
 .gnupg/
 .local/bin/mount-backups

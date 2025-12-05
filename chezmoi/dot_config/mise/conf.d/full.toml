@@ -1,0 +1,9 @@
+[tools]
+1password-cli="latest"
+elixir = "latest"
+erlang = "latest"
+go="latest"
+gofumpt="latest"
+golangci-lint="latest"
+node = "lts"
+ruby = "latest"

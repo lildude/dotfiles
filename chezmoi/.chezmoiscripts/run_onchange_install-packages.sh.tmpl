@@ -3,49 +3,24 @@
 _exists() {
   command -v "$1" > /dev/null 2>&1
 }
+# Install mise if not already installed
+if ! _exists mise; then
+  curl -fsSL https://mise.run | sh
+fi
 
+# Install/update packages with mise
+mise install
+
+# Install packages we can't manage with mise
 {{ if .linux -}}
   arch=$(uname -m)
-  packages="bat gh most jq ripgrep"
+  packages=""
   {{- if eq .install_type "min" }}
 
   {{- else }}
-    packages+=" exa gnupg2 grc"
-
-    if [[ "$arch" == "x86_64" ]]; then
-      arch="amd64"
-    elif [[ "$arch" == "aarch64" ]]; then
-      arch="arm64"
-    fi
-
-    filename="op_linux_${arch}_v2.30.3.zip"
-    curl -sLO "https://cache.agilebits.com/dist/1P/op/pkg/v2.30.3/$filename"
-    cd "$HOME/.local/bin"
-    unzip "$HOME/$filename" > /dev/null
-    # Verify download
-    gpg --keyserver hkps://keyserver.ubuntu.com --receive-keys 3FEF9748469ADBE15DA7CA80AC2D62742012EA22 &> /dev/null
-    gpg --verify op.sig op &> /dev/null || fail "Problem verifying op binary"
-    rm op.sig
-    cd "$HOME"
-    rm "$HOME/$filename"
+    packages+=" most gnupg2 grc"
   {{- end }}
-  # Install packages
   sudo apt-get -q update > /dev/null && sudo apt-get -q install -y $packages > /dev/null
-
-  # If jj is not installed and the GH_TOKEN or GITHUB_TOKEN is set, download jj from GitHub
-  if ! _exists jj && [[ -n "$GH_TOKEN" || -n "$GITHUB_TOKEN" ]]; then
-    if [[ "$arch" == "amd64" ]]; then
-      pattern="jj-*-amd64-unknown-linux-musl.tar.gz"
-    elif [[ "$arch" == "aarch64" ]]; then
-      pattern="jj-*-aarch64-unknown-linux-musl.tar.gz"
-    else
-      pattern="jj-*-x86_64-unknown-linux-musl.tar.gz"
-    fi
-
-    gh release download --repo jj-vcs/jj --pattern "$pattern" --dir "$HOME/.local/bin" --clobber \
-    && tar -xzf $HOME/.local/bin/*.tar.gz -C $HOME/.local/bin/ ./jj \
-    && rm $HOME/.local/bin/*.tar.gz
-  fi
 
 {{- else if .mac }}
   {{- if ne .install_type "min" }}

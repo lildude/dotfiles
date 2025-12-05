@@ -1,8 +1,11 @@
 [tools]
-node = "lts"
-ruby = "3.3"
-elixir = "latest"
-erlang = "latest"
+bat="latest"
+eza="latest"
+gh="latest"
+jj="latest"
+jjui="latest"
+jq="latest"
+ripgrep="latest"
 
 [settings]
 quiet = true
