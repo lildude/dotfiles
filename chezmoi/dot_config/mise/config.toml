@@ -8,4 +8,4 @@ jq="latest"
 ripgrep="latest"
 
 [settings]
-quiet = true
+# quiet = true
