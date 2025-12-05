@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+#/ Usage: jit-me
+#/
+#/ Send on slack a request for jit
+
+set -e
+
+show_help() { grep ^#/ <"${0}" |cut -c4- | envsubst ; }
+[[ "$*" == "-h" ]] && show_help && exit 0
+
+TEAM="github"
+CHANNEL="jit-ops"
+CHANNEL_ID="C024A8H6T8T"
+# CHANNEL="meao-ops"
+# CHANNEL_ID="C013UHS3STB"
+SO_CHANNEL="shell-ops"
+SO_CHANNEL_ID="C072FBPJDS9"
+
+backends="
+developer in stafftools
+kubelogin in tailscale
+"
+
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+yellow=$(tput setaf 3)
+blue=$(tput setaf 4)
+purple=$(tput setaf 5)
+reset=$(tput sgr0)
+
+
+backend=$(echo "${backends}" | grep -v "^$" | fzf)
+
+default_duration="3h"
+printf "${blue}Duration [%s] > ${reset}" "${default_duration}"
+read -r input < /dev/tty
+duration="${input:-"${default_duration}"}"
+
+default_justification="$(pbpaste | grep 'https://github.com/github/.\+/.\+/\d\+' || true)"
+if [[ "${backend}" == "kubelogin in tailscale" ]]; then
+	default_justification="using ephemeral shells"
+fi
+printf "${blue}Justification [%s] > ${reset}" "${default_justification}"
+read -r input < /dev/tty
+input="${input//[\'\"]/\`}"
+justification="${input:-"${default_justification}"}"
+
+message=".jit me to ${backend} for ${duration} because ${justification}"
+
+echo -e "Sending '${message}' to ${TEAM}/#${CHANNEL}"
+
+gh slack send \
+  --team "${TEAM}" \
+  --channel "${CHANNEL}" \
+  --message "${message}"
+
+
+echo -e "Waiting to get Hubot's fido challenge in ${TEAM}/#${CHANNEL}"
+
+for _ in {1..10}; do
+  fido_url="$(
+    gh slack api get conversations.history \
+      -f channel="${CHANNEL_ID}" \
+      -f limit=1 \
+      | jq '.messages[] | select(.bot_profile.name == "Hubot") | select(.text != "") | .text' \
+      | cut -d'<' -f3 | cut -d'>' -f1
+  )"
+
+  if [[ -n "${fido_url}" ]]; then
+    echo -e "${green}✓${reset} Got Hubot's answer: ${fido_url}"
+    # iTerm is already configured to open these links in Safari
+    if [[ "${TERM_PROGRAM}" != "iTerm.app" ]]; then
+      open "${fido_url}"
+    fi
+
+    if [[ "${default_justification}" == "using ephemeral shells" ]]; then
+      printf "${yellow}Press [ENTER] to connect to ephemeral shell...${reset}"
+      read -r input < /dev/tty
+      message=".shell me to gh-console for ${duration}"
+      echo -e "Sending '${message}' to ${TEAM}/#${SO_CHANNEL}"
+      gh slack send \
+        --team "${TEAM}" \
+        --channel "${SO_CHANNEL}" \
+        --message "${message}"
+      echo -e "Waiting to get Hubot's shell command in ${TEAM}/#${SO_CHANNEL}"
+      for _ in {1..10}; do
+        shell_cmd="$(
+          gh slack api get conversations.history \
+            -f channel="${SO_CHANNEL_ID}" \
+            -f limit=1 \
+            | jq '.messages[] | select(.bot_profile.name == "Hubot") | .attachments[] | .text' \
+            | cut -d"\`" -f2
+        )"
+        if [[ -n "${shell_cmd}" ]]; then
+          echo -e "${green}✓${reset} Got Hubot's shell command: ${shell_cmd}\n\nExecuting..."
+          eval "${shell_cmd}"
+          exit 0
+        fi
+      done
+    fi
+    exit 0
+  fi
+done
+
+echo -e "${red}Could not find Hubot's answer, opening the channel${reset}"
+open "https://github-grid.enterprise.slack.com/archives/${CHANNEL_ID}" && exit 1
