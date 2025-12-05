@@ -1,5 +1,6 @@
 export MISE_SHELL=zsh
 export __MISE_ORIG_PATH="$PATH"
+export __MISE_ZSH_PRECMD_RUN=0
 
 mise() {
   local command
@@ -25,13 +26,19 @@ mise() {
 _mise_hook() {
   eval "$(/opt/homebrew/bin/mise hook-env -s zsh)";
 }
+_mise_hook_precmd() {
+  eval "$(/opt/homebrew/bin/mise hook-env -s zsh --reason precmd)";
+}
+_mise_hook_chpwd() {
+  eval "$(/opt/homebrew/bin/mise hook-env -s zsh --reason chpwd)";
+}
 typeset -ag precmd_functions;
-if [[ -z "${precmd_functions[(r)_mise_hook]+1}" ]]; then
-  precmd_functions=( _mise_hook ${precmd_functions[@]} )
+if [[ -z "${precmd_functions[(r)_mise_hook_precmd]+1}" ]]; then
+  precmd_functions=( _mise_hook_precmd ${precmd_functions[@]} )
 fi
 typeset -ag chpwd_functions;
-if [[ -z "${chpwd_functions[(r)_mise_hook]+1}" ]]; then
-  chpwd_functions=( _mise_hook ${chpwd_functions[@]} )
+if [[ -z "${chpwd_functions[(r)_mise_hook_chpwd]+1}" ]]; then
+  chpwd_functions=( _mise_hook_chpwd ${chpwd_functions[@]} )
 fi
 
 _mise_hook
