@@ -271,12 +271,10 @@ compdef _directories md
 z4h source "$HOME/.secrets"
 z4h source /etc/grc.zsh # Colourize all the other things
 z4h source -- ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/etc/grc.zsh} # Colourize all the other things
-_exists mise && eval "$(mise activate zsh)"
-_exists zoxide && eval "$(zoxide init zsh)"
+z4h source -- ${XDG_CONFIG_HOME}/mise/activate.zsh 2>/dev/null # From running `mise activate zsh` and then modified to not assume a path.
+# _exists mise && eval "$(mise activate zsh)"
 
 unfunction _exists
-
-# eval "$(starship init zsh)"
 
 # This must always be last.
 [ -z "$ZPROF" ] || zprof
