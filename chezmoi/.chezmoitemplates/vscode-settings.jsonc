@@ -249,5 +249,6 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "scm.alwaysShowRepositories": true,
-  "scm.repositories.selectionMode": "multiple"
+  "scm.repositories.selectionMode": "multiple",
+  "editor.formatOnSave": true
 }
