@@ -1,17 +1,23 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 _exists() {
   command -v "$1" > /dev/null 2>&1
 }
-# Install mise if not already installed
-if ! _exists mise; then
-  curl -fsSL https://mise.run | sh
-fi
 
-# Install/update packages with mise
-$HOME/.local/bin/mise install
+# Install mise and run it in parallel with other package installation
+install_mise() {
+  # Install mise if not already installed
+  if ! _exists mise; then
+    curl -fsSL https://mise.run | sh
+  fi
 
-# Install packages we can't manage with mise
+  # Install/update packages with mise
+  $HOME/.local/bin/mise install
+}
+
+install_other_packages() {
+  # Install packages we can't manage with mise
 {{ if .linux -}}
   arch=$(uname -m)
   packages=""
@@ -40,3 +46,15 @@ $HOME/.local/bin/mise install
     launchctl load "$HOME/Library/LaunchAgents/local.restic_backup.plist"
   {{- end -}}
 {{- end }}
+}
+
+# Run mise installation and other package installation in parallel
+install_mise &
+mise_pid=$!
+
+install_other_packages &
+other_pid=$!
+
+# Wait for both processes to complete
+wait $mise_pid
+wait $other_pid
