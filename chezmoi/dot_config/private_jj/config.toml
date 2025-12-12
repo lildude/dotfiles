@@ -9,9 +9,8 @@ behavior = "own"
 backend = "ssh"
 key = "~/.ssh/git_signing_ed25519.pub"
 
-[git]
-push-new-bookmarks = true
-git_push_bookmark = "lildude/push-"
+[remote.origin]
+auto-track-bookmarks = "glob:lildude/*"
 
 [ui]
 default-command = "log-recent"
