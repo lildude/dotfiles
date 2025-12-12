@@ -259,8 +259,6 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 autoload -Uz zmv
 autoload -Uz $fpath[1]/*(.:t)           # Load all my functions
 
-# add-zsh-hook chpwd activate_venv_on_cd
-
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
 autoload -Uz url-quote-magic
@@ -276,6 +274,7 @@ z4h source /etc/grc.zsh # Colourize all the other things
 z4h source -- ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/etc/grc.zsh} # Colourize all the other things
 z4h source -- ${XDG_CONFIG_HOME}/mise/activate.zsh 2>/dev/null # From running `mise activate zsh` and then modified to not assume a path.
 # _exists mise && eval "$(mise activate zsh)"
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
 unfunction _exists
 
