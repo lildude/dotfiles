@@ -1,0 +1,4 @@
+local venv_dir=".venv"
+if [[ -d "$PWD/$venv_dir" ]]; then
+  source "$PWD/$venv_dir/bin/activate"
+fi
