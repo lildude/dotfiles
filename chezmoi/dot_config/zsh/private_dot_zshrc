@@ -259,7 +259,7 @@ z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
 autoload -Uz zmv
 autoload -Uz $fpath[1]/*(.:t)           # Load all my functions
 
-add-zsh-hook chpwd activate_venv_on_cd
+# add-zsh-hook chpwd activate_venv_on_cd
 
 autoload -Uz bracketed-paste-url-magic
 zle -N bracketed-paste bracketed-paste-url-magic
