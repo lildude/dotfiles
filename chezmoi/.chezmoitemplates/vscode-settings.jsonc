@@ -4,7 +4,12 @@
   "editor.fontFamily": "'JetBrainsMono Nerd Font', 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace",
   "editor.fontSize": 14,
   "editor.tabSize": 2,
-  "editor.rulers": [{ "column": 120, "color": "#4444445e" }],
+  "editor.rulers": [
+    {
+      "column": 120,
+      "color": "#4444445e"
+    }
+  ],
   "editor.minimap.enabled": false,
   "editor.cursorWidth": 3,
   "editor.scrollBeyondLastLine": false,
@@ -64,9 +69,13 @@
   "git.confirmSync": false,
   "diffEditor.renderSideBySide": false,
   "explorer.confirmDragAndDrop": false,
-  "shellcheck.customArgs": ["-x"],
+  "shellcheck.customArgs": [
+    "-x"
+  ],
   "shellcheck.useWorkspaceRootAsCwd": true,
-  "go.testFlags": ["-v"],
+  "go.testFlags": [
+    "-v"
+  ],
   "markdown.previewFrontMatter": "show",
   "[markdown]": {
     "files.trimTrailingWhitespace": false
@@ -96,7 +105,9 @@
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-    "editor.rulers": [120],
+    "editor.rulers": [
+      120
+    ],
     "editor.semanticHighlighting.enabled": true
   },
   "ruby.format": "rubyfmt",
@@ -124,7 +135,9 @@
   "sshfs.configpaths": [
     {
       "algorithms": {
-        "hmac": ["hmac-sha2-512-etm"]
+        "hmac": [
+          "hmac-sha2-512-etm"
+        ]
       }
     }
   ],
@@ -205,10 +218,6 @@
   "lldb.suppressUpdateNotifications": true,
   "workbench.iconTheme": "file-icons",
   "workbench.colorTheme": "One Dark Pro",
-  "rubyLsp.customRubyCommand": "~/.local/bin/ruby",
-  "rubyLsp.rubyVersionManager": {
-    "identifier": "custom"
-  },
   "gitlens.plusFeatures.enabled": false,
   "gitlens.virtualRepositories.enabled": false,
   "gitlens.advanced.messages": {
