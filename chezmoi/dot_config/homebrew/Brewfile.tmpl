@@ -60,7 +60,7 @@ brew 'mas'              # CLI tool for installing Mac App Store apps at the end 
 brew 'moreutils'
 brew 'most'             # Better more/less - I only use this for paging and colouring man pages.
 # brew 'pnpm'
-#brew 'openssl'
+# brew 'openssl'
 brew 'pinentry-mac'
 brew 'p7zip'
 brew 'prettyping'
@@ -84,8 +84,9 @@ brew 'zsh'
 {{- if eq .install_type "work" }}
 # Work-specific apps
 cask 'loom'
-# cask 'microsoft-edge'
+cask 'microsoft-edge'
 cask 'microsoft-teams'
+cask 'microsoft-outlook'
 cask 'slack'
 cask 'viscosity'
 {{- end }}
@@ -98,7 +99,7 @@ cask 'exodus'
 cask 'garmin-express'
 cask 'garmin-virb-edit'
 cask 'handbrake'
-cask 'netnewswire'
+# cask 'netnewswire'
 # cask 'transmission'
 cask 'transmit'
 cask 'trainerroad'
