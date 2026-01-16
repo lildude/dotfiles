@@ -198,10 +198,6 @@
   },
   "go.lintTool": "golangci-lint",
   "go.survey.prompt": false,
-  "[go]": {
-    "editor.formatOnSave": true
-  },
-  "go.formatTool": "gofumpt",
   "terminal.integrated.scrollback": 2000,
   "terminal.external.osxExec": "iTerm.app",
   "git.autofetch": true,
@@ -258,6 +254,5 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "scm.alwaysShowRepositories": true,
-  "scm.repositories.selectionMode": "multiple",
-  "editor.formatOnSave": true
+  "scm.repositories.selectionMode": "multiple"
 }
