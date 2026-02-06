@@ -9,6 +9,7 @@ Library/Application Support/Firefox/
 .config/iterm2/
 .config/ghostty/
 .config/karabiner/
+.config/hammerspoon/
 .config/restic/
 .local/bin/mount-backups
 .local/bin/rebrew

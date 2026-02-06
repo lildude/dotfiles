@@ -36,6 +36,9 @@ install_other_packages() {
       xcode-select --install
     fi
 
+    # Adjust hammerspoon config location
+    /usr/bin/defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
+
     # Build the restic-wrapper binary
     go build -o "$HOME/.local/gobin/restic-wrapper" "{{- .chezmoi.sourceDir }}/../ano/restic-wrapper/restic-wrapper.go"
 
