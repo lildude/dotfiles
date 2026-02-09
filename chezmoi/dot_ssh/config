@@ -82,14 +82,14 @@ Host *.bpdev-us-east-1.github.net *.ghe-test.org *.qaboot.net *.gh-quality.net *
   StrictHostKeyChecking no
 
 # Random test AWS instances
-Host *.compute.amazonaws.com
-  Port 122
-  User admin
-  UserKnownHostsFile /dev/null
-  StrictHostKeyChecking no
-  IdentitiesOnly yes
-  IdentityFile ~/.ssh/aws-lildude.pem
-  LogLevel quiet
+# Host *.compute.amazonaws.com
+#   Port 122
+#   User admin
+#   UserKnownHostsFile /dev/null
+#   StrictHostKeyChecking no
+#   IdentitiesOnly yes
+#   IdentityFile ~/.ssh/aws-lildude.pem
+#   LogLevel quiet
 
 Host ha.local hassio.local ha.home ha.lan
   Hostname 192.168.1.85
