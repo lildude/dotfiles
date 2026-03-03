@@ -151,6 +151,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 #### ---:[ Aliases ]:--- ###
 alias path='echo -e ${PATH//:/\\n}'
 # alias rm='nocorrect rm'
+_exists eza && alias ls="eza --no-user --group-directories-first --icons=auto"
 alias l='ls -lh'
 alias ll='ls -lha'
 alias ls-l='ls -lh'
@@ -197,7 +198,6 @@ fi
 #   alias ci="hub ci-status"
 # }
 _exists bat && alias cat=bat && export BAT_THEME="Monokai Extended"
-_exists eza && alias ls="eza --no-user --group-directories-first --icons=auto"
 _exists rg && rg() { $commands[rg] -p "$@" | less; }
 _exists prettyping && alias ping="prettyping --nolegend"
 _exists chezmoi && {
@@ -207,7 +207,7 @@ _exists chezmoi && {
   alias cha="chezmoi apply"
   alias chd="chezmoi cd"
 }
-_exists code-insiders && alias code=code-insiders
+# _exists code-insiders && alias code=code-insiders
 # _exists gh && {
 #   gh-cs="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m largePremiumLinux --default-permissions | tail -1) --insiders"
 #   gh-cs-big="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m xLargePremiumLinux --default-permissions | tail -1) --insiders"
