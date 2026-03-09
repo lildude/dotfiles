@@ -129,5 +129,7 @@ else
   user_clr=${blue}
 fi
 
+which mise > /dev/null && eval "$(mise activate bash)"
+
 export PS1="${user_clr}\u${reset}@${yellow}\h ${green}\w${purple} ${user_clr}\$${reset} "
 
