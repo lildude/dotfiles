@@ -9,7 +9,7 @@ matches:
         type: shell
         params:
           shell: bash
-          cmd: "gh md link {{clipboard}}"
+          cmd: "PATH=$PATH:$HOME/.local/share/mise/shims $HOME/.local/share/mise/shims/gh md link {{clipboard}}"
   - trigger: "//ml"
     replace: "{{output}}"
     vars:
@@ -19,7 +19,7 @@ matches:
         type: shell
         params:
           shell: bash
-          cmd: "gh md link --simple {{clipboard}}"
+          cmd: "PATH=$PATH:$HOME/.local/share/mise/shims $HOME/.local/share/mise/shims/gh md link --simple {{clipboard}}"
   - trigger: "//mr"
     replace: "{{output}}"
     vars:
@@ -29,4 +29,4 @@ matches:
         type: shell
         params:
           shell: bash
-          cmd: "gh md ref {{clipboard}}"
+          cmd: "PATH=$PATH:$HOME/.local/share/mise/shims $HOME/.local/share/mise/shims/gh md ref {{clipboard}}"
