@@ -2,6 +2,7 @@
 bat="latest"
 eza="latest"
 gh="latest"
+"github:anomalyco/opencode" = "latest"
 jj="latest"
 jjui="latest"
 jq="latest"
