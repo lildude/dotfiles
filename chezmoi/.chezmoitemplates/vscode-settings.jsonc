@@ -255,5 +255,6 @@
   },
   "scm.alwaysShowRepositories": true,
   "scm.repositories.selectionMode": "multiple",
-  "@azure.argTenant": ""
+  "@azure.argTenant": "",
+  "chat.viewSessions.orientation": "stacked"
 }
