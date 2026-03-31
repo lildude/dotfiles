@@ -45,6 +45,11 @@ read -r input < /dev/tty
 input="${input//[\'\"]/\`}"
 justification="${input:-"${default_justification}"}"
 
+default_type="gh-console"
+printf "${blue}Shell Type [%s] > ${reset}" "${default_type}"
+read -r input < /dev/tty
+type="${input:-"${default_type}"}"
+
 message=".jit me to ${backend} for ${duration} because ${justification}"
 
 echo -e "Sending '${message}' to ${TEAM}/#${CHANNEL}"
@@ -76,7 +81,7 @@ for _ in {1..10}; do
     if [[ "${default_justification}" == "using ephemeral shells" ]]; then
       printf "${yellow}Press [ENTER] to connect to ephemeral shell...${reset}"
       read -r input < /dev/tty
-      message=".shell me to gh-console for ${duration}"
+      message=".shell me to ${type} for ${duration}"
       echo -e "Sending '${message}' to ${TEAM}/#${SO_CHANNEL}"
       gh slack send \
         --team "${TEAM}" \
