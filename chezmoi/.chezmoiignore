@@ -21,6 +21,7 @@ Library/Application Support/Firefox/
 Library/
 {{ end -}}
 {{ if eq .install_type "min" -}}
+.claude-copilot-proxy/
 .config/homebrew
 .config/mise/conf.d/full.toml
 .config/restic/

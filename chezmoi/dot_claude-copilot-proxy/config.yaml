@@ -1,0 +1,76 @@
+# Claude Code -> GitHub Copilot Proxy Configuration
+# Uses wildcard routing - automatically handles all models
+
+model_list:
+  # Wildcard routes all models to GitHub Copilot
+  - model_name: "*"
+    litellm_params:
+      model: github_copilot/*
+      api_key: os.environ/GITHUB_TOKEN
+      extra_headers:
+        Editor-Version: "vscode/1.95.0"
+        Editor-Plugin-Version: "copilot-chat/0.22.4"
+        Copilot-Integration-Id: "vscode-chat"
+        Openai-Organization: "github-copilot"
+        Openai-Intent: "conversation-panel"
+        Copilot-Vision-Request: "true"
+
+litellm_settings:
+  drop_params: true
+
+general_settings:
+  allow_requests_on_db_unavailable: true
+  # Explicitly disable forwarding client/provider auth headers to upstream APIs.
+  # This prevents malformed proxy auth headers from being passed through.
+  forward_client_headers_to_llm_api: false
+  forward_llm_provider_auth_headers: false
+
+server_settings:
+  port: 4000
+  host: "0.0.0.0"
+
+router_settings:
+  num_retries: 2
+  timeout: 300
+  routing_strategy: simple-shuffle
+  model_group_alias:
+    # Supported models (synced by update-models script)
+    "claude-haiku-4.5": "claude-haiku-4.5"
+    "claude-opus-4.5": "claude-opus-4.5"
+    "claude-opus-4.6": "claude-opus-4.6"
+    "claude-opus-4.6-1m": "claude-opus-4.6-1m"
+    "claude-sonnet-4": "claude-sonnet-4"
+    "claude-sonnet-4.5": "claude-sonnet-4.5"
+    "claude-sonnet-4.6": "claude-sonnet-4.6"
+    "claude-sonnet-4.6-1m": "claude-sonnet-4.6-1m"
+    "gemini-2.5-pro": "gemini-2.5-pro"
+    "gemini-3-flash-preview": "gemini-3-flash-preview"
+    "gemini-3-pro-preview": "gemini-3-pro-preview"
+    "gpt-4.1": "gpt-4.1"
+    "gpt-4o": "gpt-4o"
+    "gpt-5": "gpt-5"
+    "gpt-5-mini": "gpt-5-mini"
+    # Claude Code compatibility aliases (map old model IDs to new ones)
+    "claude-3-5-haiku-20241022": "claude-haiku-4.5"
+    "claude-haiku-4-5-20251001": "claude-haiku-4.5"
+    "claude-sonnet-4-20250514": "claude-sonnet-4"
+    "claude-sonnet-4-5-20250929": "claude-sonnet-4.5"
+    "claude-sonnet-4-5": "claude-sonnet-4.5"
+    "claude-sonnet-4-6": "claude-sonnet-4.6"
+    "claude-sonnet-4-6-1m": "claude-sonnet-4.6-1m"
+    "claude-haiku-4-5": "claude-haiku-4.5"
+    "claude-opus-4-20250514": "claude-opus-4.5"
+    "claude-opus-4-5-20251101": "claude-opus-4.5"
+    "claude-opus-4-6": "claude-opus-4.6"
+    "claude-opus-4-6-20260205": "claude-opus-4.6"
+    "claude-opus-4-6-1m": "claude-opus-4.6-1m"
+    "claude-3-5-sonnet-20241022": "claude-sonnet-4"
+    # Gemini CLI aliases (map unsupported model names to supported ones)
+    "gemini-2.5-flash-lite": "gemini-3-flash-preview"
+    "gemini-2.5-flash": "gemini-3-flash-preview"
+    "gemini-2.5-flash-preview-04-17": "gemini-3-flash-preview"
+    "gemini-2.0-flash": "gemini-3-flash-preview"
+    "gemini-2.0-flash-lite": "gemini-3-flash-preview"
+    "gemini-1.5-flash": "gemini-3-flash-preview"
+    "gemini-2.5-pro-preview-05-06": "gemini-3-pro-preview"
+    "gemini-1.5-pro": "gemini-3-pro-preview"
