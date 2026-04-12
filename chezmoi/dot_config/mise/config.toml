@@ -9,4 +9,7 @@ jq="latest"
 ripgrep="latest"
 
 [settings]
-quiet = true
+quiet = false
+
+[settings.github]
+credential_command = "op read 'op://Private/Mise PAT/token'"
