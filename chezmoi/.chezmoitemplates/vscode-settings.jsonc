@@ -257,5 +257,5 @@
   "scm.repositories.selectionMode": "multiple",
   "@azure.argTenant": "",
   "chat.viewSessions.orientation": "stacked",
-  "editor.accessibilitySupport": "on"
+  "editor.accessibilitySupport": "off"
 }
