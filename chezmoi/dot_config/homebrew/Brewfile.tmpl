@@ -86,10 +86,10 @@ brew 'zsh'
 
 {{- if eq .install_type "work" }}
 # Work-specific apps
+cask 'cap'
 cask 'loom'
 cask 'microsoft-edge'
 cask 'microsoft-teams'
-cask 'microsoft-outlook'
 cask 'slack'
 cask 'viscosity'
 {{- end }}
