@@ -11,6 +11,6 @@ if ! grep -q "${USER}.*/bin/zsh" /etc/passwd; then
   $sudo chsh -s /bin/zsh "${USER}"
 fi
 
-if [ ! -f "${HOME}/.netrc" ] || grep -vq "goproxy.githubapp.com" "${HOME}/.netrc"; then
-  echo "machine goproxy.githubapp.com login nobody password $GITHUB_TOKEN" >> "$HOME/.netrc"
+if [ -x /usr/local/share/goproxy-init.sh ]; then
+  /usr/local/share/goproxy-init.sh --override
 fi
