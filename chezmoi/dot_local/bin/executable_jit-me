@@ -17,8 +17,21 @@ SO_CHANNEL="shell-ops"
 SO_CHANNEL_ID="C072FBPJDS9"
 
 backends="
-developer in stafftools
 kubelogin in tailscale
+developer in stafftools
+"
+
+# See https://github.com/github/shells/tree/main/config/flavors
+console_types="
+gh-console
+gh-dbconsole
+proxima-staffship-gh-console
+proxima-prod-ae-01-gh-console
+proxima-prod-cus-01-gh-console
+proxima-prod-jpw-01-gh-console
+proxima-prod-sdc-01-gh-console
+proxima-prod-weu-01-gh-console
+proxima-prod-wus3-01-gh-console
 "
 
 red=$(tput setaf 1)
@@ -28,8 +41,7 @@ blue=$(tput setaf 4)
 purple=$(tput setaf 5)
 reset=$(tput sgr0)
 
-
-backend=$(echo "${backends}" | grep -v "^$" | fzf)
+backend=$(echo "${backends}" | grep -v "^$" | fzf --prompt="Select a backend > " --height $(($(echo "${backends}" | grep -cv "^$") + 2)) --layout reverse-list)
 
 default_duration="3h"
 printf "${blue}Duration [%s] > ${reset}" "${default_duration}"
@@ -45,10 +57,7 @@ read -r input < /dev/tty
 input="${input//[\'\"]/\`}"
 justification="${input:-"${default_justification}"}"
 
-default_type="gh-console"
-printf "${blue}Shell Type [%s] > ${reset}" "${default_type}"
-read -r input < /dev/tty
-type="${input:-"${default_type}"}"
+type=$(echo "${console_types}" | grep -v "^$" | fzf --prompt="Select a console type > " --height $(($(echo "${console_types}" | grep -cv "^$") + 2)) --layout reverse-list)
 
 message=".jit me to ${backend} for ${duration} because ${justification}"
 
