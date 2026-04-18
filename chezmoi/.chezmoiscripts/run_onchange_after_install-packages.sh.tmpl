@@ -12,6 +12,9 @@ install_mise() {
     curl -fsSL https://mise.run | sh
   fi
 
+  # Update mise if installed
+  $HOME/.local/bin/mise self-update
+
   # Install/update packages with mise
   $HOME/.local/bin/mise install
 }
