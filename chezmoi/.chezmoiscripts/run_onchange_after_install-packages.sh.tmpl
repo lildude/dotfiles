@@ -9,14 +9,14 @@ _exists() {
 install_mise() {
   # Install mise if not already installed
   if ! _exists mise; then
-    curl -fsSL https://mise.run | sh
+    curl -fsSL https://mise.run | sh 2>&1 >> /dev/null
   fi
 
   # Update mise if installed
-  $HOME/.local/bin/mise self-update --yes
+  $HOME/.local/bin/mise self-update --yes --quiet 2>&1 >> /dev/null
 
   # Install/update packages with mise
-  $HOME/.local/bin/mise install
+  $HOME/.local/bin/mise install 2>&1 >> /dev/null
 }
 
 install_other_packages() {
