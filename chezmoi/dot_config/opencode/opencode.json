@@ -9,5 +9,13 @@
     "todowrite": "allow",
     "webfetch": "allow",
     "question": "allow"
+  },
+  "mcp": {
+    "github": {
+      "type": "remote",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "enabled": true,
+      "oauth": true
+    }
   }
 }
