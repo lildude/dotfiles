@@ -19,6 +19,12 @@
       "headers": {
         "Authorization": "Bearer {file:~/.config/opencode/secrets/github-pat}"
       }
+    },
+    "homeassistant": {
+      "type": "remote",
+      "url": "http://ha.local:8123/api/mcp",
+      "enabled": true,
+      "oauth": true
     }
   }
 }
