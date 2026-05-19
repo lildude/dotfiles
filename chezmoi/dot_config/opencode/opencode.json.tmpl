@@ -20,11 +20,16 @@
         "Authorization": "Bearer {file:~/.config/opencode/secrets/github-pat}"
       }
     },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp"
+    }{{- if eq .install_type "home" }},
     "homeassistant": {
       "type": "remote",
       "url": "http://ha.local:8123/api/mcp",
       "enabled": true,
       "oauth": true
     }
+    {{- end }}
   }
 }
