@@ -1,4 +1,4 @@
-{
+{ {{- if eq .install_type "work" }}
   "mcpServers": {
     "1up": {
       "type": "local",
@@ -69,4 +69,5 @@
       }
     }
   }
+  {{- end }}
 }
