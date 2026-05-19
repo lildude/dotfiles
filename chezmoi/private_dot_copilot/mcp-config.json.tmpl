@@ -1,0 +1,72 @@
+{
+  "mcpServers": {
+    "1up": {
+      "type": "local",
+      "command": "1up",
+      "args": [],
+      "tools": [
+        "*"
+      ]
+    },
+    "sentry": {
+      "type": "http",
+      "url": "https://mcp.sentry.dev/mcp",
+      "headers": {},
+      "tools": [
+        "*"
+      ]
+    },
+    "fabric-rti-mcp": {
+      "command": "uvx",
+      "args": [
+        "microsoft-fabric-rti-mcp"
+      ],
+      "env": {
+        "KUSTO_SERVICE_URI": "https://gh-analytics.eastus.kusto.windows.net",
+        "KUSTO_SERVICE_DEFAULT_DB": "hydro",
+        "FABRIC_API_BASE_URL": "https://api.fabric.microsoft.com/v1"
+      }
+    },
+    "datadog": {
+      "type": "http",
+      "url": "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp",
+      "headers": {},
+      "tools": [
+        "*"
+      ]
+    },
+    "Splunk": {
+      "tools": [
+        "*"
+      ],
+      "type": "local",
+      "source": "user",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "--dns=100.100.100.100",
+        "-e",
+        "SPLUNK_HOST",
+        "-e",
+        "SPLUNK_PORT",
+        "-e",
+        "SPLUNK_BEARER_TOKEN",
+        "-e",
+        "SPLUNK_SCHEME",
+        "-e",
+        "VERIFY_SSL",
+        "ghcr.io/github/splunk-mcp-server:latest"
+      ],
+      "env": {
+        "SPLUNK_HOST": "splunkazure-api-azure-eastus.octoca.ts.net",
+        "SPLUNK_PORT": "443",
+        "SPLUNK_SCHEME": "https",
+        "VERIFY_SSL": "true",
+        "FASTMCP_LOG_LEVEL": "DEBUG",
+        "SPLUNK_BEARER_TOKEN": "{{ onepasswordRead "op://Private/Splunk bearer token/credential" }}"
+      }
+    }
+  }
+}
