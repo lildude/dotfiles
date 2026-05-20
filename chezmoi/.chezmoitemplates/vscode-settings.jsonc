@@ -258,5 +258,6 @@
   "@azure.argTenant": "",
   "chat.viewSessions.orientation": "stacked",
   "editor.accessibilitySupport": "off",
-  "git.suggestSmartCommit": false
+  "git.suggestSmartCommit": false,
+  "github.copilot.chat.githubMcpServer.enabled": true
 }
