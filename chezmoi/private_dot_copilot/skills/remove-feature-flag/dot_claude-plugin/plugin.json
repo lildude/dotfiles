@@ -1,0 +1,7 @@
+{
+  "name": "remove-feature-flag",
+  "description": "Decommission a fully rolled-out feature flag cleanly. Verifies rollout via Datadog, finds tracking issues, maps the full surface area across the org (cross-repo!), runs an adversarial review, then opens the PR and runs the CCR loop.",
+  "author": {
+    "name": "GitHub"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "sentry-troubleshooting",
+  "description": "Investigate exceptions, error spikes, and release regressions in Sentry using the Sentry MCP server.",
+  "author": {
+    "name": "GitHub"
+  }
+}

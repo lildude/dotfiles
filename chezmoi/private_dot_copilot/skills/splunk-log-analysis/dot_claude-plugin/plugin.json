@@ -1,0 +1,7 @@
+{
+  "name": "splunk-log-analysis",
+  "description": "Query and analyze production logs in Splunk using SPL via the Splunk MCP server.",
+  "author": {
+    "name": "GitHub"
+  }
+}

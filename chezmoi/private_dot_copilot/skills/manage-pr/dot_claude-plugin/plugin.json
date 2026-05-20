@@ -1,0 +1,7 @@
+{
+  "name": "manage-pr",
+  "description": "Drive a pull request through review and CI to clean. Address feedback, re-request Copilot Code Review, watch CI, loop until mergeable.",
+  "author": {
+    "name": "GitHub"
+  }
+}

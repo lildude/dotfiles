@@ -1,0 +1,7 @@
+{
+  "name": "datadog-troubleshooting",
+  "description": "Debug and troubleshoot Datadog monitor deployment errors, invalid payloads, and SLO configuration issues.",
+  "author": {
+    "name": "GitHub"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "create-pr",
+  "description": "Open a high-quality pull request the user won't have to fix up. Encodes worktree-based branching to avoid colliding with inflight work, and uses each repo's PR template format so the PR isn't bounced for missing fields.",
+  "author": {
+    "name": "GitHub"
+  }
+}
