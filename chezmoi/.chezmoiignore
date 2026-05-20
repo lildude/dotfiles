@@ -33,6 +33,7 @@ Library/
 .netrc
 .secrets
 .ssh/**
+.config/opencode/secrets/
 dev
 tmp
 {{ end -}}
