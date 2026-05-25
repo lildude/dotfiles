@@ -25,10 +25,15 @@
       "url": "https://mcp.context7.com/mcp"
     }{{- if eq .install_type "home" }},
     "homeassistant": {
-      "type": "remote",
-      "url": "http://ha.local:8123/api/mcp",
+      "type": "local",
       "enabled": true,
-      "oauth": true
+      "command": "uvx",
+      "args": [
+        "mcp-proxy",
+        "--transport",
+        "streamablehttp",
+        "http://192.168.1.85:9583/private_wOmkXg4U_NLY4HVq3rYxTA"
+      ]
     }
     {{- end }}
   }

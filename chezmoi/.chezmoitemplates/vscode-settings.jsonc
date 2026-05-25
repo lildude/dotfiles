@@ -259,5 +259,6 @@
   "editor.accessibilitySupport": "off",
   "git.suggestSmartCommit": false,
   "github.copilot.chat.githubMcpServer.enabled": true,
-  "chat.viewSessions.orientation": "stacked"
+  "chat.viewSessions.orientation": "stacked",
+  "git.addAICoAuthor": "off"
 }
