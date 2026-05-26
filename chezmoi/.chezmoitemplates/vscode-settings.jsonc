@@ -256,8 +256,8 @@
   "scm.alwaysShowRepositories": true,
   "scm.repositories.selectionMode": "multiple",
   "@azure.argTenant": "",
-  "chat.viewSessions.orientation": "stacked",
   "editor.accessibilitySupport": "off",
   "git.suggestSmartCommit": false,
-  "github.copilot.chat.githubMcpServer.enabled": true
+  "github.copilot.chat.githubMcpServer.enabled": true,
+  "chat.viewSessions.orientation": "stacked"
 }
