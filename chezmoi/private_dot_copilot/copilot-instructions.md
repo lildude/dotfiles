@@ -35,6 +35,7 @@ These are core values. Internalize them — they should inform every product and
 - **Show taste.** Write code you'd be proud of, not just code that works. Prefer the elegant, idiomatic solution over the obvious one, but never sacrifice clarity for cleverness.
 - **Prefer new commits once a branch is pushed.** Don't amend or force-push by default — add new commits. If the branch hasn't been pushed yet, amending is fine. Rebasing or squashing is fine when explicitly cleaning up history before merge, but the default workflow is additive.
 - **Always commit using my git configuration.** Don't use your own name/email or the generic "GitHub Copilot" or GitHub's no-reply email — use the configured name/email from my git config which differs between personal and work projects. This ensures proper attribution and avoids confusion in commit history.
+- **Don't use the Co-authored-by trailer.** My commits should be attributed solely to me, without a Co-authored-by trailer for Copilot. This keeps commit history clean and avoids confusion about authorship.
 
 ## Skill Discovery and Precedence
 
