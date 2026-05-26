@@ -16,11 +16,7 @@
   useConfigOnly = true
   name = Colin Seymour
   email = colin@symr.io
-  {{- if glob (printf "%s/.ssh/git_signing_ed25519.pub" .chezmoi.homeDir) }}
-  signingkey = {{ printf "%s/.ssh/git_signing_ed25519.pub" .chezmoi.homeDir }}
-  {{- else }}
   signingkey = 88109C73073E7080
-  {{- end }}
 
 # Override default when working in work repos
 [includeIf "hasconfig:remote.*.url:ssh://git@github.com/github/*"] # Requires git 2.36.0 later
@@ -134,14 +130,10 @@
   gpgSign = true
 
 [gpg]
-  {{- if glob (printf "%s/.ssh/git_signing_ed25519.pub" .chezmoi.homeDir) }}
-  format = ssh
-  {{- else }}
   {{- if .codespaces }}
   program = /.codespaces/bin/gh-gpgsign
   {{- else }}
   program = {{- lookPath "gpg" }}
-  {{- end }}
   {{- end }}
 
 [merge]

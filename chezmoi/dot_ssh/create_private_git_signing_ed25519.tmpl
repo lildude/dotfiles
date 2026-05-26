@@ -1,5 +1,0 @@
-{{- if .codespaces -}}
-{{ .chezmoi.env "SSH_SIGNING_PRIV_KEY" }}
-{{- else if ne .install_type "min" -}}
-{{ onepasswordRead "op://Dotfiles/git_signing_ed25519/private key" }}
-{{- end -}}
