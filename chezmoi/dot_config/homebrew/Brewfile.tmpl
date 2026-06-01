@@ -11,6 +11,7 @@ tap 'espanso/espanso'           # Needed for espanso
 
 {{- if eq .install_type "home" }}
 # Home-specific tools
+brew 'restic'
 # brew 'ffmpeg'
 # brew 'vips'             # Used by jekyll plugin to resize images
 # brew 'webp'             # For converting images to webp
@@ -22,12 +23,12 @@ brew 'base64'
 brew 'bash'             # Only needed for my Bash scripts now macOS isn't shipping updates etc
 # brew 'bat'              # Like cat, but prettier - Using mise to manage this
 brew 'btop'
-brew 'claude'
-brew 'claude-code'
-brew 'copilot-cli'
+# brew 'claude'
+# brew 'claude-code'
+brew 'copilot'
 brew 'coreutils'
-brew 'docker-desktop'
-brew 'docker-compose'
+# brew 'docker-desktop'
+# brew 'docker-compose'
 brew 'dos2unix'
 brew 'duf'
 # brew 'eza'             # Better ls - Using mise to manage this
@@ -47,7 +48,6 @@ brew 'gnupg'
 # brew 'golangci-lint'   # Using mise to manage this
 brew 'goreleaser'
 brew 'grc'              # General colorizer
-brew 'htop'
 brew 'hyperfine'        # Great cli benchmarking tool
 brew 'icu4c'
 # brew 'jj'             # Using mise to manage this
@@ -69,7 +69,6 @@ brew 'p7zip'
 brew 'prettyping'
 brew 'pstree'
 brew 'rclone'
-brew 'restic'
 brew 'revive'           # fast & extensible static code analysis framework for Go
 # brew 'ripgrep'          # rg, an even faster version of ag - Using mise to manage this
 brew 'rsync'
@@ -100,8 +99,9 @@ cask 'calibre'
 cask 'concept2-utility'
 cask 'exodus'
 cask 'garmin-express'
-cask 'garmin-virb-edit'
-cask 'handbrake'
+# cask 'garmin-virb-edit'
+# cask 'handbrake'
+cask 'netspot'
 # cask 'netnewswire'
 # cask 'transmission'
 cask 'transmit'
@@ -113,14 +113,12 @@ cask 'zwift'
 cask '1password'
 cask '1password-cli'
 cask 'appcleaner'
-cask 'bartender'
+# cask 'bartender'
 cask 'bettermouse'
 cask 'bruno'                 # Alternative to Postman/Insomnia who've both gone subscription
-cask 'claude-code'
-cask 'cleanmymac'
 cask 'cleanshot'
 cask 'dash'
-cask 'docker'
+# cask 'docker'
 cask 'espanso'
 cask 'fantastical'
 cask 'firefox'
@@ -136,9 +134,7 @@ cask 'github-copilot-app'
 # cask 'ghostty'
 cask 'iterm2'
 cask 'karabiner-elements'
-# cask 'livebook'
-cask 'mailtrackerblocker'
-cask 'netspot'
+
 cask 'ngrok'
 cask 'obsidian'
 cask 'orbstack'
