@@ -36,6 +36,7 @@ Library/
 .config/opencode/secrets/
 dev
 tmp
+{{ end -}}
 {{/* Don't install personal files on work machines */}}
 {{ if eq .install_type "work" -}}
 .local/bin/mount-backups
