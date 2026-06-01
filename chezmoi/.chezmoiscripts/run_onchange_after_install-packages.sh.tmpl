@@ -42,6 +42,7 @@ install_other_packages() {
     # Adjust hammerspoon config location
     /usr/bin/defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"
 
+    {{- if eq .install_type "home" }}
     # Build the restic-wrapper binary
     go build -o "$HOME/.local/gobin/restic-wrapper" "{{- .chezmoi.sourceDir }}/../ano/restic-wrapper/restic-wrapper.go"
 
@@ -50,6 +51,7 @@ install_other_packages() {
       launchctl unload "$HOME/Library/LaunchAgents/local.restic_backup.plist"
     fi
     launchctl load "$HOME/Library/LaunchAgents/local.restic_backup.plist"
+    {{- end -}}
   {{- end -}}
 {{- end }}
 }
