@@ -1,6 +1,6 @@
 ---
 name: create-pr
-description: This skill should be used when the user asks to "create a PR", "open a draft PR", "send a pull request", "push this and open a PR", or any variant that ends in a new pull request. Encodes hard-won conventions for working in the github/github monolith and other GitHub repos that ship code via PR — most importantly using a worktree to avoid colliding with the user's inflight branches and using the repo's PR template format for the body so the PR doesn't get bounced for missing fields.
+description: This skill should be used when the user asks to "create a PR", "open a draft PR", "send a pull request", "push this and open a PR", or any variant that ends in a new pull request. Covers the github/github monolith and other GitHub repos that ship code via PR.
 ---
 
 # Create PR — open a high-quality pull request the user won't have to fix up

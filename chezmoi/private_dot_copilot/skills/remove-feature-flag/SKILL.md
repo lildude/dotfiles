@@ -1,6 +1,6 @@
 ---
 name: remove-feature-flag
-description: This skill should be used when the user asks to "remove a feature flag", "clean up a fully rolled-out FF", "delete this flag", "find a 100% flag and remove it", or otherwise wants to decommission a feature flag whose rollout is complete. Encodes the verify-rollout → find-tracking-issue → worktree → surgical-removal → CCR loop pattern, and the gotchas about workflow snapshot fixtures, downstream JSON consumers, and bugs that the FF gate was previously hiding.
+description: This skill should be used when the user asks to "remove a feature flag", "clean up a fully rolled-out FF", "delete this flag", "find a 100% flag and remove it", or otherwise wants to decommission a feature flag whose rollout is complete.
 ---
 
 # Remove Feature Flag — decommission a fully rolled-out FF cleanly

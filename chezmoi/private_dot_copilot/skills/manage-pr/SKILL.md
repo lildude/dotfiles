@@ -1,6 +1,6 @@
 ---
 name: manage-pr
-description: This skill should be used when the user asks to "address PR feedback", "respond to review comments", "request a Copilot code review", "watch CI", "wait for CI", "iterate on a PR until clean", or needs to drive a pull request through the review/CI/merge loop. Encodes hard-won knowledge about GitHub's PR review APIs (notably the `[bot]` login suffix needed to re-request Copilot Code Review) and the typical address-feedback / re-request / wait loop.
+description: This skill should be used when the user asks to "address PR feedback", "respond to review comments", "request a Copilot code review", "watch CI", "wait for CI", "iterate on a PR until clean", or needs to drive a pull request through the review/CI/merge loop.
 ---
 
 # Manage PR — drive a pull request through review and CI to clean

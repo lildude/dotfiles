@@ -13,9 +13,9 @@ Search Splunk for errors in the last hour.
 
 **Expected Behavior:**
 The response should:
-- Ask which index or service to search, or use `list_indexes` to discover
+- Ask which index or service to search, or use `splunk-list_indexes` (`list_indexes` in some clients) to discover
 - Build a valid SPL query with `earliest=-1h latest=now`
-- Use `search_splunk` to execute it
+- Use `splunk-search_splunk` (`search_splunk` in some clients) to execute it
 - Present results in a structured format with counts
 - NOT hallucinate index names without checking
 

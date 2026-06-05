@@ -82,14 +82,22 @@ Determine what you're looking for:
 4. **Correlation** → Link events across indexes by request ID, trace ID, or timestamp
 
 Ask the user for:
-- **Index** to search (or use `list_indexes` / `get_indexes_and_sourcetypes` to discover)
+- **Index** to search (or use `splunk-list_indexes` / `splunk-get_indexes_and_sourcetypes`; `list_indexes` / `get_indexes_and_sourcetypes` in some clients)
 - **Time window** (last hour, last 24h, specific range)
 - **Search terms** — error messages, job names, endpoint paths, user IDs
 - **What they want to know** — counts, individual events, trends, breakdowns
 
 ### Step 2: Build the SPL Query
 
-SPL queries follow this structure:
+For MCP execution, pass the query body without a leading `search` command. Splunk MCP tools are usually shown with a `splunk-` server prefix in Copilot CLI (`splunk-search_splunk`, `splunk-list_indexes`, `splunk-get_indexes_and_sourcetypes`) and without that prefix in some other clients (`search_splunk`, `list_indexes`, `get_indexes_and_sourcetypes`). The search tool prepends `search` plus a space before sending the SPL to Splunk:
+
+```spl
+index=<index> <search terms> earliest=-<time> latest=now
+| <transformations>
+| <output>
+```
+
+For Splunk Web UI searches and shareable URLs, include the explicit `search` command:
 
 ```spl
 search index=<index> <search terms> earliest=-<time> latest=now
@@ -101,7 +109,7 @@ See the GitHub-Specific SPL Patterns section below for real query examples using
 
 ### Step 3: Execute and Analyze
 
-Run the query via `search_splunk` and interpret results:
+Run the query via `splunk-search_splunk` (`search_splunk` in some clients) and interpret results:
 
 1. **Check result count** — empty results may mean wrong index, time range, or search terms
 2. **Look for patterns** — cluster errors by type, time, or source
@@ -158,14 +166,18 @@ Always present Splunk queries as clickable markdown links:
 
 This ensures queries are reproducible with one click and avoids copy-paste errors.
 
+> **MCP vs Web UI reminder:** the examples in this section intentionally include `search` because they are for Splunk Web UI URLs. When executing the same query through `splunk-search_splunk`, drop the leading `search` and pass `index=... | ...`.
+
 ## Common Pitfalls
 
-- **Wrong index**: Use `list_indexes` or `get_indexes_and_sourcetypes` to discover available indexes before querying. An empty result often means wrong index, not "no data."
+- **Wrong index**: Use `splunk-list_indexes` / `splunk-get_indexes_and_sourcetypes` (`list_indexes` / `get_indexes_and_sourcetypes` in some clients) to discover available indexes before querying. An empty result often means wrong index, not "no data."
 - **Time range too narrow**: Start with `-24h` and narrow down. Very recent events may not be indexed yet.
 - **Unstructured logs**: Many logs are unstructured text. Use `rex` to extract fields from `_raw` rather than assuming field names exist.
 - **Large result sets**: Splunk defaults to returning 100 results. Use `| head N` to limit if you need fewer, or add `| stats` to aggregate instead of returning raw events.
 - **Search head timeout**: Complex queries over large time ranges can timeout. Add more specific filters, reduce the time window, or use `| stats` early to reduce data.
 - **Field name variations**: Different log sources encode fields differently. Check raw events first (`| head 5`) to understand the log format before writing extraction patterns.
+- **Generating commands can't lead the query**: The `splunk-search_splunk` MCP tool (`search_splunk` in some clients) auto-prepends `search` plus a space to every query, so leading with a generating command like `| makeresults`, `| tstats`, or `| inputlookup` returns `HTTP 400 -- "This command must be the first command of a search."` Stick to the `index=<index> ... | <transformations>` form via the MCP. If you genuinely need `tstats` or `makeresults` as the first command (e.g. for performance), run it from the Splunk Web UI instead.
+- **DNS failures usually mean Tailscale is disconnected**: The MCP container connects to `splunkazure-api-azure-eastus.octoca.ts.net`, a tailnet hostname routed through Tailscale's DNS (`100.100.100.100`). If you see `[Errno -3] Temporary failure in name resolution` from `splunk-health_check`/`health_check` or `splunk-search_splunk`/`search_splunk`, confirm Tailscale is connected (menu-bar icon on macOS, or `tailscale status`). The MCP server's own `splunk-ping`/`ping` still works because it's local — only Splunk calls fail.
 
 ## Validation Checklist
 
