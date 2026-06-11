@@ -1,7 +1,7 @@
 {{- $codespaces := env "CODESPACES" | not | not -}}
 {{- $ci := env "CI" | not | not -}}
 {{- $github_workspace := stat "/workspace/github" | not | not -}}
-{{- $remote_containers := env "REMOTE_CONTAINERS" | not | not -}}
+{{- $remote_container := env "REMOTE_CONTAINERS" | not | not -}}
 sourceDir = "{{ .chezmoi.sourceDir }}"
 
 [data]
@@ -10,8 +10,8 @@ sourceDir = "{{ .chezmoi.sourceDir }}"
   linux = {{ eq .chezmoi.os "linux" }}
   codespaces = {{ $codespaces }}
   github_workspace = {{ $github_workspace }}
-  remote_containers = {{ $remote_containers }}
-{{- if or $ci $codespaces $github_workspace $remote_containers }}
+  remote_container = {{ $remote_container }}
+{{- if or $ci $codespaces $github_workspace $remote_container }}
   install_type = "min"
 {{- else }}{{/* Interactive setup so prompt for install type */}}
   install_type = {{ promptString "Install type: home|work|full|min" | quote }}
