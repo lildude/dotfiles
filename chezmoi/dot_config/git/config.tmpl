@@ -131,7 +131,7 @@
   gpgSign = true
 
 [gpg]
-  {{- if .codespaces }}
+  {{- if .codespaces and not .remote_container }}
   program = /.codespaces/bin/gh-gpgsign
   {{- else if not .remote_container }}
   program = {{- lookPath "gpg" }}
