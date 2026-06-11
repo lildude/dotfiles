@@ -10,6 +10,7 @@ Host *
   PreferredAuthentications publickey,keyboard-interactive,password,gssapi-with-mic,hostbased
   KeepAlive yes
   ServerAliveInterval 60
+  ForwardAgent yes
 
 # GitHub
 Host github.com *.github.com localhost
