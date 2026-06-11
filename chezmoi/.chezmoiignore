@@ -33,6 +33,7 @@ Library/
 .netrc
 .secrets
 .ssh/**
+!.ssh/git_signing_ed25519.pub
 .config/opencode/secrets/
 dev
 tmp
