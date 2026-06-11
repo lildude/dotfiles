@@ -139,6 +139,9 @@
 [gpg]
 {{- if glob (printf "%s/.ssh/git_signing_ed25519.pub" .chezmoi.homeDir) }}
   format = ssh
+
+[gpg "ssh"]
+  allowedSignersFile = {{ printf "%s/.ssh/allowed_signers" .chezmoi.homeDir }}
 {{- else }}
   {{- if and .codespaces (not .remote_container) }}
   program = /.codespaces/bin/gh-gpgsign
