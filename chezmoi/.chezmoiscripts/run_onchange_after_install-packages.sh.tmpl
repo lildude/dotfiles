@@ -21,7 +21,7 @@ install_mise() {
 
 install_other_packages() {
   # Install packages we can't manage with mise
-{{ if .linux -}}
+{{- if .linux }}
   arch=$(uname -m)
   packages=""
   {{- if eq .install_type "min" }}
