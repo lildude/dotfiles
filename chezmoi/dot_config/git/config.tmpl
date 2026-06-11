@@ -133,7 +133,7 @@
 [gpg]
   {{- if .codespaces }}
   program = /.codespaces/bin/gh-gpgsign
-  {{- else if not .remote_container }}
+  {{- else if not .remote_containers }}
   program = {{- lookPath "gpg" }}
   {{- end }}
 
