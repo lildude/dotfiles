@@ -88,7 +88,7 @@
   # Remove all local branches that were tracking remote branches that have been deleted.
   # We use the for loop because we can't pipe to `xargs -r git branch -D` as xargs on macos doesn't accept `-r` to ignore empty cases
   # If the repo is a shallow clone, pass --depth=1 so the pull updates the shallow tip without un-shallowing the repo.
-  up = "!git switch $(git db) && git pull --rebase --prune $(git rev-parse --is-shallow-repository 2>/dev/null | grep -q true && echo --depth=1) && for b in $(git branch --list --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'); do test -n $b && git branch -D $b; done"
+  up = "!git switch $(git db) && git pull --autostash --rebase --prune $(git rev-parse --is-shallow-repository 2>/dev/null | grep -q true && echo --depth=1) && for b in $(git branch --list --format '%(if:equals=[gone])%(upstream:track)%(then)%(refname:short)%(end)'); do test -n $b && git branch -D $b; done"
   com = "!git switch $(git db)"
   # Grab someone else's PR changes without using hub
   # Source: https://davidwalsh.name/pull-down-pr
@@ -101,6 +101,7 @@
   # Usage: git change-commits GIT_AUTHOR_NAME "old name" "new name"
   # Usage: git change-commits GIT_AUTHOR_EMAIL "old@email.com" "new@email.com" HEAD~10..HEAD
   change-commits = "!f() { VAR=$1; OLD=$2; NEW=$3; shift 3; git filter-branch --env-filter \"if [[ \\\"$`echo $VAR`\\\" = '$OLD' ]]; then export $VAR='$NEW'; fi\" $@; }; f "
+  pull = pull --autostash --rebase
 
 [gist]
   browse = true  # Open GitHub Gist in browser after submission.
