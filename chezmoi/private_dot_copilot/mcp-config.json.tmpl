@@ -1,5 +1,5 @@
-{ {{- if eq .install_type "work" }}
-  "mcpServers": {
+{
+  "mcpServers": { {{- if eq .install_type "work" }}
     "1up": {
       "type": "local",
       "command": "1up",
@@ -68,6 +68,6 @@
         "SPLUNK_BEARER_TOKEN": "{{ onepasswordRead "op://Private/Splunk bearer token/credential" }}"
       }
     }
-  }
   {{- end }}
+  }
 }
