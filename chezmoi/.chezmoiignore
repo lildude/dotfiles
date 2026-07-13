@@ -47,6 +47,15 @@ tmp
 .config/restic/
 Library/LaunchAgents/local.restic_backup.plist
 {{ end -}}
+{{/* Don't install work files on personal machines */}}
+{{ if eq .install_type "home" -}}
+.copilot/skills/create-pr/
+.copilot/skills/datadog-troubleshooting/
+.copilot/skills/manage-pr/
+.copilot/skills/remove-feature-flag/
+.copilot/skills/sentry-troubleshooting/
+.copilot/skills/splunk-log-analysis/
+{{ end -}}
 {{/* Don't ever install these files */}}
 **/.DS_Store
 ano/

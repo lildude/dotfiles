@@ -1,14 +1,16 @@
 {
   "logLevel": "all",
-  "extraKnownMarketplaces": {
+  "extraKnownMarketplaces": { {{- if eq .install_type "work" }}
     "github-slack-mcp": {
       "source": {
         "source": "github",
         "repo": "github/copilot-slack-mcp"
       }
     }
+    {{- end }}
   },
-  "enabledPlugins": {
+  "enabledPlugins": { {{- if eq .install_type "work" }}
     "slack-mcp@github-slack-mcp": true
+  {{- end }}
   }
 }
