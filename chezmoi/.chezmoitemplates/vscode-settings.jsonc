@@ -260,5 +260,10 @@
   "git.suggestSmartCommit": false,
   "github.copilot.chat.githubMcpServer.enabled": true,
   "chat.viewSessions.orientation": "stacked",
-  "git.addAICoAuthor": "off"
+  "git.addAICoAuthor": "off",
+  "chat.plugins.marketplaces": [
+    "github/copilot-plugins",
+    "github/awesome-copilot#marketplace",
+    "github/agent-skills"
+  ]
 }

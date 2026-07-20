@@ -1,0 +1,7 @@
+{
+  "name": "watch-ci",
+  "description": "Background monitoring of GitHub Actions workflow runs, status checks, and CI/CD pipelines with alerts on completion.",
+  "author": {
+    "name": "GitHub"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "wait-for-copilot-code-review",
+  "description": "Zero-token background polling to monitor pull requests for Copilot code review completion and notification.",
+  "author": {
+    "name": "GitHub"
+  }
+}
