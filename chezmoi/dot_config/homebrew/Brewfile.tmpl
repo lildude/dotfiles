@@ -1,8 +1,9 @@
-tap 'github/gh'                 # Needed for gh
-tap 'homebrew/bundle'
-tap 'muesli/tap'
-tap 'goreleaser/tap'
-tap 'espanso/espanso'           # Needed for espanso
+# tap 'github/gh', trusted: true                 # Needed for gh
+tap "azure/functions", trusted: true
+tap 'homebrew/bundle', trusted: true
+tap 'muesli/tap', trusted: true
+tap 'goreleaser/tap', trusted: true
+tap 'espanso/espanso', trusted: true           # Needed for espanso
 
 {{- if eq .install_type "work" }}
 # Work-specific tools
@@ -19,8 +20,9 @@ brew 'restic'
 {{ end }}
 
 # Install everywhere
+brew 'azure-cli'
 brew 'base64'
-brew 'bash'             # Only needed for my Bash scripts now macOS isn't shipping updates etc
+brew 'bash'               # Only needed for my Bash scripts now macOS isn't shipping updates etc
 # brew 'bat'              # Like cat, but prettier - Using mise to manage this
 brew 'btop'
 # brew 'claude'
@@ -88,6 +90,8 @@ brew 'zsh'
 # cask 'cap'
 cask 'loom'
 cask 'microsoft-edge'
+cask 'microsoft-excel'
+cask 'microsoft-onenote'
 cask 'microsoft-teams'
 cask 'slack'
 cask 'viscosity'
@@ -113,8 +117,10 @@ cask '1password-cli'
 cask 'appcleaner'
 # cask 'bartender'
 cask 'bettermouse'
+cask 'brave-browser'
 cask 'bruno'                 # Alternative to Postman/Insomnia who've both gone subscription
 cask 'cleanshot'
+cask 'copilot-cli'
 cask 'dash'
 # cask 'docker'
 cask 'espanso'
@@ -130,6 +136,8 @@ cask 'font-meslo-lg'
 cask 'font-meslo-lg-nerd-font'
 cask 'github-copilot-app'
 # cask 'ghostty'
+cask 'google-chrome'
+cask 'hiddenbar'
 cask 'iterm2'
 cask 'karabiner-elements'
 cask 'ngrok'
