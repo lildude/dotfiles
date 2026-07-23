@@ -9,6 +9,8 @@ This current implementation is managed using [chezmoi](https://chezmoi.io/) and 
 ### Direct from this repo
 
 ```console
+$ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+$ brew install --cask 1password 1password-cli
 $ op account add --address my.1password.com --email $EMAIL
 $ eval $(op signin)
 $ sh -c "$(curl -fsLS git.io/chezmoi)" -- -b ~/.local/bin init --apply lildude
