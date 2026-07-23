@@ -13,7 +13,6 @@ $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/maste
 $ brew install --cask 1password 1password-cli
 $ op account add --address my.1password.com --email $EMAIL
 $ eval $(op signin)
-$ sudo -v
 $ sh -c "$(curl -fsLS git.io/chezmoi)" -- -b ~/.local/bin init --apply lildude
 ```
 
