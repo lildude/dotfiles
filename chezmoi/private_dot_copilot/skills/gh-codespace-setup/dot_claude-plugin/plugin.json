@@ -1,0 +1,7 @@
+{
+  "name": "gh-codespace-setup",
+  "description": "Set up, connect to, and manage GitHub Codespaces from the terminal using gh codespace / gh cs.",
+  "author": {
+    "name": "GitHub"
+  }
+}
