@@ -265,5 +265,6 @@
     "github/copilot-plugins",
     "github/awesome-copilot#marketplace",
     "github/agent-skills"
-  ]
+  ],
+  "git.openRepositoryInParentFolders": "always"
 }
