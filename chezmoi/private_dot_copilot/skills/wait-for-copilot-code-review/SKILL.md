@@ -1,8 +1,12 @@
 ---
-name: wait-for-copilot-code-review
 description: Use when the user wants to be notified when Copilot finishes reviewing a PR — phrases like "watch for Copilot review", "wait for code review", "let me know when Copilot finishes reviewing", "monitor Copilot review", "watch code review", "alert when review is done".
+metadata:
+    github-path: skills/wait-for-copilot-code-review
+    github-ref: refs/heads/main
+    github-repo: https://github.com/github/agent-config
+    github-tree-sha: 0af0c8f0a45d319e259456a1d0e96cca04e568ad
+name: wait-for-copilot-code-review
 ---
-
 # Watch Code Review - Zero-Token Background Polling
 
 Monitors a pull request for Copilot code review completion using a background shell script. The agent consumes **zero LLM tokens** while the script polls, resuming only when the review lands.
@@ -40,56 +44,28 @@ PR_NUMBER=123
 
 ### Step 2: Launch the Polling Script
 
-Run this script using `bash` with `mode="async"`:
+Run the bundled watcher with `bash` in `mode="async"` and keep the `shellId`:
 
 ```bash
-#!/bin/bash
-# Poll for Copilot code review on a PR
-# Usage: watch-code-review.sh <owner/repo> <pr_number> [interval_seconds] [timeout_seconds]
-
-REPO="${1}"
-PR_NUMBER="${2}"
-INTERVAL="${3:-30}"
-TIMEOUT="${4:-3600}"
-
-ELAPSED=0
-
-while [ "$ELAPSED" -lt "$TIMEOUT" ]; do
-    # Query for reviews from known Copilot reviewer login variants
-    REVIEW_STATE=$(gh pr view "$PR_NUMBER" \
-        --repo "$REPO" \
-        --json reviews \
-        --jq '[.reviews[] | select(.author.login | test("^(copilot|copilot-pull-request-reviewer(\\[bot\\])?|github-copilot\\[bot\\])$"))] | last | .state // empty')
-
-    if [ -n "$REVIEW_STATE" ]; then
-        echo ""
-        echo "✅ REVIEW_COMPLETE"
-        echo "Review state: ${REVIEW_STATE}"
-        echo "PR: #${PR_NUMBER}"
-        echo "Repo: ${REPO}"
-
-        # Also grab the review comments for the agent
-        echo ""
-        echo "--- REVIEW BODY ---"
-        gh pr view "$PR_NUMBER" \
-            --repo "$REPO" \
-            --json reviews \
-            --jq '[.reviews[] | select(.author.login | test("^(copilot|copilot-pull-request-reviewer(\\[bot\\])?|github-copilot\\[bot\\])$"))] | last | .body // "No body"'
-        echo "--- END REVIEW BODY ---"
-        exit 0
-    fi
-
-    sleep "$INTERVAL"
-    ELAPSED=$((ELAPSED + INTERVAL))
-
-    # Silent polling - no output to avoid waking the agent
+# Resolve the installed skill dir, then call the script via "$SKILL_DIR/scripts/...".
+SKILL_DIR=""  # start empty so the ${SKILL_DIR:?...} guard can't reuse a leaked value
+for d in .github/skills/wait-for-copilot-code-review "$HOME/.copilot/skills/wait-for-copilot-code-review"; do
+  [ -d "$d" ] && { SKILL_DIR="$d"; break; }
 done
+: "${SKILL_DIR:?wait-for-copilot-code-review skill dir not found in .github/skills or ~/.copilot/skills}"
 
-echo ""
-echo "⏰ TIMEOUT"
-echo "Copilot review not detected after ${TIMEOUT}s for PR #${PR_NUMBER}"
-exit 1
+# Watch the current branch's PR (defaults: interval 30s, timeout 3600s):
+REPO=$(gh repo view --json nameWithOwner --jq .nameWithOwner)
+PR_NUMBER=$(gh pr view --json number --jq .number)
+bash "$SKILL_DIR/scripts/watch-code-review.sh" "$REPO" "$PR_NUMBER"
+# Alternative (run INSTEAD of the line above): pass an explicit PR URL, optionally with interval/timeout seconds:
+# bash "$SKILL_DIR/scripts/watch-code-review.sh" https://github.com/github/github/pull/12345 30 3600
 ```
+
+It fast-fails if you are not authenticated or the PR does not exist, stays silent
+on stdout while polling (so the wait costs zero agent tokens), and prints only when
+the review lands (`REVIEW_COMPLETE` plus the state, summary body, and inline
+comments) or the timeout expires (`TIMEOUT`). Defaults: interval 30s, timeout 3600s.
 
 **Critical implementation details:**
 

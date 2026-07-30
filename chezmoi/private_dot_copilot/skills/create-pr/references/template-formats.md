@@ -1,117 +1,64 @@
-# PR Template Formats
+# PR Templates — read the live one, don't hardcode it
 
-## github/github (the monolith)
+PR templates change, and different repos ship different sections. Reproducing any one repo's section list here would just go stale and push you to be prescriptive about sections that may no longer exist. The durable rule: **read the template from the target repo at PR time and mirror it.**
 
-The template lives at `.github/pull_request_template.md`. It's structured with specific section headings that drive PR labels via `.github/workflows/label_pr_from_template.yml`. Keep heading text exact.
+## Find and read the template
 
-### Structure
-
-```markdown
-<short summary paragraph — no heading, sets context, links related issues/PRs as a Markdown list so titles unfurl>
-
-### What approach did you choose and why?
-
-<Describe the change and your thought process. Optional sub-bullets:>
-**Tradeoffs:** ...
-**Risk:** ...
-**Alternatives:** ...
-**Attention:** ...
-**Observability:** ...
-**Accessibility:** ...
-
-### Which feature flags are involved in this change?
-
-<List feature flags with devportal links, or "None" with one-line justification.>
-
-### Which environments does this change target?
-
-<Bulleted list. Delete entries that don't apply. Schema migrations to dotcom must also include proxima.>
-
-- Production: dotcom
-- Production: proxima
-- Production: GHES
-- Non-production: dev/test only
-- Non-production: docs
-
-### Risk assessment
-
-<Pick exactly one and justify. Delete the other.>
-
-- **Low risk:** ...
-- **High risk:** ...
-
-### How did/will you validate this change?
-
-<Pick one or more. Delete what doesn't apply.>
-
-- **Review-lab deploy** — ...
-- **Local server** — ...
-- **Tests** — ...
-- **Other** — ...
-- **None** — ...
-
-### Are there related full stack changes?
-
-- **No**
-<or>
-- **Yes**
-  - **Link any related PRs or issues in `github/github-ui`:** ...
-  - **What is the rollout plan to maintain backwards compatibility...?** ...
-
-### If something goes wrong, what are the mitigation and rollback strategies?
-
-<Pick one or more. Delete what doesn't apply.>
-
-- **Other** — ...
-- **Experiment** — ...
-- **Solo Deploy** — ...
-- **Feature Flag** — ...
-- **Rollback** — ...
+```bash
+ls .github/PULL_REQUEST_TEMPLATE* .github/pull_request_template* 2>/dev/null
+ls .github/PULL_REQUEST_TEMPLATE/ 2>/dev/null   # directory of named templates, if present
+cat .github/pull_request_template.md            # read it verbatim
 ```
 
-### Field-by-field tips
+If a directory of named templates exists, pick the one that matches the change and read it the same way.
 
-- **Summary paragraph (no heading):** Lead with the *why*, then the *what*. If the change came out of an investigation, link the smoking-gun evidence (Datadog dashboard, Kusto query, Sentry issue) so reviewers can verify the motivation themselves.
-- **Approach:** Sub-bullets are optional but using `**Tradeoffs:**`, `**Alternatives:**`, and `**Attention:**` makes the PR much easier to review. Always state what the PR is *not* doing if there's a risk a reviewer will scope-creep it.
-- **Feature flags:** If "None", say so explicitly. Don't omit the section.
-- **Environments:** Most code changes target dotcom + proxima + GHES. Test/docs/internal-tooling-only changes target only the relevant non-production line.
-- **Risk assessment:** Default to "Low risk" only when the change is observability-only, fully behind a feature flag, or test/docs-only. Otherwise prefer "High risk" and lay out mitigations.
-- **Validation:** "Tests" alone is fine for pure observability/refactor changes. For behavior changes, also note Review-lab or Local server.
-- **Full stack:** Default "No" for pure backend Ruby. If you touched ERB/JS/CSS or any user-facing JSON the dashboard reads, it's "Yes".
-- **Mitigation:** "Rollback" is the safest default for changes that don't have a feature flag. Solo deploys are reserved for genuinely scary changes — don't pick this unless the user asked.
+## Fill any template you find
 
-### Headings vs labels
+- **Keep every heading and option line verbatim.** Don't rename, reorder, or paraphrase headings — repos often key automation (labels, required-section checks) off exact text.
+- **Fill what applies; delete the options that don't.** Most templates list mutually-exclusive choices (risk levels, target environments, validation methods, rollback strategies) and expect you to keep one and delete the rest.
+- **Lead the summary with the why** (see SKILL.md's anti-wall rules) — that holds regardless of what the first heading is called.
+- **Don't invent sections** that aren't in the template, and don't drop ones the repo requires.
+- If a repo has **no template**, write a focused body with at minimum: motivation (why), what changed at a high level, how you validated, and risk/rollback notes.
 
-The HTML comments next to each option in the template (e.g. `<!-- (\`risk:low\`) -->`) are how `.github/workflows/label_pr_from_template.yml` decides which labels to apply. If you change the heading text or option wording, labels will not apply. **Use the template wording verbatim.**
+## Headings, markers, and labels
 
-### Comment markers
+Many repos (the monolith among them) drive PR labels off the template: an HTML-comment marker sits next to each option, and a labeling workflow applies the matching label when that option survives in the body. So:
 
-The template includes a `pull_request_template_version=2` marker comment at the bottom. The labeling workflow needs this. If you base your body on the template, leave the marker in place; if you write the body from scratch, you can omit it (the workflow tolerates absence, just doesn't relabel).
+- Change a heading or option's wording → the label silently won't apply.
+- Delete an option but leave its marker comment → you can apply a label you didn't mean to.
 
-## github/github-ui
+Copy headings, option lines, and their marker comments **verbatim** from the live template, and delete a marker whenever you delete its option. Don't copy markers from memory, from this doc, or from old PRs — read them out of the current template.
 
-Has its own template at `.github/pull_request_template.md`. Read it the same way. Slightly different sections — typically focused on UI changes, accessibility, and Storybook screenshots.
+### Validate your markers before posting
 
-## Other repos
+```bash
+template=.github/pull_request_template.md
+body=/path/to/body.md
+comm -23 \
+  <(grep -oE '<!-- \(`[^`]+`\) -->' "$body" | sort -u) \
+  <(grep -oE '<!-- \(`[^`]+`\) -->' "$template" | sort -u)
+```
 
-Always check `.github/PULL_REQUEST_TEMPLATE*` (singular) and `.github/PULL_REQUEST_TEMPLATE/` (directory of named templates). If neither exists, write a focused body with at minimum: motivation, what changed, validation, and risk/rollback notes.
+This should print nothing. Anything it prints is a marker in your body that isn't in the current template — fix the body or re-read the template before posting. (Common cause: a marker you "remember" from a previous version of the template that has since changed.)
+
+### Trailing marker comments
+
+Some templates include a trailing marker comment (e.g. a `pull_request_template_version=…` line) that the labeling workflow relies on. If you base your body on the live template, leave any such markers in place; if you write the body from scratch, the workflow generally tolerates their absence (it just won't relabel). When unsure, keep whatever trailing comments the template shipped with.
 
 ## Cross-repo references
 
-GitHub's autolinker only resolves bare `#N` within the *same* repo. A `github/github` PR body that says "tracking issue #607" links to `github/github#607` (whatever that happens to be — possibly a closed 2009 issue), **not** to the cross-repo tracking issue you meant.
-
-Rules:
+GitHub's autolinker only resolves bare `#N` within the *same* repo. A PR body that says "tracking issue #607" links to `<this-repo>#607` (whatever that happens to be), **not** to the cross-repo issue you meant.
 
 - **Bare `#N`** — only when the referenced issue/PR is in the same repo as the PR you're opening.
 - **`owner/repo#N`** — for any cross-repo reference. Renders as a clickable link to the right place.
-- **Full URL** — also fine, especially in a top-of-body "tracking" section where you want title unfurling.
-- **Backticks around `owner/repo#N`** make it a code span (no autolink) — useful when discussing the reference textually but not wanting GitHub to render it as a link.
+- **Full URL** — also fine, especially in a top-of-body "tracking" line where you want title unfurling.
+- **Backticks around `owner/repo#N`** make it a code span (no autolink) — useful when discussing the reference textually without rendering a link.
 
-When prompting a cloud agent (or another tool) to *generate* a PR body that references issues across repos, the prompt itself must use the fully-qualified form. The agent will copy whatever style you give it — bare `#N` in your prompt becomes bare `#N` in the body, with a silently-wrong link.
+When prompting a cloud agent (or another tool) to *generate* a body that references issues across repos, the prompt itself must use the fully-qualified form — the agent copies whatever style you give it, so bare `#N` in your prompt becomes a silently-wrong link in the body.
 
 ## Tooling tips
 
 - Use `gh pr create --body-file <path>` for non-trivial bodies. Inline `--body "..."` with multi-line content is brittle.
-- For repeat use in the same session, write the body to `/tmp/pr-body-<branch>.md`, create the PR, then `rm` the file.
+- Write the body to a fresh `mktemp -d` directory, create the PR, then `rm` it (see SKILL.md section 6 for why a predictable path is risky).
 - After creation, `gh pr edit <num> --body-file <path>` lets you iterate without recreating the PR.
 - `gh pr view <num> --json body --jq .body` to inspect the rendered body.

@@ -1,9 +1,13 @@
 ---
-name: sentry-troubleshooting
 description: This skill should be used when the user asks to "investigate Sentry errors", "find exceptions", "debug error spikes", "check release regressions", "get stack traces from Sentry", "analyze Sentry issue", or needs to triage production errors tracked in Sentry
+metadata:
+    github-path: skills/sentry-troubleshooting
+    github-ref: refs/heads/main
+    github-repo: https://github.com/github/agent-config
+    github-tree-sha: 381f6fcd243981fa7d64060aa8c05499a71944e2
+name: sentry-troubleshooting
 version: 1.0.0
 ---
-
 # Sentry Troubleshooting
 
 You are an expert at investigating production errors using Sentry. You use the Sentry MCP server to search issues, analyze events, inspect stack traces, and identify release regressions.

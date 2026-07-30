@@ -33,17 +33,14 @@ Use this skill when you need to:
 
 ## Installation
 
-```bash
-# Personal skill (via gh-hubber-skills)
-gh hubber-skills install splunk-log-analysis-skill
+Install with the [`gh skill`](https://cli.github.com/manual/gh_skill) command (built into recent versions of the [GitHub CLI](https://cli.github.com/)):
 
-# Or for a specific project
-gh hubber-skills install splunk-log-analysis-skill --project
-```
-
-Or manually:
 ```bash
-ln -s "$(pwd)/splunk-log-analysis-skill" ~/.copilot/skills/
+# Personal (available across all your projects)
+gh skill install github/agent-config splunk-log-analysis --scope user
+
+# Project (checked into the current repository)
+gh skill install github/agent-config splunk-log-analysis --scope project
 ```
 
 ## Included Utilities
@@ -92,4 +89,4 @@ Additional reference material lives under the `references/` directory:
 
 ## Related Skills
 
-- **datadog-troubleshooting-skill**: For monitoring and alerting issues in Datadog
+- **datadog-troubleshooting**: For monitoring and alerting issues in Datadog

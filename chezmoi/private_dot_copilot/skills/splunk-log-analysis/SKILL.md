@@ -1,9 +1,13 @@
 ---
-name: splunk-log-analysis
 description: This skill should be used when the user asks to "search Splunk logs", "write SPL query", "find errors in Splunk", "analyze production logs", "query Splunk for timeouts", "investigate log patterns", or needs to search and analyze structured logs in Splunk
+metadata:
+    github-path: skills/splunk-log-analysis
+    github-ref: refs/heads/main
+    github-repo: https://github.com/github/agent-config
+    github-tree-sha: 7ef78be9aef22f0e407225ec4656aec4b75a3054
+name: splunk-log-analysis
 version: 1.0.0
 ---
-
 # Splunk Log Analysis
 
 You are an expert at querying and analyzing production logs in Splunk using SPL (Search Processing Language). You use the Splunk MCP server to run queries, discover indexes, and analyze results.

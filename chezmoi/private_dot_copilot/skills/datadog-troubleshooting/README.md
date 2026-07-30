@@ -22,14 +22,14 @@ Use this skill when you encounter:
 
 ## Installation
 
-Copy or symlink the skill to your Copilot CLI skills directory:
+Install with the [`gh skill`](https://cli.github.com/manual/gh_skill) command (built into recent versions of the [GitHub CLI](https://cli.github.com/)):
 
 ```bash
-# Using symlink (recommended for development)
-ln -s "$(pwd)/datadog-troubleshooting-skill" ~/.copilot-cli/skills/
+# Personal (available across all your projects)
+gh skill install github/agent-config datadog-troubleshooting --scope user
 
-# Or copy the directory
-cp -r datadog-troubleshooting-skill ~/.copilot-cli/skills/
+# Project (checked into the current repository)
+gh skill install github/agent-config datadog-troubleshooting --scope project
 ```
 
 ## Usage
@@ -47,4 +47,4 @@ See the [examples directory](./examples/) for real error messages and their solu
 
 ## Related Skills
 
-- **datadog-monitor-setup-skill**: Guide for creating monitors correctly from the start
+- **datadog-monitor-setup**: Guide for creating monitors correctly from the start

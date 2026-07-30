@@ -29,17 +29,14 @@ Use this skill when you need to:
 
 ## Installation
 
-```bash
-# Personal skill
-gh hubber-skills install sentry-troubleshooting-skill
+Install with the [`gh skill`](https://cli.github.com/manual/gh_skill) command (built into recent versions of the [GitHub CLI](https://cli.github.com/)):
 
-# Or for a specific project
-gh hubber-skills install sentry-troubleshooting-skill --project
-```
-
-Or manually:
 ```bash
-ln -s "$(pwd)/sentry-troubleshooting-skill" ~/.copilot/skills/
+# Personal (available across all your projects)
+gh skill install github/agent-config sentry-troubleshooting --scope user
+
+# Project (checked into the current repository)
+gh skill install github/agent-config sentry-troubleshooting --scope project
 ```
 
 ## Usage
@@ -64,5 +61,5 @@ This skill includes worked investigations under the `examples/` directory:
 
 ## Related Skills
 
-- **datadog-troubleshooting-skill**: For debugging monitoring/alerting issues
-- **splunk-log-analysis-skill**: For raw log queries and volume analysis
+- **datadog-troubleshooting**: For debugging monitoring/alerting issues
+- **splunk-log-analysis**: For raw log queries and volume analysis

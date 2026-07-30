@@ -1,8 +1,12 @@
 ---
-name: datadog-troubleshooting
 description: This skill should be used when the user asks to "debug Datadog monitor", "fix Datadog deployment error", "troubleshoot monitor issues", "resolve invalid payload", or encounters errors deploying monitors or SLOs to Datadog
+metadata:
+    github-path: skills/datadog-troubleshooting
+    github-ref: refs/heads/main
+    github-repo: https://github.com/github/agent-config
+    github-tree-sha: 3d47e499a536d416f8e1ffc92129d3180896775d
+name: datadog-troubleshooting
 ---
-
 # Datadog Troubleshooting Skill
 
 You are an expert at debugging Datadog monitor and SLO deployment issues at GitHub.

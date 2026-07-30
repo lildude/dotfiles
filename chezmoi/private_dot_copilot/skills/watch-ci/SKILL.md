@@ -1,8 +1,12 @@
 ---
-name: watch-ci
 description: Use when the user wants background monitoring of GitHub Actions workflow runs, status checks, or CI/CD pipelines — phrases like "watch CI", "monitor checks", "alert when CI passes", "alert when CI fails", "watch build status", "let me know when it's green", "monitor PR checks", "keep an eye on CI", "watch for failures".
+metadata:
+    github-path: skills/watch-ci
+    github-ref: refs/heads/main
+    github-repo: https://github.com/github/agent-config
+    github-tree-sha: d10632c1315279bb5849c45550b36902b486fbba
+name: watch-ci
 ---
-
 # Watch CI — zero-token background monitoring of GitHub checks
 
 Monitors GitHub Actions checks / status checks on a PR (or branch) and wakes the agent only when they finish, fail, or need attention. While the poll runs the agent consumes **zero LLM tokens** — the work happens in a shell launched via `bash(mode="async")`, and the agent checks back with `read_bash`. The runtime also posts a completion notification when the shell exits, so the user gets pinged without the agent burning turns.

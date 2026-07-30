@@ -1,8 +1,12 @@
 ---
+description: Use when the user wants to decommission a feature flag whose rollout is complete — phrases like "remove a feature flag", "clean up a fully rolled-out FF", "delete this flag", "find a 100% flag and remove it".
+metadata:
+    github-path: skills/remove-feature-flag
+    github-ref: refs/heads/main
+    github-repo: https://github.com/github/agent-config
+    github-tree-sha: 8c46c33e994fdc2facbf4568f9e999b96848b270
 name: remove-feature-flag
-description: This skill should be used when the user asks to "remove a feature flag", "clean up a fully rolled-out FF", "delete this flag", "find a 100% flag and remove it", or otherwise wants to decommission a feature flag whose rollout is complete.
 ---
-
 # Remove Feature Flag — decommission a fully rolled-out FF cleanly
 
 Use this skill when the user wants to retire a feature flag that's at 100% rollout. The mechanics (delete the constant, delete the field, fix the consumers) are easy. The traps that bite people are around **what the FF gate was hiding** (snapshot fixtures, dead code paths, ordering bugs in dev tooling) and around **proving the rollout** before you start.
@@ -16,34 +20,33 @@ Use this skill when the user wants to retire a feature flag that's at 100% rollo
 
 If the flag is **not** fully rolled out yet, stop and tell the user — removing a partially-rolled flag is a different task (and usually not what they want).
 
-This skill ends with a draft PR open and CCR happy. Driving the PR through human review and merge is `manage-pr` territory; opening the PR itself uses `create-pr` conventions (worktree + template).
+This skill ends with a draft PR open and CCR happy. Driving the PR through human review and merge is `manage-pr` territory; to open the PR itself, invoke the `create-pr` skill (worktree + template).
 
 ## Workflow
 
-### 1. Identify the flag and prove it's at 100%
+### 1. Identify the flag and prove it's fully rolled out
 
-The user may name the flag, or may ask you to find one. Either way, **never trust the name alone** — verify the rollout in the dashboard before writing code.
+The user may name the flag, or may ask you to find one. Either way, **never trust the name alone** — verify the rollout before writing code.
 
-The standard "Feature Flag Results" dashboard at `https://app.datadoghq.com/dashboard/rc6-kc7-y2u` takes a `tpl_var_feature_flag` template variable. The Go services queries on it look like:
+**Primary check — the feature-flags MCP server.** Call `get_feature_flag(flag_name)` and read the **Rollout by Stamp** table. This is the authoritative configured state, live from Vexi (the same data DevPortal shows). If you don't know the exact name, find it with `search_feature_flags(query=..., search_type="name")` (or `search_type="service"` to list a service's flags).
 
-```
-count:vexi.is_enabled.duration{feature_flag.key:<flag-key>,gh.vexi.is_enabled.result:true}.as_count()
-count:vexi.is_enabled.duration{feature_flag.key:<flag-key>,gh.vexi.is_enabled.result:false}.as_count()
-```
+A flag is safe to remove only when **every** stamp shows:
 
-(Monolith / Ruby services use `gh.vexi.is_enabled.duration.cached|memoized|adapter_called` instead — same dashboard, different section.)
+- `State` = `shipped` (not `partially-shipped` or `disabled`),
+- no restrictive **Custom Gates** — e.g. `preview_features` or a named segment means it's on only for that audience, not everyone,
+- no percentage holdout — `Percentage of actors` / `Percentage of calls` is `-` or `100`, never a partial number.
 
-Use the Datadog MCP `get_datadog_metric` tool with `response_format: scalar` over **at least 7 days**, not 1 hour. A flag can sit at 100% for an hour because traffic is low; you want a sustained verdict.
+If **any** stamp is not fully shipped — `disabled`, `partially-shipped`, a sub-100% percentage, or a restrictive custom gate — **stop and surface it.** That remainder could be a kill-switch, a region-specific holdout, a preview-only gate, or a rollout someone paused on purpose. Removing the flag would silently force it on everywhere.
 
-A flag is safe to remove when:
+`get_feature_flag` also returns the **Browser URL** (DevPortal), **Tracking URL** (issue/PR, when present), and **Last Updated** — note all of them; they feed step 2 and the PR body.
 
-- `result:true` count is non-trivial (millions over 7d for high-traffic services)
-- `result:false` count is `null` or zero
-- The flag is no longer mentioned in active issues / open PRs as something the team is iterating on
+When the user gave you a placeholder/example flag name, it's fine — `search_feature_flags(search_type="service", query="<service>")` and check the `shipped` candidates with `get_feature_flag` in a bounded batch. If none of the first batch is fully rolled out, report that and ask before scanning more.
 
-If `result:false` is non-zero (even 1%), **stop and surface it** — don't remove. The remaining `false` could be a kill-switch, a region-specific holdout, or something the team is intentionally keeping behind the gate.
+#### Cross-check the flag's change history (is anyone still tuning it?)
 
-When the user gave you a placeholder/example flag name, it's fine — just sweep the repo's flag declarations and check several candidates in parallel until you find one at 100%.
+Before removing, confirm the flag **isn't still being actively changed** — a flag the team is still iterating on (recent percentage bumps, actor adds, state toggles) is one to pause on and ask about, not remove.
+
+The **Last Updated** field from `get_feature_flag` is your primary recency signal: if it's very recent, pause and surface it. To see *what* changed, read the **first page** of `get_feature_flag_history(flag_name, stamp)` (newest first) on a rolled-out stamp — recent entries mean it's still being tuned. Don't page to the end.
 
 ### 2. Find a tracking issue
 
@@ -174,7 +177,7 @@ After the agent returns findings, score them against the **FF-specific high-valu
 
 ### 5. Make the edits
 
-Use the `create-pr` skill conventions: worktree as a sibling directory, branch named `<user>/remove-<short-flag-name>-ff`. Don't touch the user's primary checkout.
+Invoke the `create-pr` skill: worktree as a sibling directory, branch named `<user>/remove-<short-flag-name>-ff`. Don't touch the user's primary checkout.
 
 Batch all the independent edits into one response. Order doesn't matter for correctness — `go build` will catch any forgotten reference. Typical edit set:
 
@@ -208,17 +211,15 @@ Before declaring done, **read every site that consumed the FF value** and ask: *
 
 ### 7. Open a draft PR
 
-Use `create-pr` for the mechanics. The PR body needs (in addition to the repo template):
+Invoke the `create-pr` skill for the mechanics. The PR body needs (in addition to the repo template):
 
-- Link to the dashboard URL with the flag's tpl var pre-set, e.g.
-  `https://app.datadoghq.com/dashboard/rc6-kc7-y2u?tpl_var_feature_flag=<flag-key>`
-- Hard rollout numbers from your verification (`X true / 0 false over 7d`).
-- Link to the tracking issue and the original introduction PR.
+- Rollout evidence from the feature-flags MCP: the flag's DevPortal URL (`get_feature_flag` returns it as **Browser URL**), the tracking issue/PR URL (`get_feature_flag` returns it as **Tracking URL**, when present), and a one-line per-stamp summary (e.g. "shipped on all stamps, no custom gates, as of `<Last Updated>`").
+- Link to the original introduction PR.
 - **Cross-repo inventory** from step 3.5 — every consumer outside this repo, with its disposition (already removed in PR #X / removed in linked PR / out-of-scope and why). If the cross-repo inventory was empty, say so explicitly: "Searched `github` org via `gh search code <flag-key>` and found no other consumers."
 - Explicit callout of any **dependent FFs** that are *not* being removed and how they now flow through.
 - **Out-of-scope** section listing pre-existing issues you noticed but deliberately didn't fix (e.g. local-dev parity gaps unrelated to the FF).
 - A rollback strategy: usually "revert this PR; the rendered workflow regenerates per dispatch so reverting restores the old behavior on next deploy" plus mention any independent kill-switches that remain (e.g. a related FF that can still flip the user-facing piece).
-- Dashboards / metrics to monitor on rollout (the FF dashboard, plus any product metrics that should be unaffected since prod was already 100% on).
+- Dashboards / metrics to monitor on rollout — any product metrics that should be unaffected, since prod was already fully shipped.
 
 Default to `--draft`.
 
@@ -234,8 +235,8 @@ CCR is especially good at catching the bugs from step 6 — take its workflow / 
 ## Common Pitfalls
 
 - **Skipping the cross-repo search (step 3.5).** This is what caused availability-incident-3575 — single-repo grep showed nothing while the Ruby monolith had a hard `feature_flag_enabled_or_raise?` gate on the same FF. **Always run `gh search code "<flag-key>" --owner github` before editing.**
-- **Trusting the flag name without dashboard verification.** The user's example URL might have a flag name baked in that doesn't even exist anymore.
-- **One-hour time window.** Always check 7d minimum.
+- **Trusting the flag name without checking rollout.** Always run `get_feature_flag` first — the user's example name might be gated, partially shipped, or not even exist anymore.
+- **Reading `shipped` as "on for everyone".** Check the per-stamp **Custom Gates** column — a `preview_features` or named-segment gate means the flag is only on for that audience, not a full rollout.
 - **Forgetting workflow snapshot fixtures.** Snapshot tests will fail loudly; the adversarial pass almost always catches this if you list the files. Don't skip step 4.
 - **Removing a *dependent* FF by accident.** When `if outerFF { innerFF check }` becomes always-true on outer, the inner stays a real FF — keep the inner check.
 - **Hardcoding `true` somewhere instead of deleting.** If both consumers of a workflow-data field are also being deleted, leaving `"Field": true` is dead state. Delete it.
@@ -246,7 +247,8 @@ CCR is especially good at catching the bugs from step 6 — take its workflow / 
 ## Boundaries
 
 **Will:**
-- Verify rollout via Datadog before editing.
+- Verify rollout via the feature-flags MCP (`get_feature_flag`, per-stamp state) before editing.
+- Cross-check the flag's change history via the feature-flags MCP (`get_feature_flag_history`).
 - Search for tracking issues and the introduction PR.
 - Map the full FF surface area across Go, YAML, shell, and tests **in the originating repo**.
 - **Search across the entire `github` org for cross-repo references** and surface every consumer.
@@ -260,7 +262,7 @@ CCR is especially good at catching the bugs from step 6 — take its workflow / 
 
 **Will Not:**
 - Remove a flag that isn't at 100% across the relevant service tier.
-- Skip the dashboard check because the user named the flag confidently.
+- Skip the rollout check (`get_feature_flag`) because the user named the flag confidently.
 - **Skip the cross-repo `gh search code` sweep.**
 - **Proceed with in-repo removal when a Ruby monolith hard gate or other-Go-service consumer still references the flag** — coordinate first.
 - Remove a dependent FF that's still partially rolled out.
@@ -268,11 +270,11 @@ CCR is especially good at catching the bugs from step 6 — take its workflow / 
 
 ## References
 
-- [`references/dashboard-queries.md`](references/dashboard-queries.md) — copy-pasteable Datadog queries for verifying flag rollout in monolith vs Go services.
 - [`references/grep-recipes.md`](references/grep-recipes.md) — grep incantations for mapping the full surface area of a flag.
 
 ## Related Skills
 
-- `create-pr` — worktree + PR template conventions used in step 7.
+- `create-pr` — invoked in step 7 to open the PR (worktree + template conventions).
 - `manage-pr` — drives the PR through CCR / human review / CI to merge in step 8.
-- `data-query` / Kusto / Trino — for FFs that aren't on the standard Vexi dashboard and need a custom query to verify rollout.
+- `audit-flag-rollout` — read-only sibling skill (same feature-flags MCP) for finding flags that *aren't* fully rolled out yet.
+- `remove-stale-feature-flags` — issue-driven batch triage of stale flags tracked in `github/feature-flag-lifecycle`; discovers and classifies flags, then hands a confirmed single flag to this skill for careful removal.

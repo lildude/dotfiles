@@ -8,18 +8,14 @@ Launches a lightweight shell script that polls for Copilot code review status on
 
 ## Installation
 
-### Personal skill (recommended)
+Install with the [`gh skill`](https://cli.github.com/manual/gh_skill) command (built into recent versions of the [GitHub CLI](https://cli.github.com/)):
 
 ```bash
-# Symlink into your personal skills directory
-ln -s /path/to/wait-for-copilot-code-review-skill ~/.copilot/skills/wait-for-copilot-code-review-skill
-```
+# Personal (available across all your projects)
+gh skill install github/agent-config wait-for-copilot-code-review --scope user
 
-### Project skill
-
-```bash
-# Copy into your project
-cp -r wait-for-copilot-code-review-skill .github/skills/wait-for-copilot-code-review-skill
+# Project (checked into the current repository)
+gh skill install github/agent-config wait-for-copilot-code-review --scope project
 ```
 
 ## Usage

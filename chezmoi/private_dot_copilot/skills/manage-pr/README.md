@@ -25,14 +25,14 @@ This skill encodes those gotchas so you don't burn an hour on each one.
 ## Installation
 
 ```bash
-gh hubber-skills install manage-pr-skill
+gh skill install github/agent-config manage-pr --scope user
 ```
 
 ## Usage
 
 This skill activates when you ask Copilot to:
 
-- "Address the PR feedback on github/agent-skills#289"
+- "Address the PR feedback on github/agent-config#289"
 - "Re-request a Copilot review on this PR"
 - "Wait for CI on PR #42 and tell me if anything fails"
 - "Iterate on this PR until it's ready to merge"

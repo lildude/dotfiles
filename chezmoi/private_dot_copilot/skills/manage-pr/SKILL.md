@@ -1,8 +1,12 @@
 ---
+description: Use when the user wants to drive a PR through the review/CI/merge loop — phrases like "address PR feedback", "respond to review comments", "request a Copilot code review", "watch CI", "wait for CI", "iterate on a PR until clean".
+metadata:
+    github-path: skills/manage-pr
+    github-ref: refs/heads/main
+    github-repo: https://github.com/github/agent-config
+    github-tree-sha: 8b62146437a15f4b94783bd1fa430e44b231ea04
 name: manage-pr
-description: This skill should be used when the user asks to "address PR feedback", "respond to review comments", "request a Copilot code review", "watch CI", "wait for CI", "iterate on a PR until clean", or needs to drive a pull request through the review/CI/merge loop.
 ---
-
 # Manage PR — drive a pull request through review and CI to clean
 
 Use this skill any time you're shepherding a PR through to merge: addressing reviewer comments, requesting a fresh Copilot Code Review (CCR) pass, waiting for CI, and looping until the PR is clean.
@@ -62,6 +66,7 @@ query($o:String!,$r:String!,$n:Int!){
     pullRequest(number:$n){
       number title state isDraft mergeable mergeStateStatus
       headRefOid baseRefName
+      mergeQueueEntry{state position estimatedTimeToMerge enqueuer{login}}
       reviewThreads(first:50){
         nodes{
           id isResolved isOutdated
@@ -91,6 +96,22 @@ fi
 ```
 
 If the head SHA isn't reviewed yet, treat the snapshot as "pending CCR" and re-request before declaring the PR clean. See `references/copilot-code-review.md` for the full pattern.
+
+### Step 1.5: If the PR is already in the merge queue, treat it as in-flight
+
+If `mergeQueueEntry` is non-null, the PR has been enqueued and is now the merge queue's responsibility — not yours. Do **not** start the address-feedback / re-request / watch-CI loop on it; the queue will run its own validation against a freshly-built test merge commit and either land the PR or eject it.
+
+When a PR is in the queue, surface a one-line status ("PR #X is in the merge queue at position N, ETA Ys, queue state Z") and stop. The user already enqueued it intentionally; re-requesting reviews or pushing new commits would either no-op (the queue commit is what matters now) or eject the PR back out of the queue.
+
+⚠️ **Read merge-queue states carefully.** They can look alarming when they aren't:
+
+- `mergeQueueEntry.state == UNMERGEABLE` at a far-back position with all check suites still `QUEUED` is **not** a real conflict signal — it's the queue's "haven't validated this slot yet" placeholder. The state will flip to `MERGEABLE` once CI on the test merge commit (`mergeQueueEntry.headCommit.oid`, distinct from the PR's `headRefOid`) starts and passes. Don't sound the alarm; just report position + ETA.
+- `mergeQueueEntry.state == MERGEABLE` with checks still running is normal — the queue is actively validating this slot.
+- `mergeQueueEntry.state == AWAITING_CHECKS` means CI on the queue commit hasn't kicked off yet.
+- `mergeQueueEntry.state == LOCKED` means the queue is actively trying to merge this slot.
+- `mergeQueueEntry.state == UNMERGEABLE` **after the queue has validated this slot** (i.e., position 0/1, checks completed, state stuck on UNMERGEABLE) is a real signal — the test merge commit failed validation. Surface to the user; the PR has likely been ejected or will be.
+
+Don't treat queue position as fixed — other PRs ahead of yours can succeed/fail/get re-prioritized, so if you're polling, re-snapshot every few minutes rather than relying on `estimatedTimeToMerge`.
 
 ### Step 2: Resolve merge conflicts (if `mergeStateStatus == DIRTY` or `mergeable == CONFLICTING`)
 
@@ -199,11 +220,11 @@ The CCR review usually appears 1–3 minutes after the `Running Copilot Code Rev
 
 ### Step 7: Loop
 
-Re-snapshot (Step 1). If `mergeStateStatus == DIRTY` or `mergeable == CONFLICTING` (check both — see Step 2 for the async-computation rationale), go back to Step 2. If there are unresolved threads or failing checks, go back to Step 3. Repeat until **all** of these hold:
+Re-snapshot (Step 1). If `mergeQueueEntry` is now non-null, the user (or someone else) enqueued the PR while you were working — switch to Step 1.5 mode (report queue position and stop). If `mergeStateStatus == DIRTY` or `mergeable == CONFLICTING` (check both — see Step 2 for the async-computation rationale), go back to Step 2. If there are unresolved threads or failing checks, go back to Step 3. Repeat until **all** of these hold:
 
 - 0 unresolved review threads
 - `mergeStateStatus` is `CLEAN` (or `BLOCKED` only on policy items the user is choosing to bypass) **and** `mergeable` is `MERGEABLE` (not `CONFLICTING`). Symmetric with the loop trigger above — if either field still says the PR is conflicting, treat it as still-conflicting and go back to Step 2. If either field is `UNKNOWN`, GitHub is still computing; re-snapshot in a few seconds rather than declaring victory.
-- All status checks `SUCCESS`
+- All status checks `SUCCESS` (on `github/github`, first rule out a known infra flake — github-gauntlet `ThreepcError` or an octofactory `TLS handshake timeout` — before treating a red check as a real failure to fix; see `watch-ci`'s "Known github/github flakes" table. Retry the flake instead of looping on a code fix.)
 - The latest CCR-bot review's `commit_id` matches the current `head.sha` (i.e. CCR has actually reviewed the most recent push, not just an earlier one — see Step 1's CCR-coverage check)
 
 If the first three are true but CCR hasn't reviewed the head SHA, **re-request** rather than declaring victory. The auto-approve verdict comment you may be reading might be from the previous SHA; only treat the PR as approved when CCR's review references the current head.
@@ -231,7 +252,8 @@ Plan:
 
 **Will:**
 - **Run as a background agent by default** so the user's main session stays free.
-- Snapshot PR state (threads, CI, mergeability) in one read.
+- Snapshot PR state (threads, CI, mergeability, **merge-queue entry**) in one read.
+- **Recognize when a PR is already in the merge queue** and report position/ETA without trying to drive the review/CI loop on it (the queue owns it now).
 - Apply fixes for review comments and group them into meaningful commits.
 - Reply to and resolve threads (only resolves threads you actually addressed or that the reviewer agreed to drop).
 - Request and re-request Copilot Code Review using the correct `[bot]` login form.
@@ -242,6 +264,8 @@ Plan:
 
 **Will Not:**
 - **Block the foreground session waiting for CI / CCR.** Always run as a background agent unless the user explicitly opts out.
+- **Try to "fix" a PR that's already in the merge queue** — the queue owns it; new commits or re-requests are at best no-ops and at worst eject the PR.
+- **Sound the alarm on `mergeQueueEntry.state == UNMERGEABLE`** when the PR is far back in the queue with checks still QUEUED — that's the queue's "not validated yet" placeholder, not a real conflict.
 - Resolve a thread you didn't address (or that the reviewer hasn't agreed to drop).
 - Push fixes that contradict reviewer feedback without explicit user approval.
 - Force-merge or override branch protection.

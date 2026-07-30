@@ -15,7 +15,7 @@ Use this when you've addressed N review threads in a single commit and want to r
 
 ```bash
 OWNER=github
-REPO=agent-skills
+REPO=agent-config
 PR=289
 SHA=$(git rev-parse HEAD)
 

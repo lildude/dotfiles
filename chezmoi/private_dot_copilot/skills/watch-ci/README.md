@@ -11,14 +11,14 @@ Automatically monitor CI/CD pipeline status and get notified when checks pass, f
 
 ## Installation
 
-### Personal Skills
-```bash
-cp -r watch-ci-skill ~/.copilot/skills/
-```
+Install with the [`gh skill`](https://cli.github.com/manual/gh_skill) command (built into recent versions of the [GitHub CLI](https://cli.github.com/)):
 
-### Project Skills
 ```bash
-cp -r watch-ci-skill /path/to/repo/.github/skills/
+# Personal (available across all your projects)
+gh skill install github/agent-config watch-ci --scope user
+
+# Project (checked into the current repository)
+gh skill install github/agent-config watch-ci --scope project
 ```
 
 ## Usage
