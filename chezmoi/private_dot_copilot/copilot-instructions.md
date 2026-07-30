@@ -144,10 +144,8 @@ This does **not** apply to PR/issue titles being authored.
 
 ## Co-authored-by Trailer Scope
 
-The `Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>` trailer belongs only in git commit messages.
-
-Never include the Co-authored-by trailer in PR titles, PR descriptions, issue bodies, issue/PR comments, review comments, review-thread replies, or any other GitHub-posted body.
+Never use the Co-authored-by trailer.
 
 ## Responding to PR Review Comments
 
-When asked to address PR review comments: fetch all review threads, read each one, and reply to each thread individually. Fix real issues and confirm what changed. Don't blindly fix everything — review agents flag dumb stuff. If a comment is ambiguous, ask me with your take before acting. Always reply to the thread, even if you're leaving it as-is.
+When asked to address PR review comments: fetch all review threads, read each one, but do _not_ reply. Fix real issues and confirm what changed. Don't blindly fix everything — review agents flag dumb stuff. If a comment is ambiguous, ask me with your take before acting. Never reply to the thread.
