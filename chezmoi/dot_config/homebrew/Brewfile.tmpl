@@ -1,4 +1,3 @@
-# tap 'github/gh', trusted: true                 # Needed for gh
 tap "azure/functions", trusted: true
 tap 'muesli/tap', trusted: true
 tap 'goreleaser/tap', trusted: true
@@ -6,6 +5,8 @@ tap 'espanso/espanso', trusted: true           # Needed for espanso
 
 {{- if eq .install_type "work" }}
 # Work-specific tools
+tap 'timrogers/tap', trusted: true
+brew 'formanator'         # CLI to post to Forma.
 # brew 'azure-cli'
 {{ end }}
 
