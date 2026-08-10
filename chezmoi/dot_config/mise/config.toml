@@ -1,6 +1,7 @@
 [tools]
 bat="latest"
 eza="latest"
+fzf="latest"
 gh="latest"
 jj="latest"
 jjui="latest"
