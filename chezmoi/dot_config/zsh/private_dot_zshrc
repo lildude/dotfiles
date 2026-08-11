@@ -60,8 +60,6 @@ if [[ -z "${ZSH_SCRIPT+X}${ZSH_EXECUTION_STRING+X}" ]]; then
   source "$POWERLEVEL9K_CONFIG_FILE" || return
 fi
 
-_exists() { (( $+commands[$1] )) }
-
 #### ---:[ Export Variables ]:--- ###
 export BAT_THEME="TwoDark"
 export GPG_TTY=$TTY
@@ -97,7 +95,7 @@ export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
 export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
 export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
 
-_exists claude && {
+(( $+commands[claude] )) && {
   # Claude Code -> GitHub Copilot Proxy
   export ANTHROPIC_BASE_URL="http://localhost:4000"
   # Claude Code -> GitHub Copilot Proxy
@@ -133,7 +131,7 @@ export PRYRC=$XDG_CONFIG_HOME/pry/pryrc         # Unnecessary but being extra sa
 export SOLARGRAPH_CACHE=$XDG_CACHE_HOME/solargraph
 export SQLITE_HISTORY=$XDG_STATE_HOME/sqlite/history
 
-_exists pnpm && {
+(( $+commands[pnpm] )) && {
   export PNPM_HOME="$XDG_DATA_HOME/pnpm"
   path+=($PNPM_HOME)
 }
@@ -162,7 +160,7 @@ alias find='noglob find'              # Allows typing e.g. "find . -name *.zsh" 
 alias cp='cp -i'                      # Ask for confirmation when overwriting existing files.
 alias mv='mv -i'
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
-_exists dircolors && alias ls='ls --color=auto' || alias ls='ls -G'
+(( $+commands[dircolors] )) && alias ls='ls --color=auto' || alias ls='ls -G'
 
 # Lazy Git aliases
 # alias g='git'
@@ -190,34 +188,34 @@ if [ -n "$CODESPACES" ]; then
   alias driftwood-server="if [ ! -d /workspaces/driftwood ]; then ${CODESPACE_VSCODE_FOLDER}/script/setup-codespaces-driftwood-dev; fi && /workspaces/driftwood/script/server"
 fi
 
-# _exists hub && {
+# (( $+commands[hub] )) && {
 #   alias git=hub
 #   alias ci="hub ci-status"
 # }
-_exists bat && alias cat=bat && export BAT_THEME="Monokai Extended"
-_exists eza && alias ls="eza --no-user"
-_exists rg && rg() { $commands[rg] -p "$@" | less; }
-_exists prettyping && alias ping="prettyping --nolegend"
-_exists chezmoi && {
+(( $+commands[bat] )) && alias cat=bat && export BAT_THEME="Monokai Extended"
+(( $+commands[eza] )) && alias ls="eza --no-user"
+(( $+commands[rg] )) && rg() { $commands[rg] -p "$@" | less; }
+(( $+commands[prettyping] )) && alias ping="prettyping --nolegend"
+(( $+commands[chezmoi] )) && {
   alias che=chezmoi
   alias chez=chezmoi
   alias ch=chezmoi
   alias cha="chezmoi apply"
   alias chd="chezmoi cd"
 }
-# _exists code-insiders && alias code=code-insiders
-# _exists gh && {
+# (( $+commands[code-insiders] )) && alias code=code-insiders
+# (( $+commands[gh] )) && {
 #   gh-cs="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m largePremiumLinux --default-permissions | tail -1) --insiders"
 #   gh-cs-big="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m xLargePremiumLinux --default-permissions | tail -1) --insiders"
 # }
-_exists trash && alias rm="trash -F"
-_exists overmind && alias orw="overmind restart web"
+(( $+commands[trash] )) && alias rm="trash -F"
+(( $+commands[overmind] )) && alias orw="overmind restart web"
 
 if [ -z "$CODESPACES" ]; then
   # From `source $HOME/.config/op/plugins.sh`
   export OP_PLUGIN_ALIASES_SOURCED=1
   export OP_ACCOUNT="my.1password.com"
-  if _exists op; then
+  if (( $+commands[op] )); then
     alias gh="op plugin run -- gh"
     alias brew="op plugin run -- brew"
   fi
@@ -410,8 +408,14 @@ compdef _directories md
 [[ ! -r "$HOME/.secrets" ]] || source "$HOME/.secrets"
 [[ ! -r /etc/grc.zsh ]] || source /etc/grc.zsh # Colourize all the other things
 [[ -z "$HOMEBREW_PREFIX" || ! -r "$HOMEBREW_PREFIX/etc/grc.zsh" ]] || source "$HOMEBREW_PREFIX/etc/grc.zsh" # Colourize all the other things
-# _exists mise && eval "$(mise activate zsh)"
+# (( $+commands[mise] )) && eval "$(mise activate zsh)"
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
+
+# Include later PATH changes in mise's first-prompt fast path.
+if (( $+functions[_mise_hook_env_state] )); then
+  export __MISE_ZSH_ACTIVATE_PATH="$PATH"
+  export __MISE_ZSH_ACTIVATE_ENV="$(_mise_hook_env_state)"
+fi
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
 source "$ZSH_PLUGIN_HOME/zsh-autosuggestions/zsh-autosuggestions.zsh" || return
@@ -423,8 +427,6 @@ typeset -gA ZSH_HIGHLIGHT_STYLES=(comment 'fg=96')
 ZSH_HIGHLIGHT_MAXLENGTH=1024
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 source "$ZSH_PLUGIN_HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || return
-
-unfunction _exists
 
 # This must always be last.
 [ -z "$ZPROF" ] || zprof
