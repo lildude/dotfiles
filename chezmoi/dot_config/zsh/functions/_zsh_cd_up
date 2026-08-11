@@ -1,0 +1,1 @@
+builtin cd -q .. && zle reset-prompt

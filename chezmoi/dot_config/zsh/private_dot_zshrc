@@ -341,42 +341,20 @@ if [[ -z "${ZSH_SCRIPT+X}${ZSH_EXECUTION_STRING+X}" ]]; then
 fi
 source "$ZSH_PLUGIN_HOME/zsh-history-substring-search/zsh-history-substring-search.zsh" || return
 
+#### ---:[ Autoload functions ]:--- ###
+autoload -Uz zmv
+autoload -Uz $fpath[1]/*(.:t)           # Load all my functions
+
+autoload -Uz bracketed-paste-url-magic
+zle -N bracketed-paste bracketed-paste-url-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
+
+autoload -Uz add-zsh-hook
+add-zsh-hook preexec _zsh_title_preexec
+add-zsh-hook precmd _zsh_title_precmd
+
 #### ---:[ Keybindings ]:--- ###
-_zsh_cd_rotate() {
-  while (( $#dirstack )) && ! builtin pushd -q "$1" &>/dev/null; do
-    builtin popd -q "$1"
-  done
-  (( $#dirstack )) && zle reset-prompt
-}
-
-_zsh_cd_back() { _zsh_cd_rotate +1 }
-_zsh_cd_forward() { _zsh_cd_rotate -0 }
-_zsh_cd_up() { builtin cd -q .. && zle reset-prompt }
-
-_zsh_cd_down() {
-  local -a dirs=(*(N-/))
-  (( $#dirs )) || return
-  local dir
-  dir=$(printf '%s\0' "${dirs[@]}" | command fzf --read0 --no-multi --exact --no-preview --height=40% --layout=reverse) || return
-  builtin cd -q -- "$dir" && zle reset-prompt
-}
-
-_zsh_fzf_dir_history() {
-  local -A seen
-  local -a dirs
-  local dir
-  for dir in "$PWD" "${dirstack[@]}"; do
-    [[ -d "$dir" && -z ${seen[$dir]} ]] || continue
-    dirs+=("$dir")
-    seen[$dir]=1
-  done
-  (( $#dirs )) || return
-  dir=$(printf '%s\0' "${dirs[@]}" | command fzf --read0 --no-multi --no-sort --exact --no-preview --height=40% --layout=reverse) || return
-  builtin cd -q -- "$dir" && zle reset-prompt
-}
-
-_zsh_do_nothing() { return 0 }
-
 zle -N zsh-cd-back _zsh_cd_back
 zle -N zsh-cd-forward _zsh_cd_forward
 zle -N zsh-cd-up _zsh_cd_up
@@ -423,21 +401,6 @@ bindkey '^[r' zsh-fzf-dir-history
 bindkey '^[R' zsh-fzf-dir-history
 bindkey '^[[5~' zsh-do-nothing
 bindkey '^[[6~' zsh-do-nothing
-
-#### ---:[ Autoload functions ]:--- ###
-autoload -Uz zmv
-autoload -Uz $fpath[1]/*(.:t)           # Load all my functions
-
-autoload -Uz bracketed-paste-url-magic
-zle -N bracketed-paste bracketed-paste-url-magic
-autoload -Uz url-quote-magic
-zle -N self-insert url-quote-magic
-
-autoload -Uz add-zsh-hook
-_zsh_title_preexec() { print -Pn "\e]0;${1//\%/%%}\a" }
-_zsh_title_precmd() { print -Pn '\e]0;%~\a' }
-add-zsh-hook preexec _zsh_title_preexec
-add-zsh-hook precmd _zsh_title_precmd
 
 # Define functions and completions.
 # Or place the functions in $ZDOTDIR/functions and the completions in $ZDOTDIR/completions.

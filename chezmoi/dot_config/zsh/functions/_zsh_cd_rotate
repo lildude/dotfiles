@@ -1,0 +1,4 @@
+while (( $#dirstack )) && ! builtin pushd -q "$1" &>/dev/null; do
+  builtin popd -q "$1"
+done
+(( $#dirstack )) && zle reset-prompt
