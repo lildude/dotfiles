@@ -1,4 +1,9 @@
 # shellcheck shell=bash
+if [ -x /usr/libexec/path_helper ]; then
+  export MANPATH="${MANPATH:-:}"
+  eval "$(/usr/libexec/path_helper -s)"
+fi
+
 if [ -z "$SSH_AUTH_SOCK" ]; then
   # Check for a currently running instance of the agent
   RUNNING_AGENT="$(pgrep -f 'ssh-agent -s' | wc -l | tr -d '[:space:]')"
