@@ -57,6 +57,7 @@ Library/LaunchAgents/local.restic_backup.plist
 .copilot/skills/splunk-log-analysis/
 {{ end -}}
 {{/* Don't ever install these files */}}
+.local/share/zsh/plugins/powerlevel10k/**/*.zwc
 **/.DS_Store
 ano/
 Dockerfile

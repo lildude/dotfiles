@@ -14,6 +14,7 @@
 [".local/share/zsh/plugins/powerlevel10k"]
   type = "archive"
   url = "https://github.com/romkatv/powerlevel10k/archive/9253fb1c5034410c43a0c681ff8294181c54016c.tar.gz"
+  # Runtime bytecode is ignored separately so source files stay exact.
   exact = true
   stripComponents = 1
 [".local/share/zsh/plugins/zsh-autosuggestions"]
