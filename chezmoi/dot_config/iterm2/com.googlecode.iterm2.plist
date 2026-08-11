@@ -3076,7 +3076,7 @@
 			<key>Columns</key>
 			<integer>180</integer>
 			<key>Command</key>
-			<string>/usr/local/bin/zsh -l</string>
+			<string></string>
 			<key>Cursor Boost</key>
 			<real>0.0</real>
 			<key>Cursor Color</key>
@@ -3121,7 +3121,7 @@
 			<key>Cursor Type</key>
 			<integer>2</integer>
 			<key>Custom Command</key>
-			<string>Yes</string>
+			<string>No</string>
 			<key>Custom Directory</key>
 			<string>No</string>
 			<key>Default Bookmark</key>
