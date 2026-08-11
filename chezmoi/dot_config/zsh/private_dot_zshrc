@@ -31,17 +31,43 @@ unset _dir
 
 typeset -g ZSH_PLUGIN_HOME="$XDG_DATA_HOME/zsh/plugins"
 
+if [[ -z "$HOMEBREW_PREFIX" ]]; then
+  for _prefix in /opt/homebrew /usr/local /home/linuxbrew/.linuxbrew ~/.linuxbrew; do
+    [[ -x "$_prefix/bin/brew" ]] || continue
+    export HOMEBREW_PREFIX="$_prefix"
+    export HOMEBREW_CELLAR="$_prefix/Cellar"
+    if [[ -e "$_prefix/Homebrew/Library" ]]; then
+      export HOMEBREW_REPOSITORY="$_prefix/Homebrew"
+    else
+      export HOMEBREW_REPOSITORY="$_prefix"
+    fi
+    break
+  done
+  unset _prefix
+fi
+
 # Ensure path arrays do not contain duplicates.
-typeset -gU fpath path
+export -T MANPATH=${MANPATH:-:} manpath
+export -T INFOPATH=${INFOPATH:-:} infopath
+typeset -gU fpath path manpath infopath
 
 # Extend PATH.
 path=(
   ~/bin
+  ~/.local/bin
+  ~/.cargo/bin(-/N)
   ~/.local/share/gem/bin
   /opt/homebrew/opt/postgresql@17/bin
   /opt/homebrew/opt/trash/bin
   /Applications/Tailscale.app/Contents/MacOS
+  ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/bin}(-/N)
+  ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/sbin}(-/N)
+  /opt/local/sbin(-/N)
+  /opt/local/bin(-/N)
+  /usr/local/sbin(-/N)
+  /usr/local/bin(-/N)
   $path
+  /snap/bin(-/N)
 )
 
 # Extend function path
@@ -49,7 +75,27 @@ fpath=(
   $ZDOTDIR/functions
   $ZDOTDIR/completions
   $ZSH_PLUGIN_HOME/zsh-completions/src
+  ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share/zsh/site-functions}(-/N)
+  /opt/local/share/zsh/site-functions(-/N)
+  /usr/local/share/zsh/site-functions(-/N)
+  /usr/local/share/zsh/vendor-completions(-/N)
+  /usr/share/zsh/site-functions(-/N)
+  /usr/share/zsh/vendor-completions(-/N)
   $fpath
+)
+
+manpath=(
+  ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share/man}(-/N)
+  /opt/local/share/man(-/N)
+  $manpath
+  ''
+)
+
+infopath=(
+  ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/share/info}(-/N)
+  /opt/local/share/info(-/N)
+  $infopath
+  ''
 )
 
 [[ ! -r "$XDG_CONFIG_HOME/mise/activate.zsh" ]] || source "$XDG_CONFIG_HOME/mise/activate.zsh"
