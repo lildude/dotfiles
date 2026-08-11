@@ -2,7 +2,7 @@
 
 These are my dotfiles. I've borrowed many ideas from many different locations to create my ideal setup.
 
-This current implementation is managed using [chezmoi](https://chezmoi.io/) and is mostly built upon [ZSH for Humans](https://github.com/romkatv/zsh4humans).
+This current implementation is managed using [chezmoi](https://chezmoi.io/), with Zsh plugins installed directly from pinned upstream revisions.
 
 ## Installation
 

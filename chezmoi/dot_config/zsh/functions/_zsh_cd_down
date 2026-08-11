@@ -1,0 +1,5 @@
+local -a dirs=(*(N-/))
+(( $#dirs )) || return
+local dir
+dir=$(printf '%s\0' "${dirs[@]}" | command fzf --read0 --no-multi --exact --no-preview --height=40% --layout=reverse) || return
+builtin cd -q -- "$dir" && zle reset-prompt

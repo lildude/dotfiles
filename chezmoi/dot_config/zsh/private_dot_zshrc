@@ -5,43 +5,31 @@
 # shell customization and configuration (including exported environment
 # variables such as PATH) in this file or in files source by it.
 #
-# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
+# Zsh plugins are installed from pinned upstream revisions by chezmoi.
 # Profile loading the shell using `ZPROF=1 zsh -i`
 [ -z "$ZPROF" ] || zmodload zsh/zprof
 
-#### ---:[ Z4H config ]:--- ###
-
-zstyle ':z4h:'                  chsh              'no'            # Disable chsh check
-zstyle ':z4h:'                  auto-update       'no'            # Periodic auto-update on Zsh startup: 'ask' or 'no'. You can manually run `z4h update` to update everything.
-zstyle ':z4h:'                  prompt-at-bottom  'no'            # Move prompt to the bottom when zsh starts and on Ctrl+L - needs tmux
-zstyle ':z4h:bindkey'           keyboard          'mac'           # Keyboard type: 'mac' or 'pc'.
-zstyle ':z4h:autosuggestions'   forward-char      'accept'        # Right-arrow key accepts one character ('partial-accept') from command autosuggestions or the whole thing ('accept')?
-zstyle ':z4h:fzf-complete'      recurse-dirs      'no'            # Recursively traverse directories when TAB-completing files.
-zstyle ':z4h:direnv'            enable            'no'            # Disable direnv to automatically source .envrc files.
-zstyle ':z4h:ssh:*'             enable            'no'            # The default value if none of the overrides above match the hostname.
-zstyle ':z4h:'                  start-tmux        'no'            # Don't download and start tmux-related stuff as I really don't seem to gain much benefit from this.
-zstyle ':z4h:fzf-history'       fzf-flags         --no-preview    # Disable history preview and limit height
-# zstyle ':z4h:*'                 fzf-command       fzf             # Use fzf in PATH
-# zstyle ':z4h:'                  term-shell-integration  'yes'     # Mark up shell's output with semantic information.
-zstyle ':z4h:homebrew-command-not-found'   channel  'none'        # Disable homebrew command-not-found integration as it deprecated.
-
-# Disable on codespaces as they are never used
-if [ $CODESPACES ]; then
-  zstyle ':z4h:systemd'                         channel           'none'
+# Enable Powerlevel10k instant prompt. This must stay near the top of the file.
+if [[ -z "${ZSH_SCRIPT+X}${ZSH_EXECUTION_STRING+X}" && -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Clone additional Git repositories from GitHub.
-#
-# This doesn't do anything apart from cloning the repository and keeping it
-# up-to-date. Cloned files can be used after `z4h init`. This is just an
-# example. If you don't plan to use Oh My Zsh, delete this line.
-# z4h install ohmyzsh/ohmyzsh || return
+# Store stuff in ~/.config and ~/.cache when we can.
+# https://wiki.archlinux.org/title/XDG_Base_Directory
+# https://www.reddit.com/r/zsh/comments/fvtr19/no_more_dotfile_clutter_in_my_home/
+[ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="${HOME}/.config"
+[ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="${HOME}/.cache"
+[ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="${HOME}/.local/share"
+[ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="${HOME}/.tmp"
+[ -z "$XDG_STATE_HOME" ] && export XDG_STATE_HOME="${HOME}/.local/state"
 
-# Install or update core components (fzf, zsh-autosuggestions, etc.) and
-# initialize Zsh. After this point console I/O is unavailable until Zsh
-# is fully initialized. Everything that requires user interaction or can
-# perform network I/O must be done above. Everything else is best done below.
-z4h init || return
+## create directories if they don't already exist
+for _dir in "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME/zsh/completion" "$XDG_DATA_HOME" "$XDG_RUNTIME_DIR" "$XDG_STATE_HOME/zsh"; do
+  [[ -d "$_dir" ]] || mkdir -p "$_dir"
+done
+unset _dir
+
+typeset -g ZSH_PLUGIN_HOME="$XDG_DATA_HOME/zsh/plugins"
 
 # Ensure path arrays do not contain duplicates.
 typeset -gU fpath path
@@ -60,12 +48,17 @@ path=(
 fpath=(
   $ZDOTDIR/functions
   $ZDOTDIR/completions
+  $ZSH_PLUGIN_HOME/zsh-completions/src
   $fpath
 )
 
-z4h source -- ${XDG_CONFIG_HOME}/mise/activate.zsh 2>/dev/null # From running `mise activate zsh` and then modified to not assume a path.
+[[ ! -r "$XDG_CONFIG_HOME/mise/activate.zsh" ]] || source "$XDG_CONFIG_HOME/mise/activate.zsh"
 
-_exists() { (( $+commands[$1] )) }
+if [[ -z "${ZSH_SCRIPT+X}${ZSH_EXECUTION_STRING+X}" ]]; then
+  source "$ZSH_PLUGIN_HOME/powerlevel10k/powerlevel10k.zsh-theme" || return
+  typeset -g POWERLEVEL9K_CONFIG_FILE="$ZDOTDIR/.p10k.zsh"
+  source "$POWERLEVEL9K_CONFIG_FILE" || return
+fi
 
 #### ---:[ Export Variables ]:--- ###
 export BAT_THEME="TwoDark"
@@ -95,21 +88,6 @@ export GREP_COLOR=${GREP_COLOR:-'37;45'}            # BSD.
 export GREP_COLORS=${GREP_COLORS:-"mt=$GREP_COLOR"} # GNU.
 # LESS_TERMCAP_* as now set in the man() function
 
-# Store stuff in ~/.config and ~/.cache when we can.
-# https://wiki.archlinux.org/title/XDG_Base_Directory
-# https://www.reddit.com/r/zsh/comments/fvtr19/no_more_dotfile_clutter_in_my_home/
-[ -z "$XDG_CONFIG_HOME" ] && export XDG_CONFIG_HOME="${HOME}/.config"
-[ -z "$XDG_CACHE_HOME" ] && export XDG_CACHE_HOME="${HOME}/.cache"
-[ -z "$XDG_DATA_HOME" ] && export XDG_DATA_HOME="${HOME}/.local/share"
-[ -z "$XDG_RUNTIME_DIR" ] && export XDG_RUNTIME_DIR="${HOME}/.tmp"
-[ -z "$XDG_STATE_HOME" ] && export XDG_STATE_HOME="${HOME}/.local/state"
-
-## create directories if they don't already exist
-for _dir in $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME $XDG_RUNTIME_DIR $XDG_STATE_HOME; do
-  [[ -d "$_dir" ]] || mkdir -p "$_dir"
-done
-unset _dir
-
 export AWS_SHARED_CREDENTIALS_FILE=$XDG_CONFIG_HOME/aws/credentials
 export AWS_CONFIG_FILE=$XDG_CONFIG_HOME/aws/config
 export AZURE_CONFIG_DIR=$XDG_DATA_HOME/azure
@@ -117,12 +95,10 @@ export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
 export BUNDLE_USER_HOME=$XDG_CONFIG_HOME/bundle
 export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
 
-_exists claude && {
+(( $+commands[claude] )) && {
   # Claude Code -> GitHub Copilot Proxy
   export ANTHROPIC_BASE_URL="http://localhost:4000"
-  # Claude Code -> GitHub Copilot Proxy
   export ANTHROPIC_AUTH_TOKEN="fake-key"
-  # Claude Code -> GitHub Copilot Proxy
   export CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS="1"
 }
 # export COPILOT_HOME=$XDG_DATA_HOME/copilot # This is mostly borked and not properly supported yet.
@@ -153,7 +129,7 @@ export PRYRC=$XDG_CONFIG_HOME/pry/pryrc         # Unnecessary but being extra sa
 export SOLARGRAPH_CACHE=$XDG_CACHE_HOME/solargraph
 export SQLITE_HISTORY=$XDG_STATE_HOME/sqlite/history
 
-_exists pnpm && {
+(( $+commands[pnpm] )) && {
   export PNPM_HOME="$XDG_DATA_HOME/pnpm"
   path+=($PNPM_HOME)
 }
@@ -181,6 +157,8 @@ alias curl="noglob curl"              # Don't glob
 alias find='noglob find'              # Allows typing e.g. "find . -name *.zsh" without quotes.
 alias cp='cp -i'                      # Ask for confirmation when overwriting existing files.
 alias mv='mv -i'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+(( $+commands[dircolors] )) && alias ls='ls --color=auto' || alias ls='ls -G'
 
 # Lazy Git aliases
 # alias g='git'
@@ -208,50 +186,62 @@ if [ -n "$CODESPACES" ]; then
   alias driftwood-server="if [ ! -d /workspaces/driftwood ]; then ${CODESPACE_VSCODE_FOLDER}/script/setup-codespaces-driftwood-dev; fi && /workspaces/driftwood/script/server"
 fi
 
-# _exists hub && {
-#   alias git=hub
-#   alias ci="hub ci-status"
-# }
-_exists bat && alias cat=bat && export BAT_THEME="Monokai Extended"
-_exists eza && alias ls="eza --no-user"
-_exists rg && rg() { $commands[rg] -p "$@" | less; }
-_exists prettyping && alias ping="prettyping --nolegend"
-_exists chezmoi && {
+(( $+commands[bat] )) && alias cat=bat && export BAT_THEME="Monokai Extended"
+(( $+commands[eza] )) && alias ls="eza --no-user"
+(( $+commands[rg] )) && rg() { $commands[rg] -p "$@" | less; }
+(( $+commands[prettyping] )) && alias ping="prettyping --nolegend"
+(( $+commands[chezmoi] )) && {
   alias che=chezmoi
   alias chez=chezmoi
   alias ch=chezmoi
   alias cha="chezmoi apply"
   alias chd="chezmoi cd"
 }
-# _exists code-insiders && alias code=code-insiders
-# _exists gh && {
+# (( $+commands[gh] )) && {
 #   gh-cs="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m largePremiumLinux --default-permissions | tail -1) --insiders"
 #   gh-cs-big="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m xLargePremiumLinux --default-permissions | tail -1) --insiders"
 # }
-_exists trash && alias rm="trash -F"
-_exists overmind && alias orw="overmind restart web"
+(( $+commands[trash] )) && alias rm="trash -F"
+(( $+commands[overmind] )) && alias orw="overmind restart web"
 
 if [ -z "$CODESPACES" ]; then
   # From `source $HOME/.config/op/plugins.sh`
   export OP_PLUGIN_ALIASES_SOURCED=1
   export OP_ACCOUNT="my.1password.com"
-  if _exists op; then
+  if (( $+commands[op] )); then
     alias gh="op plugin run -- gh"
     alias brew="op plugin run -- brew"
   fi
 fi
 
-
-
 #### ---:[ Shell options ]:--- ###
 # See: http://zsh.sourceforge.net/Doc/Release/Options.html.
-# These are only the ones not set by z4h in z4h.zsh or that I'm overriding.
+setopt always_to_end          # Move the cursor to the end after completion.
+setopt auto_cd                # Change directory by entering its path.
+setopt auto_param_slash       # Add a trailing slash when completing directories.
+setopt auto_pushd             # Keep visited directories on the directory stack.
+setopt c_bases                # Use C-style hexadecimal numbers.
+setopt extended_glob          # Enable Zsh's extended glob syntax.
+setopt extended_history       # Save timestamps and durations in history.
 setopt glob_dots              # no special treatment for file names with a leading dot
-setopt no_auto_menu           # require an extra TAB press to open the completion menu
+setopt auto_menu              # Open fuzzy completion on the second TAB press.
 setopt inc_append_history     # Append immediately rather than only at exit
+setopt hist_expire_dups_first # Expire duplicates before unique history entries.
+setopt hist_fcntl_lock        # Use fcntl locking for the history file.
+setopt hist_find_no_dups      # Skip duplicates while searching history.
 setopt hist_no_store          # Don't store history or fc commands
 setopt hist_ignore_all_dups   # Remove older event if new event is duplicate.
+setopt hist_ignore_dups       # Don't add consecutive duplicate entries.
 setopt hist_ignore_space      # Don't store commands starting with a space.
+setopt hist_save_no_dups      # Don't write duplicate entries to disk.
+setopt hist_verify            # Expand history without immediately executing it.
+setopt interactive_comments   # Allow comments in interactive commands.
+setopt no_auto_remove_slash   # Keep trailing slashes inserted by completion.
+setopt no_beep                # Never beep on errors.
+setopt no_flow_control        # Disable terminal start/stop characters.
+setopt no_list_types          # Don't append file type markers in completion lists.
+setopt share_history          # Share history between shell sessions.
+setopt typeset_silent         # Don't print values after typeset commands.
 setopt combining_chars        # Combine zero-length punctuation characters (accents) with the base character.
 setopt rc_quotes              # Allow 'Henry''s Garage' instead of 'Henry'\''s Garage'.
 unsetopt mail_warning         # Don't print a warning message if a mail file has been accessed.
@@ -263,13 +253,82 @@ unsetopt hup                  # Don't kill jobs on shell exit.
 unsetopt check_jobs           # Don't report on jobs when shell exit.
 unsetopt clobber              # Do not overwrite existing files with > and >>. Use >! and >>! to bypass.
 
-#### ---:[ Keybindings ]:--- ###
-z4h bindkey undo Ctrl+/   Shift+Tab     # undo the last command line change
-z4h bindkey redo Option+/               # redo the last undone command line change
-z4h bindkey z4h-cd-back    Shift+Left   # cd into the previous directory
-z4h bindkey z4h-cd-forward Shift+Right  # cd into the next directory
-z4h bindkey z4h-cd-up      Shift+Up     # cd into the parent directory
-z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
+WORDCHARS=''
+ZLE_REMOVE_SUFFIX_CHARS=''
+KEYTIMEOUT=20
+DIRSTACKSIZE=10000
+PROMPT_EOL_MARK='%K{red} %k'
+TIMEFMT='user=%U system=%S cpu=%P total=%*E'
+zle_highlight=('paste:none')
+
+#### ---:[ Completion ]:--- ###
+export LS_COLORS=${LS_COLORS:-'fi=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:st=34:tw=04;34:pi=01;33:so=01;33:do=01;33:bd=01;33:cd=01;33:su=01;35:sg=01;35:ca=01;35:ex=01;32:no=38;5;248'}
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' menu no
+zstyle ':completion:*' verbose true
+zstyle ':completion:::::' insert-tab pending
+zstyle ':completion:*:-subscript-:*' tag-order indexes parameters
+zstyle ':completion:*:-tilde-:*' tag-order directory-stack named-directories users
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*:rm:*' ignore-line other
+zstyle ':completion:*:kill:*' ignore-line other
+zstyle ':completion:*:diff:*' ignore-line other
+zstyle ':completion:*:rm:*' file-patterns '*:all-files'
+zstyle ':completion:*:paths' accept-exact-dirs true
+zstyle ':completion:*' single-ignored show
+zstyle ':completion:*:functions' ignored-patterns '-*|_*'
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/completion"
+zstyle ':fzf-tab:*' fzf-flags --no-preview
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-a:toggle-all'
+
+autoload -Uz compinit
+() {
+  local dump="$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
+  local dir rebuild
+  [[ -s "$dump" ]] || rebuild=1
+  if [[ -z "$rebuild" ]]; then
+    for dir in $fpath; do
+      [[ -d "$dir" && "$dir" -nt "$dump" ]] || continue
+      rebuild=1
+      break
+    done
+  fi
+  if [[ -n "$rebuild" ]]; then
+    compinit -d "$dump"
+  else
+    compinit -C -d "$dump"
+  fi
+  if [[ -s "$dump" && ( ! -s "$dump.zwc" || "$dump" -nt "$dump.zwc" ) ]]; then
+    zcompile -R "$dump"
+  fi
+}
+
+if [[ -z "${ZSH_SCRIPT+X}${ZSH_EXECUTION_STRING+X}" ]]; then
+  if (( ! $+commands[fzf] )); then
+    print -u2 'zsh: fzf is missing; run `mise install`'
+    return 1
+  fi
+
+  _fzf_init="$XDG_CACHE_HOME/zsh/fzf.zsh"
+  if [[ ! -s "$_fzf_init" || "$commands[fzf]" -nt "$_fzf_init" ]]; then
+    command fzf --zsh >| "$_fzf_init" || return
+    zcompile -R "$_fzf_init"
+  fi
+  FZF_CTRL_T_COMMAND=
+  FZF_ALT_C_COMMAND=
+  FZF_CTRL_R_OPTS='--exact --no-multi --no-preview'
+  source "$_fzf_init" || return
+  unset _fzf_init FZF_CTRL_T_COMMAND FZF_ALT_C_COMMAND FZF_CTRL_R_OPTS
+  bindkey '^I' expand-or-complete
+fi
+
+if [[ -z "${ZSH_SCRIPT+X}${ZSH_EXECUTION_STRING+X}" ]]; then
+  source "$ZSH_PLUGIN_HOME/fzf-tab/fzf-tab.plugin.zsh" || return
+fi
+source "$ZSH_PLUGIN_HOME/zsh-history-substring-search/zsh-history-substring-search.zsh" || return
 
 #### ---:[ Autoload functions ]:--- ###
 autoload -Uz zmv
@@ -280,18 +339,85 @@ zle -N bracketed-paste bracketed-paste-url-magic
 autoload -Uz url-quote-magic
 zle -N self-insert url-quote-magic
 
+autoload -Uz add-zsh-hook
+add-zsh-hook preexec _zsh_title_preexec
+add-zsh-hook precmd _zsh_title_precmd
+
+#### ---:[ Keybindings ]:--- ###
+zle -N zsh-cd-back _zsh_cd_back
+zle -N zsh-cd-forward _zsh_cd_forward
+zle -N zsh-cd-up _zsh_cd_up
+zle -N zsh-cd-down _zsh_cd_down
+zle -N zsh-fzf-dir-history _zsh_fzf_dir_history
+zle -N zsh-do-nothing _zsh_do_nothing
+
+bindkey -e
+bindkey -s '^[OA' '^[[A'
+bindkey -s '^[OB' '^[[B'
+bindkey -s '^[OC' '^[[C'
+bindkey -s '^[OD' '^[[D'
+bindkey -s '^[OF' '^[[F'
+bindkey -s '^[OH' '^[[H'
+bindkey -s '^[[1~' '^[[H'
+bindkey -s '^[[4~' '^[[F'
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[3~' delete-char
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey '^R' fzf-history-widget
+bindkey '^[[1;3C' forward-word
+bindkey '^[[1;3D' backward-word
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+bindkey '^[[3;3~' kill-word
+bindkey '^[[3;5~' kill-word
+bindkey '^[f' forward-word
+bindkey '^[b' backward-word
+bindkey '^[d' kill-word
+bindkey '^[^?' backward-kill-word
+bindkey '^_' undo                    # Ctrl+/
+bindkey '^[[Z' undo                  # Shift+Tab
+bindkey $'\e/' redo
+bindkey $'\303\267' redo
+bindkey '^[[1;2D' zsh-cd-back       # Shift+Left
+bindkey '^[[1;2C' zsh-cd-forward    # Shift+Right
+bindkey '^[[1;2A' zsh-cd-up         # Shift+Up
+bindkey '^[[1;2B' zsh-cd-down       # Shift+Down
+bindkey '^[r' zsh-fzf-dir-history
+bindkey '^[R' zsh-fzf-dir-history
+bindkey '^[[5~' zsh-do-nothing
+bindkey '^[[6~' zsh-do-nothing
+
 # Define functions and completions.
 # Or place the functions in $ZDOTDIR/functions and the completions in $ZDOTDIR/completions.
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
-z4h source "$HOME/.secrets"
-z4h source /etc/grc.zsh # Colourize all the other things
-z4h source -- ${HOMEBREW_PREFIX:+$HOMEBREW_PREFIX/etc/grc.zsh} # Colourize all the other things
-# _exists mise && eval "$(mise activate zsh)"
+[[ ! -r "$HOME/.secrets" ]] || source "$HOME/.secrets"
+[[ ! -r /etc/grc.zsh ]] || source /etc/grc.zsh # Colourize all the other things
+[[ -z "$HOMEBREW_PREFIX" || ! -r "$HOMEBREW_PREFIX/etc/grc.zsh" ]] || source "$HOMEBREW_PREFIX/etc/grc.zsh" # Colourize all the other things
+# (( $+commands[mise] )) && eval "$(mise activate zsh)"
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(code --locate-shell-integration-path zsh)"
 
-unfunction _exists
+# Include later PATH changes in mise's first-prompt fast path.
+if (( $+functions[_mise_hook_env_state] )); then
+  export __MISE_ZSH_ACTIVATE_PATH="$PATH"
+  export __MISE_ZSH_ACTIVATE_ENV="$(_mise_hook_env_state)"
+fi
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=244'
+source "$ZSH_PLUGIN_HOME/zsh-autosuggestions/zsh-autosuggestions.zsh" || return
+bindkey '^[m' autosuggest-accept
+bindkey '^[M' autosuggest-accept
+bindkey $'\302\265' autosuggest-accept
+
+typeset -gA ZSH_HIGHLIGHT_STYLES=(comment 'fg=96')
+ZSH_HIGHLIGHT_MAXLENGTH=1024
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+source "$ZSH_PLUGIN_HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" || return
 
 # This must always be last.
 [ -z "$ZPROF" ] || zprof

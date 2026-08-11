@@ -3,6 +3,7 @@ if [ -z "${__MISE_ORIG_PATH:-}" ]; then
   export __MISE_ORIG_PATH="$PATH"
 fi
 export __MISE_ZSH_PRECMD_RUN=0
+export __MISE_ZSH_CHPWD_RAN=0
 
 mise() {
   local command
@@ -25,25 +26,49 @@ mise() {
   command ${HOME}/.local/bin/mise "$command" "$@"
 }
 
+autoload -Uz add-zsh-hook
 _mise_hook() {
-  eval "$(${HOME}/.local/bin/mise hook-env -s zsh)";
+  eval "$(${HOME}/.local/bin/mise hook-env -s zsh "$@")";
+}
+_mise_hook_env_state() {
+  # enumerate MISE_* vars with the typeset builtin rather than
+  # ${parameters}: referencing that special array autoloads the
+  # zsh/parameter module via dlopen, which can deadlock under
+  # Rosetta in login shells (https://github.com/jdx/mise/discussions/11187)
+  local -a keys=(${(o)${(f)"$(typeset +m 'MISE_*' 2>/dev/null)"}##* })
+  if (( ${#keys} > 0 )); then
+    typeset -p "${keys[@]}" 2>/dev/null
+  fi
 }
 _mise_hook_precmd() {
-  eval "$(${HOME}/.local/bin/mise hook-env -s zsh --reason precmd)";
+  if [[ "${__MISE_ZSH_CHPWD_RAN:-0}" == "1" ]]; then
+    export __MISE_ZSH_CHPWD_RAN=0
+    unset __MISE_ZSH_ACTIVATE_PATH
+    unset __MISE_ZSH_ACTIVATE_ENV
+    return
+  fi
+  if [[ "${__MISE_ZSH_PRECMD_RUN:-0}" == "0" &&
+        "$PATH" == "${__MISE_ZSH_ACTIVATE_PATH:-}" &&
+        "$(_mise_hook_env_state)" == "${__MISE_ZSH_ACTIVATE_ENV:-}" ]]; then
+    export __MISE_ZSH_PRECMD_RUN=1
+    unset __MISE_ZSH_ACTIVATE_PATH
+    unset __MISE_ZSH_ACTIVATE_ENV
+    return
+  fi
+  unset __MISE_ZSH_ACTIVATE_PATH
+  unset __MISE_ZSH_ACTIVATE_ENV
+  _mise_hook --reason precmd
 }
 _mise_hook_chpwd() {
-  eval "$(${HOME}/.local/bin/mise hook-env -s zsh --reason chpwd)";
+  export __MISE_ZSH_CHPWD_RAN=1
+  _mise_hook --reason chpwd
 }
-typeset -ag precmd_functions;
-if [[ -z "${precmd_functions[(r)_mise_hook_precmd]+1}" ]]; then
-  precmd_functions=( _mise_hook_precmd ${precmd_functions[@]} )
-fi
-typeset -ag chpwd_functions;
-if [[ -z "${chpwd_functions[(r)_mise_hook_chpwd]+1}" ]]; then
-  chpwd_functions=( _mise_hook_chpwd ${chpwd_functions[@]} )
-fi
+add-zsh-hook precmd _mise_hook_precmd
+add-zsh-hook chpwd _mise_hook_chpwd
 
 _mise_hook
+export __MISE_ZSH_ACTIVATE_PATH="$PATH"
+export __MISE_ZSH_ACTIVATE_ENV="$(_mise_hook_env_state)"
 if [ -z "${_mise_cmd_not_found:-}" ]; then
     _mise_cmd_not_found=1
     [ -n "$(declare -f command_not_found_handler)" ] && eval "${$(declare -f command_not_found_handler)/command_not_found_handler/_command_not_found_handler}"
