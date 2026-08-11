@@ -36,6 +36,7 @@ typeset -gU fpath path
 
 # Extend PATH.
 path=(
+  ~/.local/bin
   ~/bin
   ~/.local/share/gem/bin
   /opt/homebrew/opt/postgresql@17/bin
