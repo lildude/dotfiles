@@ -98,9 +98,7 @@ export BUNDLE_USER_PLUGIN=$XDG_DATA_HOME/bundle
 (( $+commands[claude] )) && {
   # Claude Code -> GitHub Copilot Proxy
   export ANTHROPIC_BASE_URL="http://localhost:4000"
-  # Claude Code -> GitHub Copilot Proxy
   export ANTHROPIC_AUTH_TOKEN="fake-key"
-  # Claude Code -> GitHub Copilot Proxy
   export CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS="1"
 }
 # export COPILOT_HOME=$XDG_DATA_HOME/copilot # This is mostly borked and not properly supported yet.
@@ -188,10 +186,6 @@ if [ -n "$CODESPACES" ]; then
   alias driftwood-server="if [ ! -d /workspaces/driftwood ]; then ${CODESPACE_VSCODE_FOLDER}/script/setup-codespaces-driftwood-dev; fi && /workspaces/driftwood/script/server"
 fi
 
-# (( $+commands[hub] )) && {
-#   alias git=hub
-#   alias ci="hub ci-status"
-# }
 (( $+commands[bat] )) && alias cat=bat && export BAT_THEME="Monokai Extended"
 (( $+commands[eza] )) && alias ls="eza --no-user"
 (( $+commands[rg] )) && rg() { $commands[rg] -p "$@" | less; }
@@ -203,7 +197,6 @@ fi
   alias cha="chezmoi apply"
   alias chd="chezmoi cd"
 }
-# (( $+commands[code-insiders] )) && alias code=code-insiders
 # (( $+commands[gh] )) && {
 #   gh-cs="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m largePremiumLinux --default-permissions | tail -1) --insiders"
 #   gh-cs-big="gh cs code -c $(gh cs create -R github/github -b master --devcontainer-path .devcontainer/devcontainer.json -m xLargePremiumLinux --default-permissions | tail -1) --insiders"
@@ -220,8 +213,6 @@ if [ -z "$CODESPACES" ]; then
     alias brew="op plugin run -- brew"
   fi
 fi
-
-
 
 #### ---:[ Shell options ]:--- ###
 # See: http://zsh.sourceforge.net/Doc/Release/Options.html.
