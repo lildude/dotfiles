@@ -6,24 +6,87 @@ _exists() {
   command -v "$1" > /dev/null 2>&1
 }
 
-# Install mise and run it in parallel with other package installation
 install_mise() {
-  # Install mise if not already installed
-  if ! _exists mise; then
-    curl -fsSL https://mise.run | sh 2>&1 >> /dev/null
+  local mise="$HOME/.local/bin/mise"
+  local log
+
+  if [[ ! -x "$mise" ]]; then
+    log=$(mktemp)
+    if ! curl -fsSL https://mise.run | MISE_QUIET=1 sh > "$log" 2>&1; then
+      cat "$log" >&2
+      rm -f "$log"
+      return 1
+    fi
+    rm -f "$log"
+  {{- if ne .install_type "min" }}
+  else
+    "$mise" self-update --yes --quiet
+  {{- end }}
   fi
 
-  # Update mise if installed
-  $HOME/.local/bin/mise self-update --yes --quiet 2>&1 >> /dev/null
+  {{- if eq .install_type "min" }}
+  if ! _exists fzf || ! fzf --zsh > /dev/null 2>&1; then
+    "$mise" install --jobs=8 --quiet fzf
+  fi
+  {{- else }}
+  "$mise" install --jobs=8 --quiet
+  {{- end }}
+}
 
-  # Install/update packages with mise
-  $HOME/.local/bin/mise install 2>&1 >> /dev/null
+install_zsh_plugin() {
+  local repository="$1"
+  local revision="$2"
+  local name="$3"
+  local destination="$HOME/.local/share/zsh/plugins/$name"
+  local revision_file="$destination/.dotfiles-revision"
+  local temp_dir
+
+  if [[ -f "$revision_file" ]] && [[ "$(< "$revision_file")" == "$revision" ]]; then
+    return
+  fi
+
+  temp_dir=$(mktemp -d "${destination}.tmp.XXXXXX")
+  if ! curl -fsSL "https://codeload.github.com/$repository/tar.gz/$revision" |
+      tar -xz --strip-components=1 -C "$temp_dir"; then
+    rm -rf "$temp_dir"
+    return 1
+  fi
+
+  printf '%s\n' "$revision" > "$temp_dir/.dotfiles-revision"
+  rm -rf "$destination"
+  mv "$temp_dir" "$destination"
+}
+
+install_zsh_plugins() {
+  local plugin_root="$HOME/.local/share/zsh/plugins"
+  local pids=()
+  local status=0
+
+  mkdir -p "$plugin_root"
+
+  install_zsh_plugin Aloxaf/fzf-tab 24105b15714bfec37989ed5c5b6e60f572253019 fzf-tab &
+  pids+=("$!")
+  install_zsh_plugin romkatv/powerlevel10k 9253fb1c5034410c43a0c681ff8294181c54016c powerlevel10k &
+  pids+=("$!")
+  install_zsh_plugin zsh-users/zsh-autosuggestions 85919cd1ffa7d2d5412f6d3fe437ebdbeeec4fc5 zsh-autosuggestions &
+  pids+=("$!")
+  install_zsh_plugin zsh-users/zsh-completions e099c4a2287cd829f43d87fbedb1c5a74791a6e2 zsh-completions &
+  pids+=("$!")
+  install_zsh_plugin zsh-users/zsh-history-substring-search 14c8d2e0ffaee98f2df9850b19944f32546fdea5 zsh-history-substring-search &
+  pids+=("$!")
+  install_zsh_plugin zsh-users/zsh-syntax-highlighting c4d95591843d49838b7ad30081e7aba3135a6703 zsh-syntax-highlighting &
+  pids+=("$!")
+
+  for pid in "${pids[@]}"; do
+    wait "$pid" || status=1
+  done
+
+  return "$status"
 }
 
 install_other_packages() {
-  # Install packages we can't manage with mise
+  :
 {{- if .linux }}
-  arch=$(uname -m)
   packages=""
   {{- if eq .install_type "min" }}
 
@@ -54,13 +117,19 @@ install_other_packages() {
 {{- end }}
 }
 
-# Run mise installation and other package installation in parallel
+status=0
+
 install_mise &
 mise_pid=$!
+
+install_zsh_plugins &
+zsh_plugins_pid=$!
 
 install_other_packages &
 other_pid=$!
 
-# Wait for both processes to complete
-wait $mise_pid
-wait $other_pid
+wait "$mise_pid" || status=1
+wait "$zsh_plugins_pid" || status=1
+wait "$other_pid" || status=1
+
+exit "$status"
