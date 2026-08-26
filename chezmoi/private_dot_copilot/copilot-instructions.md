@@ -28,6 +28,7 @@ These are global preferences that apply across all repositories. Per-repo files 
 - Never use the Co-authored-by trailer. My commits should be attributed solely to me.
 - Prefer new commits once a branch is pushed. Don't amend or force-push by default — add new commits. If the branch hasn't been pushed yet, amending is fine. Rebasing or squashing is fine when explicitly cleaning up history before merge, but the default workflow is additive.
 - Before authoring or editing a PR by any mechanism, load the `create-pr` skill first. This is non-negotiable, even if the change seems straightforward or you think you remember the conventions. The skill covers both creating new PRs and rewriting an existing PR's title/body when it has drifted from the code.
+- Use sentence case for PR titles. Use imperative mood for PR titles, e.g., "Fix issue with X" instead of "Fixed issue with X" or "Fixes issue with X". Use sentence case for PR bodies.
 - Open pull requests in draft mode. Get my permission before marking them as ready for review. Assign `@lildude` to any pull request you open.
 - Prefer pull requests with 100 or fewer changed lines.
 - Split larger work into small, targeted, stacked pull requests. Optimize for focused changes that are easy to review.
