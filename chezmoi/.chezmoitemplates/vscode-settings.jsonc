@@ -266,5 +266,6 @@
     "github/awesome-copilot#marketplace",
     "github/agent-skills"
   ],
-  "git.openRepositoryInParentFolders": "always"
+  "git.openRepositoryInParentFolders": "always",
+  "go.diagnostic.vulncheck": "Off"
 }
