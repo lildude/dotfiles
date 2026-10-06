@@ -32,3 +32,5 @@ coverage/
 
 # Jujutsu
 .jj/
+
+.worktrees/
