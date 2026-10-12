@@ -16,7 +16,6 @@ aliases:
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
 browser:
-
 # gh pr list -R "github/github" -A "@me" -s merged --json headRefName --jq ".[].headRefName"
 extensions:
     slack:
