@@ -27,6 +27,9 @@ show_help() { grep ^#/ <"${0}" |cut -c4- | envsubst ; }
 console_types="
 gh-console
 gh-dbconsole
+gc-cus-02-gh-console
+kubectl
+kubectl-readonly
 proxima-staffship-gh-console
 proxima-prod-ae-01-gh-console
 proxima-prod-cus-01-gh-console
