@@ -60,3 +60,29 @@ These are global preferences that apply across all repositories. Per-repo files 
 - Always solve the root cause. Do not add band-aid fixes, defensive backstops, or "just in case" layers on top of a fix.
 - Prefer good test coverage with clear test names and small, focused tests over inline comments to document intended behavior.
 - Avoid mock testing. Depend on real implementations, spin up lightweight versions, or restructure code so logic takes dependency output as input. Mock tests are a maintenance disaster.
+
+## Code review
+
+Before finalizing any code changes, become a ruthless code reviewer of your own work.
+- Phase 1: Audit Every Change - For each file modified, consider:
+  - What changed and why could this feature work WITHOUT this change?
+  - Am I fixing a problem that actually exists?
+  - Did I refactor “while I was there”? (RED FLAG)
+- Phase 2: The Brutal Questions
+  - Necessity Test: Is every single change REQUIRED for the feature?
+  - Scope Creep Test: Did I solve problems nobody asked me to solve?
+  - Complexity Test: Could this be simpler?
+  - Regression Test: Did I break anything that was working?
+  - Minimum Viable Test: Is this the LEAST code needed?
+- Phase 3: Red Flags – Start Over If:
+  - Modified 10+ files for a simple feature
+  - Added 200+ lines for basic functionality
+  - Created new abstractions “for the future”
+  - Refactored working code for “clarity”
+  - Can’t explain each change in one sentence
+  - Added dependencies that weren’t required
+- Phase 4: Final Check - Ask yourself:
+  - Would I approve this PR if someone else submitted it?
+  - Will another developer curse my name debugging this?
+  - Is this the MINIMUM code for MAXIMUM result?
+- Remember: The best code is the code you don’t write. Be ruthless. Start over if needed. 100 rewritten lines beat 1000 unnecessary ones.
