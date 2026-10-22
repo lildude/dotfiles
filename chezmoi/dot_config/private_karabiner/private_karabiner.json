@@ -197,6 +197,7 @@
                     },
                     {
                         "description": "TrainerRoad: Spacebar -> T (Trainer Mode on Spacebar)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -215,6 +216,7 @@
                     },
                     {
                         "description": "TrainerRoad: Right Cmd -> T (Trainer Mode on Spacebar)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -233,6 +235,7 @@
                     },
                     {
                         "description": "TrainerRoad: Right Opt -> T (Trainer Mode on Spacebar)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [
@@ -251,6 +254,7 @@
                     },
                     {
                         "description": "TrainerRoad: Right Shift -> T (Trainer Mode on Spacebar)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "conditions": [

@@ -3418,6 +3418,14 @@
 				<dict>
 					<key>action</key>
 					<string>ScriptTrigger</string>
+					<key>contentregex</key>
+					<string></string>
+					<key>disabled</key>
+					<integer>0</integer>
+					<key>matchType</key>
+					<integer>0</integer>
+					<key>name</key>
+					<string>Open FIDO in Safari</string>
 					<key>parameter</key>
 					<string>open -a Safari \0</string>
 					<key>partial</key>
@@ -3428,14 +3436,24 @@
 				<dict>
 					<key>action</key>
 					<string>PasswordTrigger</string>
+					<key>contentregex</key>
+					<string></string>
+					<key>disabled</key>
+					<integer>0</integer>
+					<key>matchType</key>
+					<integer>0</integer>
+					<key>name</key>
+					<string>Enter GitHub Password</string>
 					<key>parameter</key>
-					<string>github</string>
+					<string></string>
 					<key>partial</key>
 					<true/>
 					<key>regex</key>
 					<string>github\.com password:</string>
 				</dict>
 			</array>
+			<key>Triggers Use Interpolated Strings</key>
+			<false/>
 			<key>Unicode Version</key>
 			<integer>9</integer>
 			<key>Unlimited Scrollback</key>
