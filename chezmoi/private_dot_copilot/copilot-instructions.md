@@ -60,6 +60,7 @@ These are global preferences that apply across all repositories. Per-repo files 
 - Always solve the root cause. Do not add band-aid fixes, defensive backstops, or "just in case" layers on top of a fix.
 - Prefer good test coverage with clear test names and small, focused tests over inline comments to document intended behavior.
 - Avoid mock testing. Depend on real implementations, spin up lightweight versions, or restructure code so logic takes dependency output as input. Mock tests are a maintenance disaster.
+- Always review your own code before committing as per "Code review" guidelines below.
 
 ## Code review
 
