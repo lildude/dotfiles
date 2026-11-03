@@ -36,7 +36,7 @@ These are global preferences that apply across all repositories. Per-repo files 
 - Keep PR bodies short and high-level. Give a concise overview of what the change does, not a file-by-file or change-by-change breakdown. The diff already shows which files changed.
 - Lean on referenced issues for the "why". Link the relevant issue(s) and let them carry most of the context and motivation rather than restating it in the PR body.
 - When asked to address PR review comments: fetch all review threads, read each one, but do _not_ reply. Fix real issues and confirm what changed. Don't blindly fix everything — review agents flag dumb stuff. If a comment is ambiguous, ask me with your take before acting. Never reply to the thread.
-- If a Copilot Code Review (CCR) comment is resolved, mark it as resolved. If you disagree with a CCR comment, don't mark it as resolved — ask me first.
+- If a Copilot Code Review (CCR) comment is resolved, mark it as resolved. If you disagree with a CCR comment, don't mark it as resolved — raise it to my attention immediately explaining why.
 
 ## Writing style
 
