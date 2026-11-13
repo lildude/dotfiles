@@ -267,5 +267,14 @@
     "github/agent-skills"
   ],
   "git.openRepositoryInParentFolders": "always",
-  "go.diagnostic.vulncheck": "Off"
+  "go.diagnostic.vulncheck": "Off",
+  "chat.tools.urls.autoApprove": {
+    "https://developers.strava.com": {
+      "approveRequest": true,
+      "approveResponse": false
+    }
+  },
+  "chat.tools.terminal.autoApprove": {
+    "/^python3$/": true
+  }
 }
